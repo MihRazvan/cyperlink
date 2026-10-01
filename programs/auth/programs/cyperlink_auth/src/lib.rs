@@ -65,19 +65,31 @@ pub mod cyperlink_auth {
   require!(digest.as_ref()==&template[240..272],JoinError::Context);drop(eq);drop(val);drop(range);
   require!(ctx.accounts.permit.data_len()==520 && ctx.accounts.permit.try_borrow_data()?.iter().all(|b|*b==0),JoinError::State);
 
-  // Authenticate the expected commitment BEFORE any private predicate is evaluated.
-  require!(a[3].owner==&solana_zk_elgamal_proof_interface::id() && a[4].owner==&solana_zk_elgamal_proof_interface::id() && a[5].owner==&solana_zk_elgamal_proof_interface::id(),JoinError::Context);
-  use solana_zk_elgamal_proof_interface::{state::ProofContextState,proof_data::BatchedGroupedCiphertext3HandlesValidityProofContext};
-  use solana_curve25519::{ristretto::{PodRistrettoPoint,add_ristretto,multiply_ristretto},scalar::PodScalar};
-  let proof=a[4].try_borrow_data()?;
-  let context=bytemuck::try_from_bytes::<ProofContextState<BatchedGroupedCiphertext3HandlesValidityProofContext>>(&proof).map_err(|_|error!(JoinError::Context))?;
-  require!(context.proof_type==solana_zk_elgamal_proof_interface::proof_data::ProofType::BatchedGroupedCiphertext3HandlesValidity.into(),JoinError::Context);
-  let lo=PodRistrettoPoint(bytemuck::bytes_of(&context.proof_context.grouped_ciphertext_lo.extract_commitment()).try_into().unwrap());
-  let hi=PodRistrettoPoint(bytemuck::bytes_of(&context.proof_context.grouped_ciphertext_hi.extract_commitment()).try_into().unwrap());
-  let mut shift=[0u8;32];shift[2]=1;
-  let scaled=multiply_ristretto(&PodScalar(shift),&hi).ok_or(JoinError::Context)?;
-  let expected=add_ristretto(&lo,&scaled).ok_or(JoinError::Context)?.0;
-  require!(expected==template[336..368],JoinError::Context);drop(proof);
+  // Reject unsupported or unfunded native queries BEFORE allocating a nonce or MPC work.
+  // Snapshot/owner/consumer hashes above remain part of this immutable operation.
+  let source_data = a[0].try_borrow_data()?;
+  let mint_data = a[1].try_borrow_data()?;
+  let destination_data = a[2].try_borrow_data()?;
+  let equality_data = a[3].try_borrow_data()?;
+  let grouped_data = a[4].try_borrow_data()?;
+  let range_data = a[5].try_borrow_data()?;
+  let view = |i: usize, data| cyperlink_native_admission::AccountView {
+      key: a[i].key.as_array(), owner: a[i].owner.as_array(), data,
+  };
+  let validated = cyperlink_native_admission::validate(&cyperlink_native_admission::NoFeeAction {
+      source: view(0, &source_data), mint: view(1, &mint_data),
+      destination: view(2, &destination_data), equality: view(3, &equality_data),
+      grouped: view(4, &grouped_data), range: view(5, &range_data),
+      owner: owner.as_array(), owner_signed: ctx.accounts.source_owner.is_signer,
+      owner_account_owner: ctx.accounts.source_owner.owner.as_array(),
+      owner_account_data_len: ctx.accounts.source_owner.data_len(),
+      native_instruction: &ctx.accounts.action.native_data, expected_hook: H.as_array(),
+      expected_commitment: template[336..368].try_into().unwrap(),
+      expected_new_source_ciphertext: template[272..336].try_into().unwrap(),
+  }).map_err(|_| error!(JoinError::Context))?;
+  let expected = validated.amount_commitment;
+  drop(source_data); drop(mint_data); drop(destination_data);
+  drop(equality_data); drop(grouped_data); drop(range_data);
   let q=ctx.accounts.quota.try_borrow_data()?;require!(q.len()==129 && q[128]==1,JoinError::State);
   require!(&q[96..128]==ctx.accounts.payer.key().as_ref(),JoinError::Authority);
   let nonce=next_nonce(&q)?;let old_nonce=u128::from_le_bytes(q[40..56].try_into().unwrap());let old_ct:[u8;32]=q[56..88].try_into().unwrap();

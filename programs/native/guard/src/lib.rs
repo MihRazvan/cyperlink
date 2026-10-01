@@ -17,15 +17,27 @@ pub fn process(id:&Address,a:&[AccountInfo],data:&[u8])->ProgramResult{
  let (consumer,_)=Address::find_program_address(&[b"cyperlink-action",&data[2..34]],a[13].key);if &consumer!=a[14].key{return Err(ProgramError::Custom(706))}
  for (offset,idx) in [(80,5),(112,6),(144,7),(176,11)]{if &p[offset..offset+32]!=a[idx].key.as_ref(){return Err(fail())}}
  if hashv(&[&a[5].try_borrow_data()?]).as_ref()!=&p[208..240]{return Err(ProgramError::Custom(701))}
- let proof_data=a[9].try_borrow_data()?;
- if a[9].owner!=&solana_zk_elgamal_proof_interface::id(){return Err(fail())}
- use solana_zk_elgamal_proof_interface::{state::ProofContextState,proof_data::BatchedGroupedCiphertext3HandlesValidityProofContext};
- let ctx=bytemuck::try_from_bytes::<ProofContextState<BatchedGroupedCiphertext3HandlesValidityProofContext>>(&proof_data).map_err(|_|fail())?;
- use solana_curve25519::{ristretto::{PodRistrettoPoint,add_ristretto,multiply_ristretto},scalar::PodScalar};
- let lo=PodRistrettoPoint(bytemuck::bytes_of(&ctx.proof_context.grouped_ciphertext_lo.extract_commitment()).try_into().unwrap());
- let hi=PodRistrettoPoint(bytemuck::bytes_of(&ctx.proof_context.grouped_ciphertext_hi.extract_commitment()).try_into().unwrap());
- let mut shift=[0u8;32];shift[2]=1;let scaled=multiply_ristretto(&PodScalar(shift),&hi).ok_or(fail())?;let combined=add_ristretto(&lo,&scaled).ok_or(fail())?;
- if &combined.0!=&p[336..368]{return Err(ProgramError::Custom(704))}drop(proof_data);
+ // Revalidate the same strict native profile at commit; admission does not reserve funds.
+ let source_data=a[5].try_borrow_data()?;
+ let mint_data=a[6].try_borrow_data()?;
+ let destination_data=a[7].try_borrow_data()?;
+ let equality_data=a[8].try_borrow_data()?;
+ let grouped_data=a[9].try_borrow_data()?;
+ let range_data=a[10].try_borrow_data()?;
+ let view=|i:usize,data|cyperlink_native_admission::AccountView {
+   key:a[i].key.as_array(),owner:a[i].owner.as_array(),data,
+ };
+ cyperlink_native_admission::validate(&cyperlink_native_admission::NoFeeAction {
+   source:view(5,&source_data),mint:view(6,&mint_data),destination:view(7,&destination_data),
+   equality:view(8,&equality_data),grouped:view(9,&grouped_data),range:view(10,&range_data),
+   owner:a[11].key.as_array(),owner_signed:a[11].is_signer,
+   owner_account_owner:a[11].owner.as_array(),owner_account_data_len:a[11].data_len(),
+   native_instruction:&data[34..],expected_hook:H.as_array(),
+   expected_commitment:p[336..368].try_into().unwrap(),
+   expected_new_source_ciphertext:p[272..336].try_into().unwrap(),
+ }).map_err(|_|ProgramError::Custom(704))?;
+ drop(source_data);drop(mint_data);drop(destination_data);
+ drop(equality_data);drop(grouped_data);drop(range_data);
  let mut hashparts=vec![&data[34..]];for i in [5,6,7,8,9,10,11]{hashparts.push(a[i].key.as_ref());}
  let eq=a[8].try_borrow_data()?;let val=a[9].try_borrow_data()?;let range=a[10].try_borrow_data()?;hashparts.extend([eq.as_ref(),val.as_ref(),range.as_ref()]);
  if hashv(&hashparts).as_ref()!=&p[240..272]{return Err(ProgramError::Custom(702))}drop(p);drop(eq);drop(val);drop(range);
