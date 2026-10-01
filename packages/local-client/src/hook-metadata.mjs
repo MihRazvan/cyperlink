@@ -11,7 +11,9 @@ export async function initializeHookMetadata(session, mint) {
   const { web3 } = session, mintAddress = new web3.PublicKey(mint), hook = new web3.PublicKey(Buffer.alloc(32, 82));
   validateSyntheticMint(await session.connection.getAccountInfo(mintAddress, 'confirmed'), session.payer.publicKey, hook, web3);
   const metadata = hookMetadataAddress(web3, mintAddress);
-  ensure(!(await session.connection.getAccountInfo(metadata, 'confirmed')), 'Hook metadata already exists; initialization is create-only');
+  const existing = await session.connection.getAccountInfo(metadata, 'confirmed');
+  ensure(!existing || (existing.owner.equals(web3.SystemProgram.programId) && existing.data.length === 0 && !existing.executable),
+    'Hook metadata already exists as initialized or unsupported state');
   const instruction = new web3.TransactionInstruction({ programId: hook, data: Buffer.from([7]), keys: [
     { pubkey: mintAddress, isSigner: false, isWritable: false },
     { pubkey: metadata, isSigner: false, isWritable: true },

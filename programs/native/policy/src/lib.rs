@@ -1,4 +1,6 @@
-use cyperlink_hook_routing::{validate_metadata, ACTIVE_PERMIT_OFFSET, QUOTA_LEN};
+use cyperlink_hook_routing::{
+    canonical_metadata, validate_metadata, ACTIVE_PERMIT_OFFSET, QUOTA_LEN,
+};
 use solana_account_info::AccountInfo;
 use solana_address::Address;
 use solana_clock::Clock;
@@ -8,15 +10,20 @@ use solana_sha256_hasher::hashv;
 use solana_sysvar::Sysvar;
 use spl_token_2022_interface::{
     extension::{
-        confidential_transfer::ConfidentialTransferAccount, transfer_hook::TransferHookAccount,
-        BaseStateWithExtensions, StateWithExtensions,
+        confidential_transfer::{ConfidentialTransferAccount, ConfidentialTransferMint},
+        transfer_hook::{TransferHook, TransferHookAccount},
+        BaseStateWithExtensions, ExtensionType, StateWithExtensions,
     },
-    state::Account,
+    state::{Account, Mint},
 };
 
 entrypoint!(process);
 const G: Address = Address::new_from_array([81; 32]);
-const Q: Address = Address::new_from_array([61; 32]);
+// New deployment ABI: canonical H quota PDA, replacing research genesis key.
+const Q: Address = Address::new_from_array([
+    12, 115, 160, 247, 19, 76, 92, 108, 191, 180, 9, 30, 19, 178, 11, 105, 247, 82, 72, 165, 116,
+    249, 91, 24, 155, 189, 160, 79, 61, 73, 109, 219,
+]);
 fn e(n: u32) -> ProgramError {
     ProgramError::Custom(n)
 }
@@ -42,6 +49,100 @@ fn idle(q: &[u8]) -> ProgramResult {
 }
 
 pub fn process(id: &Address, a: &[AccountInfo], data: &[u8]) -> ProgramResult {
+    if data.first() == Some(&6) {
+        // Only Auth's authenticated upgrade-authority provisioning path may
+        // create the quota and choose its administrator. No encrypted state is
+        // initialized here; that still requires the signed runtime callback.
+        if data != [6] || a.len() != 4 {
+            return Err(e(833));
+        }
+        let system = solana_system_interface::program::id();
+        if a[0].key != &Q
+            || !a[0].is_writable
+            || a[0].owner != &system
+            || a[0].data_len() != 0
+            || !a[1].is_signer
+            || !a[1].is_writable
+            || !authorized(&a[2])
+            || a[3].key != &system
+            || !a[3].executable
+        {
+            return Err(e(834));
+        }
+        let (quota, bump) = Address::find_program_address(&[b"quota"], id);
+        if quota != Q {
+            return Err(e(834));
+        }
+        cyperlink_pda_provisioning::create_pda(
+            id,
+            &a[1],
+            &a[0],
+            &a[3],
+            QUOTA_LEN,
+            &[b"quota", &[bump]],
+        )?;
+        let mut q = a[0].try_borrow_mut_data()?;
+        if q.len() != QUOTA_LEN {
+            return Err(e(834));
+        }
+        q[96..128].copy_from_slice(a[1].key.as_ref());
+        return Ok(());
+    }
+    if data.first() == Some(&7) {
+        // Permissionless funding of immutable, fully canonical routing only.
+        // Callers cannot choose the quota, permit pointer offset or hook.
+        if data != [7] || a.len() != 4 {
+            return Err(e(835));
+        }
+        let system = solana_system_interface::program::id();
+        if a[0].owner != &spl_token_2022_interface::id()
+            || !a[1].is_writable
+            || a[1].owner != &system
+            || a[1].data_len() != 0
+            || !a[2].is_signer
+            || !a[2].is_writable
+            || a[3].key != &system
+            || !a[3].executable
+        {
+            return Err(e(836));
+        }
+        {
+            let data = a[0].try_borrow_data()?;
+            let mint = StateWithExtensions::<Mint>::unpack(&data)?;
+            mint.get_extension::<ConfidentialTransferMint>()?;
+            let hook: Option<Address> = mint.get_extension::<TransferHook>()?.program_id.into();
+            if hook != Some(*id)
+                || mint.get_extension_types()?.iter().any(|e| {
+                    !matches!(
+                        e,
+                        ExtensionType::ConfidentialTransferMint | ExtensionType::TransferHook
+                    )
+                })
+            {
+                return Err(e(836));
+            }
+        }
+        let (metadata, bump) =
+            Address::find_program_address(&[b"extra-account-metas", a[0].key.as_ref()], id);
+        if a[1].key != &metadata {
+            return Err(e(836));
+        }
+        let bytes = canonical_metadata(Q.as_array()).map_err(|_| e(836))?;
+        cyperlink_pda_provisioning::create_pda(
+            id,
+            &a[2],
+            &a[1],
+            &a[3],
+            bytes.len(),
+            &[b"extra-account-metas", a[0].key.as_ref(), &[bump]],
+        )?;
+        let mut target = a[1].try_borrow_mut_data()?;
+        if target.len() != bytes.len() {
+            return Err(e(836));
+        }
+        target.copy_from_slice(&bytes);
+        return Ok(());
+    }
     if matches!(data.first(), Some(2) | Some(3)) {
         if a.len() != 2 || a[0].key != &Q || a[0].owner != id || !authorized(&a[1]) {
             return Err(e(820));
@@ -199,4 +300,45 @@ pub fn process(id: &Address, a: &[AccountInfo], data: &[u8]) -> ProgramResult {
     q[ACTIVE_PERMIT_OFFSET..].fill(0);
     p[0] = 2;
     Ok(())
+}
+
+#[cfg(test)]
+mod provisioning_tests {
+    use super::*;
+    #[test]
+    fn configured_quota_is_the_canonical_policy_pda() {
+        let policy = Address::new_from_array([82; 32]);
+        assert_eq!(Address::find_program_address(&[b"quota"], &policy).0, Q);
+    }
+    #[test]
+    fn provisioning_requires_exact_instruction_and_account_shapes() {
+        let policy = Address::new_from_array([82; 32]);
+        for data in [vec![6], vec![6, 0]] {
+            assert_eq!(process(&policy, &[], &data), Err(e(833)));
+        }
+        for data in [vec![7], vec![7, 0]] {
+            assert_eq!(process(&policy, &[], &data), Err(e(835)));
+        }
+    }
+    #[test]
+    fn a_direct_quota_provisioner_cannot_choose_the_administrator() {
+        let policy = Address::new_from_array([82; 32]);
+        let system = solana_system_interface::program::id();
+        let payer = Address::new_from_array([1; 32]);
+        let wrong = Address::new_from_array([2; 32]);
+        let mut funds = [0u64; 4];
+        let [l0, l1, l2, l3] = &mut funds;
+        let mut d0 = [];
+        let mut d1 = [];
+        let mut d2 = [];
+        let mut d3 = [];
+        let accounts = [
+            AccountInfo::new(&Q, false, true, l0, &mut d0, &system, false),
+            AccountInfo::new(&payer, true, true, l1, &mut d1, &system, false),
+            AccountInfo::new(&wrong, true, false, l2, &mut d2, &system, false),
+            AccountInfo::new(&system, false, false, l3, &mut d3, &system, true),
+        ];
+        assert_eq!(process(&policy, &accounts, &[6]), Err(e(834)));
+        assert!(accounts[0].data_is_empty());
+    }
 }

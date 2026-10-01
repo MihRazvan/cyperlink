@@ -91,16 +91,23 @@ test('same-mint reuse rejects fees, wrong authorities/hook, freeze, auditor and 
     assert.throws(() => validateSyntheticMint(account, authority, hook, web3));
   }
 });
-test('metadata creation uses H-signed PDA allocation entrypoint and is create-only', async () => {
+test('metadata creation uses H-signed PDA allocation and accepts only empty System-owned prefunding', async () => {
   const { initializeHookMetadata, hookMetadataAddress } = await import('../src/hook-metadata.mjs');
   const payer = web3.Keypair.generate(), mint = web3.Keypair.generate().publicKey, hook = new web3.PublicKey(Buffer.alloc(32, 82));
-  const metadata = hookMetadataAddress(web3, mint); let created = false, instruction;
+  const metadata = hookMetadataAddress(web3, mint); let created = false, instruction, prefunding = null;
   const session = { web3, payer, connection: { getAccountInfo: async address => address.equals(mint) ? syntheticMint(payer.publicKey, hook)
-    : created ? { owner: hook, executable: false, data: Buffer.alloc(86) } : null },
+    : created ? { owner: hook, executable: false, data: Buffer.alloc(86) } : prefunding },
     send: async (label, [ix]) => { instruction = ix; created = true; return { label }; } };
   const result = await initializeHookMetadata(session, mint);
   assert.equal(result.address, metadata.toBase58()); assert.deepEqual([...instruction.data], [7]);
   assert.deepEqual(instruction.keys.map(k => [k.pubkey.toBase58(), k.isSigner, k.isWritable]), [
     [mint.toBase58(), false, false], [metadata.toBase58(), false, true], [payer.publicKey.toBase58(), true, true], [web3.SystemProgram.programId.toBase58(), false, false] ]);
   await assert.rejects(initializeHookMetadata(session, mint), /already exists/);
+  created = false; prefunding = { owner: web3.SystemProgram.programId, executable: false, data: Buffer.alloc(0), lamports: 890880 };
+  assert.equal((await initializeHookMetadata(session, mint)).address, metadata.toBase58());
+  for (const invalid of [
+    { owner: hook, executable: false, data: Buffer.alloc(0) },
+    { owner: web3.SystemProgram.programId, executable: false, data: Buffer.alloc(1) },
+    { owner: web3.SystemProgram.programId, executable: true, data: Buffer.alloc(0) },
+  ]) { created = false; prefunding = invalid; await assert.rejects(initializeHookMetadata(session, mint), /already exists/); }
 });

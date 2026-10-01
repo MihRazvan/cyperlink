@@ -227,6 +227,7 @@ version = "0.1.0"
 dependencies = [
  "bytemuck",
  "cyperlink-hook-routing",
+ "cyperlink-pda-provisioning",
  "solana-account-info",
  "solana-address 2.8.0",
  "solana-clock 3.2.1",
@@ -234,7 +235,9 @@ dependencies = [
  "solana-instruction",
  "solana-program-entrypoint",
  "solana-program-error",
+ "solana-rent",
  "solana-sha256-hasher",
+ "solana-system-interface",
  "solana-sysvar",
  "spl-token-2022-interface",
 ]
@@ -287,17 +290,40 @@ dependencies = [
 ]
 
 [[package]]
+name = "cyperlink-license"
+version = "0.1.0"
+dependencies = [
+ "cyperlink-operation",
+ "cyperlink-pda-provisioning",
+ "solana-account-info",
+ "solana-address 2.8.0",
+ "solana-clock 3.2.1",
+ "solana-cpi",
+ "solana-instruction",
+ "solana-program-entrypoint",
+ "solana-program-error",
+ "solana-rent",
+ "solana-sha256-hasher",
+ "solana-system-interface",
+ "solana-sysvar",
+]
+
+[[package]]
 name = "cyperlink-merchant"
 version = "0.1.0"
 dependencies = [
  "cyperlink-operation",
+ "cyperlink-pda-provisioning",
  "solana-account-info",
  "solana-address 2.8.0",
  "solana-cpi",
  "solana-instruction",
  "solana-program-entrypoint",
  "solana-program-error",
+ "solana-rent",
  "solana-sha256-hasher",
+ "solana-system-interface",
+ "solana-sysvar",
 ]
 
 [[package]]
@@ -324,6 +350,29 @@ dependencies = [
  "solana-program-entrypoint",
  "solana-program-error",
  "solana-sha256-hasher",
+]
+
+[[package]]
+name = "cyperlink-pda-provisioning"
+version = "0.1.0"
+dependencies = [
+ "solana-account-info",
+ "solana-address 2.8.0",
+ "solana-cpi",
+ "solana-program-error",
+ "solana-rent",
+ "solana-system-interface",
+ "solana-sysvar",
+]
+
+[[package]]
+name = "cyperlink-proof-buffer"
+version = "0.1.0"
+dependencies = [
+ "solana-account-info",
+ "solana-address 2.8.0",
+ "solana-program-entrypoint",
+ "solana-program-error",
 ]
 
 [[package]]
@@ -947,6 +996,7 @@ dependencies = [
  "five8",
  "five8_const",
  "serde",
+ "serde_derive",
  "sha2-const-stable",
  "solana-atomic-u64",
  "solana-define-syscall 5.2.0",
@@ -1113,6 +1163,8 @@ version = "3.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a97881335fc698deb46c6571945969aae6d93a14e2fff792a368b4fac872f116"
 dependencies = [
+ "bincode",
+ "serde",
  "solana-define-syscall 5.2.0",
  "solana-instruction-error",
  "solana-pubkey 4.1.0",
@@ -1381,6 +1433,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4e1790547bfc3061f1ee68ea9d8dc6c973c02a163697b24263a8e9f2e6d4afa2"
 dependencies = [
  "num-traits",
+ "serde",
+ "serde_derive",
+ "solana-instruction",
  "solana-msg",
  "solana-program-error",
  "solana-pubkey 3.0.0",

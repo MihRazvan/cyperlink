@@ -13,3 +13,8 @@ solana-instruction={workspace=true}
 solana-cpi={workspace=true}
 solana-sha256-hasher={workspace=true}
 cyperlink-operation={path="../interface"}
+cyperlink-pda-provisioning={path="../../../crates/pda-provisioning"}
+
+solana-rent="=3.1.0"
+solana-sysvar="=3.1.1"
+solana-system-interface={version="=2.0.0",features=["bincode"]}

@@ -5,7 +5,7 @@ use anchor_lang::solana_program::{instruction::{Instruction,AccountMeta},program
 use solana_sha256_hasher::hashv;
 declare_id!("5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ");
 const H:Pubkey=Pubkey::new_from_array([82;32]);
-const Q:Pubkey=Pubkey::new_from_array([61;32]);
+const Q:Pubkey=Pubkey::new_from_array([12,115,160,247,19,76,92,108,191,180,9,30,19,178,11,105,247,82,72,165,116,249,91,24,155,189,160,79,61,73,109,219]);
 const COMP_DEF_OFFSET_RUNTIME_BUDGET_INIT:u32=comp_def_offset("runtime_budget_init");
 const COMP_DEF_OFFSET_RUNTIME_BUDGET_BOUND:u32=comp_def_offset("runtime_budget_bound");
 
@@ -23,6 +23,19 @@ fn extra(key:Pubkey,w:bool)->arcium_client::idl::arcium::types::CallbackAccount{
 #[arcium_program]
 pub mod cyperlink_auth {
  use super::*;
+ /// The local deployment authority chooses the administrator once, before MXE initialization.
+ pub fn provision_quota(ctx:Context<ProvisionQuota>)->Result<()> {
+  let (_,bump)=Pubkey::find_program_address(&[b"admission"],&ID);
+  let ix=Instruction {program_id:H, data:vec![6], accounts:vec![
+   AccountMeta::new(Q,false),AccountMeta::new(ctx.accounts.payer.key(),true),
+   AccountMeta::new_readonly(ctx.accounts.admission.key(),true),
+   AccountMeta::new_readonly(ctx.accounts.system_program.key(),false),
+  ]};
+  invoke_signed(&ix,&[ctx.accounts.quota.to_account_info(),ctx.accounts.payer.to_account_info(),
+   ctx.accounts.admission.to_account_info(),ctx.accounts.system_program.to_account_info(),
+   ctx.accounts.policy_program.to_account_info()],&[&[b"admission",&[bump]]])?;
+  Ok(())
+ }
  pub fn init_runtime_budget_init_comp_def(ctx:Context<InitRuntimeBudgetInitCompDef>)->Result<()>{init_computation_def(ctx.accounts,None)?;Ok(())}
  pub fn init_runtime_budget_bound_comp_def(ctx:Context<InitRuntimeBudgetBoundCompDef>)->Result<()>{init_computation_def(ctx.accounts,None)?;Ok(())}
  pub fn prepare_action(ctx:Context<PrepareAction>,_action_id:u64,template:Vec<u8>,native_data:Vec<u8>)->Result<()> {
@@ -129,6 +142,24 @@ pub mod cyperlink_auth {
   policy(vec![5],ctx.accounts.quota.to_account_info(),Some(ctx.accounts.permit.to_account_info()),ctx.accounts.admission.to_account_info(),ctx.accounts.policy_program.to_account_info())?;job.status=3;Ok(())
  }
 }
+#[derive(Accounts)]
+pub struct ProvisionQuota<'info> {
+ #[account(mut)] pub payer:Signer<'info>,
+ #[account(address=Pubkey::find_program_address(&[ID.as_ref()],&anchor_lang::solana_program::bpf_loader_upgradeable::ID).0,
+   constraint=program_data.upgrade_authority_address==Some(payer.key()) @ JoinError::Authority)]
+ pub program_data:Account<'info,ProgramData>,
+ #[account(mut,address=Q)]
+ /// CHECK: H creates its canonical quota PDA; only auth deployment authority may select admin.
+ pub quota:UncheckedAccount<'info>,
+ #[account(address=H,executable)]
+ /// CHECK: fixed hook program.
+ pub policy_program:UncheckedAccount<'info>,
+ #[account(seeds=[b"admission"],bump)]
+ /// CHECK: restricted H provisioning authority.
+ pub admission:UncheckedAccount<'info>,
+ pub system_program:Program<'info,System>,
+}
+
 #[account]
 pub struct Job {pub kind:u8,pub status:u8,pub owner:Pubkey,pub computation:Pubkey,pub permit:Pubkey,pub nonce:u128,pub expiry:u64,pub template:[u8;520],pub inputs_hash:[u8;32]}
 #[account]

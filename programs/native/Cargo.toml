@@ -1,6 +1,6 @@
 [workspace]
 resolver="2"
-members=["guard","policy","interface","merchant"]
+members=["guard","policy","interface","merchant","proof-buffer","license"]
 exclude=["hook","token-2022"]
 [workspace.dependencies]
 solana-account-info="=3.1.1"

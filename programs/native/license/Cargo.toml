@@ -1,5 +1,5 @@
 [package]
-name="ct-policy-spike"
+name="cyperlink-license"
 version="0.1.0"
 edition="2021"
 [lib]
@@ -12,11 +12,8 @@ solana-program-error={workspace=true}
 solana-instruction={workspace=true}
 solana-cpi={workspace=true}
 solana-sha256-hasher={workspace=true}
-spl-token-2022-interface={workspace=true}
-bytemuck={workspace=true}
-cyperlink-hook-routing={path="../../../crates/hook-routing"}
+cyperlink-operation={path="../interface"}
 cyperlink-pda-provisioning={path="../../../crates/pda-provisioning"}
-
 solana-clock="=3.2.1"
 solana-sysvar="=3.1.1"
 solana-rent="=3.1.0"
