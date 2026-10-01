@@ -1,0 +1,17 @@
+{
+  "name": "cyperlink-local-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pinned local runtime dependencies extracted from the validated research lock",
+  "engines": {
+    "node": "24.12.0",
+    "npm": "11.6.2"
+  },
+  "packageManager": "npm@11.6.2",
+  "dependencies": {
+    "@anchor-lang/core": "1.2.0",
+    "@arcium-hq/client": "0.15.0",
+    "@solana/web3.js": "1.99.0",
+    "bn.js": "5.2.5"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "original_lock": "research/cyperlink-probes-2026-10-01/authenticated/cyperlink_auth/package-lock.json",
+  "original_lock_sha256": "b4f75537d61d0cd2c7a3e9dcec12753d3676845d3f9868413350a1ce7f7eedec",
+  "original_package_count": 173,
+  "retained_package_count": 67,
+  "derivation": "Discard dev:true entries and replace root metadata with exact-version runtime dependencies; every retained nonroot lock record is unchanged. Optional peer/tool entries are preserved.",
+  "files": {
+    "package.json": "52af490ba91312ed35082952e211edf8398da93978bba03b7e19bce66d310441",
+    "package-lock.json": "b88a51932a871d24d2a9a4cdf97a2b407b0917531db9b1bc113c3fddf6fc4f6d"
+  },
+  "direct_dependencies": {
+    "@anchor-lang/core": "1.2.0",
+    "@arcium-hq/client": "0.15.0",
+    "@solana/web3.js": "1.99.0",
+    "bn.js": "5.2.5"
+  },
+  "node": "24.12.0",
+  "npm": "11.6.2"
+}
