@@ -1,0 +1,207 @@
+{
+  "services": {
+    "arcium-trusted-dealer": {
+      "command": null,
+      "entrypoint": null,
+      "image": "arcium/trusted-dealer@sha256:4d1b7004b75bca66dc7400810970446bccc3338e35acdf58664dd7a39b92d509",
+      "restart": "no",
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "artifacts/trusted_dealer_config.toml",
+          "target": "/usr/trusted-dealer/trusted_dealer_config.toml",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/trusted_dealer_logs",
+          "target": "/usr/trusted-dealer/logs",
+          "read_only": false
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/td_identity.pem",
+          "target": "/usr/trusted-dealer/identity.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/td_master_seed.json",
+          "target": "/usr/trusted-dealer/master_seed.json",
+          "read_only": true
+        }
+      ],
+      "pull_policy": "never",
+      "platform": "linux/amd64",
+      "extra_hosts": [
+        "host.docker.internal:host-gateway"
+      ]
+    },
+    "arx-node-0": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "ARX_METRICS_HOST": "0.0.0.0",
+        "BLS_PRIVATE_KEY_FILE": "/usr/arx-node/node-keys/node_bls_keypair.json",
+        "CALLBACK_AUTHORITY_KEYPAIR_FILE": "/usr/arx-node/node-keys/callback_authority_keypair.json",
+        "NODE_CONFIG_PATH": "/usr/arx-node/arx/node_config.toml",
+        "NODE_IDENTITY_FILE": "/usr/arx-node/node-keys/node_identity.pem",
+        "NODE_KEYPAIR_FILE": "/usr/arx-node/node-keys/node_keypair.json",
+        "OPERATOR_KEYPAIR_FILE": "/usr/arx-node/node-keys/operator_keypair.json",
+        "X25519_PRIVATE_KEY_FILE": "/usr/arx-node/node-keys/node_x25519_keypair.json"
+      },
+      "image": "arcium/arx-node@sha256:345a5bd4f95ef8744907a2cde7415cf33549b9fd3c52d63297456ed1e52a036e",
+      "restart": "no",
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "artifacts/node_config_0.toml",
+          "target": "/usr/arx-node/arx/node_config.toml",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_0.json",
+          "target": "/usr/arx-node/node-keys/node_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_0.json",
+          "target": "/usr/arx-node/node-keys/operator_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_callback_0.json",
+          "target": "/usr/arx-node/node-keys/callback_authority_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/identity_0.pem",
+          "target": "/usr/arx-node/node-keys/node_identity.pem",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/arx_node_logs",
+          "target": "/usr/arx-node/logs",
+          "read_only": false
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_bls_0.json",
+          "target": "/usr/arx-node/node-keys/node_bls_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_x25519_0.json",
+          "target": "/usr/arx-node/node-keys/node_x25519_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/private_shares_node_0",
+          "target": "/usr/arx-node/private-shares",
+          "read_only": false
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/public_inputs_node_0",
+          "target": "/usr/arx-node/public-inputs",
+          "read_only": false
+        }
+      ],
+      "pull_policy": "never",
+      "platform": "linux/amd64",
+      "extra_hosts": [
+        "host.docker.internal:host-gateway"
+      ]
+    },
+    "arx-node-1": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "ARX_METRICS_HOST": "0.0.0.0",
+        "BLS_PRIVATE_KEY_FILE": "/usr/arx-node/node-keys/node_bls_keypair.json",
+        "CALLBACK_AUTHORITY_KEYPAIR_FILE": "/usr/arx-node/node-keys/callback_authority_keypair.json",
+        "NODE_CONFIG_PATH": "/usr/arx-node/arx/node_config.toml",
+        "NODE_IDENTITY_FILE": "/usr/arx-node/node-keys/node_identity.pem",
+        "NODE_KEYPAIR_FILE": "/usr/arx-node/node-keys/node_keypair.json",
+        "OPERATOR_KEYPAIR_FILE": "/usr/arx-node/node-keys/operator_keypair.json",
+        "X25519_PRIVATE_KEY_FILE": "/usr/arx-node/node-keys/node_x25519_keypair.json"
+      },
+      "image": "arcium/arx-node@sha256:345a5bd4f95ef8744907a2cde7415cf33549b9fd3c52d63297456ed1e52a036e",
+      "restart": "no",
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "artifacts/node_config_1.toml",
+          "target": "/usr/arx-node/arx/node_config.toml",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_1.json",
+          "target": "/usr/arx-node/node-keys/node_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_1.json",
+          "target": "/usr/arx-node/node-keys/operator_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_callback_1.json",
+          "target": "/usr/arx-node/node-keys/callback_authority_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/identity_1.pem",
+          "target": "/usr/arx-node/node-keys/node_identity.pem",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/arx_node_logs",
+          "target": "/usr/arx-node/logs",
+          "read_only": false
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_bls_1.json",
+          "target": "/usr/arx-node/node-keys/node_bls_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/localnet/node_x25519_1.json",
+          "target": "/usr/arx-node/node-keys/node_x25519_keypair.json",
+          "read_only": true
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/private_shares_node_1",
+          "target": "/usr/arx-node/private-shares",
+          "read_only": false
+        },
+        {
+          "type": "bind",
+          "source": "artifacts/public_inputs_node_1",
+          "target": "/usr/arx-node/public-inputs",
+          "read_only": false
+        }
+      ],
+      "pull_policy": "never",
+      "platform": "linux/amd64",
+      "extra_hosts": [
+        "host.docker.internal:host-gateway"
+      ]
+    }
+  }
+}
