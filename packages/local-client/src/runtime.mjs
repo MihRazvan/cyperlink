@@ -83,7 +83,7 @@ export class LocalSession {
       signedTransactionBase64: Buffer.from(wire).toString('base64'), classification: 'public-signed-local-transaction' }, null, 2));
     const simulation = await this.connection.simulateTransaction(transaction, { sigVerify: true, commitment: 'confirmed' });
     ensure(!simulation.value.err, `Simulation ${label} failed: ${JSON.stringify(simulation.value)}`);
-    const signature = await this.connection.sendRawTransaction(wire, { skipPreflight: false, maxRetries: 0, preflightCommitment: 'confirmed' });
+    const signature = await this.connection.sendRawTransaction(wire, { skipPreflight: false, maxRetries: 5, preflightCommitment: 'confirmed' });
     let landed;
     for (let attempt = 0; attempt < 100; attempt++) {
       const status = (await this.connection.getSignatureStatuses([signature])).value[0];
