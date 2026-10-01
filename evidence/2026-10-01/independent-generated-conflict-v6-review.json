@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "classification": "independent-agent-offline-archive-verification",
+  "checked_at": "2026-10-01T20:50:14.353Z",
+  "scenario": "conflict",
+  "genesis_hash": "CrYo4s6AH1ZioaRFWfzRznnCKYPPXZMVM7HbBzjerLKS",
+  "inputs": {
+    "results": {
+      "path": ".local/demo-generated-conflict-v6/results.json",
+      "sha256": "c5e4cfb78d9cb2a062fea85c62d2c0bf1feb8bd034b7ba6dffb4daa0237cbf45"
+    },
+    "publicReport": {
+      "path": "evidence/2026-10-01/two-consumers-generated-conflict-v6.json",
+      "sha256": "c143c04588be2253a317159bc31bbe03ff0266b478c0993c8900f57803349cfe"
+    },
+    "sourceManifest": {
+      "path": ".local/localnet-generated-conflict-v6/source-hashes.json",
+      "sha256": "2f5b435e6ec52a9140abfd1247850b987dff7bbf5e87d791a7e69b495b664a4a"
+    }
+  },
+  "counts": {
+    "archivedTransactions": 1267,
+    "ed25519SignaturesVerified": 1323,
+    "callbackPayloadsDecoded": 4,
+    "criticalPublicEntriesMatched": 85,
+    "localElfFilesMatchedToRecordedLoadedHashes": 10,
+    "compiledSourceFilesMatched": 29,
+    "archivedClientSourceFilesMatched": 15
+  },
+  "actualFailedTransactionReceipts": [
+    {
+      "label": "changed-destination-binding-rejected",
+      "signature": "64S9YvCeYEUv4eEeRekP4rjA3DreVx6dLXmDFuQVS6MhmRvdPbC5s5dexgyhRVT7VqfTpBtR4rn65JtsGPCdA96x",
+      "slot": 275,
+      "customError": 705
+    },
+    {
+      "label": "changed-application-action-binding-rejected",
+      "signature": "3Pkeriu1s8HoEUix8cStsn9yogo56Af3TcRkwkBp84V8cxeMe31qLj8sCtpxSZG9PYXUFnvxqeBx1s2WbdZ9PKM7",
+      "slot": 280,
+      "customError": 705
+    },
+    {
+      "label": "changed-consumer-binding-rejected",
+      "signature": "4bR4c23mZLctBNBEa9tuJRUHvtgKSoDDxbDx3KtBsoENerBCZ4pwq6dHt5Pr5hTHUss6RBjqRENhKVXNDpRGfehg",
+      "slot": 281,
+      "customError": 705
+    },
+    {
+      "label": "post-native-transfer-merchant-failure-rolls-back",
+      "signature": "3q8qMUpRWbwW35DdSGDt3STee3FaoAZe38j7ifae5XsKa26VxFtgtQDfHVKEmfpAwL89eivHeHVdXNpGJxvqwuXP",
+      "slot": 282,
+      "customError": 1099
+    },
+    {
+      "label": "competing-license-stale-authorization",
+      "signature": "4hCcupjULdb7i4Jgd4SMW8EcwspuNS8uFK2qDRYm6Lpe8oBvVBG1vJFRyUAY97uVkMp7hx1dnxWQLx6hcXi84jeu",
+      "slot": 284,
+      "customError": 803
+    },
+    {
+      "label": "consumed-merchant-entitlement-replay",
+      "signature": "2Pp6QE6UN5FyAnHnvryTKw8HNu1V42upAQAkNBoGWCoYfdUNPGo9w9Qvz5An7uq4rBH7VbZK4shzoha5JPo9Jinc",
+      "slot": 285,
+      "customError": 1001
+    }
+  ],
+  "rawAccountSnapshots": {
+    "available": true,
+    "snapshotCount": 14,
+    "rejectedTransactions": 6,
+    "rejectedAccountComparisons": 33,
+    "rejections": [
+      {
+        "label": "changed-destination-binding-rejected",
+        "signature": "64S9YvCeYEUv4eEeRekP4rjA3DreVx6dLXmDFuQVS6MhmRvdPbC5s5dexgyhRVT7VqfTpBtR4rn65JtsGPCdA96x",
+        "errorCode": 705,
+        "accountsCompared": 6,
+        "beforeSlot": 274,
+        "transactionSlot": 275,
+        "afterSlot": 275,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "changed-application-action-binding-rejected",
+        "signature": "3Pkeriu1s8HoEUix8cStsn9yogo56Af3TcRkwkBp84V8cxeMe31qLj8sCtpxSZG9PYXUFnvxqeBx1s2WbdZ9PKM7",
+        "errorCode": 705,
+        "accountsCompared": 6,
+        "beforeSlot": 279,
+        "transactionSlot": 280,
+        "afterSlot": 280,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "changed-consumer-binding-rejected",
+        "signature": "4bR4c23mZLctBNBEa9tuJRUHvtgKSoDDxbDx3KtBsoENerBCZ4pwq6dHt5Pr5hTHUss6RBjqRENhKVXNDpRGfehg",
+        "errorCode": 705,
+        "accountsCompared": 6,
+        "beforeSlot": 280,
+        "transactionSlot": 281,
+        "afterSlot": 281,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "post-native-transfer-merchant-failure-rolls-back",
+        "signature": "3q8qMUpRWbwW35DdSGDt3STee3FaoAZe38j7ifae5XsKa26VxFtgtQDfHVKEmfpAwL89eivHeHVdXNpGJxvqwuXP",
+        "errorCode": 1099,
+        "accountsCompared": 5,
+        "beforeSlot": 281,
+        "transactionSlot": 282,
+        "afterSlot": 282,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "competing-license-stale-authorization",
+        "signature": "4hCcupjULdb7i4Jgd4SMW8EcwspuNS8uFK2qDRYm6Lpe8oBvVBG1vJFRyUAY97uVkMp7hx1dnxWQLx6hcXi84jeu",
+        "errorCode": 803,
+        "accountsCompared": 5,
+        "beforeSlot": 283,
+        "transactionSlot": 284,
+        "afterSlot": 284,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "consumed-merchant-entitlement-replay",
+        "signature": "2Pp6QE6UN5FyAnHnvryTKw8HNu1V42upAQAkNBoGWCoYfdUNPGo9w9Qvz5An7uq4rBH7VbZK4shzoha5JPo9Jinc",
+        "errorCode": 1001,
+        "accountsCompared": 5,
+        "beforeSlot": 284,
+        "transactionSlot": 285,
+        "afterSlot": 285,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      }
+    ],
+    "commits": [
+      {
+        "label": "a60-atomic-paid-entitlement",
+        "signature": "3Px5GRTt1z1HGVF2ZThYFD5cZLhgCCHe6LwtUv6TKcZwM4cJi4GKUwuZwNukrbrw2bS7yE3xv72CJxxZgqaZm7n6",
+        "changedAccounts": 5,
+        "beforeSlot": 282,
+        "transactionSlot": 283,
+        "afterSlot": 283,
+        "exactEncryptedSuccessor": true
+      }
+    ],
+    "limitation": "Equality is independently recomputed from retained confirmed RPC account bytes and metadata, not historical state proofs; payer fees and untracked accounts are outside this comparison"
+  },
+  "callbackDecisions": [
+    {
+      "job": "HFCep3eAS3ui5pfnaWKu3LyN6DtWLvQGfsXTxei621XU",
+      "allow": true,
+      "status": 1
+    },
+    {
+      "job": "EX73VRTapQm3zmgmN4MX51wkVeqBFd7u8rBZ2cia9e3b",
+      "allow": true,
+      "status": 1
+    },
+    {
+      "job": "CWAtineC53WhkAiEFFqRJRSZkVAQeTeQxFSmf7rqNkvt",
+      "allow": false,
+      "status": 2
+    }
+  ],
+  "finalQuota": {
+    "version": "1",
+    "stateHash": "27de862e3cff043e54a92219ca2d7da59a07c933df228339a52e4bc2fbe0b0ba",
+    "nonce": "02000000000000000000000000000000",
+    "ciphertext": "838c71c996f4c3fc667de05741fd847ebb57ee2ab78887c11acf721befba5d0a",
+    "counter": "4"
+  },
+  "limitations": [
+    "Offline verification of retained RPC receipts, signed messages and source/artifact hashes; no fresh RPC reread and no independent historical state proof.",
+    "Ed25519 transaction signatures were independently checked. BLS output authenticity is supported by successful onchain callback verification and matched program artifacts, not a separate offline BLS verifier.",
+    "Equality is independently recomputed from retained confirmed RPC account bytes and metadata, not historical state proofs; payer fees and untracked accounts are outside this comparison",
+    "Native success log followed by consumer1099 confirms the late failure path in its failed transaction receipt. It does not itself expose confidential balances.",
+    "Conflict scenario proves merchant settlement and license admission/staleness/fresh denial. Successful license settlement is a separate compatible-scenario result.",
+    "No production security audit, public-network execution or external integration claim."
+  ]
+}

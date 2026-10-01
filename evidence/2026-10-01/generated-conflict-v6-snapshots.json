@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "classification": "independent-agent-offline-retained-account-snapshot-verification",
+  "checked_at": "2026-10-01T20:48:16.746Z",
+  "scenario": "conflict",
+  "genesis_hash": "CrYo4s6AH1ZioaRFWfzRznnCKYPPXZMVM7HbBzjerLKS",
+  "input": {
+    "path": ".local/demo-generated-conflict-v6/results.json",
+    "bytes": 5477018,
+    "sha256": "c5e4cfb78d9cb2a062fea85c62d2c0bf1feb8bd034b7ba6dffb4daa0237cbf45"
+  },
+  "verifier_sources": {
+    "scripts/verify_demo_snapshots.mjs": "977d4f5eabb824584963be633b06198ac5f7849d0988f63fb514685e94b1a904",
+    "packages/sdk/src/index.mjs": "2075f6e8476882f8215c1ec35e3d110ef154479c8fb57195f36b711bf821bebf",
+    "packages/sdk/src/codec.mjs": "9ac9ebb40b02278f721ecb2245fbb01a56d184dbaf0706c456f878b2121ff167"
+  },
+  "verification": {
+    "available": true,
+    "snapshotCount": 14,
+    "rejectedTransactions": 6,
+    "rejectedAccountComparisons": 33,
+    "rejections": [
+      {
+        "label": "changed-destination-binding-rejected",
+        "signature": "64S9YvCeYEUv4eEeRekP4rjA3DreVx6dLXmDFuQVS6MhmRvdPbC5s5dexgyhRVT7VqfTpBtR4rn65JtsGPCdA96x",
+        "errorCode": 705,
+        "accountsCompared": 6,
+        "beforeSlot": 274,
+        "transactionSlot": 275,
+        "afterSlot": 275,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "changed-application-action-binding-rejected",
+        "signature": "3Pkeriu1s8HoEUix8cStsn9yogo56Af3TcRkwkBp84V8cxeMe31qLj8sCtpxSZG9PYXUFnvxqeBx1s2WbdZ9PKM7",
+        "errorCode": 705,
+        "accountsCompared": 6,
+        "beforeSlot": 279,
+        "transactionSlot": 280,
+        "afterSlot": 280,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "changed-consumer-binding-rejected",
+        "signature": "4bR4c23mZLctBNBEa9tuJRUHvtgKSoDDxbDx3KtBsoENerBCZ4pwq6dHt5Pr5hTHUss6RBjqRENhKVXNDpRGfehg",
+        "errorCode": 705,
+        "accountsCompared": 6,
+        "beforeSlot": 280,
+        "transactionSlot": 281,
+        "afterSlot": 281,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "post-native-transfer-merchant-failure-rolls-back",
+        "signature": "3q8qMUpRWbwW35DdSGDt3STee3FaoAZe38j7ifae5XsKa26VxFtgtQDfHVKEmfpAwL89eivHeHVdXNpGJxvqwuXP",
+        "errorCode": 1099,
+        "accountsCompared": 5,
+        "beforeSlot": 281,
+        "transactionSlot": 282,
+        "afterSlot": 282,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "competing-license-stale-authorization",
+        "signature": "4hCcupjULdb7i4Jgd4SMW8EcwspuNS8uFK2qDRYm6Lpe8oBvVBG1vJFRyUAY97uVkMp7hx1dnxWQLx6hcXi84jeu",
+        "errorCode": 803,
+        "accountsCompared": 5,
+        "beforeSlot": 283,
+        "transactionSlot": 284,
+        "afterSlot": 284,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      },
+      {
+        "label": "consumed-merchant-entitlement-replay",
+        "signature": "2Pp6QE6UN5FyAnHnvryTKw8HNu1V42upAQAkNBoGWCoYfdUNPGo9w9Qvz5An7uq4rBH7VbZK4shzoha5JPo9Jinc",
+        "errorCode": 1001,
+        "accountsCompared": 5,
+        "beforeSlot": 284,
+        "transactionSlot": 285,
+        "afterSlot": 285,
+        "equalFields": [
+          "dataBytes",
+          "owner",
+          "executable",
+          "lamports"
+        ]
+      }
+    ],
+    "commits": [
+      {
+        "label": "a60-atomic-paid-entitlement",
+        "signature": "3Px5GRTt1z1HGVF2ZThYFD5cZLhgCCHe6LwtUv6TKcZwM4cJi4GKUwuZwNukrbrw2bS7yE3xv72CJxxZgqaZm7n6",
+        "changedAccounts": 5,
+        "beforeSlot": 282,
+        "transactionSlot": 283,
+        "afterSlot": 283,
+        "exactEncryptedSuccessor": true
+      }
+    ],
+    "limitation": "Equality is independently recomputed from retained confirmed RPC account bytes and metadata, not historical state proofs; payer fees and untracked accounts are outside this comparison"
+  },
+  "limitations": [
+    "These are retained confirmed RPC account observations, not consensus-authenticated historical state proofs or a fresh RPC reread.",
+    "This snapshot-only review recomputes equality and exact commit effects and binds their address sets to retained transaction instructions; it does not independently reverify transaction signatures. The broader archived-demo verifier performs signature checks.",
+    "Tracked account bytes, owner, executable flag and lamports are compared; transaction fee payer and other untracked accounts are excluded.",
+    "Synthetic setup and chosen purchase amounts are test-observer disclosures; encrypted quota/account contents are not decrypted by this review."
+  ]
+}
