@@ -1,0 +1,10 @@
+{
+  "name": "@cyperlink/sdk",
+  "version": "0.1.0-local.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-profile operation evidence and recovery SDK",
+  "exports": {".": {"types": "./src/index.d.ts", "import": "./src/index.mjs"}},
+  "engines": {"node": ">=22"},
+  "scripts": {"test": "node --test"}
+}
