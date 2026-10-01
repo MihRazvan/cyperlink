@@ -1,0 +1,9 @@
+{
+  "name": "@cyperlink/local-client",
+  "version": "0.1.0-local.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {"test": "node --test"},
+  "description": "Explicit local-validator provisioning with client-owned keys and native proof verification"
+}
