@@ -8,19 +8,19 @@ All native accounts, proof contexts, permits, quota and effect records are
 created by real signed instructions. The Arcium runtime supplies the MXE key and
 signed callbacks; no fixture-key circuit or preauthorized permit is used.
 
-Prepare/start a fresh `scripts/prepare_local_replay.py --fresh-native` deployment
-and its isolated two-node Compose project first. Each scenario needs a separate
+Follow the [fresh bootstrap guide](../../docs/local-bootstrap.md), then prepare/start
+`scripts/prepare_localnet.py --run-id demo-01` and its isolated two-node Compose project. Each scenario needs a separate
 fresh ledger and output directory. Pass its own preparation manifest, matching
 IDL/runtime circuit directory, and disposable administrator wallet:
 
 ```sh
 node examples/two-consumers/run.mjs \
-  --scenario conflict --out .local/demo-conflict-v4 --prefund-pdas true \
-  --preparation .local/replay-consumers-conflict-v4/preparation.json \
-  --module-root /path/to/staged/cyperlink_auth \
-  --payer /path/to/staged/cyperlink_auth/local-test-wallet.json \
-  --idl /path/to/staged/cyperlink_auth/target/idl/cyperlink_auth.json \
-  --circuits /path/to/staged/cyperlink_auth/build \
+  --scenario conflict --out .local/demo-01 --prefund-pdas true \
+  --preparation .local/localnet-demo-01/preparation.json \
+  --module-root .local/toolchain/js \
+  --payer .local/localnet-demo-01/app/local-test-wallet.json \
+  --idl .local/localnet-demo-01/app/target/idl/cyperlink_auth.json \
+  --circuits .local/localnet-demo-01/app/build \
   --proof-cli crates/client-proofs/target/debug/cyperlink-client-proofs \
   --rpc http://127.0.0.1:8899
 ```

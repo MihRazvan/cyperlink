@@ -22,7 +22,7 @@ the shell's unrelated global tools. The two Agave releases have different roles:
 4.3.0 supplies the validator and key generator; 3.1.14 supplies the SBF launcher.
 The SBF launcher reports its default platform-tools 1.52 when asked for its
 version. Builds must explicitly request the qualified platform-tools v1.57 and
-architecture v0. Host Rust 1.95.0 is also a separate prerequisite. This installer
+architecture v0. Host Rust 1.95.0 and the auth workspace’s pinned Rust 1.89.0 are separate prerequisites. This installer
 does not install or change global Rust or SBF toolchains.
 
 The launcher itself creates one runtime cache symlink at

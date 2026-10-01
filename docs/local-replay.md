@@ -1,4 +1,6 @@
-# Isolated local validator and distributed replay
+# Historical same-machine replay
+
+For new development, use the [fresh bootstrap guide](local-bootstrap.md), which generates new identities and removes the original-checkout dependency. The commands below preserve the earlier research-dependent path.
 
 The default profile starts a fresh Agave ledger with only the 61 required Arcium runtime genesis accounts. Native tokens, proof contexts, permits, quota, routing metadata and consumer entitlements are created through signed instructions by the [two-consumer example](../examples/two-consumers/README.md). Runtime keys and callbacks come from two fresh Arcium nodes. This is local validator/distributed evidence, not public-network execution.
 

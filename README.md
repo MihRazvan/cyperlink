@@ -6,7 +6,7 @@ CyperLink joins an exact native confidential payment, authenticated private shar
 
 The initial implementation supports synthetic local Token-2022 assets, one private allowance/MXE, explicit owner and administrator query signatures, and two internal consumers: a merchant SKU and an expiring product license. Fees, including fee extensions configured at 0 bps, require a separate adapter.
 
-Start with the [current status and decisions](docs/STATUS.md), [supported profile](docs/initial-profile.md), and [validation matrix](docs/validation.md). For local execution, follow the [pinned build and replay guide](docs/local-replay.md), then the [two-consumer demo](examples/two-consumers/README.md). Existing research is a read-only dependency; new ledgers, keys and evidence stay under ignored `.local/` directories.
+Start with the [current status and decisions](docs/STATUS.md), [supported profile](docs/initial-profile.md), and [validation matrix](docs/validation.md). For local execution, follow the [fresh bootstrap guide](docs/local-bootstrap.md), then the [two-consumer demo](examples/two-consumers/README.md). The current path uses repository sources and pinned upstream artifacts; historical research stays read-only. New ledgers, keys and evidence stay under ignored `.local/` directories.
 
 Developer APIs:
 
