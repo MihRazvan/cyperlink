@@ -16,6 +16,11 @@ All results here are synthetic local development evidence. Native amounts and in
 | Real validator, provisioning-v3 |[public report](../evidence/2026-10-01/provisioning-negatives-v3.json) | Nine signed negative simulations and real buffer write/close/rent refund | Predates prefunding fix; no MPC or payment claim from this test |
 | Real validator + two nodes, fresh conflict-v4 |[public report](../evidence/2026-10-01/two-consumers-conflict-v4.json) | Fresh signed provisioning, prefunded PDA recovery, both admissions, merchant payment, stale license, fresh denial, three exact binding failures and atomic rollback | One quota, administrator co-signing, confirmed commitment; remaining 40 is observer-inferred |
 | Real validator + two nodes, fresh compatible-v5 |[public report](../evidence/2026-10-01/two-consumers-compatible-v5.json) | Fresh 40+40 computations, both native payments and paid consumer records, quota version 2; independent final account/SDK read | Separate fresh ledger; remaining 20 is observer-inferred; no public-network claim |
+| Source circuit rebuild | [byte comparison](../evidence/2026-10-01/circuit-source-rebuild.json); six integrity tests | Both real runtime circuits compile from locked source; all eight artifacts exactly match | Host compilation; separate distributed execution below |
+| Repository bootstrap host tests | Seven JS, fourteen native installer, six generator, five preparation groups | Exact locks/hashes, safe extraction, fresh key generation boundaries, isolated pinned services | Existing Rust/SBF caches; Darwin ARM64 qualification only |
+| Generated bootstrap + real validator/two nodes, conflict-v6 | [public report](../evidence/2026-10-01/two-consumers-generated-conflict-v6.json) | Rebuilt circuits, new administrator/node identities, both admissions, paid SKU, stale/fresh denial and six adversarial failures; raw snapshots retained | Confirmed local RPC; one host with trusted dealer, not independent operators |
+| Generated bootstrap + real validator/two nodes, compatible-v7 | [public report](../evidence/2026-10-01/two-consumers-generated-compatible-v7.json) | Fresh 40+40 paid SKU/license and quota2; independent final SDK reads | Separate fresh ledger; observer-inferred remaining20; host caches remain |
+
 
 The interrupted v1/v3 attempts remain under `.local/` with their exact failures. They are not passing end-to-end evidence. Current results and remaining limitations are recorded in [STATUS.md](STATUS.md).
 
@@ -34,7 +39,7 @@ cargo test --locked --offline --manifest-path programs/native/Cargo.toml
 node --test packages/sdk/test/*.test.mjs packages/local-client/test/*.test.mjs
 ```
 
-See [local-replay.md](local-replay.md) for build, fresh validator/runtime setup and actual loaded-ELF verification. Changed program source must be rebuilt and the bytes loaded by that run must match before its results qualify the change.
+See [local-bootstrap.md](local-bootstrap.md) for build, fresh validator/runtime setup and actual loaded-ELF verification. The research verifier above is optional historical provenance verification, not required by the new bootstrap. Changed program source must be rebuilt and the bytes loaded by that run must match before its results qualify the change.
 
 ## Cost boundaries
 
@@ -54,3 +59,31 @@ node scripts/verify_archived_demo.mjs \
   --module-root .local/replay-consumers-conflict-v4/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth \
   --output .local/demo-conflict-v4/new-archive-check.json
 ```
+
+## Fresh generated bootstrap archives
+
+Generated conflict-v6 and compatible-v7 used independently installed dependencies, source-rebuilt circuits, fresh upstream genesis and fresh administrator/node identities. Both checked ten actually loaded ELFs. Settlement-only CU was 95,557 for conflict-v6's merchant, and 115,057/91,275 for compatible-v7's merchant/license. These are individual local transaction observations, not comparative benchmarks or total operation costs.
+
+The [combined conflict archive review](../evidence/2026-10-01/independent-generated-conflict-v6-review.json) also verifies 1,323 Ed25519 signatures over 1,267 messages, four callbacks, ten ELF hashes and the retained source manifests.
+
+The retained snapshot reviews cover [six rejected transactions and one merchant commit](../evidence/2026-10-01/generated-conflict-v6-snapshots.json) and [both compatible commits](../evidence/2026-10-01/generated-compatible-v7-snapshots.json). Rejections compare 33 tracked accounts across the six before/after pairs, including bytes, owner, executable flag and lamports. The verifier binds tracked addresses to the retained consumer instruction, checks slots bracket the receipt, and verifies exact encrypted successors and paid effects for commits. Seven synthetic corruption-test groups exercise missing/altered accounts, metadata, slots, encodings, successor and consumer effects. These test fixtures are explicitly host-only.
+
+The public exporter allowlists fields recursively and excludes private key/witness files, raw transaction wires and logs. Eight tests cover private-field exclusion, snapshot fidelity, failed-run refusal, create-only output and explicit summary labeling for separate SDK snapshots. Exported support-script hashes are labeled **export-time**, not retrospectively asserted to have been captured before launch.
+
+To export a new completed generated run (choose a new output path):
+
+```sh
+python3 scripts/export_demo_evidence.py \
+  --results .local/demo-generated-conflict-v6/results.json \
+  --preparation .local/localnet-generated-conflict-v6/preparation.json \
+  --out .local/conflict-v6-public-review.json
+node scripts/verify_archived_demo.mjs \
+  --results .local/demo-generated-conflict-v6/results.json \
+  --public-report .local/conflict-v6-public-review.json \
+  --source-manifest .local/localnet-generated-conflict-v6/source-hashes.json \
+  --module-root .local/toolchain/js --require-snapshots \
+  --output .local/conflict-v6-archive-review.json
+node --test tests/verify_demo_snapshots.test.mjs
+```
+
+The exporter requires retained compiled/client source manifests and operation descriptors beside the results. The combined signed-message archive verifier currently qualifies conflict only; compatible has its separate snapshot review and independent final SDK reads. Neither offline review independently verifies BLS signatures or proves historical consensus state.

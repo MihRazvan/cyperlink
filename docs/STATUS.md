@@ -2,7 +2,18 @@
 
 Updated 2026-10-01. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
-## Current result
+## Latest continuation: fresh bootstrap
+
+**Both scenarios now pass without the original research checkout as an execution input.** Repository installers preserve the exact JavaScript, native CLI, program and Docker versions. Both real runtime circuits were rebuilt from locked source: all eight artifacts match the reviewed bytes exactly. Each new run generated its own administrator and node identities plus 60 upstream runtime genesis accounts; native assets and all CyperLink state still came from signed instructions. Ten actual loaded ELFs matched in each run.
+
+- [Generated conflict-v6](../evidence/2026-10-01/two-consumers-generated-conflict-v6.json): A60 paid; B stale803; honest fresh B60 denied; binding705, post-native-transfer1099 rollback and replay1001 rejected. Final quota version1/counter4.
+- [Generated compatible-v7](../evidence/2026-10-01/two-consumers-generated-compatible-v7.json): A40 and freshly recomputed B40 both paid their exact consumer entitlements. Final quota version2/counter3. Independent final SDK reads observed both committed.
+
+Raw single-bank before/after tracked-account snapshots are now retained, closing the older v4 archive's rollback-review gap. The [combined conflict review](../evidence/2026-10-01/independent-generated-conflict-v6-review.json) checked 1,323 Ed25519 signatures over 1,267 messages, four callback decodes, all ten ELF hashes, source manifests and 33 unchanged tracked-account comparisons. The compatible snapshot review verified both exact paid successors. Host validation passed 76 Python tests, 25 SDK/client/example tests and seven snapshot corruption groups. These are confirmed RPC observations, not historical state proofs or finality claims. Requested amounts and remaining40/20 are test-observer disclosures. Both runs' services are stopped; ledgers, keys, receipts and source snapshots remain preserved under `.local/`.
+
+Follow [fresh bootstrap](local-bootstrap.md). Qualification covers Darwin ARM64 on this development host, with existing Rust/SBF caches and Docker prerequisites. It does not establish a blank-machine installation, independently reproducible native compiler output, independent node operators or production security. Public RPC was used only to retrieve hash-checked upstream program artifacts; no public transaction was sent. The earlier replay path and reports below remain historical evidence.
+
+## Earlier completed implementation
 
 **The initial implementation milestone is complete for the bounded local profile.** Shared native admission validation, client-owned keys/proof provisioning, operation builders/lifecycle SDK and both authenticated consumer scenarios are implemented and tested. Small reviewed slices are pushed to `origin/main`.
 
@@ -24,7 +35,7 @@ Conflict adversarial transactions reached exact binding rejection705 for changed
 - Client Rust library persists mode0600 ElGamal/AES keys, verifies current source state and generates fresh upstream proofs. Reusable account secrets remain client-side; only operation amount/opening enter encrypted MPC inputs. Signed JS provisioning performs actual native verification and buffer cleanup. Four Rust lifecycle groups and seven JS client groups pass.
 - SDK exports exact native/action and merchant/license digest builders plus a consistent-read lifecycle observer. Fifteen host groups cover binding, paid effects, stale/expiry/cancel/denial recovery and forged/partial evidence. Three example builder/settlement groups pass. Callback completion alone never establishes payment.
 - Quota/metadata/consumer provisioning uses authenticated instructions and PDA allocation. Seven native initializer tests plus the shared helper rejection test pass. [Provisioning-v3 negatives](../evidence/2026-10-01/provisioning-negatives-v3.json) distinguish nine signed simulations from three actual buffer lifecycle transactions; these predate the prefunding fix qualified in v4/v5.
-- Isolated replay/build tooling preserves exact versions and requires fresh ledgers. Six implementation programs and IDL rebuilt with SBF tools 1.57 / arch v0. Actual loaded-program verification has16 tests; Python verifier suites total 30. See [validation matrix](validation.md) and [replay instructions](local-replay.md).
+- Isolated replay/build tooling preserves exact versions and requires fresh ledgers. Six implementation programs and IDL rebuilt with SBF tools 1.57 / arch v0. Actual loaded-program verification has16 tests; Python verifier suites total 30. See [validation matrix](validation.md) and [fresh bootstrap instructions](local-bootstrap.md).
 
 ## Decisions and security boundaries
 
@@ -37,7 +48,7 @@ Conflict adversarial transactions reached exact binding rejection705 for changed
 
 ## Limits and next work
 
-Reproducibility is **same-machine**, depending on the original pinned validator/JS installation, cached digest-pinned Docker images and reviewed circuit artifacts. A clean-machine bootstrap and independent circuit rebuild remain next steps. Generic wallets/KMS, key rotation and backup, proof-context/Job/permit lifecycle cleanup, recovery beyond explicit evidence reconciliation, multi-quota support, fee adapters, production security review, public-network qualification and external customer advantage remain unproven.
+The old-checkout execution dependency is removed and the circuits now rebuild exactly from source. A blank-machine qualification remains open: install and qualify host Rust/SBF compiler caches, expand platform support explicitly, and verify the full workflow on a second machine. Do not treat the current same-host bootstrap as that result. Generic wallets/KMS, key rotation and backup, proof-context/Job/permit lifecycle cleanup, recovery beyond explicit evidence reconciliation, multi-quota support, fee adapters, production security review, public-network qualification and external customer advantage remain unproven.
 
 All receipts here use explicit confirmed commitment; they do not claim finality or production throughput. Settlement CU/fees, native proof/provisioning, queue/callback transactions, circuit upload and callback wall time are separate categories. Worker CPU/network costs are unmeasured. For illustration only, compatible-v5 settlement used 79,057 CU for merchant and 80,775 CU for license; these exclude every other stage and are not general benchmarks.
 
