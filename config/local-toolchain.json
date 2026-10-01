@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "qualification": "Same exact research-qualified native binaries; downloading does not qualify other host architectures. No latest tags.",
+  "host_rust": "1.95.0",
+  "sbf_tools": "v1.57",
+  "sbf_arch": "v0",
+  "assets": [
+    {
+      "name": "agave-validator",
+      "url": "https://github.com/anza-xyz/agave/releases/download/v4.3.0/solana-release-aarch64-apple-darwin.tar.bz2",
+      "sha256": "0bfbd769a55e32f0a1fe1b92f76f360f01ee19475facf8c31cb90f99dcca7fe0",
+      "format": "tar.bz2",
+      "directory": "agave-4.3.0"
+    },
+    {
+      "name": "sbf-launcher",
+      "url": "https://github.com/anza-xyz/agave/releases/download/v3.1.14/solana-release-aarch64-apple-darwin.tar.bz2",
+      "sha256": "54cfc2680bd6426fda04619ee01933f40a649c8056f3a61ba20dc54dd427ebed",
+      "format": "tar.bz2",
+      "directory": "agave-3.1.14"
+    },
+    {
+      "name": "anchor",
+      "url": "https://github.com/otter-sec/anchor/releases/download/v1.0.2/anchor-1.0.2-aarch64-apple-darwin",
+      "sha256": "2abc198e3207148730c6fd2627eb37afb04fed926e95face4e0fe2b61f8212c0",
+      "format": "file",
+      "path": "bin/anchor",
+      "executable": true
+    },
+    {
+      "name": "arcium",
+      "url": "https://bin.arcium.com/download/arcium_aarch64_macos_0.15.0",
+      "sha256": "8f831e2a9afa6b37dc95ed72bad527b6df815b5570dbc92ade93bbf1ffe1ba44",
+      "format": "file",
+      "path": "bin/arcium",
+      "executable": true
+    },
+    {
+      "name": "arcium-program",
+      "url": "https://bin.arcium.com/download/arcium_program_0.15.0.so",
+      "sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "format": "file",
+      "path": "programs/arcium_program_0.15.0.so",
+      "executable": false
+    },
+    {
+      "name": "arcium-staking",
+      "url": "https://bin.arcium.com/download/arcium_staking_program_0.15.0.so",
+      "sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "format": "file",
+      "path": "programs/arcium_staking_program_0.15.0.so",
+      "executable": false
+    }
+  ],
+  "public_programs": [
+    {
+      "name": "token-2022",
+      "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "bytes": 1382016,
+      "sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "path": "programs/token-2022.so"
+    },
+    {
+      "name": "lighthouse",
+      "address": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "bytes": 424248,
+      "sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "path": "programs/lighthouse.so"
+    }
+  ],
+  "artifact_rpc": "https://api.mainnet-beta.solana.com",
+  "artifact_genesis": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
+  "docker_images": {
+    "arcium-trusted-dealer": "arcium/trusted-dealer@sha256:4d1b7004b75bca66dc7400810970446bccc3338e35acdf58664dd7a39b92d509",
+    "arx-node-0": "arcium/arx-node@sha256:345a5bd4f95ef8744907a2cde7415cf33549b9fd3c52d63297456ed1e52a036e",
+    "arx-node-1": "arcium/arx-node@sha256:345a5bd4f95ef8744907a2cde7415cf33549b9fd3c52d63297456ed1e52a036e"
+  },
+  "executables": {
+    "validator": {
+      "path": "agave-4.3.0/solana-release/bin/solana-test-validator",
+      "sha256": "b87abf1b5985e39f99a3cd13a9df196d89513922c674bb34341c62d0456ce4aa",
+      "version_prefix": "solana-test-validator 4.3.0 "
+    },
+    "solana_keygen": {
+      "path": "agave-4.3.0/solana-release/bin/solana-keygen",
+      "version_prefix": "solana-keygen 4.3.0 ",
+      "sha256": "419b2b21dce0c9efe0fd89f595e53ffa363ca8c871bc79d7b8df5613cb83b34b"
+    },
+    "sbf": {
+      "path": "agave-3.1.14/solana-release/bin/cargo-build-sbf",
+      "version_prefix": "solana-cargo-build-sbf 3.1.14\n",
+      "sha256": "21ea19babb1addc7d48bf7585e6f0423231760ffc36d949d72e74ac2cb021277"
+    },
+    "anchor": {
+      "path": "bin/anchor",
+      "version_prefix": "anchor-cli 1.0.2\n",
+      "sha256": "2abc198e3207148730c6fd2627eb37afb04fed926e95face4e0fe2b61f8212c0"
+    },
+    "arcium": {
+      "path": "bin/arcium",
+      "version_prefix": "arcium 0.15.0\n",
+      "sha256": "8f831e2a9afa6b37dc95ed72bad527b6df815b5570dbc92ade93bbf1ffe1ba44"
+    }
+  },
+  "auth_workspace_rust": "1.89.0"
+}
