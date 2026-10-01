@@ -47,4 +47,18 @@ The package exports reusable `LocalSession`, `provision`, `prepareNativeTransfer
 
 Validation on 2026-10-01: `.local/provision-native-01` completed ten actual signed transactions at validator slots313–322 using the routing-v2 local ledger; fresh native mint303B/source470B/destination470B snapshots were captured. Transfer60 preparation then succeeded from the live source at slot563 using persisted client keys. This proves the initial native provisioning and client preparation path. It does not yet prove native transfer execution, range-buffer verification, hook metadata initialization, or the joined two-consumer demo. Record later evidence separately.
 
-Host tests: `node --test packages/local-client/test/runtime.test.mjs`. Set `CYPERLINK_JS_MODULE_ROOT` if the pinned installation is elsewhere. These five tests check loopback/path restrictions, secret-file permissions and symlinks, genuine local signature construction with explicitly mocked RPC responses, mismatched landed-message rejection, simulation failure without submission, and buffer upload/verification/close ordering. Mocked orchestration tests are not native validator proof-verification evidence.
+Host tests: `node --test packages/local-client/test/runtime.test.mjs`. Set `CYPERLINK_JS_MODULE_ROOT` if the pinned installation is elsewhere. These seven tests check loopback/path restrictions, secret-file permissions and symlinks, genuine local signature construction with explicitly mocked RPC responses, mismatched landed-message rejection, simulation failure without submission, and buffer upload/verification/close ordering. Mocked orchestration tests are not native validator proof-verification evidence.
+
+
+For a second independently owned source/destination under the **same** synthetic mint, pass `--mint EXISTING_MINT` to the provisioning command or `existingMint` to `provision()` / `provisionNative()`. The runner skips mint creation, validates its live owner and exact CT+hook extension profile (including the same mint/CT/hook authority, zero decimals, no freeze authority, no auditor and automatic approval), then creates the new accounts and funds the new source100 with the same local mint authority. Unsupported or fee-bearing mints are rejected, including fee extensions at zero basis points. This keeps both consumers' budgets denominated in the same synthetic asset.
+
+Initialize hook metadata once per fresh mint, after deploying and checking the H program with opcode7:
+
+```js
+import { initializeHookMetadata } from './packages/local-client/src/index.mjs';
+const { address, evidence } = await initializeHookMetadata(session, mintAddress);
+```
+
+The helper derives the official `extra-account-metas` PDA and submits H opcode7 with mint, metadata, payer and system accounts. H allocates and writes its canonical routing data; the client never injects metadata bytes. Initialization is create-only. A second provisioning call for the same mint reuses the existing metadata and should not call initialization again. The helper requires the payer to remain the synthetic mint administrator; it does not generalize permissionless metadata creation.
+
+The same-mint and metadata helpers pass host tests and the mint decoder accepts the captured genuinely provisioned mint snapshot. Their live transaction qualification awaits the v3 program deployment; they were not called against the earlier v2 validator.

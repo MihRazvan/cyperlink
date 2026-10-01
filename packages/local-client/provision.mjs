@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { provision } from './src/provision.mjs';
 const options = {};
-const names = new Map([['--out', 'directory'], ['--rpc', 'endpoint'], ['--module-root', 'moduleRoot'], ['--proof-cli', 'proofCli'], ['--payer', 'payerKeyfile']]);
+const names = new Map([['--out', 'directory'], ['--mint', 'existingMint'], ['--rpc', 'endpoint'], ['--module-root', 'moduleRoot'], ['--proof-cli', 'proofCli'], ['--payer', 'payerKeyfile']]);
 try {
   const args = process.argv.slice(2);
   for (let i = 0; i < args.length; i += 2) {

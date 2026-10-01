@@ -71,3 +71,36 @@ test('buffer orchestration uploads exact bytes and closes only after native veri
   await assert.rejects(verifyPreparedProof(session, proof, context, { bufferSigner: buffer, bufferProgram: program }), /native verification/);
   assert(!calls.some(([label]) => label === 'close-proof-buffer'));
 });
+
+function syntheticMint(authority, hook) {
+  const data = Buffer.alloc(303); data.writeUInt32LE(1); authority.toBuffer().copy(data, 4);
+  data[45] = 1; data[165] = 1;
+  data.writeUInt16LE(4, 166); data.writeUInt16LE(65, 168); authority.toBuffer().copy(data, 170); data[202] = 1;
+  data.writeUInt16LE(14, 235); data.writeUInt16LE(64, 237); authority.toBuffer().copy(data, 239); hook.toBuffer().copy(data, 271);
+  return { owner: new web3.PublicKey('TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'), executable: false, data };
+}
+test('same-mint reuse rejects fees, wrong authorities/hook, freeze, auditor and unsupported TLV', async () => {
+  const { validateSyntheticMint } = await import('../src/mint-profile.mjs');
+  const authority = web3.Keypair.generate().publicKey, hook = new web3.PublicKey(Buffer.alloc(32, 82));
+  assert.equal(validateSyntheticMint(syntheticMint(authority, hook), authority, hook, web3).decimals, 0);
+  for (const mutate of [a => a.data[4] ^= 1, a => a.data[271] ^= 1, a => a.data[239] ^= 1,
+    a => a.data[44] = 6, a => a.data[46] = 1, a => a.data[203] = 1, a => a.data[202] = 0,
+    a => a.data.writeUInt16LE(1, 166), a => a.data.writeUInt16LE(4, 235), a => a.data.writeUInt16LE(200, 168),
+    a => a.owner = web3.SystemProgram.programId, a => a.executable = true]) {
+    const account = syntheticMint(authority, hook); mutate(account);
+    assert.throws(() => validateSyntheticMint(account, authority, hook, web3));
+  }
+});
+test('metadata creation uses H-signed PDA allocation entrypoint and is create-only', async () => {
+  const { initializeHookMetadata, hookMetadataAddress } = await import('../src/hook-metadata.mjs');
+  const payer = web3.Keypair.generate(), mint = web3.Keypair.generate().publicKey, hook = new web3.PublicKey(Buffer.alloc(32, 82));
+  const metadata = hookMetadataAddress(web3, mint); let created = false, instruction;
+  const session = { web3, payer, connection: { getAccountInfo: async address => address.equals(mint) ? syntheticMint(payer.publicKey, hook)
+    : created ? { owner: hook, executable: false, data: Buffer.alloc(86) } : null },
+    send: async (label, [ix]) => { instruction = ix; created = true; return { label }; } };
+  const result = await initializeHookMetadata(session, mint);
+  assert.equal(result.address, metadata.toBase58()); assert.deepEqual([...instruction.data], [7]);
+  assert.deepEqual(instruction.keys.map(k => [k.pubkey.toBase58(), k.isSigner, k.isWritable]), [
+    [mint.toBase58(), false, false], [metadata.toBase58(), false, true], [payer.publicKey.toBase58(), true, true], [web3.SystemProgram.programId.toBase58(), false, false] ]);
+  await assert.rejects(initializeHookMetadata(session, mint), /already exists/);
+});
