@@ -1,28 +1,27 @@
-# Isolated same-machine local replay
+# Isolated local validator and distributed replay
 
-`scripts/prepare_local_replay.py` stages the final historical joined harness against selected implementation ELFs and IDL. Preparation starts no services and makes no writes to the research checkout. This remains a synthetic fixture replay: it does not provision new native confidential accounts, demonstrate a production key lifecycle or authenticate the second reference consumer.
+The default profile starts a fresh Agave ledger with only the 61 required Arcium runtime genesis accounts. Native tokens, proof contexts, permits, quota, routing metadata and consumer entitlements are created through signed instructions by the [two-consumer example](../examples/two-consumers/README.md). Runtime keys and callbacks come from two fresh Arcium nodes. This is local validator/distributed evidence, not public-network execution.
 
-Prerequisites are the original same-machine research tree, its pinned Agave 4.3.0 executable and installed JavaScript dependencies, Docker with the cached digest-pinned Arcium images, and freshly built implementation programs. No image pulls are performed. The exact installed research JavaScript versions are `@arcium-hq/client` 0.15.0 and `@anchor-lang/core` **1.2.0**, as recorded by the archived `package-lock.json`; Anchor Rust/IDL build tooling is separately pinned to 1.0.2. The historical package manifest's `^1.0.2` is not proof that its JavaScript installation was 1.0.2.
+## Pinned prerequisites and build
 
-From the repository root:
+This is currently a **same-machine replay**, not a clean-machine bootstrap. It reads the original research tree, its Agave 4.3.0 binary, installed JavaScript modules, captured Token-2022 ELF and pinned runtime circuits. Docker must already contain the digest-pinned Arcium images. Preparation pulls no images and never writes to the original research checkout.
+
+JavaScript versions are `@arcium-hq/client` 0.15.0 and `@anchor-lang/core` **1.2.0**, checked against the actual archived installation. Rust Anchor and the IDL CLI are separately pinned to **1.0.2**. Preserve lockfiles, cargo-build-sbf launcher 3.1.14, SBF tools 1.57 and arch v0.
 
 ```sh
-python3 scripts/prepare_local_replay.py --run-id admission-01
+export CYPERLINK_RESEARCH_ROOT=/Users/razvan/Repos/colosseum
+python3 scripts/verify_research.py
+python3 scripts/build_local.py --research-root "$CYPERLINK_RESEARCH_ROOT"
+python3 scripts/prepare_local_replay.py --run-id consumers-01
 ```
 
-Default build inputs are `target/deploy/{cyperlink_auth,ct_guard_spike,ct_policy_spike,cyperlink_merchant}.so`, `programs/auth/target/idl/cyperlink_auth.json`, and `programs/auth/build/runtime_budget_{init,bound}.{arcis,hash,idarc,weight}`. Override with `--auth-elf`, `--guard-elf`, `--policy-elf`, `--merchant-elf`, `--idl` and `--circuits` when needed. Historical-baseline replay must select the historical auth build explicitly; the script never silently falls back to an old ELF.
+The build command compiles all six implementation programs, builds the IDL and local client prover, and does not deploy. Runtime circuits are byte-pinned artifacts; this command does not rebuild them. The pinned toolchain emits known dependency/macro warnings; successful builds alone do not establish runtime correctness.
 
-Pass `--research-root PATH` or set `CYPERLINK_RESEARCH_ROOT` to relocate the read-only research dependency. `--admission-checks tests/local/admission-checks.cjs` optionally stages an additional signed-negative test module and invokes it after real native proofs and encrypted quota initialization, before the original operation queues. The module receives the live program/client and probe helpers. Neither it nor preparation creates verified contexts or authorized permits.
+Preparation uses `target/deploy/{cyperlink_auth,ct_guard_spike,ct_policy_spike,cyperlink_merchant,cyperlink_license,cyperlink_proof_buffer}.so`, `programs/auth/target/idl/cyperlink_auth.json` and `programs/auth/build/runtime_budget_{init,bound}.{arcis,hash,idarc,weight}`. Its `--*-elf`, `--idl` and `--circuits` flags select explicit alternatives; there is no silent fallback to historical ELFs.
 
-The script creates a new ignored `.local/replay-<run-id>` directory with mode 0700, copies only the selected public genesis/artifacts and disposable local signing/node secrets (files mode 0600), and creates empty runtime share/input/log directories. The dependency tree is referenced by a symlink for read-only module loading; do not run package installation through that symlink. The validator executable is also read from the original installation. This is intentionally not a clean-machine bootstrap.
+## Start and run
 
-The default `--profile active161` expands the blank quota to161 bytes, replaces mint metadata with the canonical dynamic route and supplies the eighth queue metadata account. These are explicit implementation fixture adaptations; native proofs and source token bytes are preserved. Use `--profile research129` only with historical programs and clients.
-
-All86 genesis accounts otherwise retain their data except three reviewed public IPv4 address fields: the cluster dealer address at offset 9 and the two node addresses at offset 72. They are remapped together with Compose onto a currently unused private /24; the original bytes and offsets are checked before editing and recorded in `preparation.json`. No existing Docker network is changed. Recovery services using `latest` and the unused URL-fixture bridge are omitted. Only the two digest-pinned runtime nodes and trusted dealer are configured. Runtime state is fresh; disposable identities and the synthetic native fixture remain the historical identities. Historical preallocated permit accounts are empty and still require authenticated callbacks to admit them.
-
-The command checks the RPC/websocket pair (8899/8900 by default) and metrics pair (9091/9092) before preparing. Override with `--rpc-port` or `--metrics-port` if occupied. This is a point-in-time check; another process could claim a port/subnet before startup. Preparation refuses an existing run directory, and the generated validator launcher refuses an existing ledger.
-
-Use the printed application directory for the following commands. In separate terminals:
+Preparation prints an application directory beneath the new `.local/replay-consumers-01` directory. From that application directory, run these in separate terminals:
 
 ```sh
 python3 run-validator.py
@@ -30,27 +29,34 @@ python3 run-validator.py
 
 ```sh
 docker compose -f artifacts/compose.json up -d --pull never
-ANCHOR_PROVIDER_URL=http://127.0.0.1:8899 ANCHOR_WALLET=./local-test-wallet.json node probe.cjs
-ANCHOR_PROVIDER_URL=http://127.0.0.1:8899 ANCHOR_WALLET=./local-test-wallet.json node extra-checks.cjs
 ```
 
-Use the printed RPC port in both environment variables when overridden. Each generated Compose file has its own project name. The staged probe writes only inside its replay directory. It uses real native proof verification and owner signatures, runtime MXE keys and authenticated callbacks. Require `JOINED PROBE PASS`, successful extra checks, and review the actual failure causes; an expected failure by itself does not establish the intended invariant. Preserve all resulting transaction/account records.
+Run `examples/two-consumers/run.mjs` from the repository root with the printed application path, preparation manifest and a new output directory, as documented in its README. Use a separate fresh ledger for `conflict` and `compatible`; never reset quota between scenarios in the same ledger. The runner checks every actual loaded implementation ELF against the staged binary before provisioning and uses genuine native verification, owner signatures and signed runtime callbacks. A successful callback is authorization only; the SDK must observe the exact paid consumer effect and atomic quota/permit changes before reporting commit.
 
-Before claiming execution of changed source, dump every changed loaded program through the local RPC and compare it byte-for-byte with its staged ELF. For example, with the pinned Agave `solana` executable:
+Preparation refuses an existing run directory, and the generated validator launcher refuses an existing ledger. It checks RPC/websocket ports8899/8900 and metrics ports9091/9092, with explicit override flags. These are point-in-time checks; another process can still claim a resource before startup.
 
-```sh
-/path/to/pinned/solana --url http://127.0.0.1:8899 program dump 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ loaded-auth.so
-cmp target/deploy/cyperlink_auth.so loaded-auth.so
-```
+Each run has its own Docker project, empty runtime share/log directories and an unused private /24. Only three reviewed public genesis IP fields are remapped: cluster dealer offset9 and node offsets72. Original values are checked and adaptations recorded in `preparation.json`. No existing network is changed. Recovery services using `latest` and the unused fixture URL bridge are omitted.
 
-Record the loaded ELF hash and current source/build inputs with the new evidence. `preparation.json` records staged hashes, network adaptations and selected deployment inputs; these are preparation provenance, not proof of loaded bytes or successful execution. It deliberately omits hashes and contents of copied secrets. Synthetic plaintext fixtures and any decoded private test state are test-observer disclosures.
+Disposable local administrator/node identities are copied into an ignored mode0700 directory with mode0600 files; new client signing/decryption keys remain there. JavaScript modules are linked read-only: do not install packages through that symlink. Public synthetic setup amounts and scenario observations are explicitly test-observer disclosures; no reusable account decryption key enters the MPC circuit.
 
-Stop only this run's services:
+## Evidence and shutdown
+
+Keep `preparation.json`, source hashes, loaded ELF reports, signed transaction receipts, account snapshots and final scenario results together. Preparation hashes prove staging only. `scripts/verify_loaded_program.py --program-id ID --elf PATH --rpc http://127.0.0.1:8899 --output NEWFILE` checks actual loaded bytes, loader ownership and stable program pointer/genesis; it rejects nonzero trailing padding and public endpoints. The demo invokes it for all staged programs.
+
+Costs remain separate: provisioning and native proof transactions, queue/callback transactions, final settlement CU/fees, and callback wall time. Worker CPU/network costs are not measured. Simulations, host tests, archived evidence and real committed transactions must remain separately labeled.
+
+Stop only this run's containers from its application directory:
 
 ```sh
 docker compose -f artifacts/compose.json down
 ```
 
-Stop its validator with Ctrl-C in the terminal that launched it. Preserve the ledger and evidence; prepare a new run ID for the next replay. Never reset the original research ledger or use broad container/process stop commands.
+Stop its validator with Ctrl-C in its own terminal. Preserve the ledger and evidence. Never reset the original ledger or use broad container/process stop commands.
 
-Preparation validation performed on 2026-10-01: isolated mounts, three static peer IP rewrites, empty runtime directories, secret permissions, 86 genesis accounts, installed module resolution and matching disposable owner public keys passed. This validation did not start the validator or distributed computation. New live results must be recorded separately in `STATUS.md`.
+## Historical fixture profiles
+
+`--profile research-active161` stages the older fixture probe with historical quota key, blank quota expanded to161 bytes, canonical dynamic metadata and eighth queue metadata account. It requires matching explicitly selected historical implementation ELFs/IDL. `--profile research129` requires the original research ABI and programs. These profiles preserve synthetic native genesis assets and cannot establish fresh provisioning or the current canonical quota PDA path.
+
+For those historical profiles only, run `node probe.cjs` and `node extra-checks.cjs` with `ANCHOR_PROVIDER_URL` and `ANCHOR_WALLET` pointing to the staged local run. `--admission-checks tests/local/admission-checks.cjs` adds signed negative queries before normal admission. Require `JOINED PROBE PASS` and inspect exact failure causes. The current default `provisioned161` deliberately disables that fixture probe; use the new example.
+
+Completed results, interrupted attempts and remaining limitations are maintained in [STATUS.md](STATUS.md).

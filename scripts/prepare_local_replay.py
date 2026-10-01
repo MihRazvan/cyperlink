@@ -24,6 +24,8 @@ PROGRAMS = {
     'guard': ('6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G', 'ct_guard_spike.so'),
     'policy': ('6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy', 'ct_policy_spike.so'),
     'merchant': ('6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg', 'cyperlink_merchant.so'),
+    'license': ('6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P', 'cyperlink_license.so'),
+    'proof_buffer': ('71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv', 'cyperlink_proof_buffer.so'),
 }
 
 
@@ -79,16 +81,18 @@ def main():
         'CYPERLINK_RESEARCH_ROOT', '/Users/razvan/Repos/colosseum')))
     parser.add_argument('--run-id', default=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
     for kind, (_, filename) in PROGRAMS.items():
-        parser.add_argument(f'--{kind}-elf', type=Path, default=REPO / 'target/deploy' / filename)
+        parser.add_argument('--' + kind.replace('_', '-') + '-elf', type=Path, default=REPO / 'target/deploy' / filename)
     parser.add_argument('--idl', type=Path, default=REPO / 'programs/auth/target/idl/cyperlink_auth.json')
     parser.add_argument('--circuits', type=Path, default=REPO / 'programs/auth/build')
     parser.add_argument('--rpc-port', type=int, default=8899)
     parser.add_argument('--metrics-port', type=int, default=9091, help='First of two consecutive ports')
     parser.add_argument('--admission-checks', type=Path, help='Optional signed-negative test module, inserted after real proofs and quota initialization')
-    parser.add_argument('--profile', choices=['active161', 'research129'], default='active161',
+    parser.add_argument('--profile', choices=['provisioned161', 'research-active161', 'research129'], default='provisioned161',
                         help='Current dynamic routing profile, or explicit historical ABI')
+    parser.add_argument('--fresh-native', action='store_true', help='Runtime genesis only; signed demo provisions native assets, quota, permits and effects')
     parser.add_argument('--subnet', help='Unused private IPv4 /24; automatically chosen by default')
     args = parser.parse_args()
+    args.fresh_native = args.fresh_native or args.profile == 'provisioned161'
     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,48}', args.run_id):
         parser.error('run-id must contain 1–49 letters, numbers, underscores or hyphens')
     research = args.research_root.resolve()
@@ -167,8 +171,9 @@ def main():
     for label in ['a', 'b']:
         for name in [f'fixture-{label}.json', f'live-proof-instructions-{label}.json']:
             copy(research / PREBUILD / 'native-live' / name, native / name)
-        copy(research / PREBUILD / f'native-live/.keys/owner-{label}.json',
-             native / f'.keys/owner-{label}.json', secret=True)
+        if not args.fresh_native:
+            copy(research / PREBUILD / f'native-live/.keys/owner-{label}.json',
+                 native / f'.keys/owner-{label}.json', secret=True)
     genesis_args = json.loads((research / PREBUILD / 'native-live/genesis-args.json').read_text())
     if len(genesis_args) % 3 or any(genesis_args[i] != '--account' for i in range(0, len(genesis_args), 3)):
         raise RuntimeError('Unexpected native genesis argument format')
@@ -179,7 +184,7 @@ def main():
         target = native / 'genesis' / source.name
         copy(source, target)
         genesis_args[i + 2] = str(target)
-    if args.profile == 'active161':
+    if args.profile == 'research-active161':
         fixture = json.loads((native / 'fixture-a.json').read_text())
         quota_path = native / 'genesis' / (fixture['quota'] + '.json')
         quota = json.loads(quota_path.read_text())
@@ -215,6 +220,9 @@ def main():
         value = json.loads(source.read_text())
         if isinstance(value, dict) and 'pubkey' in value and 'account' in value:
             copy(source, app / 'artifacts' / source.name)
+    if args.fresh_native:
+        genesis_args = []
+        (app / 'probe.cjs').write_text("throw Error('This is a provisioned161 environment. Run examples/two-consumers; the archived fixture probe is not this profile.');\n")
     public_ip_patches = []
     # Reviewed Arcium 0.15.0 public account layout. Fail closed if fixture layout drifts.
     fields = [('cluster_acc_0.json', 9, 99), ('arx_node_CW7B_a6Fp.json', 72, 100),
@@ -292,6 +300,8 @@ def main():
     for path in sorted((app / 'artifacts').glob('*.json')):
         account = json.loads(path.read_text())
         if isinstance(account, dict) and 'pubkey' in account and 'account' in account:
+            if args.fresh_native and account['account']['owner'] == PROGRAMS['policy'][0]:
+                continue  # no blank CyperLink permits supplied by genesis
             command += ['--account', account['pubkey'], str(path)]
     (app / 'validator-command.json').write_text(json.dumps(command, indent=2) + '\n')
     (app / 'run-validator.py').write_text('''#!/usr/bin/env python3
@@ -313,7 +323,7 @@ os.execv(args[0], args)
         if record['kind'] == 'artifact':
             record['staged_sha256'] = sha256(destination / record['path'])
     report = {'scope': 'prepared only; same-machine synthetic local replay, no execution claim',
-              'run_id': args.run_id, 'profile': args.profile, 'app': str(app), 'rpc': f'http://127.0.0.1:{args.rpc_port}',
+              'run_id': args.run_id, 'profile': 'provisioned161' if args.fresh_native else args.profile, 'app': str(app), 'rpc': f'http://127.0.0.1:{args.rpc_port}',
               'compose_project': compose['name'], 'subnet': str(subnet), 'validator': version,
               'validator_sha256': sha256(validator),
               'javascript_versions': {'@arcium-hq/client': '0.15.0', '@anchor-lang/core': '1.2.0'}, 'node_modules_read_only_reference': str(modules),
