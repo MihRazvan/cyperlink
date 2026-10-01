@@ -69,3 +69,26 @@ export class OperationReader {
   constructor(transport: ReadTransport);
   observe(operation: Operation): Promise<Observation>;
 }
+
+/** Node Buffer is accepted wherever Uint8Array is specified. Addresses are raw 32-byte keys. */
+export interface ConsumerDigestAddresses {
+  effect: Uint8Array; owner: Uint8Array; destination: Uint8Array; mint: Uint8Array;
+}
+/** Avoid JavaScript number rounding: unsigned u64 is bigint or a canonical decimal string. */
+export type UnsignedU64 = bigint | string;
+export function buildMerchantDigest(input: ConsumerDigestAddresses & { sku: UnsignedU64 }): Uint8Array;
+export function buildLicenseDigest(input: ConsumerDigestAddresses & { product: Uint8Array; expirySlot: UnsignedU64 }): Uint8Array;
+export interface ActionTemplateInput {
+  /** Raw 32-byte public keys. */
+  source: Uint8Array; mint: Uint8Array; destination: Uint8Array; owner: Uint8Array;
+  quota: Uint8Array; consumer: Uint8Array;
+  /** Complete current native source account bytes and exact native instruction data. */
+  sourceData: Uint8Array; nativeData: Uint8Array;
+  /** Equality, grouped, range in that order: keys32 and complete verified-context account data. */
+  proofKeys: [Uint8Array, Uint8Array, Uint8Array];
+  proofData: [Uint8Array, Uint8Array, Uint8Array];
+  /** New source ciphertext64, amount commitment32, semantic consumer digest32. */
+  newSource: Uint8Array; commitment: Uint8Array; consumerContract: Uint8Array;
+}
+/** Returns the immutable 464-byte prepare-action input, not the queued 520-byte Job template. */
+export function buildActionTemplate(input: ActionTemplateInput): Uint8Array;

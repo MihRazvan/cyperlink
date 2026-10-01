@@ -1,3 +1,5 @@
+export { buildMerchantDigest, buildLicenseDigest, buildActionTemplate } from './builders.mjs';
+import { buildMerchantDigest, buildLicenseDigest } from './builders.mjs';
 export { EvidenceError, decodeJob, decodePermit, decodeQuota, decodeMerchantEntitlement, decodeLicenseEntitlement, publicKeyAddress, publicKeyBytes } from './codec.mjs';
 export { LocalRpcTransport } from './transport.mjs';
 import { accountBytes, decodeJob, decodePermit, decodeQuota, decodeMerchantEntitlement, decodeLicenseEntitlement,
@@ -31,14 +33,13 @@ function consumerBinding(operation, template) {
   requireEvidence(template.consumer === INITIAL_PROFILE[kind], 'Operation consumer binding mismatch');
   const common = [publicKeyBytes(operation.owner), publicKeyBytes(template.destination), publicKeyBytes(template.mint)];
   if (kind === 'merchant') {
-    const sku = decimalU64(operation.sku, 'SKU'), encoded = Buffer.alloc(8); encoded.writeBigUInt64LE(sku);
-    const digest = sha256(Buffer.from('merchant-purchase-v1'), publicKeyBytes(operation.effect), encoded, ...common);
+    const sku = decimalU64(operation.sku, 'SKU');
+    const digest = buildMerchantDigest({ effect: publicKeyBytes(operation.effect), sku, owner: common[0], destination: common[1], mint: common[2] });
     requireEvidence(equal(digest, template.actionDigest), 'Merchant effect/action binding mismatch');
     return { kind, sku, ownerProgram: INITIAL_PROFILE.merchant, effectSize: 49 };
   }
   const product = hex(operation.productHex32, 32, 'license product'), expirySlot = decimalU64(operation.licenseExpirySlot, 'License expiry slot');
-  const encoded = Buffer.alloc(8); encoded.writeBigUInt64LE(expirySlot);
-  const digest = sha256(Buffer.from('licensed-product-v1'), publicKeyBytes(operation.effect), product, encoded, ...common);
+  const digest = buildLicenseDigest({ effect: publicKeyBytes(operation.effect), product, expirySlot, owner: common[0], destination: common[1], mint: common[2] });
   requireEvidence(equal(digest, template.actionDigest), 'License effect/action binding mismatch');
   return { kind, product, expirySlot, ownerProgram: INITIAL_PROFILE.license, effectSize: 81 };
 }

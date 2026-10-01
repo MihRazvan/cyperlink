@@ -95,3 +95,34 @@ const observation = await reader.observe(operation);
 ```
 
 `authorizedCommonFields` must come from the locally authorized request, including the exact queued template and locally computed encrypted-input hash. Fetching a Job and using its bytes as the expected authorization would only compare the account with itself. These host-tested consumer adapters intentionally provide no such constructor from received Job data.
+
+## Constructing exact action bindings
+
+The SDK exports `buildMerchantDigest`, `buildLicenseDigest` and `buildActionTemplate` so integrations do not need to copy the example's byte assembly. The semantic digest builders are also used internally by the operation observer, keeping construction and verification on the same contract.
+
+```js
+import { buildMerchantDigest, buildActionTemplate, publicKeyBytes } from './packages/sdk/src/index.mjs';
+
+const digest = buildMerchantDigest({
+  effect: publicKeyBytes(entitlementAddress),
+  sku: 7n,
+  owner: publicKeyBytes(ownerAddress),
+  destination: publicKeyBytes(destinationAddress),
+  mint: publicKeyBytes(mintAddress),
+});
+const immutableAction = buildActionTemplate({
+  source, mint, destination, owner, quota, consumer, // each: 32-byte public key
+  sourceData, nativeData,                         // complete current source and exact instruction bytes
+  proofKeys: [equalityKey, groupedKey, rangeKey],  // each: 32-byte public key
+  proofData: [equalityContext, groupedContext, rangeContext], // complete native-verified context account bytes
+  newSource,                                    // 64-byte new source ciphertext
+  commitment,                                   // 32-byte native amount commitment
+  consumerContract: digest,                      // 32-byte semantic digest
+});
+```
+
+All byte arguments accept `Uint8Array`, including Node `Buffer`; they do not accept base58 or hex strings implicitly. `publicKeyBytes` explicitly converts base58 addresses. Integer arguments use `bigint` or canonical decimal strings, never JavaScript numbers. `buildLicenseDigest` replaces `sku` with a 32-byte `product` and u64 `expirySlot`. These names describe binary builder arguments; the persisted license descriptor separately uses `productHex32` and `licenseExpirySlot`.
+
+`buildActionTemplate` returns the exact **464-byte immutable prepare-action input** with its first 80 bytes zero. This is distinct from the **520-byte queued Job template** in `Operation.templateHex`: the authorized queue binds quota predecessor, unique nonce and expiry, while only the authenticated callback supplies the encrypted successor. The builder hashes the complete native instruction, selected native/proof account identities, owner and full proof-context account contents in the on-chain order. It copies caller buffers rather than retaining mutable references.
+
+These are deterministic encoders, not proof verifiers or signing tools. Supplying arbitrary context bytes to the builder cannot make them native-verified; native proof verification and the queue's full admission validation remain mandatory. The builder neither submits transactions nor reveals policy decisions, allocates nonces, admits permits or automatically requests a new query. Three additional host test groups preserve independently captured example digest/template vectors and reject wrong lengths, reordered/mutated bindings and ambiguous integer representations. Run all SDK tests with `node --test packages/sdk/test/*.test.mjs`.
