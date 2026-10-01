@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "arcium_version": "0.15.0",
+  "arcium_cli_sha256": [
+    "8f831e2a9afa6b37dc95ed72bad527b6df815b5570dbc92ade93bbf1ffe1ba44"
+  ],
+  "auth_program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+  "elf_sha256": {
+    "arcium": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+    "staking": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+    "lighthouse": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb"
+  },
+  "limitations": [
+    "CLI digest currently qualified for Darwin ARM64 only; other platform binaries need explicit version and digest qualification.",
+    "Generated genesis is synthetic upstream localnet bootstrap, not signed public-network initialization.",
+    "Two nodes share this developer host and use trusted-dealer preprocessing; generated recovery identities do not prove recovery execution.",
+    "Upstream generated Compose contains mutable latest tags: the preparation layer must replace them with qualified digests before launch.",
+    "No runtime source reproducibility or binary redistribution license is inferred from pinned artifact hashes."
+  ],
+  "solana_keygen_sha256": [
+    "419b2b21dce0c9efe0fd89f595e53ffa363ca8c871bc79d7b8df5613cb83b34b"
+  ]
+}
