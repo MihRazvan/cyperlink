@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "classification": "independent-agent-offline-retained-account-snapshot-verification",
+  "checked_at": "2026-10-01T20:48:16.761Z",
+  "scenario": "compatible",
+  "genesis_hash": "8CXKJZL1MxFPop7WGiCDg1jxQ6Vwh6WoPbmgkrCyyug6",
+  "input": {
+    "path": ".local/demo-generated-compatible-v7/results.json",
+    "bytes": 5201159,
+    "sha256": "b1abb2838293edfd55729fa556fbc1cbe657dfcebe53fbe7e183fb09040d62b7"
+  },
+  "verifier_sources": {
+    "scripts/verify_demo_snapshots.mjs": "977d4f5eabb824584963be633b06198ac5f7849d0988f63fb514685e94b1a904",
+    "packages/sdk/src/index.mjs": "2075f6e8476882f8215c1ec35e3d110ef154479c8fb57195f36b711bf821bebf",
+    "packages/sdk/src/codec.mjs": "9ac9ebb40b02278f721ecb2245fbb01a56d184dbaf0706c456f878b2121ff167"
+  },
+  "verification": {
+    "available": true,
+    "snapshotCount": 4,
+    "rejectedTransactions": 0,
+    "rejectedAccountComparisons": 0,
+    "rejections": [],
+    "commits": [
+      {
+        "label": "a40-atomic-paid-entitlement",
+        "signature": "3pEamuvc6Mev8Q7Pd5JeyEnvr2NfVL1sVEoNLxTHr2eQ3WiyQiqqtF7kytd3M8t2nawFzBFEPA3QqpwRaihwhbNV",
+        "changedAccounts": 5,
+        "beforeSlot": 174,
+        "transactionSlot": 175,
+        "afterSlot": 175,
+        "exactEncryptedSuccessor": true
+      },
+      {
+        "label": "b40-honest-fresh-atomic-paid-entitlement",
+        "signature": "3BjbpaBFTNuuSZRKdkmgsspwLdjoaQNvBukqHVnxRCdbbcUNeQQ45UQ6oYdp1eSsAnBib4oBaGhoVegVdKfTvSZb",
+        "changedAccounts": 5,
+        "beforeSlot": 229,
+        "transactionSlot": 230,
+        "afterSlot": 230,
+        "exactEncryptedSuccessor": true
+      }
+    ],
+    "limitation": "Equality is independently recomputed from retained confirmed RPC account bytes and metadata, not historical state proofs; payer fees and untracked accounts are outside this comparison"
+  },
+  "limitations": [
+    "These are retained confirmed RPC account observations, not consensus-authenticated historical state proofs or a fresh RPC reread.",
+    "This snapshot-only review recomputes equality and exact commit effects and binds their address sets to retained transaction instructions; it does not independently reverify transaction signatures. The broader archived-demo verifier performs signature checks.",
+    "Tracked account bytes, owner, executable flag and lamports are compared; transaction fee payer and other untracked accounts are excluded.",
+    "Synthetic setup and chosen purchase amounts are test-observer disclosures; encrypted quota/account contents are not decrypted by this review."
+  ]
+}
