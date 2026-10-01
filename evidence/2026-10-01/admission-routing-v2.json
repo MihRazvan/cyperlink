@@ -1,0 +1,522 @@
+{
+  "evidence_level": "real-local-validator-and-two-node-Arcium",
+  "passed": true,
+  "source_commit": "7b18d4b",
+  "scope": "synthetic historical native assets; new complete admission and transient routing; quota161 at historical fixed Q61; superseded provisioning uses PDA quota",
+  "loaded_programs": [
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "9iAPk585pPZQW3AfG5SGzKDTfmGcprHTEAPQt8vmVA39",
+      "last_deploy_slot": 0,
+      "elf_bytes": 606856,
+      "elf_sha256": "dd285fc66868a25cf154a186c55dd491b992ce41e726202b461ed2da36bdbf08",
+      "loaded_elf_sha256": "dd285fc66868a25cf154a186c55dd491b992ce41e726202b461ed2da36bdbf08",
+      "loaded_account_payload_sha256": "dd285fc66868a25cf154a186c55dd491b992ce41e726202b461ed2da36bdbf08",
+      "padding_zero_bytes": 0,
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "rpc_slot": 154,
+      "genesis_hash": "Cmid5wLjWY3xujziJdHy6Cd8FPjHgbhby4QPprBSYbjf",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_auth.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "ApP1iic4fTQg1h2PnKoVSnAxnKqWmrJqEdf7LpbtbWZe",
+      "last_deploy_slot": 0,
+      "elf_bytes": 52072,
+      "elf_sha256": "63e8579cb82e63f22efd8713c2fc20ff0e3d0e6c90e24a6f60c473834246b6b7",
+      "loaded_elf_sha256": "63e8579cb82e63f22efd8713c2fc20ff0e3d0e6c90e24a6f60c473834246b6b7",
+      "loaded_account_payload_sha256": "63e8579cb82e63f22efd8713c2fc20ff0e3d0e6c90e24a6f60c473834246b6b7",
+      "padding_zero_bytes": 0,
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "rpc_slot": 154,
+      "genesis_hash": "Cmid5wLjWY3xujziJdHy6Cd8FPjHgbhby4QPprBSYbjf",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/ct_policy_spike.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "BXdX5HicWBfMnwbHKefmQsvjbJGKb2m38ggB86rqh8NG",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72928,
+      "elf_sha256": "24e7ede12caf5ee2bf492dfbe27a4158196e9b9df58f79d938f8d24ed89e4bfe",
+      "loaded_elf_sha256": "24e7ede12caf5ee2bf492dfbe27a4158196e9b9df58f79d938f8d24ed89e4bfe",
+      "loaded_account_payload_sha256": "24e7ede12caf5ee2bf492dfbe27a4158196e9b9df58f79d938f8d24ed89e4bfe",
+      "padding_zero_bytes": 0,
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "rpc_slot": 154,
+      "genesis_hash": "Cmid5wLjWY3xujziJdHy6Cd8FPjHgbhby4QPprBSYbjf",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/ct_guard_spike.so"
+    }
+  ],
+  "source_hashes": {
+    "programs/auth/programs/cyperlink_auth/Cargo.toml": "1cd901085eb898ff9f6ef4eaf857e7b96b40c1bfd09b324e4d497a0271de1d74",
+    "programs/auth/programs/cyperlink_auth/src/lib.rs": "c5272676b8f4503ae7218c67c2ec4c4e88784cc5140ef568eac723f717319adb",
+    "programs/native/guard/Cargo.toml": "87249474604193531a8b130711eaf8e2f0fd09219f84c93ac58ab3f7ca977632",
+    "programs/native/guard/src/lib.rs": "b71db00b6d14c448fe51e3d6a186071862c8987e3949280108a7eaba9def0bfa",
+    "programs/native/policy/Cargo.toml": "d285b7f0d4d1e2e2c69a6841cf5b3f24c9857a8514547b5b15814a5ccc1938aa",
+    "programs/native/policy/src/lib.rs": "edf771c0cfe77abcb9fc754a3d61b72d85842303a94f254ceac1bbe9ae3be931",
+    "crates/native-admission/src/lib.rs": "741d62f15bd6d78bf94ddce2935809279066419397d7ab39c366717f1997138d",
+    "crates/native-admission/src/arithmetic.rs": "35a5c290e6aa6c579cb449ad5330b381784c1bbaa489fee4bdc008df97f85567",
+    "crates/hook-routing/src/lib.rs": "d2806399d284ecd5d6f115815b7d44eb727a36b1c7de46c974447b032ae0d0c6"
+  },
+  "admission_checks": [
+    {
+      "name": "individually verified equality from another transfer",
+      "signature": "2QyAASLZJd7uwDingvSUfZ9e2JxirriUCSSVLpc65Wfp9hFpLV8WXBN7a32Ju1c8E4Cac1qpYUUvaUJ8MB8oKsLb",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "individually verified range from another transfer",
+      "signature": "2PAVMyXhg24gJJHayXPZVKpf6fRF3EADXAqNJ5UnT8rWmXQ6iX3CfcZYEpCgS3PQWdEavivWz66xBUCuxVuTeUg6",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "equality context substituted for grouped type",
+      "signature": "TFAGbmgEF61uobtBkgqa6edXCCxVsGF3fu58mkoXTo1SZ7Hd79ykU5GrszWwMYZN89JbJ49sYwpCRDAZGjk3PDy",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "non-ZK account substituted for range context",
+      "signature": "5jLUGNeYnXMaHo9QQEh9ofbDYZCZ2dxSN9dBuCnu5bmnSvBcYveFszajVKV9yQj8BZicrMTyySt7dNfZu48cyCsP",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "token account substituted for mint with rehashed action",
+      "signature": "4Fhj6xY195Y5RhSyCsS18Vwy49QmxGwmB1BsvoohcnMXgyKNqDTit6EkpZTg5VPuxsZTwmAasprXQLhvUgFZWsBq",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "different destination with rehashed immutable action",
+      "signature": "yCrjxHaVxBtLzsgvirgstp8zJwpewcdDWb95zP92dcMyT2avSzTRmi4qBomPcMKigWPkNYtt6SbCm3rGzFi2ReM",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "unsupported native instruction with matching action hash",
+      "signature": "3pRE5fJFFb49DqA2Sgyy1DHqCHjHgG3pwndUZHjzTSqHhnqm9ftZEiXmsaHLcg4CFFs7yuvj51LPXJNzAaaSSiie",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "inline proof offsets in context-only profile",
+      "signature": "3rjzj1rY96cSj5giQfq5kHPQeHT4CttF6675Z7i4S76njzQeSAnmsA3CoRHbhYWjEcmmG5erVbvU8TyYwGNESAd7",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    },
+    {
+      "name": "wrong post-transfer source ciphertext in template",
+      "signature": "2HKvmArc4mXJL8u1J3soXF64UJUqMSg9fR2KXvGxBHCkubzrkGyuYTnf6G3d12BQtBpk7ehEnvrE4L83pK4cngVY",
+      "nativeProofs": "genuinely verified earlier on this ledger",
+      "publicBindingsRecomputed": true,
+      "noComputationCreated": true,
+      "quotaAndPermitUnchanged": true
+    }
+  ],
+  "privacy_checks": [
+    {
+      "label": "wrong low amount",
+      "signature": "2VwtJdPQe4YLojfbHZrZYQE4iYHuYWFyQNYrzgrnM8QJ19YDpi5zVCipC4q3iLLebCSMsavCueRrVApi9a5VKCAW",
+      "public_decision": false
+    },
+    {
+      "label": "wrong high amount",
+      "signature": "5t73EayyduntoB5pnPYR6ubQHQbwudkRDjYqh3G59WKy2bx7kjCySNzsEwSzxTATGXtPFSviCuoboY3WydwijuSk",
+      "public_decision": false
+    },
+    {
+      "label": "wrong opening",
+      "signature": "5RXZeZuCPuvN3GdvqdSM3ux28oa66absQzVxGyaEhYTCHKWT5Ve1P6RyTKVBAsbL4QJFT7PWcMqp9Drf91MVHuuu",
+      "public_decision": false
+    }
+  ],
+  "broadcast_failures": [
+    {
+      "label": "individually verified equality from another transfer rejected before private evaluation",
+      "signature": "2QyAASLZJd7uwDingvSUfZ9e2JxirriUCSSVLpc65Wfp9hFpLV8WXBN7a32Ju1c8E4Cac1qpYUUvaUJ8MB8oKsLb",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "individually verified range from another transfer rejected before private evaluation",
+      "signature": "2PAVMyXhg24gJJHayXPZVKpf6fRF3EADXAqNJ5UnT8rWmXQ6iX3CfcZYEpCgS3PQWdEavivWz66xBUCuxVuTeUg6",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "equality context substituted for grouped type rejected before private evaluation",
+      "signature": "TFAGbmgEF61uobtBkgqa6edXCCxVsGF3fu58mkoXTo1SZ7Hd79ykU5GrszWwMYZN89JbJ49sYwpCRDAZGjk3PDy",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "non-ZK account substituted for range context rejected before private evaluation",
+      "signature": "5jLUGNeYnXMaHo9QQEh9ofbDYZCZ2dxSN9dBuCnu5bmnSvBcYveFszajVKV9yQj8BZicrMTyySt7dNfZu48cyCsP",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "token account substituted for mint with rehashed action rejected before private evaluation",
+      "signature": "4Fhj6xY195Y5RhSyCsS18Vwy49QmxGwmB1BsvoohcnMXgyKNqDTit6EkpZTg5VPuxsZTwmAasprXQLhvUgFZWsBq",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "different destination with rehashed immutable action rejected before private evaluation",
+      "signature": "yCrjxHaVxBtLzsgvirgstp8zJwpewcdDWb95zP92dcMyT2avSzTRmi4qBomPcMKigWPkNYtt6SbCm3rGzFi2ReM",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "unsupported native instruction with matching action hash rejected before private evaluation",
+      "signature": "3pRE5fJFFb49DqA2Sgyy1DHqCHjHgG3pwndUZHjzTSqHhnqm9ftZEiXmsaHLcg4CFFs7yuvj51LPXJNzAaaSSiie",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "inline proof offsets in context-only profile rejected before private evaluation",
+      "signature": "3rjzj1rY96cSj5giQfq5kHPQeHT4CttF6675Z7i4S76njzQeSAnmsA3CoRHbhYWjEcmmG5erVbvU8TyYwGNESAd7",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "wrong post-transfer source ciphertext in template rejected before private evaluation",
+      "signature": "2HKvmArc4mXJL8u1J3soXF64UJUqMSg9fR2KXvGxBHCkubzrkGyuYTnf6G3d12BQtBpk7ehEnvrE4L83pK4cngVY",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "tampered expected commitment rejected before MPC",
+      "signature": "2RhUtXeKTvUdZdfwu67t6YefJFfB1erdwgzadh3ohoFLEJ8jdt4WtjLfBAtvpN9s9MbNhoeaePP1Szqu3oiPvGr4",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6000
+          }
+        ]
+      }
+    },
+    {
+      "label": "merchant failure after native transfer",
+      "signature": "44eR9JVNk4qXGAgYb2oHwgAPvxB2CiGhw65wb3GqdRaM53sUqSoWw8oASoDR1UAr7DEk6QY9QzDKrn9jrR342dbi",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1099
+          }
+        ]
+      }
+    },
+    {
+      "label": "competing 60 after first60 spends",
+      "signature": "gd1SrcNtXsfc5bEfnE337ScGfYjAWhFKJ4R5Hxq1J51KvGMMb4Ma5mH7iX6MtR43YPZXLYd14vBQJp7QnNP6vxK",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 803
+          }
+        ]
+      }
+    },
+    {
+      "label": "consumed merchant operation replay",
+      "signature": "28qrPSNnVzzDMrJ3kzq7KAX4q5SCn8NimkeBBazuLtNgaCN7Pvdmrx9YxoFa29LUd5RbQmT5uDnTTVzb51D6vJof",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1001
+          }
+        ]
+      }
+    },
+    {
+      "label": "cancelled operation cannot settle",
+      "signature": "4AdabHDKRjjuzaxAaBTEqiKteHMjJ66EQAgvLV5KKohXTCFt8aLsR9KMRq1eeGDAy8we94JKoMS4smqviLVT1MSp",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 700
+          }
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "a authenticated permit staged without spending",
+      "counter": "5"
+    },
+    {
+      "label": "b authenticated permit staged without spending",
+      "counter": "6"
+    },
+    {
+      "label": "post-transfer failure fully rolls back native tokens, quota, permit and entitlement"
+    },
+    {
+      "label": "unauthorized nonce allocation",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 820
+          }
+        ]
+      },
+      "logs": [
+        "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+        "Program ComputeBudget111111111111111111111111111111 success",
+        "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy invoke [1]",
+        "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy consumed 4148 of 1299850 compute units",
+        "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy failed: custom program error: 0x334"
+      ]
+    }
+  ],
+  "extra_checks": {
+    "passed": true,
+    "checks": [
+      {
+        "label": "second Job cannot claim already assigned permit",
+        "expected": "BaiiBcA2g3cPfynUZ4bfRuy9CLfC4AxJXPy87xL6Cyhk",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 0
+            }
+          ]
+        },
+        "logs": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ invoke [1]",
+          "Program log: Instruction: RuntimeBudgetBound",
+          "Program 11111111111111111111111111111111 invoke [2]",
+          "Allocate: account Address { address: BaiiBcA2g3cPfynUZ4bfRuy9CLfC4AxJXPy87xL6Cyhk, base: None } already in use",
+          "Program 11111111111111111111111111111111 failed: custom program error: 0x0",
+          "Program 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ consumed 15804 of 1299850 compute units",
+          "Program 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ failed: custom program error: 0x0"
+        ]
+      },
+      {
+        "label": "arbitrary caller cannot admit H permit",
+        "expected": "824",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 824
+            }
+          ]
+        },
+        "logs": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy invoke [1]",
+          "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy consumed 4442 of 1299850 compute units",
+          "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy failed: custom program error: 0x338"
+        ]
+      },
+      {
+        "label": "genuine admission callback replay outside Arcium envelope",
+        "expected": "9999",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 9999
+            }
+          ]
+        },
+        "logs": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ invoke [1]",
+          "Program log: Instruction: RuntimeBudgetBoundCallback",
+          "Program log: AnchorError thrown in programs/cyperlink_auth/src/lib.rs:23. Error Code: InvalidCallbackTx. Error Number: 9999. Error Message: Invalid callback transaction.",
+          "Program 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ consumed 19228 of 1299850 compute units",
+          "Program 5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ failed: custom program error: 0x270f"
+        ]
+      }
+    ]
+  },
+  "native_settlement": {
+    "signature": "486q1cKRne5ehtZMcA2vxmRNWSrqsNNgpFeeYLhMniFRg19cUrrqUDniLCwFkkHe4B6d4rYV7o6XLkqUk4ff9CXP",
+    "owner": "D5TNnnkkFDZrzTmaKLyjnaEX4ZvspUAbAteQc8gxxYKj",
+    "signature_verified": true,
+    "confirmed_slot": 732,
+    "confirmed_cu": 80818,
+    "logs": [
+      "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+      "Program ComputeBudget111111111111111111111111111111 success",
+      "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+      "Program ComputeBudget111111111111111111111111111111 success",
+      "Program 6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg invoke [1]",
+      "Program 6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G invoke [2]",
+      "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy invoke [3]",
+      "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy consumed 4334 of 256505 compute units",
+      "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy success",
+      "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb invoke [3]",
+      "Program log: ConfidentialTransferInstruction::Transfer",
+      "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy invoke [4]",
+      "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy consumed 5473 of 227097 compute units",
+      "Program 6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy success",
+      "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 28287 of 249012 compute units",
+      "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+      "Program 6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G consumed 67406 of 287383 compute units",
+      "Program 6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G success",
+      "Program 6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg consumed 80518 of 299700 compute units",
+      "Program 6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg success"
+    ],
+    "serialized_bytes": 900,
+    "simulated_cu": 80818,
+    "effects": [
+      {
+        "address": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5",
+        "changed": true
+      },
+      {
+        "address": "32ZsJ2yJjwuoBiWE5xnZjG9tKmK3CubbmEzgkQLyQzgD",
+        "changed": true
+      },
+      {
+        "address": "HxubQYgsF5F3jxEhFnHo5X5FmyVVy3AjhzHdkq7JBQBc",
+        "changed": true
+      },
+      {
+        "address": "5842jNQd5C7pWXFxcDu3kQ5XtgqH5st25tf2ZBjYaKg8",
+        "changed": true
+      },
+      {
+        "address": "67DEQF5n7aMqPnA95HYSR4c59Kqt5ugVNH9zY1NZBro6",
+        "changed": true
+      }
+    ]
+  },
+  "final_quota": {
+    "version": "1",
+    "nonce": "05000000000000000000000000000000",
+    "ciphertext": "b74de8dc5e8fe61e84684ff558a8e40153bd00d264c8c73d9eb8931320b4f802",
+    "counter": "6"
+  },
+  "archive": {
+    ".local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/results.json": {
+      "sha256": "dea51f18b89304c6ed571f0829338a5eae73ba14f3ef8568f435a2a874a83522",
+      "bytes": 137329
+    },
+    ".local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/extra-checks.json": {
+      "sha256": "9145c3dadfff60e0c0bb6d9698fac69a719be3dc9c81091843c4648bc5318a75",
+      "bytes": 31688
+    },
+    ".local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/native-proofs.json": {
+      "sha256": "fe0f3b52de433527b7b0d509451e648a7cafd4754a47ac88d42323e947a9728f",
+      "bytes": 5089
+    },
+    ".local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/native-settlement.json": {
+      "sha256": "0057d4564f47d4355907341ea3303ffdbb7da0084410a44a8f6e3d494c309bf8",
+      "bytes": 2355
+    },
+    ".local/replay-admission-routing-v2/research/cyperlink-prebuild-2026-10-01/bound-join/final-accounts.json": {
+      "sha256": "d005a39ba576894f10fd11fb225befe7ec2ccda91340da09d3a239c619617c03",
+      "bytes": 8571
+    }
+  },
+  "limits": [
+    "Not public-network or production evidence",
+    "Native assets/proof buffers/empty permits were genesis fixtures in this replay",
+    "Fresh native provisioning was exercised separately, not substituted into this replay",
+    "Only merchant consumer committed in this run",
+    "Account-wide decryption keys never enter MPC",
+    "Costs exclude proof checks, account provisioning, MPC, callback delivery and retries"
+  ]
+}
