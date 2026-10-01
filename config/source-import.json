@@ -1,0 +1,135 @@
+{
+  "scope": "source import hashes before product edits; no new execution",
+  "files": [
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/guard/Cargo.toml",
+      "destination": "programs/native/guard/Cargo.toml",
+      "sha256": "19c2f87c201917b65f9e3cd124e41477c694e5fad31cd8c4a16ae6d8619aa425"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/guard/src/lib.rs",
+      "destination": "programs/native/guard/src/lib.rs",
+      "sha256": "31a3196dfcc01adca3ded0b696e224678ea1e01339a43144e82b068e6193a17d"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/policy/Cargo.toml",
+      "destination": "programs/native/policy/Cargo.toml",
+      "sha256": "2d6dd52ee34b95dcee05ea88e45172ae7a6e4a1eca33da4bde656abf85bef813"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/policy/src/lib.rs",
+      "destination": "programs/native/policy/src/lib.rs",
+      "sha256": "2db0d344f1bc82ffac5960d3b8111f2801eca8b8c7def8333729069b70aafba7"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/merchant/Cargo.toml",
+      "destination": "programs/native/merchant/Cargo.toml",
+      "sha256": "f1f4c76f821c5692e2cc18a65ee4b1d6d99af750d7c7217fd49e704e97aceb74"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/merchant/src/lib.rs",
+      "destination": "programs/native/merchant/src/lib.rs",
+      "sha256": "51676f841a025d75585ac23d63e0febf7f9bbf2bafd9f5b4cad36b58d903c12b"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/interface/Cargo.toml",
+      "destination": "programs/native/interface/Cargo.toml",
+      "sha256": "3d3d6368cd4d7e586e2aed682f76952d0913424b581180bf2cc4a9e8a7510c63"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/interface/src/lib.rs",
+      "destination": "programs/native/interface/src/lib.rs",
+      "sha256": "f61c747ac8f78e02aedc4e30ae84b8c0334c5e4541cb24e7c94dc11585c6ee3e"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/Cargo.toml",
+      "destination": "programs/native/Cargo.toml",
+      "sha256": "5607b3b2fc29d3b6bd8dc41ce6db85b9e6375cd5617b3878d6808c5297908351"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/native-live/Cargo.lock",
+      "destination": "programs/native/Cargo.lock",
+      "sha256": "3bd310cc7689046a523f3b4c1f396c1ae261c8ce55a7cd79831a1e0f41e7e8a0"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/Cargo.toml",
+      "destination": "programs/auth/Cargo.toml",
+      "sha256": "74fcae37b7f6c18e338690d7d683cb82a12c157cbf4e4cf6858f303804258bcf"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/Cargo.lock",
+      "destination": "programs/auth/Cargo.lock",
+      "sha256": "bd8763b5cac4d4b4c154bf9f819a04fc5948521af50be04062c565341ae6a97d"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/rust-toolchain.toml",
+      "destination": "programs/auth/rust-toolchain.toml",
+      "sha256": "72659cbb160b72a6a69202329be51728d0dd1d2acd3e234928cb369786b0a760"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/programs/cyperlink_auth/Cargo.toml",
+      "destination": "programs/auth/programs/cyperlink_auth/Cargo.toml",
+      "sha256": "438b94ae093dcc8dbc08cb032047b2e94db0a4b16caeb3cdee0d3b809269fa4d"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/programs/cyperlink_auth/src/lib.rs",
+      "destination": "programs/auth/programs/cyperlink_auth/src/lib.rs",
+      "sha256": "adc61368ecad101c1fc70ae62bb9051df3c63af30a6eab7ad1d0b6927ff3d508"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.arcis",
+      "destination": "programs/auth/build/runtime_budget_init.arcis",
+      "sha256": "6eb1f33a3e21bb7b5ce0da19d14e69b3311e1051d904043c575240421886b6a0"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.idarc",
+      "destination": "programs/auth/build/runtime_budget_init.idarc",
+      "sha256": "53a996d83bafcfce60c9640626099c67ca47ba9c4ff63b19370d19ebe884438a"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.hash",
+      "destination": "programs/auth/build/runtime_budget_init.hash",
+      "sha256": "bfbb91f0d5324d7efb2767144dbbd837f518c06d94fe0341fb12d00a38fd9ace"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.weight",
+      "destination": "programs/auth/build/runtime_budget_init.weight",
+      "sha256": "a3eb4526545f80e2949e568a7d558d1298965204025465607c12dddaeeaf0b03"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.arcis",
+      "destination": "programs/auth/build/runtime_budget_bound.arcis",
+      "sha256": "eaad70f272e3d1f9405a92755cbb7140bb066bf048bf81752c7c51c74a7ac085"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.idarc",
+      "destination": "programs/auth/build/runtime_budget_bound.idarc",
+      "sha256": "951453fcd00fa6ea798fea9884029bd09bdac6db507a61de7c435aae1e099918"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.hash",
+      "destination": "programs/auth/build/runtime_budget_bound.hash",
+      "sha256": "ab84cf6e4a61d004e3abee783b29734cfd17c7d84e7a0f89a14d3f0187e5f5ee"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.weight",
+      "destination": "programs/auth/build/runtime_budget_bound.weight",
+      "sha256": "87ce6a29b15b31890f0797e9760c6fb58b991f4a0c9cf2eb12097ff2c2158957"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-circuit/Cargo.toml",
+      "destination": "circuits/budget/Cargo.toml",
+      "sha256": "051fb0d7d0a88df8f45c54032be573db06d21130a3982e05b1e16c627b6bb141"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-circuit/Cargo.lock",
+      "destination": "circuits/budget/Cargo.lock",
+      "sha256": "52dc8a703edcc9bdd1fd9ba3cfab5554f83129931f5936b323f8d047199cee44"
+    },
+    {
+      "source": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-circuit/src/main.rs",
+      "destination": "circuits/budget/src/main.rs",
+      "sha256": "56822c86ff19a2c9fced03e4e4f41ff327f4612051535b5f3ec36c495db6d820"
+    }
+  ]
+}

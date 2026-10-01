@@ -1,0 +1,1 @@
+{"name":"runtime_budget_init","inputs":[{"type":"arcis_x25519_pubkey"},{"size_in_bits":128,"type":"u128"},{"size_in_bits":253,"type":"ciphertext"},{"size_in_bits":128,"type":"u128"}],"outputs":[{"type":"bool"},{"size_in_bits":253,"type":"ciphertext"}]}
