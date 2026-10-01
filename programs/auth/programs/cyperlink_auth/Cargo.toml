@@ -33,5 +33,7 @@ bytemuck="=1.25.2"
 
 cyperlink-native-admission = { path = "../../../../crates/native-admission" }
 
+cyperlink-hook-routing = { path = "../../../../crates/hook-routing" }
+
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

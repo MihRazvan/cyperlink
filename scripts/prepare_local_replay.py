@@ -35,6 +35,20 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def active_metadata(quota_bytes):
+    """SPL Execute TLV: fixed writable quota, then its transient permit pointer.
+
+    Conformance is checked against upstream Rust ExtraAccountMetaList in
+    crates/hook-routing. This encodes routing only, never an authorized permit.
+    """
+    if len(quota_bytes) != 32:
+        raise ValueError('Expected a 32-byte quota key')
+    fixed = bytes([0]) + quota_bytes + bytes([0, 1])
+    dynamic = bytes([2, 2, 5, 129]) + bytes(29) + bytes([0, 1])
+    payload = (2).to_bytes(4, 'little') + fixed + dynamic
+    return bytes([105, 37, 101, 197, 75, 251, 102, 26]) + len(payload).to_bytes(4, 'little') + payload
+
+
 def available_port(port):
     with socket.socket() as sock:
         try:
@@ -71,6 +85,8 @@ def main():
     parser.add_argument('--rpc-port', type=int, default=8899)
     parser.add_argument('--metrics-port', type=int, default=9091, help='First of two consecutive ports')
     parser.add_argument('--admission-checks', type=Path, help='Optional signed-negative test module, inserted after real proofs and quota initialization')
+    parser.add_argument('--profile', choices=['active161', 'research129'], default='active161',
+                        help='Current dynamic routing profile, or explicit historical ABI')
     parser.add_argument('--subnet', help='Unused private IPv4 /24; automatically chosen by default')
     args = parser.parse_args()
     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,48}', args.run_id):
@@ -163,6 +179,37 @@ def main():
         target = native / 'genesis' / source.name
         copy(source, target)
         genesis_args[i + 2] = str(target)
+    if args.profile == 'active161':
+        fixture = json.loads((native / 'fixture-a.json').read_text())
+        quota_path = native / 'genesis' / (fixture['quota'] + '.json')
+        quota = json.loads(quota_path.read_text())
+        old = base64.b64decode(quota['account']['data'][0])
+        if len(old) != 129 or old[128] != 0:
+            raise RuntimeError('Expected historical blank quota129')
+        quota['account']['data'][0] = base64.b64encode(old + bytes(32)).decode()
+        quota['account']['space'] = 161
+        quota_path.write_text(json.dumps(quota, indent=2) + '\n')
+        meta_address = fixture['merchant_instruction']['accounts'][12]['key']
+        meta_path = native / 'genesis' / (meta_address + '.json')
+        meta = json.loads(meta_path.read_text())
+        # The fixed qualification quota is [61;32]; no authority/key is encoded.
+        encoded = active_metadata(bytes([61]) * 32)
+        meta['account']['data'][0] = base64.b64encode(encoded).decode()
+        meta['account']['space'] = len(encoded)
+        meta_path.write_text(json.dumps(meta, indent=2) + '\n')
+        for label in ['a', 'b']:
+            fixture_path = native / f'fixture-{label}.json'
+            f = json.loads(fixture_path.read_text())
+            accounts = f['native_instruction']['accounts']
+            accounts[7], accounts[8] = accounts[8], accounts[7]
+            fixture_path.write_text(json.dumps(f, indent=2) + '\n')
+        probe_path = app / 'probe.cjs'
+        probe = probe_path.read_text()
+        needle = '{pubkey:new PublicKey(f.consumer),isSigner:false,isWritable:false}'
+        if probe.count(needle) != 3:
+            raise RuntimeError('Queue remaining-account insertion points drifted')
+        probe = probe.replace(needle, needle + ',{pubkey:new PublicKey(f.merchant_instruction.accounts[12].key),isSigner:false,isWritable:false}')
+        probe_path.write_text(probe)
     (native / 'genesis-args.json').write_text(json.dumps(genesis_args, indent=2) + '\n')
     for source in (original / 'artifacts').glob('*.json'):
         value = json.loads(source.read_text())
@@ -266,7 +313,7 @@ os.execv(args[0], args)
         if record['kind'] == 'artifact':
             record['staged_sha256'] = sha256(destination / record['path'])
     report = {'scope': 'prepared only; same-machine synthetic local replay, no execution claim',
-              'run_id': args.run_id, 'app': str(app), 'rpc': f'http://127.0.0.1:{args.rpc_port}',
+              'run_id': args.run_id, 'profile': args.profile, 'app': str(app), 'rpc': f'http://127.0.0.1:{args.rpc_port}',
               'compose_project': compose['name'], 'subnet': str(subnet), 'validator': version,
               'validator_sha256': sha256(validator),
               'javascript_versions': {'@arcium-hq/client': '0.15.0', '@anchor-lang/core': '1.2.0'}, 'node_modules_read_only_reference': str(modules),

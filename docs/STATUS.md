@@ -19,11 +19,19 @@ The research queue does not validate every equality/range/grouped/account/fundin
 
 - Repository inspection: only initial README and user-supplied handoff pointer; no existing implementation.
 - Supported initial scope and query authorization recorded.
-- Independent admission review and archived-provenance tooling underway.
-- Next code gate: exact native transfer validation before private evaluation, with adversarial proof-set tests.
+- Archived verifier passes: 46 pinned artifacts; 14 corruption/semantic tests. No original evidence changed.
+- Imported auth rebuild exactly matches historical ELF `cedff496…c782a0`; native programs also build with SBF 1.57/v0. Direct dependencies pin actual lockfile resolutions, with no existing dependency version changes.
+- Shared strict native validator now runs before queue and at settlement. Twelve host test groups pass, rechecking six genuine proof payloads before inconsistent-context/account/funding/profile tests. Ordinary empty system-owned owner wallets only; native multisig semantics are explicitly excluded.
+- Isolated replay tooling and live loaded-program verifier implemented (16 verifier tests). First development replay `admission-v1` checked the changed loaded auth ELF and rejected four signed malformed queries before computation. The replay stopped on a faulty negative test that substituted the same shared mint; this is a harness error, not a passing end-to-end run. Fixed the test to substitute an actual wrong account. That preliminary ELF also predates the explicit ordinary-owner restriction; a fresh run is required.
+- Current code gate: dynamic hook routing with a transient active-permit pointer, strict queue/commit metadata validation, then a fresh complete validator/distributed replay. Client key/proof preparation and lifecycle SDK work are proceeding in separate packages.
+
+## Decisions after source inspection
+
+- Full current executability includes hook account resolution. The old metadata fixes one permit per source, which cannot support honest fresh operations while retaining permanent PermitClaim assignment. The selected replacement appends an active-permit pointer to quota (129 → 161 bytes), set only during G-authorized arm and cleared by atomic hook consumption. Metadata resolves quota then this pointer; queue and guard must validate its exact schema. Permanent per-operation claims remain.
+- JavaScript Anchor actually resolves to **1.2.0** in the archived lock/install; Rust Anchor and IDL binary are **1.0.2**. Preserve both exact versions rather than treating the original JavaScript semver lower bound as its installed version.
 
 ## Continuation and evidence
 
 Start from this file, `initial-profile.md`, then the original `handoff/cyperlink/` guides 01–06 and canonical `CYPERLINK.md` sections 1, 6–18, 22–24. The latest source is `research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth`, `native-live/{guard,policy,merchant,interface}`, and `admission-review/bound-circuit`; earlier scaffold generators are not authoritative.
 
-No new validator/distributed replay has completed here yet. Record exact commands/results and substantive architecture changes as each slice lands. No third-party contact, real funds, public-network writes or production deployment are authorized.
+No new end-to-end validator/distributed replay has completed here yet. Preliminary run artifacts remain under ignored `.local/replay-admission-v1`; do not cite that interrupted run as completion. Record exact commands/results and substantive architecture changes as each slice lands. No third-party contact, real funds, public-network writes or production deployment are authorized.

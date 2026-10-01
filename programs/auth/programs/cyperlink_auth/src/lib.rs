@@ -17,7 +17,7 @@ fn policy<'a>(data:Vec<u8>,quota:AccountInfo<'a>,permit:Option<AccountInfo<'a>>,
  metas.push(AccountMeta::new_readonly(*authority.key,true));infos.push(authority);infos.push(program);
  invoke_signed(&Instruction{program_id:H,accounts:metas,data},&infos,&[&[b"admission",&[bump]]])?;Ok(())
 }
-fn next_nonce(q:&[u8])->Result<u128>{require!(q.len()==129,JoinError::Context);Ok(u64::from_le_bytes(q[88..96].try_into().unwrap()).checked_add(1).ok_or(JoinError::Context)? as u128)}
+fn next_nonce(q:&[u8])->Result<u128>{require!(q.len()==161,JoinError::Context);Ok(u64::from_le_bytes(q[88..96].try_into().unwrap()).checked_add(1).ok_or(JoinError::Context)? as u128)}
 fn extra(key:Pubkey,w:bool)->arcium_client::idl::arcium::types::CallbackAccount{arcium_client::idl::arcium::types::CallbackAccount{pubkey:key,is_writable:w}}
 
 #[arcium_program]
@@ -31,7 +31,7 @@ pub mod cyperlink_auth {
  }
  pub fn runtime_budget_init(ctx:Context<RuntimeBudgetInit>,computation_offset:u64,pubkey:[u8;32],client_nonce:u128,initial_ct:[u8;32])->Result<()> {
   let q=ctx.accounts.quota.try_borrow_data()?;
-  require!(q.len()==129 && q[128]==0 && &q[96..128]==ctx.accounts.payer.key().as_ref(),JoinError::Authority);
+  require!(q.len()==161 && q[128]==0 && &q[96..128]==ctx.accounts.payer.key().as_ref(),JoinError::Authority);
   let nonce=next_nonce(&q)?;drop(q);
   let job=&mut ctx.accounts.job;job.kind=0;job.status=0;job.owner=ctx.accounts.payer.key();job.computation=ctx.accounts.computation_account.key();job.nonce=nonce;job.expiry=Clock::get()?.slot+2000;
   job.inputs_hash=hashv(&[&pubkey,&client_nonce.to_le_bytes(),&initial_ct,&nonce.to_le_bytes()]).to_bytes();
@@ -51,7 +51,7 @@ pub mod cyperlink_auth {
   job.status=1;emit!(Admitted{job:job.key(),status:job.status});Ok(())
  }
  pub fn runtime_budget_bound(ctx:Context<RuntimeBudgetBound>,computation_offset:u64,pubkey:[u8;32],client_nonce:u128,amount_ct:[u8;32],opening_ct:[u8;32],expiry:u64)->Result<()> {
-  require!(ctx.remaining_accounts.len()==7 && ctx.accounts.action.owner==ctx.accounts.source_owner.key(),JoinError::Authority);
+  require!(ctx.remaining_accounts.len()==8 && ctx.accounts.action.owner==ctx.accounts.source_owner.key(),JoinError::Authority);
   let now=Clock::get()?.slot;require!(expiry>now && expiry<=now+2000,JoinError::State);
   require!(ctx.remaining_accounts[0].owner==&"TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb".parse::<Pubkey>().unwrap(),JoinError::Context);
   let raw=ctx.remaining_accounts[0].try_borrow_data()?;require!(raw.len()>=64 && &raw[32..64]==ctx.accounts.source_owner.key().as_ref(),JoinError::Authority);drop(raw);
@@ -65,6 +65,10 @@ pub mod cyperlink_auth {
   require!(digest.as_ref()==&template[240..272],JoinError::Context);drop(eq);drop(val);drop(range);
   require!(ctx.accounts.permit.data_len()==520 && ctx.accounts.permit.try_borrow_data()?.iter().all(|b|*b==0),JoinError::State);
 
+  cyperlink_hook_routing::validate_metadata(
+      a[1].key.as_array(), Q.as_array(), H.as_array(),
+      a[7].key.as_array(), a[7].owner.as_array(), &a[7].try_borrow_data()?,
+  ).map_err(|_| error!(JoinError::Context))?;
   // Reject unsupported or unfunded native queries BEFORE allocating a nonce or MPC work.
   // Snapshot/owner/consumer hashes above remain part of this immutable operation.
   let source_data = a[0].try_borrow_data()?;
@@ -90,8 +94,9 @@ pub mod cyperlink_auth {
   let expected = validated.amount_commitment;
   drop(source_data); drop(mint_data); drop(destination_data);
   drop(equality_data); drop(grouped_data); drop(range_data);
-  let q=ctx.accounts.quota.try_borrow_data()?;require!(q.len()==129 && q[128]==1,JoinError::State);
+  let q=ctx.accounts.quota.try_borrow_data()?;require!(q.len()==161 && q[128]==1,JoinError::State);
   require!(&q[96..128]==ctx.accounts.payer.key().as_ref(),JoinError::Authority);
+  require!(q[129..161].iter().all(|byte| *byte == 0), JoinError::State);
   let nonce=next_nonce(&q)?;let old_nonce=u128::from_le_bytes(q[40..56].try_into().unwrap());let old_ct:[u8;32]=q[56..88].try_into().unwrap();
   template[0]=0;template[1]=0;template[8..16].copy_from_slice(&q[..8]);template[16..48].copy_from_slice(&q[8..40]);template[48..80].fill(0);template[368..400].copy_from_slice(Q.as_ref());template[464..480].copy_from_slice(&nonce.to_le_bytes());template[480..512].fill(0);template[512..520].copy_from_slice(&expiry.to_le_bytes());drop(q);
   ctx.accounts.permit_claim.job=ctx.accounts.job.key();ctx.accounts.permit_claim.owner=owner;

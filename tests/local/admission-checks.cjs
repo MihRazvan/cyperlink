@@ -53,7 +53,7 @@ module.exports = async function admissionChecks({program, connection, admin, nat
     const permit = new PublicKey(a.permit);
     const acc = {...accounts('runtime_budget_bound', offset), sourceOwner: owner.publicKey, action, permit,
       permitClaim: PublicKey.findProgramAddressSync([Buffer.from('permit-claim'), permit.toBuffer()], program.programId)[0]};
-    const remaining = [...keys, new PublicKey(a.consumer)].map(pubkey => ({pubkey, isSigner: false, isWritable: false}));
+    const remaining = [...keys, new PublicKey(a.consumer), new PublicKey(a.merchant_instruction.accounts[12].key)].map(pubkey => ({pubkey, isSigner: false, isWritable: false}));
     const ix = await program.methods.runtimeBudgetBound(offset, pk, bn(nonce), Array.from(ct[0]), Array.from(ct[1]), new BN((await connection.getSlot()) + 1800))
       .accountsPartial(acc).remainingAccounts(remaining).instruction();
     const before = await connection.getMultipleAccountsInfo([native.QUOTA, permit], 'confirmed');

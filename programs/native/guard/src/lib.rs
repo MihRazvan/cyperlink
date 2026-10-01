@@ -17,6 +17,10 @@ pub fn process(id:&Address,a:&[AccountInfo],data:&[u8])->ProgramResult{
  let (consumer,_)=Address::find_program_address(&[b"cyperlink-action",&data[2..34]],a[13].key);if &consumer!=a[14].key{return Err(ProgramError::Custom(706))}
  for (offset,idx) in [(80,5),(112,6),(144,7),(176,11)]{if &p[offset..offset+32]!=a[idx].key.as_ref(){return Err(fail())}}
  if hashv(&[&a[5].try_borrow_data()?]).as_ref()!=&p[208..240]{return Err(ProgramError::Custom(701))}
+ cyperlink_hook_routing::validate_metadata(
+   a[6].key.as_array(),a[1].key.as_array(),H.as_array(),
+   a[12].key.as_array(),a[12].owner.as_array(),&a[12].try_borrow_data()?,
+ ).map_err(|_|ProgramError::Custom(707))?;
  // Revalidate the same strict native profile at commit; admission does not reserve funds.
  let source_data=a[5].try_borrow_data()?;
  let mint_data=a[6].try_borrow_data()?;
@@ -44,8 +48,11 @@ pub fn process(id:&Address,a:&[AccountInfo],data:&[u8])->ProgramResult{
  let (signer,bump)=Address::find_program_address(&[b"guard"],id);if &signer!=a[2].key{return Err(fail())}
  let arm=Instruction{program_id:H,accounts:vec![AccountMeta::new(*a[0].key,false),AccountMeta::new(*a[1].key,false),AccountMeta::new_readonly(signer,true)],data:vec![0]};
  invoke_signed(&arm,&[a[0].clone(),a[1].clone(),a[2].clone(),a[3].clone()],&[&[b"guard",&[bump]]])?;
- let mut metas=Vec::new();for i in [5,6,7,8,9,10,11,0,1,12,3]{metas.push(if [5,7,0,1].contains(&i){AccountMeta::new(*a[i].key,i==11)}else{AccountMeta::new_readonly(*a[i].key,i==11)});}
+ let mut metas=Vec::new();for i in [5,6,7,8,9,10,11,1,0,12,3]{metas.push(if [5,7,0,1].contains(&i){AccountMeta::new(*a[i].key,i==11)}else{AccountMeta::new_readonly(*a[i].key,i==11)});}
  let ct=Instruction{program_id:*a[4].key,accounts:metas,data:data[34..].to_vec()};invoke(&ct,a)?;
  if a[0].try_borrow_data()?[0]!=2{return Err(ProgramError::Custom(703))}
+ let quota=a[1].try_borrow_data()?;
+ if quota.len()!=161||quota[129..161].iter().any(|byte|*byte!=0){return Err(ProgramError::Custom(708))}
+ drop(quota);
  if data[1]!=0{return Err(ProgramError::Custom(799))}Ok(())
 }

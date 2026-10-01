@@ -18,3 +18,4 @@ solana-curve25519="=3.1.14"
 solana-zk-elgamal-proof-interface="=0.1.3"
 
 cyperlink-native-admission = { path = "../../../crates/native-admission" }
+cyperlink-hook-routing = { path = "../../../crates/hook-routing" }
