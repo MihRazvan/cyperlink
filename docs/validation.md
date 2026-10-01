@@ -39,3 +39,18 @@ See [local-replay.md](local-replay.md) for build, fresh validator/runtime setup 
 ## Cost boundaries
 
 Final settlement CU and fees exclude native proof verification, account/rent setup, query preparation, Arcium queue/callback transactions and circuit upload. Callback wall time includes local scheduling and observation, not an independent measure of worker computation. The two-node Docker run uses cached AMD64 images on an ARM64 host; public-network latency and throughput cannot be inferred. Worker CPU/network usage, production fee markets and user-scale economics are unmeasured. Keep these categories separate in any demo or business claim.
+
+## Independent conflict archive review
+
+The [independent review](../evidence/2026-10-01/independent-conflict-v4-review.json) verified 1,323 Ed25519 signatures over 1,267 archived messages, decoded all four callbacks, and matched 85 public critical receipts, ten loaded-ELF reports, 29 compiled source files and 15 executed client files. This is offline archive verification, not a fresh RPC reread or an independent BLS verifier. Historical rollback byte equality was checked by the executed runner; v4 did not retain those raw before/after snapshots for independent rechecking. Compatible-v5 separately retains its final single-bank account snapshot.
+
+Repeat that offline check without starting services (output must be new):
+
+```sh
+node scripts/verify_archived_demo.mjs \
+  --results .local/demo-conflict-v4/results.json \
+  --public-report evidence/2026-10-01/two-consumers-conflict-v4.json \
+  --source-manifest .local/replay-consumers-conflict-v4/source-hashes.json \
+  --module-root .local/replay-consumers-conflict-v4/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth \
+  --output .local/demo-conflict-v4/new-archive-check.json
+```

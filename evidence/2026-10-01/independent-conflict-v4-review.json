@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "classification": "independent-agent-offline-archive-verification",
+  "checked_at": "2026-10-01T17:57:30.772Z",
+  "scenario": "conflict",
+  "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+  "inputs": {
+    "results": {
+      "path": ".local/demo-conflict-v4/results.json",
+      "sha256": "a2797565863cc78f1d9f9f948276c01282b93cabc4143678b4611b38f06fd872"
+    },
+    "publicReport": {
+      "path": "evidence/2026-10-01/two-consumers-conflict-v4.json",
+      "sha256": "cd1f3fe6ce39d1fdf2ce538bdf29fd6b540c43062a8a6b3541275f8d1f7d6e15"
+    },
+    "sourceManifest": {
+      "path": ".local/replay-consumers-conflict-v4/source-hashes.json",
+      "sha256": "26489c0d7a437294c0dc3852aa9650862b55d3ddc772b583fec6269b0718463f"
+    }
+  },
+  "counts": {
+    "archivedTransactions": 1267,
+    "ed25519SignaturesVerified": 1323,
+    "callbackPayloadsDecoded": 4,
+    "criticalPublicEntriesMatched": 85,
+    "localElfFilesMatchedToRecordedLoadedHashes": 10,
+    "compiledSourceFilesMatched": 29,
+    "archivedClientSourceFilesMatched": 15
+  },
+  "actualFailedTransactionReceipts": [
+    {
+      "label": "changed-destination-binding-rejected",
+      "signature": "5Nhzhj3XnS4AZerFFzT1zQJj4pnETpofH4Ds463b3n5jHPKKw3tWpNhUwU3wbqa2eaX79WbANyS15aH77etP3ZyF",
+      "slot": 405,
+      "customError": 705
+    },
+    {
+      "label": "changed-application-action-binding-rejected",
+      "signature": "7AafQ2Q55oiUkSW6UJcoYbpmJTeDubZ6MqQaUuUkoP9diHgNwrmuJba7zUVZG98T8c8TRHFgdw1m5kTgwpSyFFu",
+      "slot": 410,
+      "customError": 705
+    },
+    {
+      "label": "changed-consumer-binding-rejected",
+      "signature": "kSdksJawDA6DXraGeC69F5BQbrbEnCNVqNzHaas8Ec1KJWwb4rZUfTP5oodo3TTQDyr94RpWuUNWymdJhV51oKz",
+      "slot": 411,
+      "customError": 705
+    },
+    {
+      "label": "post-native-transfer-merchant-failure-rolls-back",
+      "signature": "4D7iJp6XPAXutg7YkDLkZ4Tc4MgChcZbWUoBwSSXJbNDX2HuwEf8Mu19AyZngHM8HvJZzxJb5Er3rCUtAWPK3ZWA",
+      "slot": 412,
+      "customError": 1099
+    },
+    {
+      "label": "competing-license-stale-authorization",
+      "signature": "2dioLqZCHGW3yDperoznwp8xL54wEPDoCvSfigECXoUFxQj6s17JPUPXorzLTfLVtJgNUtsaGHwLo1zbHUuPewJi",
+      "slot": 414,
+      "customError": 803
+    },
+    {
+      "label": "consumed-merchant-entitlement-replay",
+      "signature": "4mvTR76mFrci5939TpEgznQsuRjQjhrgsMwPauCmrQPrMt5eCnU2KtaStQvCrsUZLMWBHtRQhQuotzyb2YLdDqEU",
+      "slot": 415,
+      "customError": 1001
+    }
+  ],
+  "callbackDecisions": [
+    {
+      "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+      "allow": true,
+      "status": 1
+    },
+    {
+      "job": "9PNwdxpCFnQyUaU3omEUq9XQHfTcvkD2NwADp5E9AKqo",
+      "allow": true,
+      "status": 1
+    },
+    {
+      "job": "9tV7rtw9DbKrNmVoe6X3tRNZ9vCpvDeQ8bLWmbb9XeTu",
+      "allow": false,
+      "status": 2
+    }
+  ],
+  "finalQuota": {
+    "version": "1",
+    "stateHash": "a765876b2803d3000f3536d4cf017817b2e0cbfdf1442c499f059a196922b2b5",
+    "nonce": "02000000000000000000000000000000",
+    "ciphertext": "30836fe6be45237b2df89e42a54418e4aa9bc1361bb2f36a7e205f1ef849ff04",
+    "counter": "4"
+  },
+  "limitations": [
+    "Offline verification of retained RPC receipts, signed messages and source/artifact hashes; no fresh RPC reread of the replaced v4 ledger.",
+    "Ed25519 transaction signatures were independently checked. BLS output authenticity is supported by successful onchain callback verification and matched program artifacts, not a separate offline BLS verifier.",
+    "Rollback byte equality was asserted by the executed runner before and after each failure. Those raw historical snapshots were not retained for v4; this review does not independently revalidate historical rollback account bytes.",
+    "Native success log followed by consumer1099 confirms the late failure path in its failed transaction receipt. It does not itself expose confidential balances.",
+    "Conflict scenario proves merchant settlement and license admission/staleness/fresh denial. Successful license settlement is a separate compatible-scenario result.",
+    "No production security audit, public-network execution or external integration claim."
+  ]
+}

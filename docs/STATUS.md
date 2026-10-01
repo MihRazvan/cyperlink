@@ -41,6 +41,8 @@ Reproducibility is **same-machine**, depending on the original pinned validator/
 
 All receipts here use explicit confirmed commitment; they do not claim finality or production throughput. Settlement CU/fees, native proof/provisioning, queue/callback transactions, circuit upload and callback wall time are separate categories. Worker CPU/network costs are unmeasured. For illustration only, compatible-v5 settlement used 79,057 CU for merchant and 80,775 CU for license; these exclude every other stage and are not general benchmarks.
 
+The [independent conflict archive review](../evidence/2026-10-01/independent-conflict-v4-review.json) verified 1,323 Ed25519 signatures and matched callbacks, failure receipts, ELF reports and source hashes. Its limitations distinguish executed rollback assertions from independently retained account snapshots.
+
 Full evidence, signed wires, keys, source snapshots and preserved ledgers remain under ignored `.local/`. Only public reports are committed. v4/v5 services were stopped after evidence capture. Interrupted v1 and v3 are diagnostic only: v1 had a faulty negative fixture substitution; v3 preserved an unresolved delivery attempt, safe exact-operation retry and a harness confirmed/finalized observation mismatch. Neither is cited as a passing end-to-end run. Bounded retransmission now preserves identical signed bytes; observation commitment is explicit.
 
 ## Continue from here
