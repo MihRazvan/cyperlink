@@ -15,6 +15,7 @@ use std::{rc::Rc, time::Instant};
 
 fn main() {
     std::env::set_current_dir(env!("CARGO_MANIFEST_DIR")).unwrap();
+    compile_initializer();
     let mut builder = IRBuilder::<DefaultConfig>::new(true);
     let client_pk = builder.push_curve(CurveExpr::Input(0, Rc::new(CurveInputInfo::from(InputKind::Plaintext))));
     // 1 client nonce; 2 amount CT; 3 opening CT; 4 quota nonce; 5 quota CT; 6 successor nonce.
@@ -69,4 +70,32 @@ fn main() {
     println!("host_compile_ms={} public_interface_inputs=39 flattened_outputs=34", started.elapsed().as_millis());
     println!("runtime_metadata={:#?}", instruction.metadata);
 
+}
+
+fn compile_initializer() {
+    let mut builder = IRBuilder::<DefaultConfig>::new(true);
+    let pk = builder.push_curve(CurveExpr::Input(0, Rc::new(CurveInputInfo::from(InputKind::Plaintext))));
+    // Client nonce, client-encrypted initial budget, new MXE-state nonce.
+    let fields: Vec<_> = (1..4).map(|i| builder.push_field(FieldExpr::<ScalarField, usize>::Input(i, Rc::new(InputInfo::from(InputKind::Plaintext))))).collect();
+    let outputs=with_local_expr_store_as_global(|| {
+        let f=|i:usize| FieldValue::<ScalarField>::from_id(fields[i-1]);
+        let client_cipher=RescueCipher::<ScalarField,FieldValue<ScalarField>>::new_with_client::<FieldValue<BaseField>,FieldValue<ScalarField>,CurveValue<DefaultConfig>>(X25519PublicKey::new(CurveValue::new(pk),true));
+        let initial=client_cipher.decrypt(vec![f(2)],f(1))[0];
+        let valid=!initial.gt(FieldValue::<ScalarField>::from(ScalarField::from(u64::MAX)));
+        let safe_initial=valid.select(initial,FieldValue::<ScalarField>::from(ScalarField::from(0u64)));
+        let state_cipher=RescueCipher::<ScalarField,FieldValue<ScalarField>>::new_for_mxe();
+        let ciphertext=state_cipher.encrypt(vec![safe_initial],f(3))[0];
+        vec![FieldValue::<ScalarField>::from(valid.reveal()).get_id(),ciphertext.get_id()]
+    },&mut builder);
+    let name="runtime_budget_init";
+    let out_dir=Some("build".to_string());
+    let path=write_ir(builder.into_ir(outputs),name,&ArcisCOptions{out_dir:out_dir.clone()});
+    let u128_ty=||Value::Scalar{size_in_bits:128,kind:ScalarKind::Unsigned};
+    let ct=||Value::Ciphertext{size_in_bits:253};
+    let interface=CircuitInterface::new(name.to_owned(),vec![Value::ArcisX25519Pubkey,u128_ty(),ct(),u128_ty()],vec![Value::Bool,ct()]);
+    let interfaces=write_interface(interface.serialize().unwrap(),name,&out_dir).unwrap();
+    compile_and_write_all(&[(&path.path,path.hash)],&interfaces.iter().map(|p|(p.path.as_str(),p.hash)).collect::<Vec<_>>()).unwrap();
+    let artifact=ArcisInstruction::<DefaultConfig>::from_current_bytes(std::fs::read(format!("build/{name}.arcis")).unwrap()).unwrap();
+    std::fs::write("build/initializer-metadata.json",serde_json::to_vec_pretty(&artifact.metadata).unwrap()).unwrap();
+    println!("initializer_caller_inputs=4 initializer_outputs=2; authorized-admin and initialize-once enforced by consumer, NOT circuit");
 }

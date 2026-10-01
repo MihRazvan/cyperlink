@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "evidence_kind": "fresh host circuit compilation and exact artifact byte comparison",
+  "distributed_execution": false,
+  "public_network": false,
+  "compiler_version": "0.15.0",
+  "command": [
+    "cargo",
+    "run",
+    "--locked",
+    "--manifest-path",
+    "<fresh-local-stage>/compiler/Cargo.toml",
+    "--offline"
+  ],
+  "toolchain": {
+    "rustc": "rustc 1.92.0 (ded5c06cf 2025-12-08) (Homebrew)",
+    "cargo": "cargo 1.92.0 (Homebrew)"
+  },
+  "sources": {
+    "Cargo.lock": {
+      "bytes": 83433,
+      "sha256": "52dc8a703edcc9bdd1fd9ba3cfab5554f83129931f5936b323f8d047199cee44"
+    },
+    "Cargo.toml": {
+      "bytes": 312,
+      "sha256": "49fc60c42f18e71ba9a38fe1b60145c318ed1220c02f761d0a759901dc7b8efd"
+    },
+    "src/main.rs": {
+      "bytes": 7390,
+      "sha256": "3d4271e419f3589414568e188c6ee4942e209444adf85b06b170b024835fdbe8"
+    }
+  },
+  "baseline_manifest": {
+    "bytes": 1566,
+    "sha256": "c9372d7c249d40dde1068e981396599aa2978e1b29ffbadd2d4190757e3f2b21"
+  },
+  "reviewed_artifacts": {
+    "runtime_budget_init.arcis": {
+      "bytes": 313058,
+      "sha256": "6eb1f33a3e21bb7b5ce0da19d14e69b3311e1051d904043c575240421886b6a0"
+    },
+    "runtime_budget_init.hash": {
+      "bytes": 109,
+      "sha256": "bfbb91f0d5324d7efb2767144dbbd837f518c06d94fe0341fb12d00a38fd9ace"
+    },
+    "runtime_budget_init.idarc": {
+      "bytes": 252,
+      "sha256": "53a996d83bafcfce60c9640626099c67ca47ba9c4ff63b19370d19ebe884438a"
+    },
+    "runtime_budget_init.weight": {
+      "bytes": 476,
+      "sha256": "a3eb4526545f80e2949e568a7d558d1298965204025465607c12dddaeeaf0b03"
+    },
+    "runtime_budget_bound.arcis": {
+      "bytes": 636725,
+      "sha256": "eaad70f272e3d1f9405a92755cbb7140bb066bf048bf81752c7c51c74a7ac085"
+    },
+    "runtime_budget_bound.hash": {
+      "bytes": 119,
+      "sha256": "ab84cf6e4a61d004e3abee783b29734cfd17c7d84e7a0f89a14d3f0187e5f5ee"
+    },
+    "runtime_budget_bound.idarc": {
+      "bytes": 2412,
+      "sha256": "951453fcd00fa6ea798fea9884029bd09bdac6db507a61de7c435aae1e099918"
+    },
+    "runtime_budget_bound.weight": {
+      "bytes": 477,
+      "sha256": "87ce6a29b15b31890f0797e9760c6fb58b991f4a0c9cf2eb12097ff2c2158957"
+    }
+  },
+  "passed": true,
+  "rebuilt_artifacts": {
+    "runtime_budget_init.arcis": {
+      "bytes": 313058,
+      "sha256": "6eb1f33a3e21bb7b5ce0da19d14e69b3311e1051d904043c575240421886b6a0"
+    },
+    "runtime_budget_init.hash": {
+      "bytes": 109,
+      "sha256": "bfbb91f0d5324d7efb2767144dbbd837f518c06d94fe0341fb12d00a38fd9ace"
+    },
+    "runtime_budget_init.idarc": {
+      "bytes": 252,
+      "sha256": "53a996d83bafcfce60c9640626099c67ca47ba9c4ff63b19370d19ebe884438a"
+    },
+    "runtime_budget_init.weight": {
+      "bytes": 476,
+      "sha256": "a3eb4526545f80e2949e568a7d558d1298965204025465607c12dddaeeaf0b03"
+    },
+    "runtime_budget_bound.arcis": {
+      "bytes": 636725,
+      "sha256": "eaad70f272e3d1f9405a92755cbb7140bb066bf048bf81752c7c51c74a7ac085"
+    },
+    "runtime_budget_bound.hash": {
+      "bytes": 119,
+      "sha256": "ab84cf6e4a61d004e3abee783b29734cfd17c7d84e7a0f89a14d3f0187e5f5ee"
+    },
+    "runtime_budget_bound.idarc": {
+      "bytes": 2412,
+      "sha256": "951453fcd00fa6ea798fea9884029bd09bdac6db507a61de7c435aae1e099918"
+    },
+    "runtime_budget_bound.weight": {
+      "bytes": 477,
+      "sha256": "87ce6a29b15b31890f0797e9760c6fb58b991f4a0c9cf2eb12097ff2c2158957"
+    }
+  },
+  "host_build_elapsed_seconds": 59.337,
+  "local_report_sha256": "b0d4565ab22befae17d2490eb57dec4ddebe649ba6f2a9529a646385583b2feb",
+  "compile_log_sha256": "cb7287e67a0dc9b7824571370f11da889ca5ad9d7800aa7b6880c9039d89b096",
+  "rebuild_script_sha256": "9159f9928e4b65b2961697ee552bd50ad9c24ac38fdc11bb8d7feaaf3cc8c056",
+  "recorded_date": "2026-10-01",
+  "limitations": [
+    "Fresh host compilation only; no additional distributed computation or public-network operation occurred.",
+    "Cargo dependency object cache may be reused; source staging contains no circuit artifacts or compiler cache markers.",
+    "Host elapsed build time is not runtime circuit latency or cost."
+  ]
+}

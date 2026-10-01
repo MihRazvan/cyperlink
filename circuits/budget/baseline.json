@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "compiler_version": "0.15.0",
+  "initializer_source_origin": "research/cyperlink-probes-2026-10-01/auth-review/runtime-key-circuit/src/main.rs",
+  "initializer_original_source_sha256": "abaa2c962c7f809a4d23b172f398d318ff72bd58445b090fc95e61b76528c798",
+  "initializer_function_sha256": "b5a3632445f145a6d2df9da0f1c37db813230fc3ae4c646e445f03882013fb10",
+  "artifacts": {
+    "runtime_budget_init.arcis": {
+      "bytes": 313058,
+      "sha256": "6eb1f33a3e21bb7b5ce0da19d14e69b3311e1051d904043c575240421886b6a0"
+    },
+    "runtime_budget_init.hash": {
+      "bytes": 109,
+      "sha256": "bfbb91f0d5324d7efb2767144dbbd837f518c06d94fe0341fb12d00a38fd9ace"
+    },
+    "runtime_budget_init.idarc": {
+      "bytes": 252,
+      "sha256": "53a996d83bafcfce60c9640626099c67ca47ba9c4ff63b19370d19ebe884438a"
+    },
+    "runtime_budget_init.weight": {
+      "bytes": 476,
+      "sha256": "a3eb4526545f80e2949e568a7d558d1298965204025465607c12dddaeeaf0b03"
+    },
+    "runtime_budget_bound.arcis": {
+      "bytes": 636725,
+      "sha256": "eaad70f272e3d1f9405a92755cbb7140bb066bf048bf81752c7c51c74a7ac085"
+    },
+    "runtime_budget_bound.hash": {
+      "bytes": 119,
+      "sha256": "ab84cf6e4a61d004e3abee783b29734cfd17c7d84e7a0f89a14d3f0187e5f5ee"
+    },
+    "runtime_budget_bound.idarc": {
+      "bytes": 2412,
+      "sha256": "951453fcd00fa6ea798fea9884029bd09bdac6db507a61de7c435aae1e099918"
+    },
+    "runtime_budget_bound.weight": {
+      "bytes": 477,
+      "sha256": "87ce6a29b15b31890f0797e9760c6fb58b991f4a0c9cf2eb12097ff2c2158957"
+    }
+  }
+}
