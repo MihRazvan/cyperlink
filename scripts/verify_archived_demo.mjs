@@ -6,12 +6,14 @@ import { resolve, dirname, relative } from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { createHash, verify } from 'node:crypto';
+import { verifyAccountSnapshots } from './verify_demo_snapshots.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const flags = new Map([['--results','results'],['--public-report','publicReport'],['--source-manifest','sourceManifest'],['--module-root','moduleRoot'],['--output','output']]);
 const options = {};
-for (let i = 2; i < process.argv.length; i += 2) {
-  const name = flags.get(process.argv[i]); assert(name && !options[name] && process.argv[i + 1], 'Expected unique option/value pairs'); options[name] = resolve(process.argv[i + 1]);
+for (let i = 2; i < process.argv.length; i++) {
+  if (process.argv[i] === '--require-snapshots') { assert(!options.requireSnapshots); options.requireSnapshots = true; continue; }
+  const name = flags.get(process.argv[i]); assert(name && !options[name] && process.argv[i + 1], 'Expected unique option/value pairs'); options[name] = resolve(process.argv[++i]);
 }
 for (const name of flags.values()) assert(options[name], `Missing ${name}`);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -21,6 +23,7 @@ assert.equal(results.scenario, 'conflict', 'This verifier currently qualifies th
 assert.equal(results.passed, true); assert.equal(report.passed, true);
 assert.equal(report.full_evidence.sha256, sha(raw)); assert.equal(report.full_evidence.bytes, raw.length);
 for (const [publicKey, rawKey] of [['genesis_hash','genesis_hash'],['scenario','scenario'],['operations','operations'],['final_quota','finalQuota'],['observer_disclosures','observer_disclosures'],['validator_cost_by_category','validatorCostByCategory']]) assert.deepEqual(report[publicKey], results[rawKey], publicKey);
+if (report.accountSnapshots !== undefined || options.requireSnapshots) assert.deepEqual(report.accountSnapshots, results.accountSnapshots, 'Public raw account snapshots differ from full archive');
 assert.deepEqual(report.checks, results.checks.map(({ logs, ...rest }) => rest));
 assert.deepEqual(report.compiled_program_source_manifest, sources);
 
@@ -93,6 +96,7 @@ if (results.scenario === 'conflict') {
   assert.equal(results.finalQuota.version, '1'); assert.equal(results.finalQuota.counter, '4');
   assert.equal(Buffer.from(results.callbacks[1].output.field2).toString('hex'), results.finalQuota.ciphertext);
 }
+const rawAccountSnapshots = verifyAccountSnapshots(results, { required: Boolean(options.requireSnapshots) });
 const review = {
   schema_version: 1, passed: true, classification: 'independent-agent-offline-archive-verification',
   checked_at: new Date().toISOString(), scenario: results.scenario, genesis_hash: results.genesis_hash,
@@ -101,12 +105,13 @@ const review = {
     criticalPublicEntriesMatched: report.critical_transactions.length, localElfFilesMatchedToRecordedLoadedHashes: results.loaded_programs.length,
     compiledSourceFilesMatched: Object.keys(sources.files).length, archivedClientSourceFilesMatched: report.executed_client_source_manifest.length },
   actualFailedTransactionReceipts: rejections,
+  rawAccountSnapshots,
   callbackDecisions: results.callbacks.slice(1).map(entry => ({ job: entry.job, allow: entry.output.field1, status: entry.status })),
   finalQuota: results.finalQuota,
   limitations: [
-    'Offline verification of retained RPC receipts, signed messages and source/artifact hashes; no fresh RPC reread of the replaced v4 ledger.',
+    'Offline verification of retained RPC receipts, signed messages and source/artifact hashes; no fresh RPC reread and no independent historical state proof.',
     'Ed25519 transaction signatures were independently checked. BLS output authenticity is supported by successful onchain callback verification and matched program artifacts, not a separate offline BLS verifier.',
-    'Rollback byte equality was asserted by the executed runner before and after each failure. Those raw historical snapshots were not retained for v4; this review does not independently revalidate historical rollback account bytes.',
+    rawAccountSnapshots.available ? rawAccountSnapshots.limitation : 'Rollback byte equality was asserted by the executed historical runner, but raw snapshots are absent; this review cannot independently compare those account bytes.',
     'Native success log followed by consumer1099 confirms the late failure path in its failed transaction receipt. It does not itself expose confidential balances.',
     'Conflict scenario proves merchant settlement and license admission/staleness/fresh denial. Successful license settlement is a separate compatible-scenario result.',
     'No production security audit, public-network execution or external integration claim.'

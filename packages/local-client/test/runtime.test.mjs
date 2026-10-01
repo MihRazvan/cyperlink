@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, chmod, symlink, rm, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { REPO, loadWeb3, loopbackEndpoint, saveSigner, loadSigner, createPrivateRun, LocalSession, PROOF_PROGRAM } from '../src/runtime.mjs';
 import { verifyPreparedProof } from '../src/proofs.mjs';
-const moduleRoot = process.env.CYPERLINK_JS_MODULE_ROOT ?? '/Users/razvan/Repos/colosseum/research/cyperlink-probes-2026-10-01/authenticated/cyperlink_auth';
+const moduleRoot = process.env.CYPERLINK_JS_MODULE_ROOT ?? resolve(REPO, '.local/toolchain/js');
 const web3 = await loadWeb3(moduleRoot);
 async function scratch(t) {
   await mkdir(resolve(REPO, '.local'), { recursive: true });
