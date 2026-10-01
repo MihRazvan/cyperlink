@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "baseline": "2026-10-01 bound-join final grouped-proof-type-check replay",
+  "evidence_level": "archived real-local-validator and two-node-distributed-computation records; not a fresh replay",
+  "versions": {
+    "validator": "Agave 4.3.0",
+    "solana-zk-sdk": "7.0.1",
+    "sbf-tools": "1.57",
+    "sbf-arch": "v0",
+    "arcium": "0.15.0",
+    "anchor": "1.0.2",
+    "spl-token-2022-interface": "3.1.0",
+    "solana-zk-elgamal-proof-interface": "0.1.3"
+  },
+  "roles": {
+    "provenance": "research/cyperlink-prebuild-2026-10-01/bound-join/provenance.json",
+    "results": "research/cyperlink-prebuild-2026-10-01/bound-join/results.json",
+    "extra_checks": "research/cyperlink-prebuild-2026-10-01/bound-join/extra-checks.json",
+    "native_proofs": "research/cyperlink-prebuild-2026-10-01/bound-join/native-proofs.json",
+    "rpc_crosscheck": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-final-rpc-crosscheck.json",
+    "elf_match": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-final-elf-match.json",
+    "auth_elf": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_auth.so",
+    "auth_source": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/programs/cyperlink_auth/src/lib.rs",
+    "runtime_circuit": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.arcis"
+  },
+  "files": [
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/README.md",
+      "bytes": 7499,
+      "sha256": "aa6446a4c801c16c24d6b323cf2c289b924ae7b603e2b336ad7c074339eb99ce"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/results.json",
+      "bytes": 87950,
+      "sha256": "8f9d718defb0bdbff91daf41673bcb582d1ff205ca2f7b5c88a4cd143bd09013"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/native-proofs.json",
+      "bytes": 5089,
+      "sha256": "7d9239c960efcf11b483e9185decd6ab73adaff51d49dedfdbd332cb079a7bd2"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/native-settlement.json",
+      "bytes": 2354,
+      "sha256": "5db7de929ed5d79f371100dbd533670f4c0470ffa9804110b093476cf7c341e3"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/extra-checks.json",
+      "bytes": 31699,
+      "sha256": "448da7df4c195b13d7fb78b0c9097681b609bd3344c74153466f52bdda5b2dfe"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/final-accounts.json",
+      "bytes": 8528,
+      "sha256": "4bdbc3d2e2a272dade9482ba60ac17cbc90cb83f8034cf4dec5ef31341acaae3"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/probe-final.log",
+      "bytes": 5848,
+      "sha256": "fa7e9305d037cfa4dd193c5fa18ed9bc254b5126b9b938952148b90cbb7ed552"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/extra-checks.log",
+      "bytes": 160,
+      "sha256": "fa416a038d075f563cebbcacbb7d294b7d94e3a2a94cbc4c0cb0683ca5adb62e"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/build-final.log",
+      "bytes": 12009,
+      "sha256": "f014b8e659be2f11ff4c47ee758308e9135d4b188067444b5f1db2354c944cde"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/programs/cyperlink_auth/src/lib.rs",
+      "bytes": 22661,
+      "sha256": "adc61368ecad101c1fc70ae62bb9051df3c63af30a6eab7ad1d0b6927ff3d508"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/programs/cyperlink_auth/Cargo.toml",
+      "bytes": 816,
+      "sha256": "438b94ae093dcc8dbc08cb032047b2e94db0a4b16caeb3cdee0d3b809269fa4d"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/Cargo.lock",
+      "bytes": 131295,
+      "sha256": "bd8763b5cac4d4b4c154bf9f819a04fc5948521af50be04062c565341ae6a97d"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/probe.cjs",
+      "bytes": 17036,
+      "sha256": "4a9472a7774381898532a1cb3f0f30f000001bb0b9dc139d29b9b5ac48014119"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/extra-checks.cjs",
+      "bytes": 5208,
+      "sha256": "8aa7803c0eae988920e7b0261a38fff21b58d53d0d375ab2b57e2a18016d663b"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/run-validator.py",
+      "bytes": 1699,
+      "sha256": "186ca396a7cb8c861ec50ff109d8b3af7773ef25e0c29e0d810c95c5593dea27"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_auth.so",
+      "bytes": 573232,
+      "sha256": "cedff4962f7de61e8e733f8ffa23d3da3433bd2eb8d750fa9027ee42c2b782a0"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/idl/cyperlink_auth.json",
+      "bytes": 41123,
+      "sha256": "1f8d2c9cb248a058fe1b428a7bbc22fc0ae4e50c105c834d2839bbd91a67e64a"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.weight",
+      "bytes": 477,
+      "sha256": "87ce6a29b15b31890f0797e9760c6fb58b991f4a0c9cf2eb12097ff2c2158957"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_link.idarc",
+      "bytes": 1390,
+      "sha256": "32d1ca7140e020ad323bb525b2c8f19785e8a869c17847d9a5fce730c4361c27"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.arcis",
+      "bytes": 313058,
+      "sha256": "6eb1f33a3e21bb7b5ce0da19d14e69b3311e1051d904043c575240421886b6a0"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.arcis",
+      "bytes": 636725,
+      "sha256": "eaad70f272e3d1f9405a92755cbb7140bb066bf048bf81752c7c51c74a7ac085"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.weight",
+      "bytes": 476,
+      "sha256": "a3eb4526545f80e2949e568a7d558d1298965204025465607c12dddaeeaf0b03"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_link.arcis",
+      "bytes": 630986,
+      "sha256": "87db104654784c7735a28a0700386d5cb73c23d885215442f45e4eb552d67404"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.idarc",
+      "bytes": 252,
+      "sha256": "53a996d83bafcfce60c9640626099c67ca47ba9c4ff63b19370d19ebe884438a"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_link.weight",
+      "bytes": 476,
+      "sha256": "52c15e1ad8ec9f112346f28004bc12f9dc94d428694e56f6be57e3d47e5f21ee"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.idarc",
+      "bytes": 2412,
+      "sha256": "951453fcd00fa6ea798fea9884029bd09bdac6db507a61de7c435aae1e099918"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_bound.hash",
+      "bytes": 119,
+      "sha256": "ab84cf6e4a61d004e3abee783b29734cfd17c7d84e7a0f89a14d3f0187e5f5ee"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_link.hash",
+      "bytes": 108,
+      "sha256": "d54660b99bad5af8a913b866accf95566c479e0fe4e73e973ccd4c55ccc9ddca"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/build/runtime_budget_init.hash",
+      "bytes": 109,
+      "sha256": "bfbb91f0d5324d7efb2767144dbbd837f518c06d94fe0341fb12d00a38fd9ace"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/native-live/build/ct_guard_spike.so",
+      "bytes": 29056,
+      "sha256": "bad59d94084d71db79a2ea5b9275ca6735d82f77ee12708f6930f2ff0090f069"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/native-live/build/ct_policy_spike.so",
+      "bytes": 34120,
+      "sha256": "f39292c837532aabb59b2ff033e5887db455d88d9d22f8c474abd7cdc922bf62"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/native-live/build/cyperlink_merchant.so",
+      "bytes": 22984,
+      "sha256": "aec5af913ae44bd1dba0437aa331702fd4b3c948f204b85570474965bccec80a"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/native-live/client.cjs",
+      "bytes": 12290,
+      "sha256": "cbab2c0dde0afe9bfb3c4848efe72080476f951c26e13e1ed6fb644fd3f5fbc5"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/compatibility/deployed-elf/evidence/mainnet-token-2022.so",
+      "bytes": 1382016,
+      "sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-final-elf-match.json",
+      "bytes": 720,
+      "sha256": "8c30492a6a0186daf4a6d35f89c0533eb7c5872023ff3804fbe9f25f0fbf4440"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-final-rpc-crosscheck.json",
+      "bytes": 252052,
+      "sha256": "8ae59cd07bc0f063c6c5ab41e6ed48c29a9eb305deb62b013f03c705d02c87b4"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/BOUND-JOIN-REVIEW.md",
+      "bytes": 8092,
+      "sha256": "605eb92253e75ca04d5b0807cdfa1f7915d3488c75e6ac796df73ed8171702e4"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/PRIVACY-QUERY-BOUNDARY.md",
+      "bytes": 8609,
+      "sha256": "9f96a43acc82ff1f75b758a7ee1772ee212e54c30019807183a5e37d0af0f068"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/provenance.json",
+      "bytes": 8673,
+      "sha256": "23c533060e5255b5342378dceacfdcbbc1a1926cd66381edb96193b5e920ec0f"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-circuit/src/main.rs",
+      "bytes": 4987,
+      "sha256": "56822c86ff19a2c9fced03e4e4f41ff327f4612051535b5f3ec36c495db6d820"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-circuit/Cargo.toml",
+      "bytes": 298,
+      "sha256": "051fb0d7d0a88df8f45c54032be573db06d21130a3982e05b1e16c627b6bb141"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/admission-review/bound-circuit/Cargo.lock",
+      "bytes": 83433,
+      "sha256": "52dc8a703edcc9bdd1fd9ba3cfab5554f83129931f5936b323f8d047199cee44"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/package.json",
+      "bytes": 495,
+      "sha256": "84b77c7ac5b7af1a8b7cddfb34e968123c3f15377640f455579902b182538f8f"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/package-lock.json",
+      "bytes": 75366,
+      "sha256": "b4f75537d61d0cd2c7a3e9dcec12753d3676845d3f9868413350a1ce7f7eedec"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/artifacts/docker-compose-arx-env.yml",
+      "bytes": 18091,
+      "sha256": "169a208ee34682e28241181bd6f40cee7fec1806f523d8c95ec4fb941bfa8e7c"
+    },
+    {
+      "path": "research/cyperlink-prebuild-2026-10-01/native-live/Cargo.lock",
+      "bytes": 112604,
+      "sha256": "3bd310cc7689046a523f3b4c1f396c1ae261c8ce55a7cd79831a1e0f41e7e8a0"
+    }
+  ]
+}
