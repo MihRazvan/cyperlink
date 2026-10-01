@@ -81,3 +81,10 @@ export function decodeMerchantEntitlement(bytes) {
   requireEvidence(data[48] === 1 && data.subarray(0, 8).toString('ascii') === 'PURCH001', 'Invalid merchant entitlement');
   return { issued: true, owner: key(data, 8), sku: data.readBigUInt64LE(40) };
 }
+export function decodeLicenseEntitlement(bytes) {
+  const data = Buffer.from(bytes);
+  requireEvidence(data.length === 81, 'License entitlement must be 81 bytes');
+  if (allZero(data)) return { issued: false };
+  requireEvidence(data[80] === 1 && data.subarray(0, 8).toString('ascii') === 'LICENSE1', 'Invalid license entitlement');
+  return { issued: true, owner: key(data, 8), product: data.subarray(40, 72), expirySlot: data.readBigUInt64LE(72) };
+}
