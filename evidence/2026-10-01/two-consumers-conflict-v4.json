@@ -1900,5 +1900,39 @@
     "path": ".local/demo-conflict-v3",
     "passed": false,
     "note": "Preserved incomplete: first queue delivery unknown, exact signed operation later recovered; confirmed callback then outpaced default finalized SDK observation. v4 used fresh ledger, bounded same-signed-byte retransmission, explicit confirmed observation."
+  },
+  "compiled_program_source_manifest": {
+    "commit": "80015851718250a2c3e5c56e1e13a83891a724c7",
+    "files": {
+      "crates/hook-routing/Cargo.lock": "001f288faf776d0d4c08ada06bffbc5d15d1b59266cc6b58884e7034e02ac861",
+      "crates/hook-routing/Cargo.toml": "3c163fcd494bbd26b9f78bd80b1d0df1db41dcb933d1c1e2c59a9d61f284e365",
+      "crates/hook-routing/src/lib.rs": "d2806399d284ecd5d6f115815b7d44eb727a36b1c7de46c974447b032ae0d0c6",
+      "crates/hook-routing/tests/routing.rs": "37b527640eb553db1c592a09d1d94906c967d60e650e1c619759cf2a578799d7",
+      "crates/native-admission/Cargo.lock": "9912d3df91cadfed41ee92d73bed40ff64f459cad1436f9f1399a99067eacdbc",
+      "crates/native-admission/Cargo.toml": "7b1953b384b70b351612e07788561bd57528ac3c35e155a5de8a9a23693416a4",
+      "crates/native-admission/src/arithmetic.rs": "35a5c290e6aa6c579cb449ad5330b381784c1bbaa489fee4bdc008df97f85567",
+      "crates/native-admission/src/lib.rs": "741d62f15bd6d78bf94ddce2935809279066419397d7ab39c366717f1997138d",
+      "crates/native-admission/tests/admission.rs": "decb9eaae83b681056bb7d3444e9bdf00db733c031764cf10c4579e119ef28d9",
+      "crates/pda-provisioning/Cargo.lock": "0c6847d4c8bbb495c6d08b3a5de7e25f36501938c0c3d8ce28480b46af79be14",
+      "crates/pda-provisioning/Cargo.toml": "165471e3d09e08c95e0c707ec3d25ae3a8038935fcbb96acc7299597a0adc51f",
+      "crates/pda-provisioning/src/lib.rs": "05106018df2b34987b458444b6ad28c62386b0ef539f2c8aca0bc9615d92c541",
+      "programs/auth/Cargo.lock": "adb3b4fa7a4abf6dbed7edacc07425bd674d58bb1709a2846df74426f01b60de",
+      "programs/auth/programs/cyperlink_auth/Cargo.toml": "1cd901085eb898ff9f6ef4eaf857e7b96b40c1bfd09b324e4d497a0271de1d74",
+      "programs/auth/programs/cyperlink_auth/src/lib.rs": "cf93f3cfb37ef5d0d5a6d62c27537da3cf62e784b35854cee9e0477ed094e192",
+      "programs/native/Cargo.lock": "3c10e62aa136a0866d479606fe04b42af4018f76a566bdc17a48d1b55edac749",
+      "programs/native/Cargo.toml": "983841fdebfc08e134547c46b8ca8a83bbfb3c4a589fab5e4a5010619a60f196",
+      "programs/native/guard/Cargo.toml": "87249474604193531a8b130711eaf8e2f0fd09219f84c93ac58ab3f7ca977632",
+      "programs/native/guard/src/lib.rs": "b71db00b6d14c448fe51e3d6a186071862c8987e3949280108a7eaba9def0bfa",
+      "programs/native/interface/Cargo.toml": "3d3d6368cd4d7e586e2aed682f76952d0913424b581180bf2cc4a9e8a7510c63",
+      "programs/native/interface/src/lib.rs": "f61c747ac8f78e02aedc4e30ae84b8c0334c5e4541cb24e7c94dc11585c6ee3e",
+      "programs/native/license/Cargo.toml": "3e3f4c06924a52662526788a4be8ba81280428b1f3e2a06cbd1525e153fcc36b",
+      "programs/native/license/src/lib.rs": "c2641c552a449adbfe66c5ba1a1e5c76e99781b65536c9a7bb2b0290cf452607",
+      "programs/native/merchant/Cargo.toml": "add74ef929f927393bdd0ccff5f7850b5d62c6d11bc1a905e18b808360a9bb88",
+      "programs/native/merchant/src/lib.rs": "38a7c40956c522f8088e06a80bc527c4f0de9406ac065ffd3fba57d2d85f5664",
+      "programs/native/policy/Cargo.toml": "f2084fa9f189a5c3a47cac6248973d6ccf6bcce6133878c13bd2b575b538f775",
+      "programs/native/policy/src/lib.rs": "e73b3a933b853013fc36f4351a699423d9a7ffdd6b38461330df0dfb95c0f8e1",
+      "programs/native/proof-buffer/Cargo.toml": "d281d6531053ce180fb2d17c708d8f2aae65708d8cdb7db48981ccec45e95eec",
+      "programs/native/proof-buffer/src/lib.rs": "136c3cbff4947815a3babff21bb2cd76475c2264f3540e447e3d9eb704bd2f4f"
+    }
   }
 }

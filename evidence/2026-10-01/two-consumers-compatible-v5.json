@@ -1,0 +1,1655 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scenario": "compatible",
+  "evidence_level": "real-local-validator-and-two-node-runtime",
+  "scope": "synthetic same-mint assets, one quota/MXE, administrator co-signed queries",
+  "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+  "validator": {
+    "feature-set": 3383571666,
+    "solana-core": "4.3.0"
+  },
+  "loaded_programs": [
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "9iAPk585pPZQW3AfG5SGzKDTfmGcprHTEAPQt8vmVA39",
+      "last_deploy_slot": 0,
+      "elf_bytes": 672832,
+      "elf_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "loaded_elf_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "loaded_account_payload_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "padding_zero_bytes": 0,
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_auth.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "BXdX5HicWBfMnwbHKefmQsvjbJGKb2m38ggB86rqh8NG",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72928,
+      "elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_account_payload_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "padding_zero_bytes": 0,
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/ct_guard_spike.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "ApP1iic4fTQg1h2PnKoVSnAxnKqWmrJqEdf7LpbtbWZe",
+      "last_deploy_slot": 0,
+      "elf_bytes": 107960,
+      "elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_account_payload_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "padding_zero_bytes": 0,
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/ct_policy_spike.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2yvmbPSjGuDnex57mg8e3yEckvErZ9bsvjKVgnau6GmX",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72808,
+      "elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_account_payload_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "padding_zero_bytes": 0,
+      "program": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_merchant.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "AwZBSQnp4PmNDiQPwVnFq35NY2YAbfSXoQoJfd6RDghz",
+      "last_deploy_slot": 0,
+      "elf_bytes": 73560,
+      "elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_account_payload_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "padding_zero_bytes": 0,
+      "program": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_license.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "En7FK1cr5MYU1v7wKrcK95fk5btMxhw2EqJHvF5Rf2RS",
+      "last_deploy_slot": 0,
+      "elf_bytes": 16504,
+      "elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_account_payload_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "padding_zero_bytes": 0,
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_proof_buffer.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "6kZkJ4BgFbuYcEAED3AtzVouHDMNMLYLJb5zZSoEBftc",
+      "last_deploy_slot": 0,
+      "elf_bytes": 1648440,
+      "elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_account_payload_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "padding_zero_bytes": 0,
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "rpc_slot": 48,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/artifacts/arcium_program_0.15.0.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2Nws4AxLooysrGiQfrSwywWcZJdyMsL2XetkQ2KtUQG5",
+      "last_deploy_slot": 0,
+      "elf_bytes": 816976,
+      "elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_account_payload_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "padding_zero_bytes": 0,
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "rpc_slot": 49,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/artifacts/arcium_staking_program_0.15.0.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "CJ5WEjifs4d77pEA9DpewppByFjHcAkNv3YYSuSoDk7c",
+      "last_deploy_slot": 0,
+      "elf_bytes": 424248,
+      "elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_account_payload_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "padding_zero_bytes": 0,
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "rpc_slot": 49,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/artifacts/lighthouse.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "DoU57AYuPFu2QU514RktNPG22QhApEjnKxnBcu4BHDTY",
+      "last_deploy_slot": 0,
+      "elf_bytes": 1382016,
+      "elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_account_payload_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "padding_zero_bytes": 0,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "rpc_slot": 49,
+      "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899/",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-compatible-v5/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/artifacts/token-2022.so"
+    }
+  ],
+  "idl_sha256": "5eb54e4b438fd9775b176b9922c5b98eb549d2d5c64b0e63ad67d9aac3867bcd",
+  "runtime_mxe_public_key_hex": "4fa8587928ceb37793ee2093fe76663faf618528a6e6198e1af082ad80250655",
+  "observer_disclosures": {
+    "initial_allowance": 100,
+    "purchase_amounts": [
+      40,
+      40
+    ],
+    "note": "Setup and requested amounts are disclosed to the test observer. Remaining allowance is inferred from committed purchases, not decrypted from MXE state.",
+    "inferred_remaining_allowance": 20
+  },
+  "operations": [
+    {
+      "label": "a40",
+      "kind": "merchant",
+      "requestedAmountObserverDisclosure": 40,
+      "status": 1,
+      "source": "6R916SejzrrTXQEPNW2y6mtJWAxcw2gBMGQtCxEr87ZN",
+      "destination": "Cr8rdQfenSefAhAe8LEAiLGTmixqGPjtAm3pMh6MxueM",
+      "permit": "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+      "job": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+      "consumer": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "record": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+      "quotaVersionAtAdmission": "0"
+    },
+    {
+      "label": "b40-honest-fresh",
+      "kind": "license",
+      "requestedAmountObserverDisclosure": 40,
+      "status": 1,
+      "source": "CHGr26SMr2LGFeMpD8GndL5GGQcYfjMAdFdXq3L3vF3X",
+      "destination": "Am4SeobeU8UFCqZYw5vXSA8g9YxPR8iQ4moicPQfyGEC",
+      "permit": "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+      "job": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+      "consumer": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "record": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+      "quotaVersionAtAdmission": "1"
+    }
+  ],
+  "callbacks": [
+    {
+      "label": "RuntimeBudgetInitCallback",
+      "job": "5NuMQvH8JYQPm8jHTFBUU28GhFJvdptS7UVjiLLH8KHE",
+      "computation": "CbLoi822bHWrSga9R9fnA84QGG14um6BQihpLV5xQLBB",
+      "signature": "3dxchXttkcF6oEqc2Rbc3RyRRjcH4yXgeT9dH7G41BSKGCRV718CW3NibkP7U2U5QH5HwWWcuXP5bPY7vWkuAjL",
+      "output": {
+        "field0": true,
+        "field1": [
+          39,
+          194,
+          193,
+          81,
+          119,
+          213,
+          113,
+          72,
+          238,
+          13,
+          66,
+          200,
+          154,
+          0,
+          133,
+          40,
+          26,
+          244,
+          180,
+          144,
+          153,
+          100,
+          230,
+          211,
+          119,
+          129,
+          195,
+          185,
+          42,
+          250,
+          248,
+          7
+        ]
+      },
+      "status": 1,
+      "elapsedFromQueueMs": 3828,
+      "slot": 92,
+      "landedCU": 144407,
+      "feeLamports": 5000
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+      "computation": "98tvnv3ibkk4HFhddVfnH2vz39wau44coUdukgJGJqn1",
+      "signature": "5oqoAu5hX3s9rszpfJjSMA7JVbzrHrwoQwR9SPu94Zgb1bEJ5TVbsPygjuQKFoHeAPcTh8QfNrj6GwYTHcd6S517",
+      "output": {
+        "field0": [
+          130,
+          24,
+          245,
+          147,
+          64,
+          154,
+          208,
+          194,
+          27,
+          75,
+          96,
+          169,
+          229,
+          51,
+          181,
+          183,
+          16,
+          225,
+          12,
+          192,
+          48,
+          128,
+          89,
+          82,
+          174,
+          31,
+          14,
+          20,
+          218,
+          15,
+          84,
+          25
+        ],
+        "field1": true,
+        "field2": [
+          235,
+          166,
+          240,
+          166,
+          149,
+          189,
+          187,
+          134,
+          114,
+          135,
+          41,
+          96,
+          79,
+          230,
+          214,
+          74,
+          239,
+          42,
+          57,
+          20,
+          6,
+          230,
+          18,
+          134,
+          189,
+          221,
+          64,
+          62,
+          116,
+          115,
+          241,
+          8
+        ]
+      },
+      "status": 1,
+      "elapsedFromQueueMs": 21151,
+      "slot": 170,
+      "landedCU": 151115,
+      "feeLamports": 5000
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+      "computation": "2CDS7gqV279ej3TXTr8WYiiHSVotfCewARjvhYjZKejw",
+      "signature": "KMMaSN9KGd4esiJEeQbG7ZUa8oLWSrN41TjnLtT2Dcnu5GL7XHbcMhtzNyHxFGcJLgkDRorzhfFDnaPjP8tnvsd",
+      "output": {
+        "field0": [
+          228,
+          251,
+          85,
+          40,
+          171,
+          124,
+          247,
+          243,
+          102,
+          12,
+          56,
+          113,
+          52,
+          121,
+          187,
+          93,
+          59,
+          113,
+          50,
+          1,
+          160,
+          120,
+          200,
+          190,
+          30,
+          4,
+          208,
+          223,
+          180,
+          143,
+          232,
+          107
+        ],
+        "field1": true,
+        "field2": [
+          141,
+          80,
+          88,
+          137,
+          125,
+          117,
+          196,
+          80,
+          219,
+          246,
+          218,
+          116,
+          66,
+          43,
+          61,
+          166,
+          65,
+          239,
+          194,
+          191,
+          253,
+          180,
+          173,
+          2,
+          83,
+          163,
+          217,
+          191,
+          88,
+          209,
+          253,
+          15
+        ]
+      },
+      "status": 1,
+      "elapsedFromQueueMs": 19826,
+      "slot": 226,
+      "landedCU": 154380,
+      "feeLamports": 5000
+    }
+  ],
+  "checks": [
+    {
+      "label": "quota-prefunded-empty-system-account",
+      "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "lamports": 890880
+    },
+    {
+      "label": "hook-metadata-prefunded-empty-system-account",
+      "address": "5rqD3agMfHNVKbmVZCfQE3RxA3qcjjuhkWLDjCcUFYFZ",
+      "lamports": 890880
+    },
+    {
+      "label": "a40-consumer-record-prefunded-empty-system-account",
+      "address": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+      "lamports": 890880
+    },
+    {
+      "label": "a40-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 170,
+        "commitment": "confirmed",
+        "job": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+        "permit": "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+        "effect": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "a40-sdk-paid-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 171,
+        "commitment": "confirmed",
+        "job": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+        "permit": "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+        "effect": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "label": "a40-native-payment-and-entitlement-atomic",
+      "changedAccounts": [
+        "6R916SejzrrTXQEPNW2y6mtJWAxcw2gBMGQtCxEr87ZN",
+        "Cr8rdQfenSefAhAe8LEAiLGTmixqGPjtAm3pMh6MxueM",
+        "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+        "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp"
+      ]
+    },
+    {
+      "label": "b40-honest-fresh-consumer-record-prefunded-empty-system-account",
+      "address": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+      "lamports": 890880
+    },
+    {
+      "label": "b40-honest-fresh-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 226,
+        "commitment": "confirmed",
+        "job": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+        "permit": "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+        "effect": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1132",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "b40-honest-fresh-sdk-paid-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 227,
+        "commitment": "confirmed",
+        "job": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+        "permit": "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+        "effect": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1132",
+        "licenseActive": true,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "label": "b40-honest-fresh-native-payment-and-entitlement-atomic",
+      "changedAccounts": [
+        "CHGr26SMr2LGFeMpD8GndL5GGQcYfjMAdFdXq3L3vF3X",
+        "Am4SeobeU8UFCqZYw5vXSA8g9YxPR8iQ4moicPQfyGEC",
+        "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+        "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo"
+      ]
+    }
+  ],
+  "limitations": [
+    "No public-network execution or production claim",
+    "Internal reference consumers, no external integration commitment",
+    "CU/fees measure validator transactions; wall-clock callback latency is separate from distributed runtime resource costs, which are not measured"
+  ],
+  "full_evidence": {
+    "path": ".local/demo-compatible-v5/results.json",
+    "bytes": 5186941,
+    "sha256": "0d433414639e1ba7e0bda671d043962af96d5c91987a60b8c6e436ce9e6502c9"
+  },
+  "executed_client_source_manifest": [
+    {
+      "path": "examples/two-consumers/transport.mjs",
+      "sha256": "f8139982dd9c6586c5ae6953899b072800a6846a5f6260653868edf6168a30b5",
+      "bytes": 5972
+    },
+    {
+      "path": "examples/two-consumers/run.mjs",
+      "sha256": "52291b485e31358a2dd839939edc1a7e04d8ac05836ec5e7e105c1c172860cbf",
+      "bytes": 33376
+    },
+    {
+      "path": "examples/two-consumers/operation.mjs",
+      "sha256": "f14293ea2a59113cb1a56f825b85ccd6812e72f59be2a984ff0f9a7fae6189f5",
+      "bytes": 2379
+    },
+    {
+      "path": "examples/two-consumers/operation.test.mjs",
+      "sha256": "b39fab154e3ce78d72707e5266fee0687a00a8fb0dc3b261017fa889e60926a8",
+      "bytes": 2497
+    },
+    {
+      "path": "packages/local-client/src/provision.mjs",
+      "sha256": "32640d5eab5a871c03d2f7900cf06df7b49449bdb8889e46ab7faa1e7ba0822d",
+      "bytes": 5152
+    },
+    {
+      "path": "packages/local-client/src/mint-profile.mjs",
+      "sha256": "0bd343878e5840a1bb7853c5898bf85143a313393bd6820f8bb8549f7afc1d79",
+      "bytes": 2178
+    },
+    {
+      "path": "packages/local-client/src/proofs.mjs",
+      "sha256": "847a2008d3603335f1ed676c3d980962a876db3cd44ca39afe8c200b209e9333",
+      "bytes": 4107
+    },
+    {
+      "path": "packages/local-client/src/runtime.mjs",
+      "sha256": "7d0c754b603e4ca553886b6db2cb1d71dc9e6e7de77c1d6a5ee6088d9922fa2f",
+      "bytes": 8862
+    },
+    {
+      "path": "packages/local-client/src/index.mjs",
+      "sha256": "459468786b672ef87e3876d06027e51c7fb65049c04c553ad4934f76e741d892",
+      "bytes": 454
+    },
+    {
+      "path": "packages/local-client/src/prepare-transfer.mjs",
+      "sha256": "f550895f5e294d3e9347da07071f22d97a322c338a0026b93b91b03b5e91364e",
+      "bytes": 3223
+    },
+    {
+      "path": "packages/local-client/src/hook-metadata.mjs",
+      "sha256": "533d9738ec8c0691b39b8a9b1c6d45a7407b55fb99cbdaba6416783135599d59",
+      "bytes": 1823
+    },
+    {
+      "path": "packages/sdk/src/transport.mjs",
+      "sha256": "fec822327a632cffb92528cd9e2308115ab4345d90cfb72f32663faf09c468cb",
+      "bytes": 3187
+    },
+    {
+      "path": "packages/sdk/src/builders.mjs",
+      "sha256": "1c352492317d3184a9a8dcb5dc40333b0444517f5687ed40a3c8c84396665579",
+      "bytes": 3375
+    },
+    {
+      "path": "packages/sdk/src/codec.mjs",
+      "sha256": "9ac9ebb40b02278f721ecb2245fbb01a56d184dbaf0706c456f878b2121ff167",
+      "bytes": 5421
+    },
+    {
+      "path": "packages/sdk/src/index.mjs",
+      "sha256": "2075f6e8476882f8215c1ec35e3d110ef154479c8fb57195f36b711bf821bebf",
+      "bytes": 10838
+    }
+  ],
+  "compiled_program_source_manifest": {
+    "commit": "80015851718250a2c3e5c56e1e13a83891a724c7",
+    "files": {
+      "crates/hook-routing/Cargo.lock": "001f288faf776d0d4c08ada06bffbc5d15d1b59266cc6b58884e7034e02ac861",
+      "crates/hook-routing/Cargo.toml": "3c163fcd494bbd26b9f78bd80b1d0df1db41dcb933d1c1e2c59a9d61f284e365",
+      "crates/hook-routing/src/lib.rs": "d2806399d284ecd5d6f115815b7d44eb727a36b1c7de46c974447b032ae0d0c6",
+      "crates/hook-routing/tests/routing.rs": "37b527640eb553db1c592a09d1d94906c967d60e650e1c619759cf2a578799d7",
+      "crates/native-admission/Cargo.lock": "9912d3df91cadfed41ee92d73bed40ff64f459cad1436f9f1399a99067eacdbc",
+      "crates/native-admission/Cargo.toml": "7b1953b384b70b351612e07788561bd57528ac3c35e155a5de8a9a23693416a4",
+      "crates/native-admission/src/arithmetic.rs": "35a5c290e6aa6c579cb449ad5330b381784c1bbaa489fee4bdc008df97f85567",
+      "crates/native-admission/src/lib.rs": "741d62f15bd6d78bf94ddce2935809279066419397d7ab39c366717f1997138d",
+      "crates/native-admission/tests/admission.rs": "decb9eaae83b681056bb7d3444e9bdf00db733c031764cf10c4579e119ef28d9",
+      "crates/pda-provisioning/Cargo.lock": "0c6847d4c8bbb495c6d08b3a5de7e25f36501938c0c3d8ce28480b46af79be14",
+      "crates/pda-provisioning/Cargo.toml": "165471e3d09e08c95e0c707ec3d25ae3a8038935fcbb96acc7299597a0adc51f",
+      "crates/pda-provisioning/src/lib.rs": "05106018df2b34987b458444b6ad28c62386b0ef539f2c8aca0bc9615d92c541",
+      "programs/auth/Cargo.lock": "adb3b4fa7a4abf6dbed7edacc07425bd674d58bb1709a2846df74426f01b60de",
+      "programs/auth/programs/cyperlink_auth/Cargo.toml": "1cd901085eb898ff9f6ef4eaf857e7b96b40c1bfd09b324e4d497a0271de1d74",
+      "programs/auth/programs/cyperlink_auth/src/lib.rs": "cf93f3cfb37ef5d0d5a6d62c27537da3cf62e784b35854cee9e0477ed094e192",
+      "programs/native/Cargo.lock": "3c10e62aa136a0866d479606fe04b42af4018f76a566bdc17a48d1b55edac749",
+      "programs/native/Cargo.toml": "983841fdebfc08e134547c46b8ca8a83bbfb3c4a589fab5e4a5010619a60f196",
+      "programs/native/guard/Cargo.toml": "87249474604193531a8b130711eaf8e2f0fd09219f84c93ac58ab3f7ca977632",
+      "programs/native/guard/src/lib.rs": "b71db00b6d14c448fe51e3d6a186071862c8987e3949280108a7eaba9def0bfa",
+      "programs/native/interface/Cargo.toml": "3d3d6368cd4d7e586e2aed682f76952d0913424b581180bf2cc4a9e8a7510c63",
+      "programs/native/interface/src/lib.rs": "f61c747ac8f78e02aedc4e30ae84b8c0334c5e4541cb24e7c94dc11585c6ee3e",
+      "programs/native/license/Cargo.toml": "3e3f4c06924a52662526788a4be8ba81280428b1f3e2a06cbd1525e153fcc36b",
+      "programs/native/license/src/lib.rs": "c2641c552a449adbfe66c5ba1a1e5c76e99781b65536c9a7bb2b0290cf452607",
+      "programs/native/merchant/Cargo.toml": "add74ef929f927393bdd0ccff5f7850b5d62c6d11bc1a905e18b808360a9bb88",
+      "programs/native/merchant/src/lib.rs": "38a7c40956c522f8088e06a80bc527c4f0de9406ac065ffd3fba57d2d85f5664",
+      "programs/native/policy/Cargo.toml": "f2084fa9f189a5c3a47cac6248973d6ccf6bcce6133878c13bd2b575b538f775",
+      "programs/native/policy/src/lib.rs": "e73b3a933b853013fc36f4351a699423d9a7ffdd6b38461330df0dfb95c0f8e1",
+      "programs/native/proof-buffer/Cargo.toml": "d281d6531053ce180fb2d17c708d8f2aae65708d8cdb7db48981ccec45e95eec",
+      "programs/native/proof-buffer/src/lib.rs": "136c3cbff4947815a3babff21bb2cd76475c2264f3540e447e3d9eb704bd2f4f"
+    }
+  },
+  "final_quota": {
+    "version": "2",
+    "stateHash": "a753335a053b5db6bc9743757e15446fc94bd47eb663b08f06ade2f5c60ff061",
+    "nonce": "03000000000000000000000000000000",
+    "ciphertext": "8d5058897d75c450dbf6da74422b3da641efc2bffdb4ad0253a3d9bf58d1fd0f",
+    "counter": "3"
+  },
+  "locally_retained_operation_descriptors": [
+    {
+      "path": ".local/demo-compatible-v5/operation-a40/operation-descriptor.json",
+      "profile": "local-native-ct-v0",
+      "consumerKind": "merchant",
+      "job": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+      "computation": "98tvnv3ibkk4HFhddVfnH2vz39wau44coUdukgJGJqn1",
+      "permit": "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+      "owner": "GfsX4aQroTE88b4ZMag54pbzXk8ahwcKbwSHqWxDfcar",
+      "admin": "H4bUEC6TomzykKMfCBypmn1nX3cfpkZywmXNtfjd6rb7",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+      "templateHex": "000000000000000000000000000000008137040644429862d3e3ccdfe83aeaccadf66f8ca43eb0aed329b363b3e8bc1a000000000000000000000000000000000000000000000000000000000000000050796be7eccc2e782b45a37d8d4df2131bb97f40ad25a3003a357ab1479496b5c966869a2f3a2a37400e39310f5a5d6e58147b9943351f537ebaafe9e87275bcb006e5f380c1b03a3ada54be9112667fddebc91762ef9c0bc289315f2aeddabee8d47ef1461a6e6a4c54ed225910c6111872f323dd1df362d9e645ce5b3c46e7730d90180e735492dd4be7b78585a04845389fa974c766f42b1a8ea9c6b411023638c22ae1425e6d0a70a8a96a91652d71077dddd0bfe4b0608f4fcfce4d33545c5337efe71e09f8b100e74b8cedae9c3d444269c2c2223c4a7ed9cdb89c811c60e10b40b5033babbff474d066efe148e761ce78164f9acd6e62e7f338998b5a8218f593409ad0c21b4b60a9e533b5b710e10cc030805952ae1f0e14da0f54190c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb5353535353535353535353535353535353535353535353535353535353535353d871b2f060678aeaaed3ae0412c2d3632901716ef7bb4cac55f7c3c78dd1a8830200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008707000000000000",
+      "inputsHashHex": "db2853707578be78b0f869ec8c860243b3e7dc4e08699ff582a6fc7ce51140fb",
+      "sku": "7"
+    },
+    {
+      "path": ".local/demo-compatible-v5/operation-b40-honest-fresh/operation-descriptor.json",
+      "profile": "local-native-ct-v0",
+      "consumerKind": "license",
+      "job": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+      "computation": "2CDS7gqV279ej3TXTr8WYiiHSVotfCewARjvhYjZKejw",
+      "permit": "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+      "owner": "DoXdK8Sf7JMVNxSeu7sdUKQK4kwvN92YMfaDuU2Dnvw4",
+      "admin": "H4bUEC6TomzykKMfCBypmn1nX3cfpkZywmXNtfjd6rb7",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+      "templateHex": "0000000000000000010000000000000092675be00aadf87210799e258c16d39e000ce9a43f4b93a1c7e66431b65064d10000000000000000000000000000000000000000000000000000000000000000a79bc3eb1e552a3c1a648a7cbda3d7492461542223c4d0ef455782b91eb04a52c966869a2f3a2a37400e39310f5a5d6e58147b9943351f537ebaafe9e87275bc9102a14fef6aafd95cbe74b50fcda687134c34e5c70873d6683ecd2ad3ddc899be3796dfb70e90e974d911650caa55e6009bf990d88f05ffaa4089d90a5d88dbd0f1948e0a5fde30f3ba01864f039f35150e6a0db04773decf97f32597780656d27f8e6026b4550ba96c9ac8730f004f50b040478ea751b1b62d88fa614ea1d0ecb6b8c1815d53066f41706c3a89dc388a0630b7c83680dddab1c68aa37b06079c5d88499987f95b6872886cd80d6850463766efef6020c43b06d086fc6e8f4ee4fb5528ab7cf7f3660c38713479bb5d3b713201a078c8be1e04d0dfb48fe86b0c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb54545454545454545454545454545454545454545454545454545454545454540ae794e16964dff0a7b74acbffa04657aa2615c4e36505c8e9bc956d4ffb4549030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c207000000000000",
+      "inputsHashHex": "d040d920af8ce117156bac5e9671ad7d8610a61ccc9769c3140b7cbfb54b3290",
+      "productHex32": "4be48fe675784b42e1b54f00fb379caf3f164b0ff183663871780c0507356d36",
+      "licenseExpirySlot": "1132"
+    }
+  ],
+  "validator_cost_by_category": {
+    "adversarial-prefunding-setup": {
+      "transactions": 4,
+      "landedCU": 1200,
+      "feeLamports": 20000
+    },
+    "application": {
+      "transactions": 6,
+      "landedCU": 75621,
+      "feeLamports": 50000
+    },
+    "arcium-definition": {
+      "transactions": 2,
+      "landedCU": 82142,
+      "feeLamports": 10000
+    },
+    "arcium-circuit-upload": {
+      "transactions": 1178,
+      "landedCU": 10619294,
+      "feeLamports": 5890000
+    },
+    "arcium-queue": {
+      "transactions": 3,
+      "landedCU": 457506,
+      "feeLamports": 25000
+    },
+    "lookup-table": {
+      "transactions": 4,
+      "landedCU": 40500,
+      "feeLamports": 20000
+    },
+    "native-settlement": {
+      "transactions": 2,
+      "landedCU": 159832,
+      "feeLamports": 20000
+    },
+    "native-provisioning": {
+      "transactions": 19,
+      "landedCU": 76962,
+      "feeLamports": 170000
+    },
+    "native-proof-and-permit-provisioning": {
+      "transactions": 22,
+      "landedCU": 453908,
+      "feeLamports": 190000
+    },
+    "arcium-signed-callback": {
+      "transactions": 3,
+      "landedCU": 449902,
+      "feeLamports": 15000
+    }
+  },
+  "cost_scope": "Validator CU and fees are separate by category. Callback elapsed time is queue-to-observed committed callback including polling/RPC overhead. Distributed worker CPU/network costs are unmeasured.",
+  "critical_transactions": [
+    {
+      "label": "quota-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "3nxoPZJNkDwBKd6N11CGV1HgwWxDQwrKMd6eRGySb5FPvbbXBucLMRS2Mw8gugme5ijvUySQcpJhCdio2k7SwKC5",
+      "bytes": 257,
+      "slot": 50,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "provision-quota",
+      "category": "application",
+      "signature": "jpiSjqFoEVysfxcWCHkHxn9DgxFhLPxs3Q7HFJxgtRCcES88doutsB1CZ2DRCTzWdktnac9XtfeU1L73nFS7ScV",
+      "bytes": 385,
+      "slot": 51,
+      "signaturesVerified": true,
+      "simulatedCU": 27580,
+      "landedCU": 27580,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "runtime_budget_init-definition",
+      "category": "arcium-definition",
+      "signature": "4PncdLTw23f72wa4WhgZBNHGDgpbsagogKy5FCius7ZNtpg5moPNiN27SDqXuYpnmcAnPMudxBN29741ez41uzAw",
+      "bytes": 418,
+      "slot": 52,
+      "signaturesVerified": true,
+      "simulatedCU": 34484,
+      "landedCU": 34484,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "runtime_budget_bound-definition",
+      "category": "arcium-definition",
+      "signature": "2B2eFs9KFXKNpWMsDHTTGJqioN7FBxQCFBRBZ74UR6CuRJ62GS824279p5NUpnapQo8Qo1MXwwbDBD1DtX6fcmq8",
+      "bytes": 418,
+      "slot": 63,
+      "signaturesVerified": true,
+      "simulatedCU": 47658,
+      "landedCU": 47658,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "initialize-encrypted-allowance",
+      "category": "arcium-queue",
+      "signature": "2ziHb3eWZ2kj8AQ7E2TsPi4hQ9XCp2vecaJHC5af8AnTmfTSKECnMP72BvM9BG6EYbooH3BsaSw14Woj2t9m5wuF",
+      "bytes": 803,
+      "slot": 86,
+      "signaturesVerified": true,
+      "simulatedCU": 119650,
+      "landedCU": 119650,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "hook-metadata-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "3qrzMvij5ikETqKNdVghAW3bbYAU4jWG7reuhf8G1DbHVZ1db48GSDSEZNmNd7GmegaUpRAijGMEhb8hLwkdGwJQ",
+      "bytes": 257,
+      "slot": 112,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "initialize-hook-metadata",
+      "category": "application",
+      "signature": "5p5Gpt1vtq43YJFZcjMQck5S3TdsUHKcNk3m59Nsy71GNTrnyxZNGHtERKF1dms6YpKU4Qyno2uWjiMPicjAiUfi",
+      "bytes": 312,
+      "slot": 113,
+      "signaturesVerified": true,
+      "simulatedCU": 11922,
+      "landedCU": 11922,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a40-consumer-record-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "4wLbG81W6df4Nit9jXRaGv8T7P6V2u2ZSfS3W29NtWKULpAXCKeLtrjZCSR83z5yYzKwqTWn9pvywrEKND6FV6VP",
+      "bytes": 257,
+      "slot": 124,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a40-initialize-consumer-record",
+      "category": "application",
+      "signature": "5S6qBLnSfXtPeSBpKfyYUWN6c3K2DcradpiuAtcuoHeSkto2Yyy6Ed8WuFLeit34hkSkuRYxi9RbeQLfTi6zq83Z",
+      "bytes": 384,
+      "slot": 125,
+      "signaturesVerified": true,
+      "simulatedCU": 10289,
+      "landedCU": 10289,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "a40-prepare-immutable-action",
+      "category": "application",
+      "signature": "5PLWoscGEF5LfrQTc6Bkz8RkPDf57gc3pChkue4o1j28bvj4skNSmz6uz6oKZoRJhXGJdtVApCQT85Dn7nQSawvL",
+      "bytes": 1033,
+      "slot": 127,
+      "signaturesVerified": true,
+      "simulatedCU": 7020,
+      "landedCU": 7020,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "create-demo-alt",
+      "category": "lookup-table",
+      "signature": "3GmCbUwrqPW82WQdGTVDXBA3yiKXdwpP2dzGBFE57cQQv1s18sws4d78CJVCctqD5peEmJXV2Lw3C6RnWnKGwgmq",
+      "bytes": 292,
+      "slot": 128,
+      "signaturesVerified": true,
+      "simulatedCU": 10640,
+      "landedCU": 10661,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "38i8Gzxzm49sKADqXX6mVEfE4HueG3NFfg4e3M3QMvscjQNcqX5bndf2xRocg7skZgfGRgtzSfTUDrzch9jKdbwA",
+      "bytes": 932,
+      "slot": 129,
+      "signaturesVerified": true,
+      "simulatedCU": 11807,
+      "landedCU": 11807,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "5kJYwpNT59wwKqFZpWEeJPLKEFufeAsyiXLwr6ZPvV6yBNpCvwMQ1fXeC8iDUvBxmVHtWEYx4T44SCoCtgoSfnd7",
+      "bytes": 580,
+      "slot": 130,
+      "signaturesVerified": true,
+      "simulatedCU": 8572,
+      "landedCU": 8574,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a40-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "2rvR3RZUdvqCJqdkSQ6ikCqvVGXMkZZA7VcuKboqghzNmXHNLrYhFGapyPuxevwWCeMaVnymmYpRRKYe9Q7TkpCK",
+      "bytes": 532,
+      "slot": 165,
+      "signaturesVerified": true,
+      "simulatedCU": 166126,
+      "landedCU": 166942,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "a40-atomic-paid-entitlement",
+      "category": "native-settlement",
+      "signature": "3AUN5wCdKt8vWqXm4ajKYYzqh2VHN9KZ4Wf6yk1KbRpuQecoD7ACcxgqGHp6ZAK6qNzofNz3X9FvuyduAqQQEohe",
+      "bytes": 984,
+      "slot": 171,
+      "signaturesVerified": true,
+      "simulatedCU": 79057,
+      "landedCU": 79057,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-consumer-record-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "JJHjRjVsfshS3aUprUuWBZmo9xyuubx9V5FzfgnaaFpzSZnZBoLmJQUtGytRbpFEtk7NaSkN2LnRpyxKRRZNgAv",
+      "bytes": 257,
+      "slot": 183,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-initialize-consumer-record",
+      "category": "application",
+      "signature": "6Cdk16soKjBGHkyrfGpZgWFampHhjm2GbY4By1Tm3rZRPNYwqmEmJ9EorMtcwmJxawnnoGiVj3auchrvJEnTCMw",
+      "bytes": 408,
+      "slot": 184,
+      "signaturesVerified": true,
+      "simulatedCU": 11790,
+      "landedCU": 11790,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-prepare-immutable-action",
+      "category": "application",
+      "signature": "v44EbJRMfhjVdfByNB5MrbtHj9LQXymkTL7PDgs6KEeRdZRG8CmoAaa8BkBLJRgLPoAcd4LDcPPfNDe3Pd3qKSo",
+      "bytes": 1033,
+      "slot": 186,
+      "signaturesVerified": true,
+      "simulatedCU": 7020,
+      "landedCU": 7020,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "2YvTyFKsW6iq1YNCqkBPvB98TfRqgzi7qdPq8nnmEnzuFxoPRCL1Qdr3k4HqiKERi9NDmB3yRDwgXLxPAeLDjN5x",
+      "bytes": 676,
+      "slot": 187,
+      "signaturesVerified": true,
+      "simulatedCU": 9458,
+      "landedCU": 9458,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "4vt1G3PXh3E6hr7jSxQhdb6vJECWr2s2RHzCbA7mBe9KftpFVP5HK6EbCP7zJyz36UghiFNmLGtFgXbYJqR5uKMN",
+      "bytes": 532,
+      "slot": 221,
+      "signaturesVerified": true,
+      "simulatedCU": 170122,
+      "landedCU": 170914,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-atomic-paid-entitlement",
+      "category": "native-settlement",
+      "signature": "2N8KEHXoB92ExreJNmgEGcKmqUFDphw5vqBwAJ8o3LD7jKThkLbxW2XUF9QacoMwabuuBtXAH42K6qU9paqov4SG",
+      "bytes": 1016,
+      "slot": 227,
+      "signaturesVerified": true,
+      "simulatedCU": 80775,
+      "landedCU": 80775,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "create-initialize-mint",
+      "signature": "2Sr4GPvMhgoKA8ND3KxuGdaTsrgWtxdSbsxvPBEqSHtcAvLGwBU4D1A53U4raBMxNftqCPrF4QAzfxRBxP7pdr9A",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 93,
+      "bytes": 573,
+      "signaturesVerified": true,
+      "simulatedCU": 4144,
+      "landedCU": 4144,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-source",
+      "signature": "2rkHXrAVuTb1QeWqdPkc7RyMmkorkuWfNRQf2gdGZom9HikVmBqsbKcUV7oY2EPRh49ZQNSETDByjLgaAudsmV1K",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 94,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "5TBGANEENzScvSUsHXFLm4eg3o1n16TX8zaq5C6s284crEmw5AGugkgZdTtYuf4C3j4b7RgsStRbcyiAGqV1WGQj",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 95,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "4v9Xf32Hbxm4s5FK4FR8Bvi6PzfD85PbzbbHovRKfCKQx88Nn7zzJLTLHwTVGGEeACCj2iyWaVAYDGPWTHqBy6zJ",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 96,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-source",
+      "signature": "2ZJXNkJqfgaZ2ktK5D7C1kS1WhFUFrxecNmFnFxcka4UuL1C5nt3uNhczRXT3vAoQXbMDM7V3kKhHWuBmGhAXtbf",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 97,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "fund-source",
+      "signature": "4CwYHukxVPctA16tvsJBa3HXA5X3wdWu84QF4MKJyEsVQ3CcNeen5WaTDjeyZPZ5k8fZhH7Ra7xZUur79DZoy68W",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 98,
+      "bytes": 451,
+      "signaturesVerified": true,
+      "simulatedCU": 19955,
+      "landedCU": 19955,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-destination",
+      "signature": "5oKJibycrKT9D14uiTg6LLsmYUHzmu6Acs5ZcgUxNPUpcE7qbf8g2NkNCQrY1Zet5MwnZ6yWKSE2viQ25scdtSJQ",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 99,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "3kokztG1rY8Wd857LFw53yJFT8r8c2UPmmKWV5zLGtUzqgf9oH9iYHtpWCpKYBJeoW3nsh5Da1kT5y9Pz1UZ8pqD",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 100,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "2Hkr6BDdeP736jUTN3F55tq5LM375UvjJwuxikLuYwM8dumKtGECVf1MfYg19kKiTYcyhG2Ta8VYD3VmriaR6hk8",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 101,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-destination",
+      "signature": "2Wjisu5gWMcfa48YrW21qVWchSufiLgcuwXBDhJgV4x9k2EPya2aAh8D4QXciX4HFafjTGoKiGQVT1wUpUzm4kbm",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 102,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-source",
+      "signature": "3msNTwwFR4wTdxNDJuJ4GntZ87YR6bVmc6WBRLpPedcp2k8HjZAaG6TMCsor8sqVggPQRRG13Nx8uvTtzvnHsfmA",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 103,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "5M5jcsRPGUQNSxkC62ERWdRW4CMGPnfVdAiookqz6t6WsLabTuj1D3SHMFKqwy9XRiDRLUeu1JVLdauZucbG5out",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 104,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "AvwmaiBvPcs2cdr9zpqyTCaP1HFDWBhtaC38cpVVWqCdLShFXoKcFuhDf2QqTK1KYgYeGu7ngGWRHdAs6ywuUGF",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 105,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-source",
+      "signature": "67op3nxFJFxt4A6TZF3cgKz41hpTus16XeRDHrofsHo2A9o9cYvRtfYtawNQwUAVC8DGMpZ2mkSQZ6p5j2izujW1",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 106,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "fund-source",
+      "signature": "SSRHa1cY3KCL5DKXirA73JdRs8AmasaeXmi2frTTfyc7RZFuagnPWuK3e3yDqK7DCpskpnSJJ3oA9ACjws8R7hi",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 107,
+      "bytes": 451,
+      "signaturesVerified": true,
+      "simulatedCU": 19955,
+      "landedCU": 19955,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-destination",
+      "signature": "3rtB9PNKsm4Bg1m6AAgsDKFdbjoSjMDy7K14NDFpqj8r9sNt5SjM6VtmiWpFs9WCT7GMrx9sXDSonLhyZSZ8dJQX",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 108,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "2pxZiQHyaQTjRMJVkYUzDdvUreNMNuSnS3QrBxdAVJjrMPF8Q6U3NikWYx7VhrVnqWsEKz2jpmBVXRVmDmaADUhX",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 109,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "5FkPBiD9sYKnaVA8REQJ1m3oEhVgohdjbZxPtRmEi5bdLcN8jPdGyPA1piiRQtd25BZNBrt6cb6dQL7Z6JYWcvd3",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 110,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-destination",
+      "signature": "3qfJjLe5KqdGehJCL1wBPnhQMYX1tQZLvnkTkXBevpNd8oCaPBCNpbhzz8bycunn1aDU4Xpi1iR9NTYPwu2feJuJ",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 111,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-equality",
+      "signature": "4F2Sf92CgTHzLGmCZYVeuuzvnaYH7jJ1SAzBbqAGw7U2tGZvWbHq42gxSuzGSLkixv2HkiQnWgg49g7fPvLGok8e",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 114,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-equality",
+      "signature": "53DozAVDPpa8G8E57VbhQGR7BwCQ5yXzmCsvb3VwUT9FqoATMNde4zqdXBv3qMeySraBW5HGshsP2wPe1ZucCTqN",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 115,
+      "bytes": 599,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-grouped",
+      "signature": "WquQFUZAwuJm8qQT2aiZTGwNbVeA6Jr1semNWerSCsPJixwK64JgSeeNMNGV6UBcXMGgJavKs2qdQGeMbvK92q9",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 116,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-grouped",
+      "signature": "5EyRPGPbvhN19HWgoPuTNy44pAif14yyZGhbS113sZp9ic31SQes1m1wzDNY3LB7Ur6SxKaKGdZVioJmioHphU5V",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 117,
+      "bytes": 823,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-range",
+      "signature": "8rThtPjkkxyCKDFMw6UKG5KdDqkYznhCbEiBfSYSj9gYGQMVvj6ogMXcDHr3raRrdmcfLijECcPAdZEP4MrzeRi",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 118,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-buffer",
+      "signature": "4hQ1djvyUND4SM7Hn7xEf6EiZtMmzc2Nm2LNgFzSupLG5N13j4x8P3uMaXva3cZn4XJ1Z8jKUMMuahW7DPtoG2i5",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 119,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-0",
+      "signature": "3yZ7bV7o5PewTgSVHgwVmxQQVVLa4F8NrH7GSFYkgNrTvKaGe6EEBukFcEuoSyYjdBYVptDqstUrMEaYrA3PxiwN",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 120,
+      "bytes": 1014,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-700",
+      "signature": "3JWAu7ytoBGNcs59peQpJ7k9ZgzPc5sjkewf2EMo9Lg6JMGy15gnrZzc2P46wwq5JDCdSxA1k7SoZnH4DZK2k1P2",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 121,
+      "bytes": 614,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-range",
+      "signature": "2mB9R5kfaznGLFhaLtctnzNX5aTRG8Aj3srY4UHNwyWkYAvJ2kR5ewZj4b932SH67hyJ6BZ5xWgZs9pfgwTPJVpi",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 122,
+      "bytes": 315,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "close-proof-buffer",
+      "signature": "5f2LV4ogiLziicUHGzimcUAh2QSGusQ5bxnzS9k48pZRX7oPZEn2YAJJzFtdaaGm8g3ttDrFUaDMMiaYazETGAc1",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 123,
+      "bytes": 310,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "signature": "5x2oXzFgpRtSar8MDxfWJQk9Np4dZCJkWz59Cucqa2vWb19FPsyR3ALghuAuxiHpSUmCjNeNiKgfHHuDw3aa1CUs",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 126,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-equality",
+      "signature": "2hdh6SuKRQTtx7VJ5gQkbUdinG4cQSN5uWGabXhRgBRsomRhWheqT26PAZMQ8XDtk2vDLqznMHLzWVPCfRCyx3bU",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 173,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-equality",
+      "signature": "3npuzXasR3RcLnkqpFGQke5wi4GVhkgEmjxetdCBUCwojy92otS3cfVvP7bVgG13oAMuhtc4qr1UnfM5ar6w4DCi",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 174,
+      "bytes": 599,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-grouped",
+      "signature": "4fof5y59FyBnZKJGDVPmbHCECbgFGu83EJWMx4CRUjjAp4wFVqeTCGBDQPzgn7tcHQiaaNfohrXckQWM78NDytij",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 175,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-grouped",
+      "signature": "3xf9Xqeb1zsF17hrzE4WrT3AQRzbvXNwmTZCgc41XNumjDExoVZgXCgAk3sGSSSaeZ1M6hDa6KiF61rHzp44zRR7",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 176,
+      "bytes": 823,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-range",
+      "signature": "Ew5T39rufd9c8UwkvvFTv8m3wN8vTREXoxmx1jvL2H4ndTqnbCscoppY1tfVRyD2WDHqPZk2cP3fbfDLiSawMdq",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 177,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-buffer",
+      "signature": "5WdzrHYEzgvP7R5aHHwZk1vFuKDokCHW8TC5gk6PhWkp6p9KKVTXqcoEUfMRiz1NKumKtC7NLqGzprw8mnWg1w3h",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 178,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-0",
+      "signature": "2TzbXsdrwT6rhqJDHrGrdLLPH7td9jUhLujL8gjpaT3eYt1SLEUa3i6sLnnwHMMCqwB9iWnhBPoBs4foJxWeeWiq",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 179,
+      "bytes": 1014,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-700",
+      "signature": "587kqhoU1CCoc1W2VBeS2bJAWm2UAT1jAQ7ZoVvfrMuhJxhg8sb7qbHB5ysa3Un3SwnWV9rvJ9aFkZgq2aSmJULj",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 180,
+      "bytes": 614,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-range",
+      "signature": "wXruUDdxGMyuWe1MPAVcUyE7AyFFtRrtQCZ3ss2rkFTiLjTSxEEnvt4FRQ7JBbXZuaiBoSFazMVYtAThBpGCyGx",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 181,
+      "bytes": 315,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "close-proof-buffer",
+      "signature": "5oye2goV3ZSEMBDpNRbdW2EKbjb6G5Lv9eQWzpBtdfqn9zHDSB8RqNs9oxkarCvHLqPDeRqyJeRk1tm8k1cfnNQF",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 182,
+      "bytes": 310,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "signature": "31YnkvpXBT9Vxis8AmQ7nWTkNNG53XcWUvCzu3HPhVGvdioGTc98ZMcEJmwLXCNxCPcDQZjCnHnuBPeyNaHtr2rs",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 185,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    }
+  ],
+  "final_account_evidence": {
+    "genesis_hash": "5U7a7ktJyBaDo7Fe6WjVgpLiAmh9wcBcf22zdbcQXtcy",
+    "classification": "actual-local-validator-account-snapshot",
+    "commitment": "confirmed",
+    "context": {
+      "apiVersion": "4.3.0",
+      "slot": 312
+    },
+    "accounts": [
+      {
+        "address": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+        "data": [
+          "S3xQy6G0ylABAejUfvFGGm5qTFTtIlkQxhEYcvMj3R3zYtnmRc5bPEbneONGjwn9HN0DzZ1ptq8ErnqP0cOZXJfyln6Ht5SdcGq+UuBylJXk1u2y7QPbguYEUx9deGYBFqgcKiVRiEyNHgIAAAAAAAAAAAAAAAAAAACHBwAAAAAAAAAAAAAAAAAAAAAAAAAAAACBNwQGREKYYtPjzN/oOurMrfZvjKQ+sK7TKbNjs+i8GgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUHlr5+zMLngrRaN9jU3yExu5f0CtJaMAOjV6sUeUlrXJZoaaLzoqN0AOOTEPWl1uWBR7mUM1H1N+uq/p6HJ1vLAG5fOAwbA6OtpUvpESZn/d68kXYu+cC8KJMV8q7dq+6NR+8UYabmpMVO0iWRDGERhy8yPdHfNi2eZFzls8RudzDZAYDnNUkt1L57eFhaBIRTifqXTHZvQrGo6pxrQRAjY4wirhQl5tCnCoqWqRZS1xB33d0L/ksGCPT8/OTTNUXFM37+ceCfixAOdLjO2unD1EQmnCwiI8Sn7ZzbicgRxg4QtAtQM7q7/0dNBm7+FI52HOeBZPms1uYufzOJmLWoIY9ZNAmtDCG0tgqeUztbcQ4QzAMIBZUq4fDhTaD1QZDHOg9xNMXGy/tAkeE7ILafdSSKV0+VsYm72gTz1JbdtTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU9hxsvBgZ4rqrtOuBBLC02MpAXFu97tMrFX3w8eN0aiDAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhwcAAAAAAADbKFNwdXi+eLD4aeyMhgJDs+fcTghpn/WCpvx85RFA+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 8017920,
+        "owner": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+        "rentEpoch": 18446744073709552000,
+        "space": 1024
+      },
+      {
+        "address": "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+        "data": [
+          "AgEAAAAAAAAAAAAAAAAAAIE3BAZEQphi0+PM3+g66syt9m+MpD6wrtMps2Oz6Lwakmdb4Aqt+HIQeZ4ljBbTngAM6aQ/S5Ohx+ZkMbZQZNFQeWvn7MwueCtFo32NTfITG7l/QK0lowA6NXqxR5SWtclmhpovOio3QA45MQ9aXW5YFHuZQzUfU366r+nocnW8sAbl84DBsDo62lS+kRJmf93ryRdi75wLwokxXyrt2r7o1H7xRhpuakxU7SJZEMYRGHLzI90d82LZ5kXOWzxG53MNkBgOc1SS3Uvnt4WFoEhFOJ+pdMdm9CsajqnGtBECNjjCKuFCXm0KcKipapFlLXEHfd3Qv+SwYI9Pz85NM1RcUzfv5x4J+LEA50uM7a6cPURCacLCIjxKftnNuJyBHGDhC0C1Azurv/R00Gbv4UjnYc54Fk+azW5i5/M4mYtaghj1k0Ca0MIbS2Cp5TO1txDhDMAwgFlSrh8OFNoPVBkMc6D3E0xcbL+0CR4Tsgtp91JIpXT5WxibvaBPPUlt21NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NT2HGy8GBniuqu064EEsLTYykBcW73u0ysVffDx43RqIMCAAAAAAAAAAAAAAAAAAAA66bwppW9u4ZyhylgT+bWSu8qORQG5hKGvd1APnRz8QiHBwAAAAAAAA==",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 4510080,
+        "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+        "rentEpoch": 18446744073709552000,
+        "space": 520
+      },
+      {
+        "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "data": [
+          "AgAAAAAAAACnUzNaBTtdtryXQ3V+FURvyUvUfrZjsI8GreL1xg/wYQMAAAAAAAAAAAAAAAAAAACNUFiJfXXEUNv22nRCKz2mQe/Cv/20rQJTo9m/WNH9DwMAAAAAAAAA7qa1PVgLLy72WiBOxM1wejaadvx06i/7l8j2im3aFuYBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 2011440,
+        "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+        "rentEpoch": 18446744073709552000,
+        "space": 161
+      },
+      {
+        "address": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+        "data": [
+          "UFVSQ0gwMDHo1H7xRhpuakxU7SJZEMYRGHLzI90d82LZ5kXOWzxG5wcAAAAAAAAAAQ==",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 1231920,
+        "owner": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+        "rentEpoch": 18446744073709552000,
+        "space": 49
+      },
+      {
+        "address": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+        "data": [
+          "S3xQy6G0ylABAb43lt+3DpDpdNkRZQyqVeYAm/mQ2I8F/6pAidkKXYjbEbsiRpDNE/oGS62xQZsLD7wUdIANLP9riJ4jdjsMm76TQLQKJ0zceCDgGEp83DrZGoC93XXGrQsuJ1aFvC0E2AMAAAAAAAAAAAAAAAAAAADCBwAAAAAAAAAAAAAAAAAAAQAAAAAAAACSZ1vgCq34chB5niWMFtOeAAzppD9Lk6HH5mQxtlBk0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAp5vD6x5VKjwaZIp8vaPXSSRhVCIjxNDvRVeCuR6wSlLJZoaaLzoqN0AOOTEPWl1uWBR7mUM1H1N+uq/p6HJ1vJECoU/vaq/ZXL50tQ/NpocTTDTlxwhz1mg+zSrT3ciZvjeW37cOkOl02RFlDKpV5gCb+ZDYjwX/qkCJ2QpdiNvQ8ZSOCl/eMPO6AYZPA581FQ5qDbBHc97Pl/Mll3gGVtJ/jmAmtFULqWyayHMPAE9QsEBHjqdRsbYtiPphTqHQ7La4wYFdUwZvQXBsOoncOIoGMLfINoDd2rHGiqN7BgecXYhJmYf5W2hyiGzYDWhQRjdm7+9gIMQ7BtCG/G6PTuT7VSirfPfzZgw4cTR5u107cTIBoHjIvh4E0N+0j+hrDHOg9xNMXGy/tAkeE7ILafdSSKV0+VsYm72gTz1JbdtUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVArnlOFpZN/wp7dKy/+gRleqJhXE42UFyOm8lW1P+0VJAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwgcAAAAAAADQQNkgr4zhFxVrrF6Wca19hhCmHMyXacMUC3y/tUsykAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 8017920,
+        "owner": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+        "rentEpoch": 18446744073709552000,
+        "space": 1024
+      },
+      {
+        "address": "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+        "data": [
+          "AgEAAAAAAAABAAAAAAAAAJJnW+AKrfhyEHmeJYwW054ADOmkP0uTocfmZDG2UGTRp1MzWgU7Xba8l0N1fhVEb8lL1H62Y7CPBq3i9cYP8GGnm8PrHlUqPBpkiny9o9dJJGFUIiPE0O9FV4K5HrBKUslmhpovOio3QA45MQ9aXW5YFHuZQzUfU366r+nocnW8kQKhT+9qr9lcvnS1D82mhxNMNOXHCHPWaD7NKtPdyJm+N5bftw6Q6XTZEWUMqlXmAJv5kNiPBf+qQInZCl2I29DxlI4KX94w87oBhk8DnzUVDmoNsEdz3s+X8yWXeAZW0n+OYCa0VQupbJrIcw8AT1CwQEeOp1Gxti2I+mFOodDstrjBgV1TBm9BcGw6idw4igYwt8g2gN3ascaKo3sGB5xdiEmZh/lbaHKIbNgNaFBGN2bv72AgxDsG0Ib8bo9O5PtVKKt89/NmDDhxNHm7XTtxMgGgeMi+HgTQ37SP6GsMc6D3E0xcbL+0CR4Tsgtp91JIpXT5WxibvaBPPUlt21RUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUCueU4Wlk3/Cnt0rL/6BGV6omFcTjZQXI6byVbU/7RUkDAAAAAAAAAAAAAAAAAAAAjVBYiX11xFDb9tp0Qis9pkHvwr/9tK0CU6PZv1jR/Q/CBwAAAAAAAA==",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 4510080,
+        "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+        "rentEpoch": 18446744073709552000,
+        "space": 520
+      },
+      {
+        "address": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+        "data": [
+          "TElDRU5TRTG+N5bftw6Q6XTZEWUMqlXmAJv5kNiPBf+qQInZCl2I20vkj+Z1eEtC4bVPAPs3nK8/FksP8YNmOHF4DAUHNW02bAQAAAAAAAAB",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 1454640,
+        "owner": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+        "rentEpoch": 18446744073709552000,
+        "space": 81
+      },
+      {
+        "address": "6R916SejzrrTXQEPNW2y6mtJWAxcw2gBMGQtCxEr87ZN",
+        "data": [
+          "yWaGmi86KjdADjkxD1pdblgUe5lDNR9Tfrqv6ehydbzo1H7xRhpuakxU7SJZEMYRGHLzI90d82LZ5kXOWzxG5wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQGgUvMV2UqSfkdcKztLSpn1om41C+jGzxubdlVmNjdJPgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXFM37+ceCfixAOdLjO2unD1EQmnCwiI8Sn7ZzbicgRxg4QtAtQM7q7/0dNBm7+FI52HOeBZPms1uYufzOJmLWlI2sY1XvLbWKq0xdPruqLjIZAmXU7sDgsV+7pVLc6g4/WDTSAEBAAAAAAAAAABkAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAA=",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 4162080,
+        "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "rentEpoch": 18446744073709552000,
+        "space": 470
+      },
+      {
+        "address": "Cr8rdQfenSefAhAe8LEAiLGTmixqGPjtAm3pMh6MxueM",
+        "data": [
+          "yWaGmi86KjdADjkxD1pdblgUe5lDNR9Tfrqv6ehydbwRhGdhx0/UCb/DYT3umbVzbtT50pYVGhvsFRP8lj9+RwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQEgcr/+Fad5eErX9DpkvbI/TnNcOMjKbk1ddpq54xJmW+B+tJ/K6X8R0sINWw4DiGuzdyx4WPe8dLNaSm9LDtlGJD1A9b6Wei/yIkL6o5h/EaVh8XXzTkn47zIS3vGPuQSoghGHG3DQigmrqzqOpzzbuKgKcWk2NsXSuNvmt3V3N+SI9hR+ZcosJMIkDiOulHSC0BU1tgI6jkDopTHtQXJgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHxIgaDyiRabjHYmF03oVEokmvL88QxaGSEjK58uweH2GDJHUQEBAQAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 4162080,
+        "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "rentEpoch": 18446744073709552000,
+        "space": 470
+      },
+      {
+        "address": "CHGr26SMr2LGFeMpD8GndL5GGQcYfjMAdFdXq3L3vF3X",
+        "data": [
+          "yWaGmi86KjdADjkxD1pdblgUe5lDNR9Tfrqv6ehydby+N5bftw6Q6XTZEWUMqlXmAJv5kNiPBf+qQInZCl2I2wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQFSgsJEO6OkBvXUyNFvr+h2Ng3FkxqutXBfIo9e8F+2IwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7La4wYFdUwZvQXBsOoncOIoGMLfINoDd2rHGiqN7BgecXYhJmYf5W2hyiGzYDWhQRjdm7+9gIMQ7BtCG/G6PTtg13hRkwJsrLYjUOPVvR7GWrUatiiCrSqt5mEqYLOrCLJascQEBAAAAAAAAAABkAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAA=",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 4162080,
+        "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "rentEpoch": 18446744073709552000,
+        "space": 470
+      },
+      {
+        "address": "Am4SeobeU8UFCqZYw5vXSA8g9YxPR8iQ4moicPQfyGEC",
+        "data": [
+          "yWaGmi86KjdADjkxD1pdblgUe5lDNR9Tfrqv6ehydbyrmlilfTXP9yVrRwOK7+HXHZq4u62B3N/iHLrKGcanEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQGiHKA9A6i9/ovrEomxyD8j0bqeG6exfGN7DlgwzWYmKJC0rXHb0mk9zu3wL75TlYHaWM10op+FpDPDq50Nj5p1NFENi2QSBzuMLCfUN9T8Xj2BaK+lInQ9ORzP0aDfqDHg1w8S70j3VmhOI9F2OKc4OLYYpM/utdE7pkpV0FE0ACSNuoyUjNYiMz1keiBLTH98h8FJVQHjCO3djfJ8B8JQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACW5VVYC6RMHgKy3fUgCMsdEL47pYn+F19XpDPqkjbsTptcjQEBAQAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+          "base64"
+        ],
+        "executable": false,
+        "lamports": 4162080,
+        "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "rentEpoch": 18446744073709552000,
+        "space": 470
+      }
+    ],
+    "independent_post_run_sdk_observations": [
+      {
+        "status": "committed",
+        "slot": 312,
+        "commitment": "confirmed",
+        "job": "93tej7SBEwnjjBjTLzMq8NbPvHXzcaYY4fcwiGsQwaEQ",
+        "permit": "Dowm2vH8XWqJVYwqXMPKEiymS9gBL7p67yzUR4Qy6eGV",
+        "effect": "As8rc9oUsmQeT9fo8SDuvmmmTkYExTVopzvcLqx2QZSp",
+        "consumerKind": "merchant",
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      {
+        "status": "committed",
+        "slot": 312,
+        "commitment": "confirmed",
+        "job": "AdoRhRvCnUJobqdfTUs82YFo9hsp857mANwKM29kryB9",
+        "permit": "AupA22xAsPnEofAUPfRkt9sXx4EoacHV9USb7m55C77m",
+        "effect": "9dtT5erzxFLy1xaksQVjGWQSmP1rK5eghP2hoCoGRLdo",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1132",
+        "licenseActive": true,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    ]
+  }
+}
