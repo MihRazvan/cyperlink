@@ -1,0 +1,363 @@
+{
+  "scope": "real-local-validator provisioning only; no native proof, MPC, token transfer or permit claim",
+  "rpc": "http://127.0.0.1:8899/",
+  "version": {
+    "feature-set": 3383571666,
+    "solana-core": "4.3.0"
+  },
+  "startedAt": "2026-10-01T17:34:48.223Z",
+  "programs": {
+    "auth": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+    "policy": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+    "merchant": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+    "license": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+    "proofBuffer": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv"
+  },
+  "completed": true,
+  "buffer": {
+    "address": "HANdvshr3ce967JmccPKzrcmfDBrFKokspGYB1ss8ePz",
+    "bytes": 32,
+    "rent": 1113600,
+    "classification": "ordinary-upload-storage-only; no native proof verification",
+    "rejectedWritesLeftBytesAndLamportsUnchanged": true,
+    "authorizedWrite": {
+      "observedSha256": "8a7dbada66bb5186ff0b696d53184ad9988ce09a20d14f53a837e56aced4de61",
+      "expectedSha256": "8a7dbada66bb5186ff0b696d53184ad9988ce09a20d14f53a837e56aced4de61"
+    },
+    "closure": {
+      "requiredBufferKey": true,
+      "accountRemoved": true,
+      "refundAddress": "HBBEy8u18wqC7He6uw11NebrXfdppj433HbPqJAgAPzE",
+      "refundedLamports": 1113600
+    }
+  },
+  "completedAt": "2026-10-01T17:34:49.825Z",
+  "source_evidence": {
+    "path": ".local/replay-consumers-conflict-v3/provisioning-negatives.json",
+    "sha256": "ca897209bd5c6edda53b83e698a4ada7bd8f6232c4a9f5765de6760e62d6cbf2"
+  },
+  "loaded_programs": [
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "9iAPk585pPZQW3AfG5SGzKDTfmGcprHTEAPQt8vmVA39",
+      "last_deploy_slot": 0,
+      "elf_bytes": 672832,
+      "elf_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "loaded_elf_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "loaded_account_payload_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "padding_zero_bytes": 0,
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "rpc_slot": 79,
+      "genesis_hash": "EAfNckU9VbwSHLL6bnUcoutNmzRkmEuYeBr6vJMYSszE",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-conflict-v3/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_auth.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "BXdX5HicWBfMnwbHKefmQsvjbJGKb2m38ggB86rqh8NG",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72928,
+      "elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_account_payload_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "padding_zero_bytes": 0,
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "rpc_slot": 79,
+      "genesis_hash": "EAfNckU9VbwSHLL6bnUcoutNmzRkmEuYeBr6vJMYSszE",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-conflict-v3/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/ct_guard_spike.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "ApP1iic4fTQg1h2PnKoVSnAxnKqWmrJqEdf7LpbtbWZe",
+      "last_deploy_slot": 0,
+      "elf_bytes": 104904,
+      "elf_sha256": "1266f0b50636da5e106fc5f534d450fa9cb47d8995177b5cab9f2ce057ebd412",
+      "loaded_elf_sha256": "1266f0b50636da5e106fc5f534d450fa9cb47d8995177b5cab9f2ce057ebd412",
+      "loaded_account_payload_sha256": "1266f0b50636da5e106fc5f534d450fa9cb47d8995177b5cab9f2ce057ebd412",
+      "padding_zero_bytes": 0,
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "rpc_slot": 79,
+      "genesis_hash": "EAfNckU9VbwSHLL6bnUcoutNmzRkmEuYeBr6vJMYSszE",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-conflict-v3/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/ct_policy_spike.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2yvmbPSjGuDnex57mg8e3yEckvErZ9bsvjKVgnau6GmX",
+      "last_deploy_slot": 0,
+      "elf_bytes": 69016,
+      "elf_sha256": "dbc2ed0ffc53b99d47a79b49707a630a1fff5a71d114aa03745c04b8bc0c80c3",
+      "loaded_elf_sha256": "dbc2ed0ffc53b99d47a79b49707a630a1fff5a71d114aa03745c04b8bc0c80c3",
+      "loaded_account_payload_sha256": "dbc2ed0ffc53b99d47a79b49707a630a1fff5a71d114aa03745c04b8bc0c80c3",
+      "padding_zero_bytes": 0,
+      "program": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "rpc_slot": 79,
+      "genesis_hash": "EAfNckU9VbwSHLL6bnUcoutNmzRkmEuYeBr6vJMYSszE",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-conflict-v3/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_merchant.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "AwZBSQnp4PmNDiQPwVnFq35NY2YAbfSXoQoJfd6RDghz",
+      "last_deploy_slot": 0,
+      "elf_bytes": 69728,
+      "elf_sha256": "dcdf8d48301d1381c47830a8b5352c60376cd79167d2711c3adc0344ed054080",
+      "loaded_elf_sha256": "dcdf8d48301d1381c47830a8b5352c60376cd79167d2711c3adc0344ed054080",
+      "loaded_account_payload_sha256": "dcdf8d48301d1381c47830a8b5352c60376cd79167d2711c3adc0344ed054080",
+      "padding_zero_bytes": 0,
+      "program": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "rpc_slot": 79,
+      "genesis_hash": "EAfNckU9VbwSHLL6bnUcoutNmzRkmEuYeBr6vJMYSszE",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-conflict-v3/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_license.so"
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "En7FK1cr5MYU1v7wKrcK95fk5btMxhw2EqJHvF5Rf2RS",
+      "last_deploy_slot": 0,
+      "elf_bytes": 16504,
+      "elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_account_payload_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "padding_zero_bytes": 0,
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "rpc_slot": 80,
+      "genesis_hash": "EAfNckU9VbwSHLL6bnUcoutNmzRkmEuYeBr6vJMYSszE",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false,
+      "rpc": "http://127.0.0.1:8899",
+      "local_elf_path": "/Users/razvan/Repos/cyperlink/.local/replay-consumers-conflict-v3/research/cyperlink-prebuild-2026-10-01/bound-join/cyperlink_auth/target/deploy/cyperlink_proof_buffer.so"
+    }
+  ],
+  "simulations": [
+    {
+      "name": "auth-quota-unauthorized-administrator",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 479,
+      "transactionSignature": "4BGrhJbazL7ci1i9tRUcV3C5D3nvuE1SKYxrbHmHgnqdAHb6ph53p8Mh2NAcRQFWqPiPKFJmRf6mC7jko34hua2g",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6001
+          }
+        ]
+      },
+      "unitsConsumed": 4729,
+      "expected": {
+        "Custom": 6001
+      }
+    },
+    {
+      "name": "policy-quota-admission-pda-not-signing",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 479,
+      "transactionSignature": "38VSgxHcfpAF4QLXmV6VG5aDF5rA7Lz3pb3zXhE3BGjZ7fMAan15v51AYtKzt49VTLuYxQbJmg7XMBbWEBnM4f4o",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 834
+          }
+        ]
+      },
+      "unitsConsumed": 4861,
+      "expected": {
+        "Custom": 834
+      },
+      "note": "Combined provisioning authority/state guard. An already-created quota also rejects here; this case does not independently isolate its authority check."
+    },
+    {
+      "name": "merchant-initialization-missing-buyer-signature",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 479,
+      "transactionSignature": "2XJs6n3yRK9c2VABrUt3sVtAM3tMNjGnWNkkHbgAG4QFxC1CNVyoYK1royNo5x9y387t8psBvdQt3BMY5diTjPU8",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1011
+          }
+        ]
+      },
+      "unitsConsumed": 1374,
+      "expected": {
+        "Custom": 1011
+      }
+    },
+    {
+      "name": "merchant-initialization-wrong-record-pda",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 479,
+      "transactionSignature": "4PfH574majviUcntfBvnC5WU5f2XtxYC2qPk8bU9phUFg7peo438V36CYj8iLDHP3weaPtdxg83xvF4HgA3rVLkf",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1012
+          }
+        ]
+      },
+      "unitsConsumed": 7438,
+      "expected": {
+        "Custom": 1012
+      }
+    },
+    {
+      "name": "license-initialization-missing-buyer-signature",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 479,
+      "transactionSignature": "3jvZpg8a8BGEhf8jnxbvnfJ9K8oxrmtJvm6L3XbZuHpL8vQrsEEkcmW72q4n2Xq8myV2Gxaxkvi6rYad4rfKYRKQ",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1111
+          }
+        ]
+      },
+      "unitsConsumed": 1374,
+      "expected": {
+        "Custom": 1111
+      }
+    },
+    {
+      "name": "license-initialization-wrong-record-pda",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 479,
+      "transactionSignature": "xrZPF6ZATLhYwQodgxmizFeT6o29sjxPpYjGzDuRnDoNYDG3M1qAJord4XUQZCjcW2kxBug5VNZyx1WFpCg48RG",
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1112
+          }
+        ]
+      },
+      "unitsConsumed": 2938,
+      "expected": {
+        "Custom": 1112
+      }
+    },
+    {
+      "name": "proof-buffer-write-without-buffer-key",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 481,
+      "transactionSignature": "3qgGfNSjtzmreV9Wnuf32gaVYA4B3dpKwe8hMRmhoYKuStMFahMxGm1qZFEBPR6eGNdkZgWeWQjC1ReQ5i6FAYcQ",
+      "error": {
+        "InstructionError": [
+          1,
+          "MissingRequiredSignature"
+        ]
+      },
+      "unitsConsumed": 550,
+      "expected": "MissingRequiredSignature"
+    },
+    {
+      "name": "proof-buffer-write-out-of-bounds",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 481,
+      "transactionSignature": "4PyZQe2XXPA1EjgA7Tx3K2RbzAXcWR7FfWR9HDXq9GSeQ6a94KwvAdpdfnhxd7wHkac1tgMeREANXAjb7Pm9fyMx",
+      "error": {
+        "InstructionError": [
+          1,
+          "AccountDataTooSmall"
+        ]
+      },
+      "unitsConsumed": 603,
+      "expected": "AccountDataTooSmall"
+    },
+    {
+      "name": "proof-buffer-close-without-buffer-key",
+      "classification": "signed-simulation-only",
+      "sigVerify": true,
+      "broadcast": false,
+      "slot": 482,
+      "transactionSignature": "3yEDj7m7ovKKvJPkNfq97QPJ3h6mfADA5zjxiG2HQcDTehNQwH4RyER9V2EMuwaeGvxcQP8MvuscqC6EZ67B38vS",
+      "error": {
+        "InstructionError": [
+          1,
+          "MissingRequiredSignature"
+        ]
+      },
+      "unitsConsumed": 825,
+      "expected": "MissingRequiredSignature"
+    }
+  ],
+  "transactions": [
+    {
+      "name": "proof-buffer-create",
+      "classification": "broadcast-confirmed-local-transaction",
+      "label": "proof-buffer-create",
+      "signature": "3RC7pYU5bwqzGPR47EENSkGP3D99Mc8jCdVBLJ7vZStGPBn9XBLC4F8jr1aWxfTyi4n9PSUgshvtpZNKeEHM5MaR",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 481,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300
+    },
+    {
+      "name": "proof-buffer-authorized-write",
+      "classification": "broadcast-confirmed-local-transaction",
+      "label": "proof-buffer-authorized-write",
+      "signature": "61ETXea6WazHXuXwXqq91FJsHwmUUB3W8gyMYgMqRUnUKuCYnyeV9pk57NMWj6A3dJ46L3Yqzm8qHaLntseAgkKe",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 482,
+      "bytes": 334,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617
+    },
+    {
+      "name": "proof-buffer-authorized-close",
+      "classification": "broadcast-confirmed-local-transaction",
+      "label": "proof-buffer-authorized-close",
+      "signature": "e7df54Foc7fd5TzEruxGePTj9VQV2vyY9fh41TT3ymNG2yh8jVzRmXwvZxbNb249ic4VfNTzHgicY6GXJJKhVSn",
+      "rpc": "http://127.0.0.1:8899/",
+      "slot": 483,
+      "bytes": 342,
+      "signaturesVerified": true,
+      "simulatedCU": 971,
+      "landedCU": 971
+    }
+  ],
+  "limitations": [
+    "This v3 deployment predates the PDA prefunding fix.",
+    "Negative cases are genuinely signed simulations, not landed failed transactions.",
+    "These tests establish provisioning and buffer controls only, not native proof verification or MPC execution."
+  ]
+}
