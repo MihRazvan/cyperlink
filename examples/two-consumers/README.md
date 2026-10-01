@@ -99,3 +99,9 @@ attacks, post-transfer1099 rollback,1001 replay, and prefunded PDA initializatio
 checks passed. Quota ended at version1/counter4. The compact public record is
 [`two-consumers-conflict-v4.json`](../../evidence/2026-10-01/two-consumers-conflict-v4.json);
 full receipts and source snapshots remain in `.local/demo-conflict-v4`.
+
+Compatible-v5 also passed on its own fresh ledger: A40 committed a merchant SKU,
+then B40 recomputed against quota version1 and committed the paid license.
+Quota finished at version2/counter3. Both records were checked again through the
+SDK after the run; the public report includes a single-bank final account snapshot.
+See [`two-consumers-compatible-v5.json`](../../evidence/2026-10-01/two-consumers-compatible-v5.json).
