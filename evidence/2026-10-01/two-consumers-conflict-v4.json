@@ -1,0 +1,1904 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scenario": "conflict",
+  "evidence_level": "real-local-validator-and-two-node-runtime",
+  "scope": "synthetic same-mint assets, one quota/MXE, administrator co-signed queries",
+  "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+  "validator": {
+    "feature-set": 3383571666,
+    "solana-core": "4.3.0"
+  },
+  "full_evidence": {
+    "path": ".local/demo-conflict-v4/results.json",
+    "bytes": 5423738,
+    "sha256": "a2797565863cc78f1d9f9f948276c01282b93cabc4143678b4611b38f06fd872"
+  },
+  "loaded_programs": [
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "9iAPk585pPZQW3AfG5SGzKDTfmGcprHTEAPQt8vmVA39",
+      "last_deploy_slot": 0,
+      "elf_bytes": 672832,
+      "elf_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "loaded_elf_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "loaded_account_payload_sha256": "1c431d69eb8f51dd93e9292b79580969b4fe4ef0347e2687eadfa5590eb3dfea",
+      "padding_zero_bytes": 0,
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "rpc_slot": 224,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "BXdX5HicWBfMnwbHKefmQsvjbJGKb2m38ggB86rqh8NG",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72928,
+      "elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_account_payload_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "padding_zero_bytes": 0,
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "rpc_slot": 224,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "ApP1iic4fTQg1h2PnKoVSnAxnKqWmrJqEdf7LpbtbWZe",
+      "last_deploy_slot": 0,
+      "elf_bytes": 107960,
+      "elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_account_payload_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "padding_zero_bytes": 0,
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "rpc_slot": 224,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2yvmbPSjGuDnex57mg8e3yEckvErZ9bsvjKVgnau6GmX",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72808,
+      "elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_account_payload_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "padding_zero_bytes": 0,
+      "program": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "rpc_slot": 224,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "AwZBSQnp4PmNDiQPwVnFq35NY2YAbfSXoQoJfd6RDghz",
+      "last_deploy_slot": 0,
+      "elf_bytes": 73560,
+      "elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_account_payload_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "padding_zero_bytes": 0,
+      "program": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "rpc_slot": 224,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "En7FK1cr5MYU1v7wKrcK95fk5btMxhw2EqJHvF5Rf2RS",
+      "last_deploy_slot": 0,
+      "elf_bytes": 16504,
+      "elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_account_payload_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "padding_zero_bytes": 0,
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "rpc_slot": 225,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "6kZkJ4BgFbuYcEAED3AtzVouHDMNMLYLJb5zZSoEBftc",
+      "last_deploy_slot": 0,
+      "elf_bytes": 1648440,
+      "elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_account_payload_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "padding_zero_bytes": 0,
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "rpc_slot": 225,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2Nws4AxLooysrGiQfrSwywWcZJdyMsL2XetkQ2KtUQG5",
+      "last_deploy_slot": 0,
+      "elf_bytes": 816976,
+      "elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_account_payload_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "padding_zero_bytes": 0,
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "rpc_slot": 225,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "CJ5WEjifs4d77pEA9DpewppByFjHcAkNv3YYSuSoDk7c",
+      "last_deploy_slot": 0,
+      "elf_bytes": 424248,
+      "elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_account_payload_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "padding_zero_bytes": 0,
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "rpc_slot": 225,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "DoU57AYuPFu2QU514RktNPG22QhApEjnKxnBcu4BHDTY",
+      "last_deploy_slot": 0,
+      "elf_bytes": 1382016,
+      "elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_account_payload_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "padding_zero_bytes": 0,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "rpc_slot": 226,
+      "genesis_hash": "GggBkJpPfdbAfJWRoGfS7jcQSjXT2ezVD7UHPvM62pdo",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    }
+  ],
+  "executed_client_source_manifest": [
+    {
+      "path": "examples/two-consumers/transport.mjs",
+      "sha256": "f8139982dd9c6586c5ae6953899b072800a6846a5f6260653868edf6168a30b5",
+      "bytes": 5972
+    },
+    {
+      "path": "examples/two-consumers/run.mjs",
+      "sha256": "52291b485e31358a2dd839939edc1a7e04d8ac05836ec5e7e105c1c172860cbf",
+      "bytes": 33376
+    },
+    {
+      "path": "examples/two-consumers/operation.mjs",
+      "sha256": "f14293ea2a59113cb1a56f825b85ccd6812e72f59be2a984ff0f9a7fae6189f5",
+      "bytes": 2379
+    },
+    {
+      "path": "examples/two-consumers/operation.test.mjs",
+      "sha256": "b39fab154e3ce78d72707e5266fee0687a00a8fb0dc3b261017fa889e60926a8",
+      "bytes": 2497
+    },
+    {
+      "path": "packages/local-client/src/provision.mjs",
+      "sha256": "32640d5eab5a871c03d2f7900cf06df7b49449bdb8889e46ab7faa1e7ba0822d",
+      "bytes": 5152
+    },
+    {
+      "path": "packages/local-client/src/mint-profile.mjs",
+      "sha256": "0bd343878e5840a1bb7853c5898bf85143a313393bd6820f8bb8549f7afc1d79",
+      "bytes": 2178
+    },
+    {
+      "path": "packages/local-client/src/proofs.mjs",
+      "sha256": "847a2008d3603335f1ed676c3d980962a876db3cd44ca39afe8c200b209e9333",
+      "bytes": 4107
+    },
+    {
+      "path": "packages/local-client/src/runtime.mjs",
+      "sha256": "7d0c754b603e4ca553886b6db2cb1d71dc9e6e7de77c1d6a5ee6088d9922fa2f",
+      "bytes": 8862
+    },
+    {
+      "path": "packages/local-client/src/index.mjs",
+      "sha256": "459468786b672ef87e3876d06027e51c7fb65049c04c553ad4934f76e741d892",
+      "bytes": 454
+    },
+    {
+      "path": "packages/local-client/src/prepare-transfer.mjs",
+      "sha256": "f550895f5e294d3e9347da07071f22d97a322c338a0026b93b91b03b5e91364e",
+      "bytes": 3223
+    },
+    {
+      "path": "packages/local-client/src/hook-metadata.mjs",
+      "sha256": "533d9738ec8c0691b39b8a9b1c6d45a7407b55fb99cbdaba6416783135599d59",
+      "bytes": 1823
+    },
+    {
+      "path": "packages/sdk/src/transport.mjs",
+      "sha256": "fec822327a632cffb92528cd9e2308115ab4345d90cfb72f32663faf09c468cb",
+      "bytes": 3187
+    },
+    {
+      "path": "packages/sdk/src/builders.mjs",
+      "sha256": "1c352492317d3184a9a8dcb5dc40333b0444517f5687ed40a3c8c84396665579",
+      "bytes": 3375
+    },
+    {
+      "path": "packages/sdk/src/codec.mjs",
+      "sha256": "9ac9ebb40b02278f721ecb2245fbb01a56d184dbaf0706c456f878b2121ff167",
+      "bytes": 5421
+    },
+    {
+      "path": "packages/sdk/src/index.mjs",
+      "sha256": "2075f6e8476882f8215c1ec35e3d110ef154479c8fb57195f36b711bf821bebf",
+      "bytes": 10838
+    }
+  ],
+  "idl_sha256": "5eb54e4b438fd9775b176b9922c5b98eb549d2d5c64b0e63ad67d9aac3867bcd",
+  "runtime_mxe_public_key_hex": "3ad3dddd038969dfc755dd115ae15d5e5e7431706e1f0bd158fb2ae3c3b6455f",
+  "observer_disclosures": {
+    "initial_allowance": 100,
+    "purchase_amounts": [
+      60,
+      60,
+      60
+    ],
+    "note": "Setup and requested amounts are disclosed to the test observer. Remaining allowance is inferred from committed purchases, not decrypted from MXE state.",
+    "inferred_remaining_allowance": 40
+  },
+  "final_quota": {
+    "version": "1",
+    "stateHash": "a765876b2803d3000f3536d4cf017817b2e0cbfdf1442c499f059a196922b2b5",
+    "nonce": "02000000000000000000000000000000",
+    "ciphertext": "30836fe6be45237b2df89e42a54418e4aa9bc1361bb2f36a7e205f1ef849ff04",
+    "counter": "4"
+  },
+  "operations": [
+    {
+      "label": "a60",
+      "kind": "merchant",
+      "requestedAmountObserverDisclosure": 60,
+      "status": 1,
+      "source": "FtGGDHUHkHFfBRxZ26wTCMob6Ntor3rfuDq48xoP3ep1",
+      "destination": "Hk2YLDRHQMp2w8rxgwvcWzcvhPQPfaK5gm7F9Lp3qokk",
+      "permit": "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+      "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+      "consumer": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "record": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+      "quotaVersionAtAdmission": "0"
+    },
+    {
+      "label": "b60-stale",
+      "kind": "license",
+      "requestedAmountObserverDisclosure": 60,
+      "status": 1,
+      "source": "5T2wetEebNM3cpbTfvv3w7oUZrdx7CVzf7eemVDwT35u",
+      "destination": "3cxA5kt2LariatMstJrG9JM2pjtaykpRNhUGyQ3HcjbT",
+      "permit": "6Njppyr57roRjcJAE1xEjE2zTKhpq6CFgbZXXEkpPJek",
+      "job": "9PNwdxpCFnQyUaU3omEUq9XQHfTcvkD2NwADp5E9AKqo",
+      "consumer": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "record": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+      "quotaVersionAtAdmission": "0"
+    },
+    {
+      "label": "b60-honest-fresh",
+      "kind": "license",
+      "requestedAmountObserverDisclosure": 60,
+      "status": 2,
+      "source": "5T2wetEebNM3cpbTfvv3w7oUZrdx7CVzf7eemVDwT35u",
+      "destination": "3cxA5kt2LariatMstJrG9JM2pjtaykpRNhUGyQ3HcjbT",
+      "permit": "4mVDLu7MYTjeXg4Fc1AhZtrvYFvL5hpb517sQcURWcQR",
+      "job": "9tV7rtw9DbKrNmVoe6X3tRNZ9vCpvDeQ8bLWmbb9XeTu",
+      "consumer": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "record": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+      "quotaVersionAtAdmission": "1"
+    }
+  ],
+  "locally_retained_operation_descriptors": [
+    {
+      "path": ".local/demo-conflict-v4/operation-a60/operation-descriptor.json",
+      "profile": "local-native-ct-v0",
+      "consumerKind": "merchant",
+      "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+      "computation": "7SZMkpQdDhY6fhH3BzJNmpoMsg2hLqwxYM9XLNpen1K3",
+      "permit": "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+      "owner": "HsxgLgdgd3FQkRwKwQteChbUMYfyQikZzjGstNhebgmD",
+      "admin": "H4bUEC6TomzykKMfCBypmn1nX3cfpkZywmXNtfjd6rb7",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+      "templateHex": "000000000000000000000000000000000ae0929d292c201f526fa849421dfc25389bc4304dc337a137d1919b0c9e2ca10000000000000000000000000000000000000000000000000000000000000000dd257ece797ddff338ebc607458d194e3dc39b824d9f3d2c437be4d4bac6db8a3f62ed4117e1693b4e4d1a5434008cbf0a3febd67b60006abf62d3940b439512f8c0b50581bab497284ee56067a068067b5698f4f49439f8bb54500513b15d21fac8fca4d77579c30032a4b651901c709d6fb8e0b3270587b29a2e376798cae06829e5bc00c2537071b6a2c5c2ae190a036cbcc57fa3baad7757914edc13c46a24145dc305b27cc970f1c14e1190f3d2a29a5c3864d28aa8f68c07102c72a1e90eeff705b3f149e8960d18ed5a1e419f4881093ef234646d8585f4a3fc72d236d48528364ff51968fe4924bb092200dded8bbe75e4e587f457301c609c114c00444409dce6e0a9b209212e66b7053e372e4b809291ebccd96caded2335621b730c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb53535353535353535353535353535353535353535353535353535353535353533ca42e61e1fc94823eef933f4d0260aab910c4b2489e389b24e4bb43170dbcd50200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003a08000000000000",
+      "inputsHashHex": "adf2dff9b1e6ff2fd3fbc201b0f635e695a6dba6d37126f331777ba21292e91b",
+      "sku": "7"
+    },
+    {
+      "path": ".local/demo-conflict-v4/operation-b60-honest-fresh/operation-descriptor.json",
+      "profile": "local-native-ct-v0",
+      "consumerKind": "license",
+      "job": "9tV7rtw9DbKrNmVoe6X3tRNZ9vCpvDeQ8bLWmbb9XeTu",
+      "computation": "EfpxNPTLLk5nqrGDxuNoHg3JSkvtqLZH42LW3LRFhnz7",
+      "permit": "4mVDLu7MYTjeXg4Fc1AhZtrvYFvL5hpb517sQcURWcQR",
+      "owner": "CowkvnMwvYyXzhCupxrkuyB8XvNobQia654KXjMgRm2q",
+      "admin": "H4bUEC6TomzykKMfCBypmn1nX3cfpkZywmXNtfjd6rb7",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+      "templateHex": "00000000000000000100000000000000a765876b2803d3000f3536d4cf017817b2e0cbfdf1442c499f059a196922b2b50000000000000000000000000000000000000000000000000000000000000000421a0b7eb7f7713131d03643949f711a84da76d0704363e71c5f4a49a8c584543f62ed4117e1693b4e4d1a5434008cbf0a3febd67b60006abf62d3940b43951226ed11634b668e5332a029b280bc9bd9d13c4b13728096784e79ad4e15a4302eaf773011003bccf790e848d1e05e0996cb6f1ea3614ad621877132ab10ba0dca23f057772e9b3b2d3c207a1cd4f8c642de441e368f400a60d4fca1bef9fcd6acb521c15210cff0940c65210c6be8ee86609ba1469b40430327627d847eea0f753043ef1df72b76a1637649bc4a6fea8705b52bd816170b85e44aecb7bb1933284cc2cc224215153e8fd65a4d417d7b60c53799b28753a56816bbd2da274d996464c577621157ffe436ea5b0fa54c41a3d661d6a61a356f794df5ad12b92a92580c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb5454545454545454545454545454545454545454545454545454545454545454b0e7559254d2e2a0b893363a13787d86577ab1bfb6c7f7436586bee7eaae1fba040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000b308000000000000",
+      "inputsHashHex": "1213c53252526fc33235c70c237b69614ec599b7f67e5285148473108a9de699",
+      "productHex32": "4be48fe675784b42e1b54f00fb379caf3f164b0ff183663871780c0507356d36",
+      "licenseExpirySlot": "1375"
+    },
+    {
+      "path": ".local/demo-conflict-v4/operation-b60-stale/operation-descriptor.json",
+      "profile": "local-native-ct-v0",
+      "consumerKind": "license",
+      "job": "9PNwdxpCFnQyUaU3omEUq9XQHfTcvkD2NwADp5E9AKqo",
+      "computation": "3s4KcYnTMWPQHJsNW17XHqrF256RchhKaUyXew4CBnPS",
+      "permit": "6Njppyr57roRjcJAE1xEjE2zTKhpq6CFgbZXXEkpPJek",
+      "owner": "CowkvnMwvYyXzhCupxrkuyB8XvNobQia654KXjMgRm2q",
+      "admin": "H4bUEC6TomzykKMfCBypmn1nX3cfpkZywmXNtfjd6rb7",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+      "templateHex": "000000000000000000000000000000000ae0929d292c201f526fa849421dfc25389bc4304dc337a137d1919b0c9e2ca10000000000000000000000000000000000000000000000000000000000000000421a0b7eb7f7713131d03643949f711a84da76d0704363e71c5f4a49a8c584543f62ed4117e1693b4e4d1a5434008cbf0a3febd67b60006abf62d3940b43951226ed11634b668e5332a029b280bc9bd9d13c4b13728096784e79ad4e15a4302eaf773011003bccf790e848d1e05e0996cb6f1ea3614ad621877132ab10ba0dca23f057772e9b3b2d3c207a1cd4f8c642de441e368f400a60d4fca1bef9fcd6ace90714f91375030327d8aaf242a4aa73b2024165007d3a45de0e8c54bd26748542ee2c4c9be72bc3af1fe8277157ca8b7c98a65db412abbbb4babf3d2b269571d2cd7050acedf1c7c9119f9c13c8ecc6dc6189cbba47d54917af29a498b8cc2208d83e47b73a1fb0fa01f1aa1952dd193c101d29fc929dbcc3ab1972f0fd35690c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb54545454545454545454545454545454545454545454545454545454545454547289231a4336c0b8beeb7bbb3def464021a2b5667221d5037972e956ae8f45850300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007308000000000000",
+      "inputsHashHex": "4014ed44643b5fc024afa56dcfffe928755df9eb407117e1c2b122c6e787f1b9",
+      "productHex32": "4be48fe675784b42e1b54f00fb379caf3f164b0ff183663871780c0507356d36",
+      "licenseExpirySlot": "1309"
+    }
+  ],
+  "callbacks": [
+    {
+      "label": "RuntimeBudgetInitCallback",
+      "job": "EN8Wap5gVdiWYieRKN7FyJSQ4XxMDUda5RxoP92K13Ka",
+      "computation": "9MhJa5RbXU3BCMwTTbYFechawWwNmHFuukbP73fo9rCJ",
+      "signature": "AJFMRuv2KFyvJWEqvwsja3wQccQn8egELDmpw4bCXB2YWfSTyw633xKdWHjzMykRup2KVtqgLbBw9ReokyGou4b",
+      "output": {
+        "field0": true,
+        "field1": [
+          54,
+          161,
+          170,
+          113,
+          22,
+          0,
+          178,
+          242,
+          83,
+          166,
+          65,
+          18,
+          109,
+          77,
+          55,
+          6,
+          239,
+          52,
+          221,
+          16,
+          150,
+          35,
+          98,
+          134,
+          48,
+          202,
+          150,
+          13,
+          208,
+          5,
+          126,
+          4
+        ]
+      },
+      "status": 1,
+      "elapsedFromQueueMs": 3310,
+      "slot": 269,
+      "landedCU": 136838,
+      "feeLamports": 5000
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+      "computation": "7SZMkpQdDhY6fhH3BzJNmpoMsg2hLqwxYM9XLNpen1K3",
+      "signature": "StmqAxFDAZJqhsBQ7EEvacXYdAXzwsBmfSeS7miZD4sLTSZCTbapeizAmsHkkjdzuQMXwE2svA2dKsUMvoeijsH",
+      "output": {
+        "field0": [
+          68,
+          68,
+          9,
+          220,
+          230,
+          224,
+          169,
+          178,
+          9,
+          33,
+          46,
+          102,
+          183,
+          5,
+          62,
+          55,
+          46,
+          75,
+          128,
+          146,
+          145,
+          235,
+          204,
+          217,
+          108,
+          173,
+          237,
+          35,
+          53,
+          98,
+          27,
+          115
+        ],
+        "field1": true,
+        "field2": [
+          48,
+          131,
+          111,
+          230,
+          190,
+          69,
+          35,
+          123,
+          45,
+          248,
+          158,
+          66,
+          165,
+          68,
+          24,
+          228,
+          170,
+          155,
+          193,
+          54,
+          27,
+          178,
+          243,
+          106,
+          126,
+          32,
+          95,
+          30,
+          248,
+          73,
+          255,
+          4
+        ]
+      },
+      "status": 1,
+      "elapsedFromQueueMs": 21101,
+      "slot": 349,
+      "landedCU": 154820,
+      "feeLamports": 5000
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "9PNwdxpCFnQyUaU3omEUq9XQHfTcvkD2NwADp5E9AKqo",
+      "computation": "3s4KcYnTMWPQHJsNW17XHqrF256RchhKaUyXew4CBnPS",
+      "signature": "4god1hKuRK3BTNWUMHqfAWGGFgtfsi9AV6dPiHU2Q2UEhSWAwiioX3ZmZx83MunduJYK6XziwvwE2jKyU9pqxKEM",
+      "output": {
+        "field0": [
+          8,
+          216,
+          62,
+          71,
+          183,
+          58,
+          31,
+          176,
+          250,
+          1,
+          241,
+          170,
+          25,
+          82,
+          221,
+          25,
+          60,
+          16,
+          29,
+          41,
+          252,
+          146,
+          157,
+          188,
+          195,
+          171,
+          25,
+          114,
+          240,
+          253,
+          53,
+          105
+        ],
+        "field1": true,
+        "field2": [
+          100,
+          195,
+          220,
+          97,
+          9,
+          106,
+          31,
+          192,
+          141,
+          191,
+          152,
+          36,
+          4,
+          150,
+          217,
+          157,
+          26,
+          110,
+          144,
+          163,
+          254,
+          89,
+          248,
+          119,
+          231,
+          154,
+          14,
+          236,
+          153,
+          94,
+          20,
+          10
+        ]
+      },
+      "status": 1,
+      "elapsedFromQueueMs": 20147,
+      "slot": 404,
+      "landedCU": 151704,
+      "feeLamports": 5000
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "9tV7rtw9DbKrNmVoe6X3tRNZ9vCpvDeQ8bLWmbb9XeTu",
+      "computation": "EfpxNPTLLk5nqrGDxuNoHg3JSkvtqLZH42LW3LRFhnz7",
+      "signature": "3gHf2aQqpHBW4RY69EjYZeFiAsfBEuq95nBSpAPbWt3sQSqkCG9bwjQgH2UMSvubMuxEHoQ6iaHme8QoLvjMdhef",
+      "output": {
+        "field0": [
+          100,
+          197,
+          119,
+          98,
+          17,
+          87,
+          255,
+          228,
+          54,
+          234,
+          91,
+          15,
+          165,
+          76,
+          65,
+          163,
+          214,
+          97,
+          214,
+          166,
+          26,
+          53,
+          111,
+          121,
+          77,
+          245,
+          173,
+          18,
+          185,
+          42,
+          146,
+          88
+        ],
+        "field1": false,
+        "field2": [
+          14,
+          130,
+          181,
+          63,
+          87,
+          234,
+          229,
+          163,
+          84,
+          166,
+          79,
+          69,
+          20,
+          129,
+          217,
+          108,
+          36,
+          30,
+          152,
+          103,
+          179,
+          4,
+          145,
+          246,
+          74,
+          233,
+          191,
+          134,
+          142,
+          50,
+          229,
+          11
+        ]
+      },
+      "status": 2,
+      "elapsedFromQueueMs": 20458,
+      "slot": 468,
+      "landedCU": 141616,
+      "feeLamports": 5000
+    }
+  ],
+  "checks": [
+    {
+      "label": "quota-prefunded-empty-system-account",
+      "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "lamports": 890880
+    },
+    {
+      "label": "hook-metadata-prefunded-empty-system-account",
+      "address": "3DgtwSaMuoQWXhZcu6bPpsi5ZpetC1tPfhQJ3qpgbUt5",
+      "lamports": 890880
+    },
+    {
+      "label": "a60-consumer-record-prefunded-empty-system-account",
+      "address": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+      "lamports": 890880
+    },
+    {
+      "label": "a60-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 349,
+        "commitment": "confirmed",
+        "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+        "permit": "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+        "effect": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "b60-stale-consumer-record-prefunded-empty-system-account",
+      "address": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+      "lamports": 890880
+    },
+    {
+      "label": "b60-stale-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 404,
+        "commitment": "confirmed",
+        "job": "9PNwdxpCFnQyUaU3omEUq9XQHfTcvkD2NwADp5E9AKqo",
+        "permit": "6Njppyr57roRjcJAE1xEjE2zTKhpq6CFgbZXXEkpPJek",
+        "effect": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1309",
+        "licenseActive": false,
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "honest-commit-before-binding-attacks",
+      "evidence_level": "signature-verified-local-validator-simulation",
+      "simulatedCU": 101557
+    },
+    {
+      "label": "changed-destination-binding-rejected",
+      "actualCustomError": 705,
+      "consumerPdaRecomputed": true,
+      "allTrackedDataUnchanged": true
+    },
+    {
+      "label": "tamper-merchant-prefunded-empty-system-account",
+      "address": "22oyiVLZS35aHxroHgD5jaqVmiSa9pEovmmGgk2ALtCf",
+      "lamports": 890880
+    },
+    {
+      "label": "tamper-license-prefunded-empty-system-account",
+      "address": "2stBPvAevryibU6uoD8DqNEt7SdZ6SC7VKCQKsSR2S5E",
+      "lamports": 890880
+    },
+    {
+      "label": "changed-application-action-binding-rejected",
+      "actualCustomError": 705,
+      "consumerPdaRecomputed": true,
+      "allTrackedDataUnchanged": true
+    },
+    {
+      "label": "changed-consumer-binding-rejected",
+      "actualCustomError": 705,
+      "consumerPdaRecomputed": true,
+      "allTrackedDataUnchanged": true
+    },
+    {
+      "label": "post-native-transfer-merchant-failure-rolls-back",
+      "actualCustomError": 1099,
+      "allFiveAccountDataUnchanged": true
+    },
+    {
+      "label": "post-native-transfer-merchant-failure-rolls-back-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 412,
+        "commitment": "confirmed",
+        "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+        "permit": "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+        "effect": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "a60-sdk-paid-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 413,
+        "commitment": "confirmed",
+        "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+        "permit": "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+        "effect": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "label": "a60-native-payment-and-entitlement-atomic",
+      "changedAccounts": [
+        "FtGGDHUHkHFfBRxZ26wTCMob6Ntor3rfuDq48xoP3ep1",
+        "Hk2YLDRHQMp2w8rxgwvcWzcvhPQPfaK5gm7F9Lp3qokk",
+        "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+        "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd"
+      ]
+    },
+    {
+      "label": "competing-license-stale-authorization",
+      "actualCustomError": 803,
+      "allFiveAccountDataUnchanged": true
+    },
+    {
+      "label": "competing-license-stale-authorization-sdk-observation",
+      "observation": {
+        "status": "stale",
+        "slot": 414,
+        "commitment": "confirmed",
+        "job": "9PNwdxpCFnQyUaU3omEUq9XQHfTcvkD2NwADp5E9AKqo",
+        "permit": "6Njppyr57roRjcJAE1xEjE2zTKhpq6CFgbZXXEkpPJek",
+        "effect": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1309",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "cancel-with-owner",
+          "prepare-fresh-with-owner-and-admin"
+        ]
+      }
+    },
+    {
+      "label": "consumed-merchant-entitlement-replay",
+      "actualCustomError": 1001,
+      "allFiveAccountDataUnchanged": true
+    },
+    {
+      "label": "consumed-merchant-entitlement-replay-sdk-observation",
+      "observation": {
+        "status": "committed",
+        "slot": 415,
+        "commitment": "confirmed",
+        "job": "FtELstPubyjWh3rSmPBKpvHeJH2VHAKfidesRa95Vufo",
+        "permit": "GLaS2dvYz9CsZp1CiDu87EX9jN5x2p73GaMrCwzRebfD",
+        "effect": "5c7pSYs5RQJ7jtxCrr7GtTRo85eAL1p2MH4o8JRqxYd",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "label": "b60-honest-fresh-sdk-observation",
+      "observation": {
+        "status": "denied",
+        "slot": 468,
+        "commitment": "confirmed",
+        "job": "9tV7rtw9DbKrNmVoe6X3tRNZ9vCpvDeQ8bLWmbb9XeTu",
+        "permit": "4mVDLu7MYTjeXg4Fc1AhZtrvYFvL5hpb517sQcURWcQR",
+        "effect": "BUKSdaYWKyxd9YZgb2oG5mehgFGPrXagCrnfAnqLghRt",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1375",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "prepare-fresh-with-owner-and-admin"
+        ]
+      }
+    }
+  ],
+  "validator_cost_by_category": {
+    "adversarial-prefunding-setup": {
+      "transactions": 6,
+      "landedCU": 1800,
+      "feeLamports": 30000
+    },
+    "application": {
+      "transactions": 9,
+      "landedCU": 112220,
+      "feeLamports": 80000
+    },
+    "arcium-definition": {
+      "transactions": 2,
+      "landedCU": 82142,
+      "feeLamports": 10000
+    },
+    "arcium-circuit-upload": {
+      "transactions": 1178,
+      "landedCU": 10619294,
+      "feeLamports": 5890000
+    },
+    "arcium-queue": {
+      "transactions": 4,
+      "landedCU": 620800,
+      "feeLamports": 35000
+    },
+    "lookup-table": {
+      "transactions": 5,
+      "landedCU": 48783,
+      "feeLamports": 25000
+    },
+    "adversarial-consumer-binding": {
+      "transactions": 3,
+      "landedCU": 49098,
+      "feeLamports": 30000
+    },
+    "adversarial-native-settlement": {
+      "transactions": 3,
+      "landedCU": 160450,
+      "feeLamports": 30000
+    },
+    "native-settlement": {
+      "transactions": 1,
+      "landedCU": 101557,
+      "feeLamports": 10000
+    },
+    "native-provisioning": {
+      "transactions": 19,
+      "landedCU": 76962,
+      "feeLamports": 170000
+    },
+    "native-proof-and-permit-provisioning": {
+      "transactions": 33,
+      "landedCU": 680862,
+      "feeLamports": 285000
+    },
+    "arcium-signed-callback": {
+      "transactions": 4,
+      "landedCU": 584978,
+      "feeLamports": 20000
+    }
+  },
+  "cost_scope": "Validator CU and fees are separate by category. Callback elapsed time is queue-to-observed committed callback including polling/RPC overhead. Distributed worker CPU/network costs are unmeasured.",
+  "critical_transactions": [
+    {
+      "label": "quota-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "tWuNxieYVGEtojqh1dhyXApnqzD4Xy1FCFabhSwtq2RJDwTdAE5Dq367oi3DryKDbM1QkQppoT5FazbyMo5bZw4",
+      "bytes": 257,
+      "slot": 227,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "provision-quota",
+      "category": "application",
+      "signature": "5UjQF9WEN21A8Vear2MpQMEBDpmjKPYd3jjDTZZMPqCXBqEkPsEVYQmxDXGkUCZ9LdFJv9uRzM78uYhD8kpqeNMW",
+      "bytes": 385,
+      "slot": 228,
+      "signaturesVerified": true,
+      "simulatedCU": 27580,
+      "landedCU": 27580,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "runtime_budget_init-definition",
+      "category": "arcium-definition",
+      "signature": "2oDY5uWN2QKBVVXVhJruGKjLRGf1W1pPewPALE8AtmMGveKGx2iUM8Q8cZ1F5hB9DLbFWmnc7VhjVFyoA9yq4Nr4",
+      "bytes": 418,
+      "slot": 229,
+      "signaturesVerified": true,
+      "simulatedCU": 34484,
+      "landedCU": 34484,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "runtime_budget_bound-definition",
+      "category": "arcium-definition",
+      "signature": "5qdKnTn2LbSScR2ypneRxz3yQvbqDehTwkr8mKpFzLqdt5TCaXnGpLEZ8WFsL9pQPbBjvAqqFz2j2HrmHg6QFmLD",
+      "bytes": 418,
+      "slot": 241,
+      "signaturesVerified": true,
+      "simulatedCU": 47658,
+      "landedCU": 47658,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "initialize-encrypted-allowance",
+      "category": "arcium-queue",
+      "signature": "2bKqZF3sVuKeMsZAQjAJThEnzbEAAH6QRXuJZyHRWHZnZrTkU41QQk12dU85aTivsEh9yv5T9ksPvNXMzBswSZ13",
+      "bytes": 803,
+      "slot": 263,
+      "signaturesVerified": true,
+      "simulatedCU": 112150,
+      "landedCU": 112150,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "hook-metadata-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "4YtHb4tF9oDzfS5Q2Zugdd8TXJDp8asSpZPJ46S2TK6XPtigJAyBWae2fR83V3p6LkAf6t3TktC6Kj3zEuQAXPWw",
+      "bytes": 257,
+      "slot": 290,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "initialize-hook-metadata",
+      "category": "application",
+      "signature": "2k1oMqqaZpXTRVfkc7aiZZmvByBs4jimZ5UnJswpnJRcb6WBkcEn6uWjni1335poWatrDnzdxF7YZ3dQqG11ABBv",
+      "bytes": 312,
+      "slot": 291,
+      "signaturesVerified": true,
+      "simulatedCU": 19422,
+      "landedCU": 19422,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a60-consumer-record-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "5B5rosYj8ABNVdsryqqEkz4nQ8NEo5gf1YiUvjQQnKsLZuBnYHEyW3BKgeCEFZif454sxj3K66VWNnFoMUTMzYGW",
+      "bytes": 257,
+      "slot": 303,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a60-initialize-consumer-record",
+      "category": "application",
+      "signature": "258AY5tb5Wz45PfbQijcN4i17DjMqVF1ErGH5tpgvSuLHWcTr5qmPQj26gWMDxwWYrisdWYUoYGcx8wUTcZTw1vw",
+      "bytes": 384,
+      "slot": 304,
+      "signaturesVerified": true,
+      "simulatedCU": 10289,
+      "landedCU": 10289,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "a60-prepare-immutable-action",
+      "category": "application",
+      "signature": "3b2LpmMaSnv47BRx9Ahsiy4uKLr3fmCc1bfhYGMAYR633FAH1L8NbCvJK8zb2ksAHThVfKdZFWk5ziC6Za6dpqUp",
+      "bytes": 1033,
+      "slot": 306,
+      "signaturesVerified": true,
+      "simulatedCU": 7020,
+      "landedCU": 7020,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "create-demo-alt",
+      "category": "lookup-table",
+      "signature": "28Dz2MHLn7717yddDQGqZALnJYQqQ4pAMJDah1xVxsseC5w7iEGZ2yraB765DMPHz3J3KyrBxcjZuJDngpYfuxU7",
+      "bytes": 292,
+      "slot": 307,
+      "signaturesVerified": true,
+      "simulatedCU": 10640,
+      "landedCU": 10661,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "27v2H5oXrLG6TbAiSZCektUWeFzH2pEKBfkVgbfhCNdLd9k75eh5LdFGHAfzYwDyj2f9np2xm6APJMDaA8ZwCL5Z",
+      "bytes": 932,
+      "slot": 308,
+      "signaturesVerified": true,
+      "simulatedCU": 11807,
+      "landedCU": 11807,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "C1BisEVsTKUbE5wcNQErggFid99Qaj1JRZrT2hJmPZtojoxfYDV4S1oKBLgeL8SS8H1WfMbXQS5JqEz4SMCQrGr",
+      "bytes": 580,
+      "slot": 309,
+      "signaturesVerified": true,
+      "simulatedCU": 8572,
+      "landedCU": 8574,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a60-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "4bobLvh5buDgVQP5sAVpssL8F7symNTfrACz8oC55LHRx813jXPFdtzpHavSCijE7rg7E9ceXgy8FeGYxBn5jVKL",
+      "bytes": 532,
+      "slot": 344,
+      "signaturesVerified": true,
+      "simulatedCU": 168154,
+      "landedCU": 168154,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b60-stale-consumer-record-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "25BN2z94vJQN1bwDivpm1hVeE6oUeJ8395CyWtUPPbJLsfk98SN3fBkRFUdgiSGwb48R7GkReuSfVeuwp39vnwcp",
+      "bytes": 257,
+      "slot": 360,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b60-stale-initialize-consumer-record",
+      "category": "application",
+      "signature": "5544uxLXoBGi3Pqs18uTCj8hRGW9vL6VD1yDpdee8bZvE8LBy9rrrB6nebF8bqi9YFcC3xxymCSgFfr5J6zZjKoZ",
+      "bytes": 408,
+      "slot": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 10290,
+      "landedCU": 10290,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b60-stale-prepare-immutable-action",
+      "category": "application",
+      "signature": "4hUFTrMGuwBu6BpfeubJnHf5JkCryjM3uRn8CDLuYLRd9nmdBbsxq2scQWNBpGBvKU6JTu7gjQs1yawm3YSFFyjr",
+      "bytes": 1033,
+      "slot": 363,
+      "signaturesVerified": true,
+      "simulatedCU": 7020,
+      "landedCU": 7020,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "5EAwPDQPTVYSSskeTQQkVTbtL1vynTctH8F66XsDXyNZPNVUbUkbbKNJfawpdUouoRWiFq3CNKQb46Yq9GikkG1Z",
+      "bytes": 676,
+      "slot": 364,
+      "signaturesVerified": true,
+      "simulatedCU": 9458,
+      "landedCU": 9458,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b60-stale-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "4xv2Jm8QauvAufx2yNZoE4bM1bSvW4RFbi3y1uttT23UCRUrpKqaBXv6fnWg3q9JH4ugEe9eoxreySnso7efWbtc",
+      "bytes": 532,
+      "slot": 399,
+      "signaturesVerified": true,
+      "simulatedCU": 168574,
+      "landedCU": 169390,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "changed-destination-binding-rejected",
+      "category": "adversarial-consumer-binding",
+      "signature": "5Nhzhj3XnS4AZerFFzT1zQJj4pnETpofH4Ds463b3n5jHPKKw3tWpNhUwU3wbqa2eaX79WbANyS15aH77etP3ZyF",
+      "bytes": 984,
+      "slot": 405,
+      "signaturesVerified": true,
+      "simulatedCU": 15302,
+      "landedCU": 15302,
+      "feeLamports": 10000,
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 705
+          }
+        ]
+      }
+    },
+    {
+      "label": "tamper-merchant-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "3Akx5tPazRKqg1KHPsuAk7LZvCpGLwFuiDLAKrnBHi9v64ZJbpqB8BYHADM1PtESHkineFmg1CgpwcGkuDnZzhLC",
+      "bytes": 257,
+      "slot": 406,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "tamper-merchant-initialize-record",
+      "category": "application",
+      "signature": "3PtKdrjo9SgmP5uBWmeKw7Tf2htJvKtmEfcKsF3wJn7h1GQxyWSCEZ8DjsEvosrUcLdmZgrdFJjdfpsq7FpuiwqD",
+      "bytes": 384,
+      "slot": 407,
+      "signaturesVerified": true,
+      "simulatedCU": 11789,
+      "landedCU": 11789,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "tamper-license-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "2Mo24e8rXpSBfduyNb4CYwGuaNf4SGxjj5NcjWmk2yFvqz3yAB3ZezjDQh36FYpJideYWt1KZ2NcvrnaW49yZ1nR",
+      "bytes": 257,
+      "slot": 408,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "tamper-license-initialize-record",
+      "category": "application",
+      "signature": "2v31dy2HCiCa1VKQhyZc583cuTVaVD9UoepmtbBT6sFV5yw7ay4BQBTfjuuX4NnAaWcaMbDwG4SdpbtuoMfwrfT9",
+      "bytes": 408,
+      "slot": 409,
+      "signaturesVerified": true,
+      "simulatedCU": 10290,
+      "landedCU": 10290,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "changed-application-action-binding-rejected",
+      "category": "adversarial-consumer-binding",
+      "signature": "7AafQ2Q55oiUkSW6UJcoYbpmJTeDubZ6MqQaUuUkoP9diHgNwrmuJba7zUVZG98T8c8TRHFgdw1m5kTgwpSyFFu",
+      "bytes": 984,
+      "slot": 410,
+      "signaturesVerified": true,
+      "simulatedCU": 18302,
+      "landedCU": 18302,
+      "feeLamports": 10000,
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 705
+          }
+        ]
+      }
+    },
+    {
+      "label": "changed-consumer-binding-rejected",
+      "category": "adversarial-consumer-binding",
+      "signature": "kSdksJawDA6DXraGeC69F5BQbrbEnCNVqNzHaas8Ec1KJWwb4rZUfTP5oodo3TTQDyr94RpWuUNWymdJhV51oKz",
+      "bytes": 1016,
+      "slot": 411,
+      "signaturesVerified": true,
+      "simulatedCU": 15494,
+      "landedCU": 15494,
+      "feeLamports": 10000,
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 705
+          }
+        ]
+      }
+    },
+    {
+      "label": "post-native-transfer-merchant-failure-rolls-back",
+      "category": "adversarial-native-settlement",
+      "signature": "4D7iJp6XPAXutg7YkDLkZ4Tc4MgChcZbWUoBwSSXJbNDX2HuwEf8Mu19AyZngHM8HvJZzxJb5Er3rCUtAWPK3ZWA",
+      "bytes": 984,
+      "slot": 412,
+      "signaturesVerified": true,
+      "simulatedCU": 101568,
+      "landedCU": 101568,
+      "feeLamports": 10000,
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1099
+          }
+        ]
+      }
+    },
+    {
+      "label": "a60-atomic-paid-entitlement",
+      "category": "native-settlement",
+      "signature": "ZTHUUPZiGukDPXC7xhe1wgNk7xBprbJy7yXSjnFceLtGCYbfXv15eBiGAUxmELaxb8Py836Qw528T3hFQaNGq23",
+      "bytes": 984,
+      "slot": 413,
+      "signaturesVerified": true,
+      "simulatedCU": 101557,
+      "landedCU": 101557,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "competing-license-stale-authorization",
+      "category": "adversarial-native-settlement",
+      "signature": "2dioLqZCHGW3yDperoznwp8xL54wEPDoCvSfigECXoUFxQj6s17JPUPXorzLTfLVtJgNUtsaGHwLo1zbHUuPewJi",
+      "bytes": 1016,
+      "slot": 414,
+      "signaturesVerified": true,
+      "simulatedCU": 53887,
+      "landedCU": 53887,
+      "feeLamports": 10000,
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 803
+          }
+        ]
+      }
+    },
+    {
+      "label": "consumed-merchant-entitlement-replay",
+      "category": "adversarial-native-settlement",
+      "signature": "4mvTR76mFrci5939TpEgznQsuRjQjhrgsMwPauCmrQPrMt5eCnU2KtaStQvCrsUZLMWBHtRQhQuotzyb2YLdDqEU",
+      "bytes": 984,
+      "slot": 415,
+      "signaturesVerified": true,
+      "simulatedCU": 4995,
+      "landedCU": 4995,
+      "feeLamports": 10000,
+      "error": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 1001
+          }
+        ]
+      }
+    },
+    {
+      "label": "b60-honest-fresh-prepare-immutable-action",
+      "category": "application",
+      "signature": "5uHgsK8Yntdo4bJi5vCiBCyJjdoGm6yuKdq1r7ZS6rDSZXMK9kqErrZtBBsxDgQTVW2qrWzaR3q2rMD6Xqjk3vBH",
+      "bytes": 1033,
+      "slot": 427,
+      "signaturesVerified": true,
+      "simulatedCU": 8520,
+      "landedCU": 8520,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "Q3wVvo7D5ZtzQGEuowRXK52X1UwLW8r4MAJbz6fB12ym95ZzCAY159sK3pmHiM5QSaGNnsm84239AvguriH7rV1",
+      "bytes": 548,
+      "slot": 428,
+      "signaturesVerified": true,
+      "simulatedCU": 8283,
+      "landedCU": 8283,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b60-honest-fresh-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "2snaGZRSYSPGjEFdkrChR8xxijjjk3tj9qNhv393jJ8tyM3sEGpdiyRjF9fMyDcBHjcTznWVmo3DNg1YLUefzcLb",
+      "bytes": 532,
+      "slot": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 170295,
+      "landedCU": 171106,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "create-initialize-mint",
+      "signature": "2ry8YSC5fRoZ3YYqa8h1mKhJ6gm9KnBvPYuUBAbPVzDsmLqSi9BfEfQy6LLiJV2Sj162nz59sckpgMs8QQoavVpZ",
+      "slot": 271,
+      "bytes": 573,
+      "signaturesVerified": true,
+      "simulatedCU": 4144,
+      "landedCU": 4144,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-source",
+      "signature": "SS8TGSRpt9Sse6nuuDtVB5qVLw3vpRx8AoPeaojyaKtD6Atk5bbfNvebWuSnJudVVwH23TFgkbRT1pRc4qEPwgL",
+      "slot": 272,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "5SXd8KsLhEjC6pWdTZN2RdhEUsdZzwM6LmJFi6vVc7CD3oGoGbPwhHADnAyqzqGgQoZ8wGc8mbc1nDdsf3pf7dWx",
+      "slot": 273,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "3ifiU5bHxbhBDrYjVTpqhFxXnmQG2J5ikWp7oiMpx1DGJiyDciSPQYguabGjMv4k6wMcTKSrFAt73aepRkx1QiM1",
+      "slot": 274,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-source",
+      "signature": "5Eo8Wdpq1VjY46x5CZjwDrJzzqKt4Rk3rxkLshF4trjk9nScRHVWnTUT2mjtHbtygY18hCuhD2mStSpvsopHkYAD",
+      "slot": 275,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "fund-source",
+      "signature": "4pRaGCccxszzmVTBtdwyYEELXNaFvYHJx5A7TUzJgUyrDeX6uGkcwAUVqnSh5tj985ZbRxSpXEanem46oj6XSKAN",
+      "slot": 276,
+      "bytes": 451,
+      "signaturesVerified": true,
+      "simulatedCU": 19955,
+      "landedCU": 19955,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-destination",
+      "signature": "4koBpmuEt7qch3uwmMVbUvpUntkdPK6sXRoCFw9zPrvatzCiMYyXGidKXiJ3zrufsCCvSDD77RWFmGULKMNRVGg",
+      "slot": 277,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "29ADBWJ7tDUqRfG7UFWJYa9UtWfC2ivZMzXBA7ndQJE7pcRjnUoLf2xStt7cbcVHq7jTaFDYWCTE7f2J1ZrsYse2",
+      "slot": 278,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "5gpmnoWR2euC6PQjEVc4YY136Q1YVRF8CzhJhhohGmqpdbqkRR4aTWPVF2BgpcHgQyZbCZJx3dEHsC8cGrxgcrPR",
+      "slot": 279,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-destination",
+      "signature": "fVsTyZLgWYid4vD8xyrhL7k7Qi13W4jR6TTWtesqy7oAaVoaFP16cYX8qTk8dAVbLx9R38bcXhKFKWUkqZZF2UQ",
+      "slot": 280,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-source",
+      "signature": "42tyMxg2QowD8CqVZCKbdK8CCfY2pRx19doGKJ8fHPf99w77u2RyAY5Hke7QqnMFALNK9EvKnej1849KvP7xsL2f",
+      "slot": 281,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "2QZtKPmRhUr58e6uESEyjciGdw7CR9kYABNADitRGy8bPyAfsGeTwwz8FY7GgVGMwNjxYvFy7b1w3vpigrFz1rqs",
+      "slot": 282,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "2Jw3Nv7kwVDXFj95jnUgc5HwAuAsdPtoNJQ9HNeZ5kjZVyRiPGqezJxtNHofzm4UbAt2nT1qoYTFrEU3pZ5Xt67R",
+      "slot": 283,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-source",
+      "signature": "3yfVqx24tphUqYkeyeBm1i5Srr9Qa7n6hHrnqCus9znZTNmJNKhzmHStUUUdPkynNTUTN8Nb31MATwcHPSQiiEtF",
+      "slot": 284,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "fund-source",
+      "signature": "4ZmzXW22Qct6aSGk7vWXYczjSMMiHj8iJDA3vJDg2hXLxAe4K8sybaTLun5ywCiHuxJKXAozXzdxvjeYq7ycJUpw",
+      "slot": 285,
+      "bytes": 451,
+      "signaturesVerified": true,
+      "simulatedCU": 19955,
+      "landedCU": 19955,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-initialize-destination",
+      "signature": "2AN4tyG9TYMYxbZYqDZavc5XiNfSHFCnXVGyJ42JqKJdF6XYkBuBAWnykVuWJY1bHHqY1tuhcCAXmkJ5U5f6BVNw",
+      "slot": 286,
+      "bytes": 463,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-pubkey",
+      "signature": "4ksdG8xYvLbb5Nutv8qy5ZLiPkqaj2Zw65xg7S2z8qGBS2eD1oMyJJMH9dqQ9jL7MQdBRC4vwW5oRTbimhASvkM4",
+      "slot": 287,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "signature": "4YyCB8FgpwqbV8n7gFGNWUgBg3xmP3rmuhypHi18mP4evoVthR5PVwLUmMKAZhtzrvh9QMC66eP3KJNhn6Xf1yQB",
+      "slot": 288,
+      "bytes": 374,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "configure-destination",
+      "signature": "2uEF4DKLNP57uKV8TXX9hr1WnnfKyQQa982aPgHZXxWwWbqiPYz79bxvjqcySuKJszkRxRYQ55FmqfRNUWG93QDX",
+      "slot": 289,
+      "bytes": 454,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "category": "native-provisioning"
+    },
+    {
+      "label": "create-proof-equality",
+      "signature": "5Dhjw4zNn8ymfwi5qEgNiUVmBfMDGtmkWJ9amWKBjWhbLcc7qRr5iUnPWdoBFE2wQ1KRwkkTe1MfkZE6JUQzVpbZ",
+      "slot": 293,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-equality",
+      "signature": "5BJ9a5pFxcDfCUHcbn7jqxAsdgexWRs1QGYQAw1uois6gFKR6gkMMHCpkgQatgAmJY32NH7Pmko3WhYXUPnCq7uW",
+      "slot": 294,
+      "bytes": 599,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-grouped",
+      "signature": "3kMRJxqCUEK56MuYWY41Mbk5NAaJeVkVjBZ6FLYna7qAGMGindL7exhvqtgiB1YaHDK3tYB2wEFLhz4HNB8vbC3B",
+      "slot": 295,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-grouped",
+      "signature": "4Qy8qpjmGYyXWQhUodV7C6N6FkC4eVjU3Vd4ephzXsktnbpXykNDTFf7N5okPq2VPrMtCT9czXGaH41wMyyhQyPG",
+      "slot": 296,
+      "bytes": 823,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-range",
+      "signature": "3HgnppkJYtULTzMLsT2N351tZdfeL7eZiJR7b8jy17LkrGPjCxrXKkjca1deS9DQeP4S2JLLqPbY1Mf4UaWGonWf",
+      "slot": 297,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-buffer",
+      "signature": "x7RM3xE5jqL2oLNByTz8o8uadfg1TpVEUtVnJ6jf1EmKMd3DP8nLsqyWihzjAKMDRoPW8mUdyNpno8Xy4ebwg1P",
+      "slot": 298,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-0",
+      "signature": "25mqXZpFEtK1f57UbpozGFmGnYKKwE4W69A9uJwfGVbDFp27JQnCnQjigBYnVKfGwXkpxmHcKsyn6mDRfXNAwhu4",
+      "slot": 299,
+      "bytes": 1014,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-700",
+      "signature": "hWRMNG5Yn3oJ2RnwhJW7UhJPaK27Gk572aB84uSP7zVE3bPmGJ6gFJbN82zSTKYXf7WjLa8d5tX54jfFcfRjwXH",
+      "slot": 300,
+      "bytes": 614,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-range",
+      "signature": "4474xuv9WbcA8XNxPkFC5LWjA98Kqk7b5aB5pXf2xYPENiWTDNNNh8s9gGjxnqHJ2aqLnrVpqCNKWd5yynA81f6w",
+      "slot": 301,
+      "bytes": 315,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "close-proof-buffer",
+      "signature": "4g786TyDS5pjtA7MXS7pBnUk7KpszyjXr4ERhf3ZCmh3CusdxY4fDmxtH5vDJWw6JtFVndRPZSSGCgZjzYMQZ84k",
+      "slot": 302,
+      "bytes": 310,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "signature": "4AWpuShaJwYHazpEa3RnzLqkaHBkrXZzpMzGNWYrnv7T1wWn21P4ET6qec5X6oEAij3S5pjWLgczW2puA2ZCZUyM",
+      "slot": 305,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-equality",
+      "signature": "2wEggSivu2oEsXgcf6NbJaggfnAQaLTN7bFzq5N8nT3XEeLEesg8Gs1CRJgmNMXnMh28yA8jrguCS1iBVbLNPpQJ",
+      "slot": 416,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-equality",
+      "signature": "2ty6PJnYfCYsUncZuXH5W5GDzqFokBLxv71WAGNosoDGkqmzgKGaw4rWHpyL8CgCtWQ5ghUZD9vikeXEikS9pmPW",
+      "slot": 417,
+      "bytes": 599,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-grouped",
+      "signature": "5GwA3LJvNndeGbAzkzyPLkyoi3LenHWFcLjvNfvoHDonrcbBYDk4mvepzNr4FFNoE5AqL43hCs2GtQBAVEhRBG3d",
+      "slot": 418,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-grouped",
+      "signature": "9diZXtDZPGVZ7SWeETnEBszEi8HCWSgXZFeQujLVZwGKLgikD8ouauEiJe8HgwXxkn4usgrA1zp61ypv9ZNMFYZ",
+      "slot": 419,
+      "bytes": 823,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-range",
+      "signature": "4ZtTBDoirPgcCGzT88UezwsvdcatAAt6u4tv86fXs7T1qJHta57tsJP4DGPgM6YbcMGLHttSquhbYBdvcFnaZK2R",
+      "slot": 420,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-buffer",
+      "signature": "5ojcNPo5Nih9kVx3ZhKXanx87Dwonv7BD2c1n2pfjDqGrygpefjQaotvGvhsNpmnskQjqBhyUxSmX34HjVm3Aycz",
+      "slot": 421,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-0",
+      "signature": "2iCjPeYpEJsowsvkLq5funhv1vDeZP5ynWMKLZac8MjmMwZBV5oT9QRNuHJDQqNnCT9QC1XhmBK1FMdWHGuTAk3y",
+      "slot": 422,
+      "bytes": 1014,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-700",
+      "signature": "5pfhbXzBQsbBwZYspuyAd9ByeDF4DoaUwPft4zp1CqWyoeEBaWYSNfwezBK2qJ399WFzz3Bjv9e4eNi8WEKVjEDg",
+      "slot": 423,
+      "bytes": 614,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-range",
+      "signature": "3uauitbbLadoiS1FdvmdP4bQK2JZVyCypp1upmRq2BBJWCpxBqsDvcfPuYqocgmVSK7ucTsdkzpuNnHDMhrQvxus",
+      "slot": 424,
+      "bytes": 315,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "close-proof-buffer",
+      "signature": "86UMz2UoCF8nyT1BJ79qXDkA9b3PDHpNv3dyZVbMSMtjNujiyNEvxbiZqTSpgWbZcRfjrxm1JaCDHkkiR2aeF5t",
+      "slot": 425,
+      "bytes": 310,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "signature": "4EHF2bhCesWMgkRhLNV5Sukx74x2mRnqn7dPfU7S3AAPMLyBjtQfZuwzC4naSGWtTjgoSp5arQteFYrkADHTG9sT",
+      "slot": 426,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-equality",
+      "signature": "4jZeMsKUFRgavpmmpWocTeTPNZrUBnn72a9ESVGWgUzLvSF5DdjbH31ZyU6kr8GZNKAxBcv76WcNsVb9deWJKfid",
+      "slot": 350,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-equality",
+      "signature": "4zKmcKpLiSj7oazCqAW3i1erJbwRVdhkoAnihTGCyfMkEc8UgikrDYBytD14Xkr9DUDrqiNfRD9THNSe2MZskbr",
+      "slot": 351,
+      "bytes": 599,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-grouped",
+      "signature": "4B3SUfxJRVJ99nnaKefAW8QxBk3yUPDVqYKYFDCgJAJEnSdME7kPyGQ6e9qphDYwtQ3TTjkEKhrX7wttSPoWUUo2",
+      "slot": 352,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-grouped",
+      "signature": "qfVZcz6FvcsX8bFfjk2adLMyeRCHR2BjY61rZSsWU9CKJYK3PZoqaEJJxS7jQ9mQxkjeHmDSAP54rzoJec2UGgs",
+      "slot": 353,
+      "bytes": 823,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-range",
+      "signature": "BZV4y9m7DkJ7LMfKYaaT9FffgYMiAoWNqtr8wzo2F53AHPNJ57cVgbB9gFcdrT9er4BhHJ2aZWyHUNmzasqjQnD",
+      "slot": 354,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-proof-buffer",
+      "signature": "nkiyY6g7Due4iKyHwvYtFcM38RcDbXsnyc1NmsDcsam3CtHLRazUAyjpmRMBmUZFzxqjfjfSiEksYUvzCWnCmbx",
+      "slot": 355,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-0",
+      "signature": "5ZXHCTMrfNqgp51FG5so4QqgXLYXDyBFQhDBVeet7K9LkBZ9dL94voVH2jiUwKyvUgKmm5c7UTLv6L1je73HuCvT",
+      "slot": 356,
+      "bytes": 1014,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "upload-proof-700",
+      "signature": "3tdNAp9hZedz7EULCjJRhM3T9eAUzRYQ3CENxfKaTmjkzpDWqz8NG9qGmeAP8Uk2A2woxXkxkLZ4yUYgubvtkBhG",
+      "slot": 357,
+      "bytes": 614,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "verify-proof-range",
+      "signature": "2B82TfQkTzuVZonqbi4BrFJjusy5gYaUMYjtD1enYXhFrRJDT3zPY3kT44xkWtaFCxZpoXPnpztXj5FpkyJtD4o7",
+      "slot": 358,
+      "bytes": 315,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "close-proof-buffer",
+      "signature": "1eo9DuYrL7pu9NG6WWZKSU9CwGB2CHAvJQYfQvD5NFHcGm2gdVPJ8NGS774DswhCCduyWY8UkLiHssXVfhtb3SP",
+      "slot": 359,
+      "bytes": 310,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "category": "native-proof-and-permit-provisioning"
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "signature": "2aAdnPJidmzJh2vNHwWNyZBU4EzRV9d2hB8XWGoi4dUdgR2JhLKvNASKRiQnPJvEALJwSgo8CqXKwvcTxVnYz8ep",
+      "slot": 362,
+      "bytes": 361,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "category": "native-proof-and-permit-provisioning"
+    }
+  ],
+  "limitations": [
+    "No public-network execution or production claim",
+    "Internal reference consumers, no external integration commitment",
+    "CU/fees measure validator transactions; wall-clock callback latency is separate from distributed runtime resource costs, which are not measured"
+  ],
+  "prior_interrupted_attempt": {
+    "path": ".local/demo-conflict-v3",
+    "passed": false,
+    "note": "Preserved incomplete: first queue delivery unknown, exact signed operation later recovered; confirmed callback then outpaced default finalized SDK observation. v4 used fresh ledger, bounded same-signed-byte retransmission, explicit confirmed observation."
+  }
+}

@@ -90,3 +90,12 @@ node --test examples/two-consumers/operation.test.mjs
 
 The focused host tests check ordered native/action bindings and exact successor
 checks. They do not substitute for native validator or distributed execution.
+
+On 2026-10-01, the fresh v4 **conflict** scenario completed with `passed:true`.
+The real signed callbacks admitted both initial60 purchases, A's native payment
+installed its SKU entitlement, B's old authorization failed803, and B's fresh
+owner/admin-signed recomputation returned a signed denial. All three705 binding
+attacks, post-transfer1099 rollback,1001 replay, and prefunded PDA initialization
+checks passed. Quota ended at version1/counter4. The compact public record is
+[`two-consumers-conflict-v4.json`](../../evidence/2026-10-01/two-consumers-conflict-v4.json);
+full receipts and source snapshots remain in `.local/demo-conflict-v4`.
