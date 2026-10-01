@@ -22,7 +22,7 @@ export async function run(options) {
   const endpoint = local.loopbackEndpoint(options.endpoint ?? 'http://127.0.0.1:8899');
   const preparation = JSON.parse(await readFile(options.preparation, 'utf8'));
   local.ensure(preparation.profile === 'provisioned161' && local.loopbackEndpoint(preparation.rpc) === endpoint,
-    'Require matching --fresh-native v3 preparation and endpoint');
+    'Require matching provisioned161 preparation and endpoint');
   const directory = await local.createPrivateRun(options.directory);
   const evidence = { schema_version: 1, scenario: options.scenario, passed: false,
     evidence_level: 'real-local-validator-and-two-node-runtime', rpc: endpoint,
@@ -259,14 +259,24 @@ export async function run(options) {
       return new TransactionInstruction({ programId: op.consumer, data: Buffer.concat([...prefix, op.nativeData]),
         keys: keys.map((pubkey, i) => ({ pubkey, isSigner: i === 11, isWritable: [0, 1, 5, 7, 16].includes(i) })) });
     }
-    async function state(op) {
-      const keys = [op.source, op.destination, op.permit, Q, op.record];
-      return Promise.all(keys.map(async key => ({ address: key.toBase58(), data: (await connection.getAccountInfo(key, 'confirmed')).data })));
+    async function snapshotAccounts(keys, label) {
+      const response = await connection.getMultipleAccountsInfoAndContext(keys, { commitment: 'confirmed' });
+      local.ensure(response.value.every(Boolean), 'Snapshot contains a missing account');
+      evidence.accountSnapshots ??= [];
+      evidence.accountSnapshots.push({ label, context: response.context, commitment: 'confirmed',
+        accounts: keys.map((key, i) => ({ address: key.toBase58(), owner: response.value[i].owner.toBase58(),
+          executable: response.value[i].executable, lamports: response.value[i].lamports,
+          dataBase64: response.value[i].data.toString('base64') })) });
+      await save();
+      return keys.map((key, i) => ({ address: key.toBase58(), data: response.value[i].data }));
+    }
+    async function state(op, label) {
+      return snapshotAccounts([op.source, op.destination, op.permit, Q, op.record], label);
     }
     async function reject(op, label, code, fail = false) {
-      const before = await state(op);
+      const before = await state(op, `${label}-before`);
       const tx = await transport.send(label, [consume(op, fail)], [op.owner], { expectedError: code, category: 'adversarial-native-settlement' });
-      assert.deepEqual(await state(op), before, 'Rejected transaction mutated native/application state');
+      assert.deepEqual(await state(op, `${label}-after`), before, 'Rejected transaction mutated native/application state');
       if (fail) local.ensure(tx.transaction.meta.logMessages.some(line => line.includes('ConfidentialTransferInstruction::Transfer')), 'Forced failure occurred before native transfer');
       evidence.checks.push({ label, actualCustomError: code, allFiveAccountDataUnchanged: true }); await save();
       const observation = await operationReader.observe(op.descriptor);
@@ -274,9 +284,9 @@ export async function run(options) {
       evidence.checks.push({ label: `${label}-sdk-observation`, observation }); await save();
     }
     async function commit(op) {
-      const before = await state(op);
+      const before = await state(op, `${op.label}-commit-before`);
       await transport.send(`${op.label}-atomic-paid-entitlement`, [consume(op)], [op.owner], { category: 'native-settlement' });
-      const after = await state(op);
+      const after = await state(op, `${op.label}-commit-after`);
       assertSettlementEffect(before[3].data, after[3].data, after[2].data, after[4].data, op.kind);
       assert(before[0].data.equals(after[0].data) === false && before[1].data.equals(after[1].data) === false, 'Native source and destination must both change');
       const observation = await operationReader.observe(op.descriptor); assert.equal(observation.status, 'committed');
@@ -300,10 +310,9 @@ export async function run(options) {
         // Recompute the consumer authority correctly so rejection reaches G's permit binding.
         const keys = [...new Map([op.source, op.destination, altered.destination, op.permit, Q, op.record, altered.record]
           .map(key => [key.toBase58(), key])).values()];
-        const snapshot = () => connection.getMultipleAccountsInfo(keys, 'confirmed').then(accounts => accounts.map(account => Buffer.from(account.data)));
-        const before = await snapshot();
+        const before = await snapshotAccounts(keys, `${label}-before`);
         await transport.send(label, [consume(altered)], [op.owner], { expectedError: 705, category: 'adversarial-consumer-binding' });
-        assert.deepEqual(await snapshot(), before, 'Binding failure mutated native, permit, quota or effect state');
+        assert.deepEqual(await snapshotAccounts(keys, `${label}-after`), before, 'Binding failure mutated native, permit, quota or effect state');
         evidence.checks.push({ label, actualCustomError: 705, consumerPdaRecomputed: true, allTrackedDataUnchanged: true }); await save();
       }
       await changed('changed-destination-binding-rejected', { destination: new PublicKey(assetB.accounts.destination.address) });
