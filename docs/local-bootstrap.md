@@ -33,6 +33,11 @@ python3 scripts/prepare_localnet.py --run-id demo-01 \
 
 Preparation generates a new administrator wallet, node BLS/X25519/signing identities and 60 upstream runtime genesis accounts using the pinned Arcium CLI. The CLI lacks a generation-only command, so a checked wrapper intercepts its service launch. The resulting raw upstream Compose is retained as disabled evidence; only the reviewed three-service, digest-pinned Compose is executable through this guide. Recovery identities are generated but recovery is not exercised. No CyperLink-owned genesis state, token assets, proof contexts or preauthorized permits are injected.
 
+Run one generated validator at a time on this host: the pinned validator also
+uses the default faucet port 9900, independent of `--rpc-port`. Stop the previous
+run's validator and Compose project before starting the next. A startup collision
+can leave a partial ledger; preserve it and prepare a new run ID.
+
 From the printed application directory, start these in separate terminals:
 
 ```sh

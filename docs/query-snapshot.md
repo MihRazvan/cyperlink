@@ -45,3 +45,9 @@ rollback. Qualification requires rebuilding and checking the actual loaded Auth
 ELF, then an owner/admin-signed stale-query rejection with unchanged quota,
 absent Job and permit claim, and no queued computation, followed by an explicitly
 fresh authorized query.
+
+Qualified in the final conflict-v15 run: the actual loaded rebuilt Auth ELF
+matched; a retained owner/admin-signed query rejected 6004 after another query
+advanced only the counter. Two existing accounts stayed unchanged, and its Job,
+permit claim and computation stayed absent. The later explicitly fresh B query
+received an authenticated denial. See the [recovery archive review](../evidence/2026-10-02/sdk-conflict-v15-recovery-review.json).

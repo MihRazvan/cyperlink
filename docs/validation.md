@@ -26,6 +26,28 @@ The interrupted v1/v3 attempts remain under `.local/` with their exact failures.
 
 ## Repeatable checks
 
+The 2026-10-02 SDK continuation adds two final fresh-runtime qualifications:
+
+| Layer | Evidence | Result | Boundary |
+| --- | --- | --- | --- |
+| Host SDK, durable transport and recovery | 77 Node client/SDK/example/snapshot tests; five recovery archive groups; 80 Python tests; four Auth snapshot tests | Exact signed-wire recovery, bounded broadcast journals, finalized ALT activation, alternate PreparedAction rejection and query snapshot binding | Synthetic host fixtures and mocked RPC remain distinct from execution |
+| Real validator + two nodes, compatible-v13 | [Run](../evidence/2026-10-02/two-consumers-sdk-compatible-v13.json), [independent review](../evidence/2026-10-02/independent-sdk-compatible-v13-review.json), [recovery review](../evidence/2026-10-02/sdk-compatible-v13-recovery-review.json) | Both 40 purchases paid; quota2/counter3; nine recovery processes, four tickets; 1,282 Ed25519 signatures and ten loaded ELFs checked | Explicit admin/owner signing; deliberately lost RPC response; local confirmed observations |
+| Real validator + two nodes, conflict-v15 | [Run](../evidence/2026-10-02/two-consumers-sdk-conflict-v15.json), [signed archive](../evidence/2026-10-02/independent-sdk-conflict-v15-review.json), [recovery review](../evidence/2026-10-02/sdk-conflict-v15-recovery-review.json) | Actual 6004 rejects counter-only query drift before MPC; paidA, staleB, fresh denial,705/1099/1001; 11 recovery processes, five tickets; 1,350 signatures and ten loaded ELFs checked | New query ABI/ELF; unchanged circuit and native cryptography; 33 original rejection account comparisons plus separate 6004 absence/equality checks |
+
+Recovery archive verification requires the query's retained immutable action
+account evidence, its native/consumer template match and the actual signed wire.
+It fails closed for older archives that lack that evidence. It does not independently
+verify BLS or turn RPC observations into historical state proofs. Preserve the
+older verifier revision when examining older qualification levels.
+
+```sh
+node scripts/verify_recovery_archive.mjs \
+  --results .local/demo-sdk-conflict-v15/results.json \
+  --module-root .local/toolchain/js \
+  --output .local/new-sdk-conflict-recovery-review.json
+node --test tests/recovery-archive.test.mjs
+```
+
 From the repository root, with the pinned toolchain/cache available:
 
 ```sh

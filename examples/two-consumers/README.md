@@ -93,6 +93,14 @@ initial funding and requested scenario amounts are explicitly observer disclosur
 The result is successful only when `passed:true`; source presence or syntax
 checks alone do not constitute live validation.
 
+Final SDK qualification on 2026-10-02 passed in
+[compatible-v13](../../evidence/2026-10-02/two-consumers-sdk-compatible-v13.json)
+and [conflict-v15](../../evidence/2026-10-02/two-consumers-sdk-conflict-v15.json).
+These include the signed query snapshot digest, immutable-action recovery check,
+finalized ALT activation and separate keyless submission/recovery processes.
+Both runs verified all ten actual loaded ELFs; their services are stopped.
+The older results below qualify their historical versions only.
+
 The sender may retransmit identical signed bytes before blockhash expiry; it
 never automatically changes operation identity, nonce, encrypted query or
 signature. Ambiguous delivery aborts and preserves the signed wire. A previous
