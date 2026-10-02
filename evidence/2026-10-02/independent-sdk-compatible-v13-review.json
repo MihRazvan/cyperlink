@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "independent-agent-offline-review-of-real-local-evidence",
+  "checkedAt": "2026-10-02T11:07:02.942Z",
+  "scenario": "compatible",
+  "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+  "input": {
+    "path": ".local/demo-sdk-compatible-v13/results.json",
+    "sha256": "8163b2a6a41e15f42e1d56d2db20fdd705ed0d9e9205f4c3aee878bda561f11c",
+    "bytes": 5238416
+  },
+  "counts": {
+    "archivedMessages": 1243,
+    "ed25519SignaturesVerified": 1282,
+    "loadedElfHashesMatched": 10,
+    "callbacksDecoded": 3,
+    "retainedPlans": 2,
+    "recoveryWorkers": 9,
+    "queryPreparedActionEvidenceValidated": 3,
+    "distinctSignedTickets": 4
+  },
+  "retainedTickets": [
+    {
+      "signature": "5i78u1EmrvrCTTtDUvAMCXbSEZjsgMTMLio2QM1oficFhqDEGrgP57nNS2wiAFkkZ5SHpcXc3TrWMvttKTmf2y3q",
+      "wireSha256": "65b46c25706f402d9b9e7311d2816fb9109c3ccbd149e132944154fdf1364ba4",
+      "role": "query",
+      "receiptSlot": 483
+    },
+    {
+      "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+      "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+      "role": "commit",
+      "receiptSlot": 490
+    },
+    {
+      "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+      "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+      "role": "query",
+      "receiptSlot": 539
+    },
+    {
+      "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+      "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+      "role": "commit",
+      "receiptSlot": 546
+    }
+  ],
+  "lostResponse": {
+    "sameSignedWireAndSignature": true,
+    "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+    "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+    "testObserverFaultInjection": true
+  },
+  "rawAccountSnapshots": {
+    "available": true,
+    "snapshotCount": 4,
+    "rejectedTransactions": 0,
+    "rejectedAccountComparisons": 0,
+    "rejections": [],
+    "commits": [
+      {
+        "label": "a40-atomic-paid-entitlement",
+        "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+        "changedAccounts": 5,
+        "beforeSlot": 488,
+        "transactionSlot": 490,
+        "afterSlot": 490,
+        "exactEncryptedSuccessor": true
+      },
+      {
+        "label": "b40-honest-fresh-atomic-paid-entitlement",
+        "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+        "changedAccounts": 5,
+        "beforeSlot": 545,
+        "transactionSlot": 546,
+        "afterSlot": 546,
+        "exactEncryptedSuccessor": true
+      }
+    ],
+    "limitation": "Equality is independently recomputed from retained confirmed RPC account bytes and metadata, not historical state proofs; payer fees and untracked accounts are outside this comparison"
+  },
+  "finalQuota": {
+    "version": "2",
+    "stateHash": "13f1b9e8d52365c07c8c643ad3f7c260b40415bb8f41ab16c9d2579babe18c58",
+    "nonce": "03000000000000000000000000000000",
+    "ciphertext": "a41470165fd76e4c9d041b55d5cc51046a7e32ecad4e1709bde137229a4b710a",
+    "counter": "3"
+  },
+  "limitations": [
+    "Offline checks of retained confirmed RPC receipts and raw snapshots; no fresh RPC or independent historical-state proof.",
+    "PreparedAction fields and Ed25519 signatures independently recomputed; BLS authenticity relies on successful onchain callback verification and matched program artifacts, not offline BLS verification.",
+    "Response-loss injection and process separation are recorded test-runner evidence; this review does not independently attest operating-system events.",
+    "No account-wide decryption keys read. Allowance amounts remain labeled observer disclosures; no independent private-balance decryption or production/public-network claim."
+  ]
+}

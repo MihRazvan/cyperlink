@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "passed": true,
+  "scenario": "compatible",
+  "evidenceLevel": "offline-recovery-journal-and-receipt-crosscheck",
+  "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+  "input": {
+    "path": ".local/demo-sdk-compatible-v13/results.json",
+    "bytes": 5238416,
+    "sha256": "8163b2a6a41e15f42e1d56d2db20fdd705ed0d9e9205f4c3aee878bda561f11c"
+  },
+  "counts": {
+    "workers": 9,
+    "distinctRecordedProcessIds": 9,
+    "signedTickets": 4
+  },
+  "tickets": [
+    {
+      "signature": "5i78u1EmrvrCTTtDUvAMCXbSEZjsgMTMLio2QM1oficFhqDEGrgP57nNS2wiAFkkZ5SHpcXc3TrWMvttKTmf2y3q",
+      "role": "query",
+      "wireSha256": "65b46c25706f402d9b9e7311d2816fb9109c3ccbd149e132944154fdf1364ba4",
+      "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+      "receiptSlot": 483,
+      "receiptError": null,
+      "preparedAction": {
+        "address": "34J5qXypjjo9giwqtqJSuSem5i8ZUeHLEZSasFmMoXcw",
+        "slot": 482,
+        "sha256": "d566fda8a1f899dc0445c7af91888dbc955065722d01edfeec31d49d20dc21a6",
+        "bytes": 1200
+      },
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+      "role": "commit",
+      "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+      "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+      "receiptSlot": 490,
+      "receiptError": null,
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+      "role": "query",
+      "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+      "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+      "receiptSlot": 539,
+      "receiptError": null,
+      "preparedAction": {
+        "address": "DSWejGe8QMaVZ84WdyBPbxWsFVa3JCbRCn39vUEWaE2w",
+        "slot": 538,
+        "sha256": "6ca16c5d72cec079450febcf634bbd6eb59c6f8277a9a2145be0f7010afde9fd",
+        "bytes": 1200
+      },
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+      "role": "commit",
+      "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+      "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+      "receiptSlot": 546,
+      "receiptError": null,
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    }
+  ],
+  "querySnapshotRejection": {
+    "expected": false,
+    "reason": "Compatible purchases do not include the delayed-query rejection scenario."
+  },
+  "limitations": [
+    "No RPC calls, public-network writes, key access or fresh execution; trusted archived RPC receipts are not historical state proofs.",
+    "Signed wire semantics reuse the operation-ticket validator; signature checks use Node Ed25519. This does not independently verify BLS or reconstruct runtime execution.",
+    "Every query-ticket recovery requires retained immutable PreparedAction account bytes matching its local plan; these are archived RPC observations, not a new live account read.",
+    "Process IDs and test response-loss classifications are archived runner evidence, not independent operating-system attestations."
+  ]
+}

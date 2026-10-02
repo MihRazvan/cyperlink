@@ -1,0 +1,2973 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scenario": "compatible",
+  "evidence_level": "real-local-validator-and-two-node-runtime",
+  "scope": "synthetic same-mint assets, one quota/MXE, administrator co-signed queries",
+  "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+  "idl_sha256": "32e0cafd3cbfe87e3e8739874d84fae831f688821dd8d9d6ade10d3fb40c6f37",
+  "runtime_mxe_public_key_hex": "1ad436327bf9da7c2fd43a31b03c631db404ddd23c9b33d135a326c395ce7a74",
+  "limitations": [
+    "No public-network execution or production claim",
+    "Internal reference consumers, no external integration commitment",
+    "CU/fees measure validator transactions; wall-clock callback latency is separate from distributed runtime resource costs, which are not measured"
+  ],
+  "validator": {
+    "feature-set": 3383571666,
+    "solana-core": "4.3.0"
+  },
+  "loaded_programs": [
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "9iAPk585pPZQW3AfG5SGzKDTfmGcprHTEAPQt8vmVA39",
+      "last_deploy_slot": 0,
+      "elf_bytes": 677864,
+      "elf_sha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "loaded_elf_sha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "loaded_account_payload_sha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "padding_zero_bytes": 0,
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "rpc_slot": 365,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "BXdX5HicWBfMnwbHKefmQsvjbJGKb2m38ggB86rqh8NG",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72928,
+      "elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_account_payload_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "padding_zero_bytes": 0,
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "rpc_slot": 365,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "ApP1iic4fTQg1h2PnKoVSnAxnKqWmrJqEdf7LpbtbWZe",
+      "last_deploy_slot": 0,
+      "elf_bytes": 107960,
+      "elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_account_payload_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "padding_zero_bytes": 0,
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "rpc_slot": 365,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2yvmbPSjGuDnex57mg8e3yEckvErZ9bsvjKVgnau6GmX",
+      "last_deploy_slot": 0,
+      "elf_bytes": 72808,
+      "elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_account_payload_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "padding_zero_bytes": 0,
+      "program": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "rpc_slot": 365,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "AwZBSQnp4PmNDiQPwVnFq35NY2YAbfSXoQoJfd6RDghz",
+      "last_deploy_slot": 0,
+      "elf_bytes": 73560,
+      "elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_account_payload_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "padding_zero_bytes": 0,
+      "program": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "rpc_slot": 365,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "En7FK1cr5MYU1v7wKrcK95fk5btMxhw2EqJHvF5Rf2RS",
+      "last_deploy_slot": 0,
+      "elf_bytes": 16504,
+      "elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_account_payload_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "padding_zero_bytes": 0,
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "rpc_slot": 366,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "6kZkJ4BgFbuYcEAED3AtzVouHDMNMLYLJb5zZSoEBftc",
+      "last_deploy_slot": 0,
+      "elf_bytes": 1648440,
+      "elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_account_payload_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "padding_zero_bytes": 0,
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "rpc_slot": 366,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "2Nws4AxLooysrGiQfrSwywWcZJdyMsL2XetkQ2KtUQG5",
+      "last_deploy_slot": 0,
+      "elf_bytes": 816976,
+      "elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_account_payload_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "padding_zero_bytes": 0,
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "rpc_slot": 366,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "CJ5WEjifs4d77pEA9DpewppByFjHcAkNv3YYSuSoDk7c",
+      "last_deploy_slot": 0,
+      "elf_bytes": 424248,
+      "elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_account_payload_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "padding_zero_bytes": 0,
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "rpc_slot": 366,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    },
+    {
+      "matched": true,
+      "program_owner": "BPFLoaderUpgradeab1e11111111111111111111111",
+      "programdata": "DoU57AYuPFu2QU514RktNPG22QhApEjnKxnBcu4BHDTY",
+      "last_deploy_slot": 0,
+      "elf_bytes": 1382016,
+      "elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_account_payload_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "padding_zero_bytes": 0,
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "rpc_slot": 366,
+      "genesis_hash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "evidence_level": "real-local-validator-account-read",
+      "executes_program": false
+    }
+  ],
+  "operations": [
+    {
+      "label": "a40",
+      "kind": "merchant",
+      "requestedAmountObserverDisclosure": 40,
+      "status": 1,
+      "source": "96DgNjfMg7YN585KKVL2kuBCnsdsM6rh1DVmy1tbUM6x",
+      "destination": "GKtPrNX4bwtiXoDtmx6TH6qLsbG7CToZLG7zcz5JNXVK",
+      "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+      "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+      "consumer": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "record": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+      "quotaVersionAtAdmission": "0"
+    },
+    {
+      "label": "b40-honest-fresh",
+      "kind": "license",
+      "requestedAmountObserverDisclosure": 40,
+      "status": 1,
+      "source": "Fm7ARrj1g2JpiiT5am6gSZKh9wfqkpiKPp75sGWwakTU",
+      "destination": "43TBBmp7moscDkjf19Nato9CjPxUvnAxo7YzhoLr6RHo",
+      "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+      "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+      "consumer": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "record": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+      "quotaVersionAtAdmission": "1"
+    }
+  ],
+  "observer_disclosures": {
+    "initial_allowance": 100,
+    "purchase_amounts": [
+      40,
+      40
+    ],
+    "note": "Setup and requested amounts are disclosed to the test observer. Remaining allowance is inferred from committed purchases, not decrypted from MXE state.",
+    "inferred_remaining_allowance": 20
+  },
+  "callbacks": [
+    {
+      "label": "RuntimeBudgetInitCallback",
+      "job": "13eex1VBZ6LWcc6Qtwb55j8NyNRy49dZMJLKXfosrBfm",
+      "computation": "52hQwnjwk981AmYGE988gs2JufwGpGSnw71E9wp9RPcA",
+      "signature": "5qd7xFrFW8UtjyRoKEkUK3Gu3mLZyJ5ptbUXNYAi8UTAVUbbE1uc5hk6ofr69Q9yzoHb4zDCisxLst8CKYsUGW9U",
+      "status": 1,
+      "elapsedFromQueueMs": 3890,
+      "slot": 411,
+      "landedCU": 140085,
+      "feeLamports": 5000,
+      "output": {
+        "field0": true,
+        "field1": [
+          194,
+          160,
+          162,
+          58,
+          7,
+          135,
+          20,
+          196,
+          173,
+          236,
+          151,
+          141,
+          171,
+          134,
+          233,
+          222,
+          147,
+          46,
+          208,
+          114,
+          215,
+          157,
+          55,
+          148,
+          33,
+          46,
+          37,
+          59,
+          174,
+          221,
+          219,
+          11
+        ]
+      }
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+      "computation": "HJnJM69829Y8WFUNJDfrF231cHbqA1YZhMkc4yqKB5Fy",
+      "signature": "x3sCFMxaHyGwVhSk6fMfTgc2b4VXTfXiaXCxEwx5wwAahmmATG7RHHe6nDgPdMZ52CGG7wFURe5ZMbk85imQ2Bh",
+      "status": 1,
+      "elapsedFromQueueMs": 19811,
+      "slot": 488,
+      "landedCU": 152126,
+      "feeLamports": 5000,
+      "output": {
+        "field0": [
+          202,
+          133,
+          251,
+          209,
+          30,
+          1,
+          106,
+          53,
+          184,
+          103,
+          127,
+          125,
+          69,
+          214,
+          175,
+          55,
+          32,
+          99,
+          120,
+          182,
+          126,
+          208,
+          55,
+          34,
+          79,
+          198,
+          19,
+          161,
+          202,
+          242,
+          111,
+          121
+        ],
+        "field1": true,
+        "field2": [
+          43,
+          222,
+          209,
+          98,
+          140,
+          190,
+          229,
+          61,
+          50,
+          56,
+          132,
+          106,
+          29,
+          135,
+          176,
+          162,
+          202,
+          53,
+          233,
+          236,
+          99,
+          126,
+          71,
+          188,
+          255,
+          175,
+          126,
+          180,
+          92,
+          0,
+          242,
+          9
+        ]
+      }
+    },
+    {
+      "label": "RuntimeBudgetBoundCallback",
+      "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+      "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+      "signature": "492gHcyixM8VvTHtvWr7zDLDkJxJXt3cB2gk89wJnJm4kSsds1e7VNQGHAkiiv549BhjZbdCN7DTfAwVJwhuY7h7",
+      "status": 1,
+      "elapsedFromQueueMs": 19486,
+      "slot": 544,
+      "landedCU": 151701,
+      "feeLamports": 5000,
+      "output": {
+        "field0": [
+          114,
+          190,
+          132,
+          71,
+          190,
+          45,
+          25,
+          33,
+          103,
+          213,
+          81,
+          104,
+          10,
+          46,
+          228,
+          131,
+          180,
+          218,
+          92,
+          143,
+          252,
+          71,
+          91,
+          92,
+          175,
+          217,
+          134,
+          161,
+          164,
+          210,
+          33,
+          62
+        ],
+        "field1": true,
+        "field2": [
+          164,
+          20,
+          112,
+          22,
+          95,
+          215,
+          110,
+          76,
+          157,
+          4,
+          27,
+          85,
+          213,
+          204,
+          81,
+          4,
+          106,
+          126,
+          50,
+          236,
+          173,
+          78,
+          23,
+          9,
+          189,
+          225,
+          55,
+          34,
+          154,
+          75,
+          113,
+          10
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "quota-prefunded-empty-system-account",
+      "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "lamports": 890880
+    },
+    {
+      "label": "hook-metadata-prefunded-empty-system-account",
+      "address": "H74d9bQt7RgNQcahpee8EASa27LMh3pkz99xzj7AAp4d",
+      "lamports": 890880
+    },
+    {
+      "label": "a40-consumer-record-prefunded-empty-system-account",
+      "address": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+      "lamports": 890880
+    },
+    {
+      "label": "a40-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 488,
+        "commitment": "confirmed",
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "a40-sdk-paid-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 490,
+        "commitment": "confirmed",
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "label": "a40-native-payment-and-entitlement-atomic",
+      "changedAccounts": [
+        "96DgNjfMg7YN585KKVL2kuBCnsdsM6rh1DVmy1tbUM6x",
+        "GKtPrNX4bwtiXoDtmx6TH6qLsbG7CToZLG7zcz5JNXVK",
+        "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX"
+      ]
+    },
+    {
+      "label": "b40-honest-fresh-consumer-record-prefunded-empty-system-account",
+      "address": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+      "lamports": 890880
+    },
+    {
+      "label": "b40-honest-fresh-sdk-observation",
+      "observation": {
+        "status": "authorized",
+        "slot": 544,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "b40-honest-fresh-sdk-paid-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 546,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": true,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "label": "b40-honest-fresh-native-payment-and-entitlement-atomic",
+      "changedAccounts": [
+        "Fm7ARrj1g2JpiiT5am6gSZKh9wfqkpiKPp75sGWwakTU",
+        "43TBBmp7moscDkjf19Nato9CjPxUvnAxo7YzhoLr6RHo",
+        "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT"
+      ]
+    }
+  ],
+  "accountSnapshots": [
+    {
+      "label": "a40-commit-before",
+      "commitment": "confirmed",
+      "context": {
+        "apiVersion": "4.3.0",
+        "slot": 488
+      },
+      "accounts": [
+        {
+          "address": "96DgNjfMg7YN585KKVL2kuBCnsdsM6rh1DVmy1tbUM6x",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP7QQwA+mHWdcWbY2q8IN8hQJd4ggXD155aJ0c/FsKy07wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQEMeM+OW7lFg06s3asN8hCSRFZ2BsnqhSXupEp6wcibCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgsr37NMZtfm+BMsXNlOpu+i5pT8cUJSUUDLhLqbZjQ/cjQHawKGuwnTYu7B4qkE8RFJw1M3m2pajmDh3tW65StGSviFreut52ihoOMc/hHx5flLVPLOlgBWtFj6SXcDgXMS1VQEBAAAAAAAAAABkAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAA="
+        },
+        {
+          "address": "GKtPrNX4bwtiXoDtmx6TH6qLsbG7CToZLG7zcz5JNXVK",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP4ZTEEzg824+URUg/K0P90VBKgUPb4AxRqNG1S7trHBcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQHWmKXBNG2VnKdGHf0N7FUFG0oFAOBz2LiuBQNsACNOGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKH27+onqN/7AhIISdBGbjgviLMNTrnGdpEelEvKKAzqGNuw4gEBAAAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 4510080,
+          "dataBase64": "AAEAAAAAAAAAAAAAAAAAAPLg5iBSq2qFGDacrwrAF3/ECYxHNte4j8ri21XUj09UiBf0dnOaGY3UO5nMuKLZXVvctVRn2SlLSAntGExuqXl4M7xKHOvLWmHJWD9wBQuAztKvgBSDp+hJxwa9tS91YYch634tPYMwo6HWB4WUUboRj76WdfkYlKQ2ey4jBJj+47XerNLGsMePiuh7LTKiJysC0lWFtRkfQ5AobS6gRzrQQwA+mHWdcWbY2q8IN8hQJd4ggXD155aJ0c/FsKy07+kbmh2s94Ehhd0YM2sS/pIC1uRTQL56tPVGq3AKHNuq3rfulvKENN9NJFTyuv5qYLxwev7vzT3/CuBZ96O6XNpGwQsG4KE/MkFJLm5oj8cEFLTD7CzkYYNf7ux281xybqo5uz6uMRS+Sk1ZhvVs+OTSnApCfmojPfMGWvYNZGEQyoX70R4BajW4Z399RdavNyBjeLZ+0DciT8YTocryb3kMc6D3E0xcbL+0CR4Tsgtp91JIpXT5WxibvaBPPUlt21NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTFZPCZgfqmHZJ0uNy1BorAgNkl4wAPnTZ3C4jtpSknGcCAAAAAAAAAAAAAAAAAAAAK97RYoy+5T0yOIRqHYewoso16exjfke8/69+tFwA8gnHCAAAAAAAAA=="
+        },
+        {
+          "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 2011440,
+          "dataBase64": "AAAAAAAAAADy4OYgUqtqhRg2nK8KwBd/xAmMRzbXuI/K4ttV1I9PVAEAAAAAAAAAAAAAAAAAAADCoKI6B4cUxK3sl42rhuneky7QctedN5QhLiU7rt3bCwIAAAAAAAAAS6Nls1cxVZ48tUv3/YYOzz867UqFvdS0YAOmKO8w09gBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+          "owner": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+          "executable": false,
+          "lamports": 1231920,
+          "dataBase64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+        }
+      ]
+    },
+    {
+      "label": "a40-commit-after",
+      "commitment": "confirmed",
+      "context": {
+        "apiVersion": "4.3.0",
+        "slot": 490
+      },
+      "accounts": [
+        {
+          "address": "96DgNjfMg7YN585KKVL2kuBCnsdsM6rh1DVmy1tbUM6x",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP7QQwA+mHWdcWbY2q8IN8hQJd4ggXD155aJ0c/FsKy07wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQEMeM+OW7lFg06s3asN8hCSRFZ2BsnqhSXupEp6wcibCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARsELBuChPzJBSS5uaI/HBBS0w+ws5GGDX+7sdvNccm6qObs+rjEUvkpNWYb1bPjk0pwKQn5qIz3zBlr2DWRhEEn0CG4BfS/gIDwvRiagvz7iZbBwGb5N/6Gmbos5jh4n1oZMyQEBAAAAAAAAAABkAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAA="
+        },
+        {
+          "address": "GKtPrNX4bwtiXoDtmx6TH6qLsbG7CToZLG7zcz5JNXVK",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP4ZTEEzg824+URUg/K0P90VBKgUPb4AxRqNG1S7trHBcgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQHWmKXBNG2VnKdGHf0N7FUFG0oFAOBz2LiuBQNsACNOG1B3JlFVfE0ur8Ll/l/rfUREfywmFcfOMv526dclZPJ+7klwSjchV9fV2+wqJfGyfZexi2UhV/vbkfYzUd1FfEXU3hPpQhs20a7MbK4Fg9K69++179BV/xhzyzEi8qxMFPjxIazClW61K58l51/EzIPyFM7L9gkF8r6mqBK4lO8yAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKH27+onqN/7AhIISdBGbjgviLMNTrnGdpEelEvKKAzqGNuw4gEBAQAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 4510080,
+          "dataBase64": "AgEAAAAAAAAAAAAAAAAAAPLg5iBSq2qFGDacrwrAF3/ECYxHNte4j8ri21XUj09UiBf0dnOaGY3UO5nMuKLZXVvctVRn2SlLSAntGExuqXl4M7xKHOvLWmHJWD9wBQuAztKvgBSDp+hJxwa9tS91YYch634tPYMwo6HWB4WUUboRj76WdfkYlKQ2ey4jBJj+47XerNLGsMePiuh7LTKiJysC0lWFtRkfQ5AobS6gRzrQQwA+mHWdcWbY2q8IN8hQJd4ggXD155aJ0c/FsKy07+kbmh2s94Ehhd0YM2sS/pIC1uRTQL56tPVGq3AKHNuq3rfulvKENN9NJFTyuv5qYLxwev7vzT3/CuBZ96O6XNpGwQsG4KE/MkFJLm5oj8cEFLTD7CzkYYNf7ux281xybqo5uz6uMRS+Sk1ZhvVs+OTSnApCfmojPfMGWvYNZGEQyoX70R4BajW4Z399RdavNyBjeLZ+0DciT8YTocryb3kMc6D3E0xcbL+0CR4Tsgtp91JIpXT5WxibvaBPPUlt21NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTFZPCZgfqmHZJ0uNy1BorAgNkl4wAPnTZ3C4jtpSknGcCAAAAAAAAAAAAAAAAAAAAK97RYoy+5T0yOIRqHYewoso16exjfke8/69+tFwA8gnHCAAAAAAAAA=="
+        },
+        {
+          "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 2011440,
+          "dataBase64": "AQAAAAAAAACIF/R2c5oZjdQ7mcy4otldW9y1VGfZKUtICe0YTG6peQIAAAAAAAAAAAAAAAAAAAAr3tFijL7lPTI4hGodh7CiyjXp7GN+R7z/r360XADyCQIAAAAAAAAAS6Nls1cxVZ48tUv3/YYOzz867UqFvdS0YAOmKO8w09gBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+          "owner": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+          "executable": false,
+          "lamports": 1231920,
+          "dataBase64": "UFVSQ0gwMDHQQwA+mHWdcWbY2q8IN8hQJd4ggXD155aJ0c/FsKy07wcAAAAAAAAAAQ=="
+        }
+      ]
+    },
+    {
+      "label": "b40-honest-fresh-commit-before",
+      "commitment": "confirmed",
+      "context": {
+        "apiVersion": "4.3.0",
+        "slot": 545
+      },
+      "accounts": [
+        {
+          "address": "Fm7ARrj1g2JpiiT5am6gSZKh9wfqkpiKPp75sGWwakTU",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP70Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQHmY5f3z6vyoIRaq7eu/0wb+5EwJmrJnwW7d1bm5b9XWgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgsr37NMZtfm+BMsXNlOpu+i5pT8cUJSUUDLhLqbZjQ8IIh/XwqlqMlHgLCfDShQT4k54uM/w+FH5DCrjchBlLAAfGlMbklgtvqVIXoNx9BxwRNx9AwEjz+ZzRcE1049OOrC60QEBAAAAAAAAAABkAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAA="
+        },
+        {
+          "address": "43TBBmp7moscDkjf19Nato9CjPxUvnAxo7YzhoLr6RHo",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP7LtmVHsjR9/G7Rgrn4/QoagexWyznQedzzsMBjzml+XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQFqZGWdAT48O7qjHx19kANGQDVw2j6P2q4Rnu1JD8mrAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/jM57iqCuSgXOwxY0nIyif33oJeLqMxk1ZMR9+iPfywJuClAEBAAAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 4510080,
+          "dataBase64": "AAEAAAAAAAABAAAAAAAAAIgX9HZzmhmN1DuZzLii2V1b3LVUZ9kpS0gJ7RhMbql5E/G56NUjZcB8jGQ60/fCYLQEFbuPQasWydJXm6vhjFjbUCP+SdCvGioc5GQGaF1z9Rv3ATDtM9hDOJjFGsiFc4ch634tPYMwo6HWB4WUUboRj76WdfkYlKQ2ey4jBJj+LTPRuxHlDaVuIjfa6/51HoLosPqJlyv4YPkm6pkVN2b0Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZeSEyfl6bYx4P25+D+4JpPCBGZlHHdes33HGkw15hW4kRFZeEeSc7m5kJPPrfMig8XEA5Y4Lz25ngdOg4IlItDUmHZmqQ7jD6Tvct8ri20WQCw6imGql3v2aPdHECgBdM5TgSy33MEim8WX4vQIwCYDULw5LaiQm53Z2iCnM7xpacr6ER74tGSFn1VFoCi7kg7TaXI/8R1tcr9mGoaTSIT4Mc6D3E0xcbL+0CR4Tsgtp91JIpXT5WxibvaBPPUlt21RUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUTxetHvhr3PqKTmE1keOBI4nmD2hPdb6X20RZSGdB5PwDAAAAAAAAAAAAAAAAAAAApBRwFl/XbkydBBtV1cxRBGp+MuytThcJveE3IppLcQoBCQAAAAAAAA=="
+        },
+        {
+          "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 2011440,
+          "dataBase64": "AQAAAAAAAACIF/R2c5oZjdQ7mcy4otldW9y1VGfZKUtICe0YTG6peQIAAAAAAAAAAAAAAAAAAAAr3tFijL7lPTI4hGodh7CiyjXp7GN+R7z/r360XADyCQMAAAAAAAAAS6Nls1cxVZ48tUv3/YYOzz867UqFvdS0YAOmKO8w09gBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+          "owner": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+          "executable": false,
+          "lamports": 1454640,
+          "dataBase64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    {
+      "label": "b40-honest-fresh-commit-after",
+      "commitment": "confirmed",
+      "context": {
+        "apiVersion": "4.3.0",
+        "slot": 546
+      },
+      "accounts": [
+        {
+          "address": "Fm7ARrj1g2JpiiT5am6gSZKh9wfqkpiKPp75sGWwakTU",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP70Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQHmY5f3z6vyoIRaq7eu/0wb+5EwJmrJnwW7d1bm5b9XWgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJh2ZqkO4w+k73LfK4ttFkAsOophqpd79mj3RxAoAXTOU4Est9zBIpvFl+L0CMAmA1C8OS2okJud2dogpzO8aWoNnGqpy5wCYrvzXyncZTVHOu1MKlyj7nfqYKT8H4GXj6mk8RgEBAAAAAAAAAABkAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAA="
+        },
+        {
+          "address": "43TBBmp7moscDkjf19Nato9CjPxUvnAxo7YzhoLr6RHo",
+          "owner": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+          "executable": false,
+          "lamports": 4162080,
+          "dataBase64": "hyHrfi09gzCjodYHhZRRuhGPvpZ1+RiUpDZ7LiMEmP7LtmVHsjR9/G7Rgrn4/QoagexWyznQedzzsMBjzml+XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg8AAQAABQAnAQFqZGWdAT48O7qjHx19kANGQDVw2j6P2q4Rnu1JD8mrAaBYPY6fOJ17xjlFzwYtkgS4a+WVjv/FQpnwN5CV0uJLivkPl0JfDium5hta4jsfshToh1OoaHeogJgf1yiHZTx+j1KBzuH9+vlz8hg/r2bxZk/1QgkFsZVPjutVaAMVOeYYIJYsS0kOp6qsqPx1QCTAE/PgU7RqLoTlJK0ej+ksAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/jM57iqCuSgXOwxY0nIyif33oJeLqMxk1ZMR9+iPfywJuClAEBAQAAAAAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 4510080,
+          "dataBase64": "AgEAAAAAAAABAAAAAAAAAIgX9HZzmhmN1DuZzLii2V1b3LVUZ9kpS0gJ7RhMbql5E/G56NUjZcB8jGQ60/fCYLQEFbuPQasWydJXm6vhjFjbUCP+SdCvGioc5GQGaF1z9Rv3ATDtM9hDOJjFGsiFc4ch634tPYMwo6HWB4WUUboRj76WdfkYlKQ2ey4jBJj+LTPRuxHlDaVuIjfa6/51HoLosPqJlyv4YPkm6pkVN2b0Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZeSEyfl6bYx4P25+D+4JpPCBGZlHHdes33HGkw15hW4kRFZeEeSc7m5kJPPrfMig8XEA5Y4Lz25ngdOg4IlItDUmHZmqQ7jD6Tvct8ri20WQCw6imGql3v2aPdHECgBdM5TgSy33MEim8WX4vQIwCYDULw5LaiQm53Z2iCnM7xpacr6ER74tGSFn1VFoCi7kg7TaXI/8R1tcr9mGoaTSIT4Mc6D3E0xcbL+0CR4Tsgtp91JIpXT5WxibvaBPPUlt21RUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUTxetHvhr3PqKTmE1keOBI4nmD2hPdb6X20RZSGdB5PwDAAAAAAAAAAAAAAAAAAAApBRwFl/XbkydBBtV1cxRBGp+MuytThcJveE3IppLcQoBCQAAAAAAAA=="
+        },
+        {
+          "address": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+          "owner": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+          "executable": false,
+          "lamports": 2011440,
+          "dataBase64": "AgAAAAAAAAAT8bno1SNlwHyMZDrT98JgtAQVu49BqxbJ0lebq+GMWAMAAAAAAAAAAAAAAAAAAACkFHAWX9duTJ0EG1XVzFEEan4y7K1OFwm94TcimktxCgMAAAAAAAAAS6Nls1cxVZ48tUv3/YYOzz867UqFvdS0YAOmKO8w09gBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        },
+        {
+          "address": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+          "owner": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+          "executable": false,
+          "lamports": 1454640,
+          "dataBase64": "TElDRU5TRTH0Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZUvkj+Z1eEtC4bVPAPs3nK8/FksP8YNmOHF4DAUHNW02oAUAAAAAAAAB"
+        }
+      ]
+    }
+  ],
+  "final_quota": {
+    "version": "2",
+    "counter": "3",
+    "nonce": "03000000000000000000000000000000",
+    "stateHash": "13f1b9e8d52365c07c8c643ad3f7c260b40415bb8f41ab16c9d2579babe18c58",
+    "ciphertext": "a41470165fd76e4c9d041b55d5cc51046a7e32ecad4e1709bde137229a4b710a"
+  },
+  "validator_cost_by_category": {
+    "adversarial-prefunding-setup": {
+      "transactions": 4,
+      "landedCU": 1200,
+      "feeLamports": 20000
+    },
+    "application": {
+      "transactions": 6,
+      "landedCU": 80197,
+      "feeLamports": 50000
+    },
+    "arcium-definition": {
+      "transactions": 2,
+      "landedCU": 82142,
+      "feeLamports": 10000
+    },
+    "arcium-circuit-upload": {
+      "transactions": 1178,
+      "landedCU": 10619294,
+      "feeLamports": 5890000
+    },
+    "arcium-queue": {
+      "transactions": 3,
+      "landedCU": 460660,
+      "feeLamports": 25000
+    },
+    "lookup-table": {
+      "transactions": 4,
+      "landedCU": 40500,
+      "feeLamports": 20000
+    },
+    "native-settlement": {
+      "transactions": 2,
+      "landedCU": 171832,
+      "feeLamports": 20000
+    },
+    "native-provisioning": {
+      "transactions": 19,
+      "landedCU": 76962,
+      "feeLamports": 170000
+    },
+    "native-proof-and-permit-provisioning": {
+      "transactions": 22,
+      "landedCU": 453908,
+      "feeLamports": 190000
+    },
+    "arcium-signed-callback": {
+      "transactions": 3,
+      "landedCU": 443912,
+      "feeLamports": 15000
+    }
+  },
+  "critical_transactions": [
+    {
+      "label": "quota-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "FYXMEz9KHxBQCQo6Hu18Z8okU9wMV4BHs67L9pdVKNXGkMTsxDvFiTcParZcmkK4xdRrKBdii88B8firmj7b1om",
+      "bytes": 257,
+      "slot": 368,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "provision-quota",
+      "category": "application",
+      "signature": "3YTFrWsHAWJsgCuzW92mN8v62hiQtY6yhCDaCQHVXFALQqheQ9JaqP9Tbj4heoiRqdhMhHaxHcYFnKk8TSgbiHWN",
+      "bytes": 385,
+      "slot": 369,
+      "signaturesVerified": true,
+      "simulatedCU": 27580,
+      "landedCU": 27580,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "runtime_budget_init-definition",
+      "category": "arcium-definition",
+      "signature": "C1SGkjd2uBhMa2vrFndTUGa4WKcRFdUFxELr12m4E7JpnUJ26MrUPRonmzZgRNEW3Ph885cmdg64YAEbFB2g6La",
+      "bytes": 418,
+      "slot": 370,
+      "signaturesVerified": true,
+      "simulatedCU": 34484,
+      "landedCU": 34484,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "runtime_budget_bound-definition",
+      "category": "arcium-definition",
+      "signature": "E7ri1v1CpETMdLpgjEV8dbZUu9J6ko9tpKawo1Lx66Kxq24JriBPFUhaCsT9AACu67xkrXS3R65yXAG32f8xFTj",
+      "bytes": 418,
+      "slot": 382,
+      "signaturesVerified": true,
+      "simulatedCU": 47658,
+      "landedCU": 47658,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "initialize-encrypted-allowance",
+      "category": "arcium-queue",
+      "signature": "3YW8JcnarAiM5GbmxfkCzhjvgEui5Pu82BAPx6xjZQNKNvz3SK7vzCYFtdLWXhcahzw5oWBVUEFV4SbUGDfGQqGZ",
+      "bytes": 803,
+      "slot": 404,
+      "signaturesVerified": true,
+      "simulatedCU": 115150,
+      "landedCU": 115150,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "hook-metadata-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "51HmjXjMHEQCaj3LPGA5meLaWbDrp77JamzKHUDSfRFiMZx1bbN6koWgk1fM4Um7t71bcxfBMpy1jRMZnsSF6juP",
+      "bytes": 257,
+      "slot": 431,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "initialize-hook-metadata",
+      "category": "application",
+      "signature": "TKU1fGBA7Mfma1cxcSxAn599exZUS55VUNkW2qdZ63diAt4wuPaVd5s6cAyE1WfbcSLQ8KGZuSUKhUekPz9qGUo",
+      "bytes": 312,
+      "slot": 432,
+      "signaturesVerified": true,
+      "simulatedCU": 13422,
+      "landedCU": 13422,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a40-consumer-record-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "3DwRVSDSGFBgHK1BoHV7AvV46KvhsV5x4UZn6BPqTGVMiPFF7VsBuaYjPTy9LRA4VMoUdqdfuGysEhMue7nsbe2C",
+      "bytes": 257,
+      "slot": 433,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a40-initialize-consumer-record",
+      "category": "application",
+      "signature": "5jPEWyHWKAe29ResjsWxuXc9pyHaZnRsx5k5hp1sXP7fqZDTUaXvFS6rkunNDA4WZhsz4fUCR9Xcg5HYe9wimxMU",
+      "bytes": 384,
+      "slot": 445,
+      "signaturesVerified": true,
+      "simulatedCU": 10289,
+      "landedCU": 10289,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "a40-prepare-immutable-action",
+      "category": "application",
+      "signature": "5EjMMWAEK5aLfGHpavcv5FpuFjy4dnjHGfRpFbN2A7XP9fYEiUHgF1JSHS4PybyjLT1czwCBdwZmEiiuRzThv9fB",
+      "bytes": 1033,
+      "slot": 447,
+      "signaturesVerified": true,
+      "simulatedCU": 8558,
+      "landedCU": 8558,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "create-demo-alt",
+      "category": "lookup-table",
+      "signature": "5SXFPtDkniksaMqCTh4UwwFrxgdt153FuoPFz9YV4nJaYJBfZYHaP6W3Tqty2treDWrszigMzjAR1DTBbhddgs6E",
+      "bytes": 292,
+      "slot": 448,
+      "signaturesVerified": true,
+      "simulatedCU": 10640,
+      "landedCU": 10661,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "4rfdBn2aW7fYHLWKGbR9uU69T6gmMXheM4pG8MzSetaiQC8Jyr1RF4QHG4EiCcMTaoDmzvzDF977sAVDHbNejmV4",
+      "bytes": 932,
+      "slot": 449,
+      "signaturesVerified": true,
+      "simulatedCU": 11807,
+      "landedCU": 11807,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "53PDai17f4NrVi3ZRsLa8j5tHLdzHHvH5Nv9UTaLWjw4UB4atJB1h2TX7gv7FPepWCzAbHu4vi2hRJRe7qq5GRYE",
+      "bytes": 580,
+      "slot": 450,
+      "signaturesVerified": true,
+      "simulatedCU": 8572,
+      "landedCU": 8574,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "a40-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "5i78u1EmrvrCTTtDUvAMCXbSEZjsgMTMLio2QM1oficFhqDEGrgP57nNS2wiAFkkZ5SHpcXc3TrWMvttKTmf2y3q",
+      "bytes": 564,
+      "slot": 483,
+      "signaturesVerified": true,
+      "simulatedCU": 180375,
+      "landedCU": 180375,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "a40-atomic-paid-entitlement",
+      "category": "native-settlement",
+      "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+      "bytes": 984,
+      "slot": 490,
+      "signaturesVerified": true,
+      "simulatedCU": 86557,
+      "landedCU": 86557,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-consumer-record-prefund-system-pda",
+      "category": "adversarial-prefunding-setup",
+      "signature": "3VNzEaZhsHqkosVuzVR6aYvV9Uj93CJ8o2XjZgdYF2vibqEYhoLoe2AJxCvNuxsoxofYBfxp7a3kj9KwcgWcwvRa",
+      "bytes": 257,
+      "slot": 491,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-initialize-consumer-record",
+      "category": "application",
+      "signature": "5pZjsCQ1kyXitYuN1eVfNSQgSE7sswAvErdQMZsHcW7W76ALryG7nSLWEeVah9jbTJnbHTPeoZeYwfTXfy1X6aSF",
+      "bytes": 408,
+      "slot": 503,
+      "signaturesVerified": true,
+      "simulatedCU": 11790,
+      "landedCU": 11790,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-prepare-immutable-action",
+      "category": "application",
+      "signature": "4ExnNxktUU8BqTcEADtUdHSJd8TtoA37Nvr965ihFVhR9auTCvYVKvMKbXYhrDteA4io9dnz71QBiiNcMEzNrzUB",
+      "bytes": 1033,
+      "slot": 505,
+      "signaturesVerified": true,
+      "simulatedCU": 8558,
+      "landedCU": 8558,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "extend-demo-alt",
+      "category": "lookup-table",
+      "signature": "2M4PgQQWNUAdtd7qENRMokmBrsK7VbKerf5kWnGiQa9BmcgrjwZy6GXx3bZt7HjM64mqon5GVqkNekoM4UsUW4Ni",
+      "bytes": 676,
+      "slot": 506,
+      "signaturesVerified": true,
+      "simulatedCU": 9458,
+      "landedCU": 9458,
+      "feeLamports": 5000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-queue-owner-authorized-query",
+      "category": "arcium-queue",
+      "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+      "bytes": 564,
+      "slot": 539,
+      "signaturesVerified": true,
+      "simulatedCU": 165111,
+      "landedCU": 165135,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "b40-honest-fresh-atomic-paid-entitlement",
+      "category": "native-settlement",
+      "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+      "bytes": 1016,
+      "slot": 546,
+      "signaturesVerified": true,
+      "simulatedCU": 85275,
+      "landedCU": 85275,
+      "feeLamports": 10000,
+      "error": null
+    },
+    {
+      "label": "create-initialize-mint",
+      "category": "native-provisioning",
+      "signature": "2qsXDpBN3L3hcSr6MAK9ooWUXsgxpkaGmWpBGSCqUsRPswAxULLriEVtQ2RGDZ6k6h3wPy7yFgikXNWmmsH1Xo2f",
+      "bytes": 573,
+      "slot": 412,
+      "signaturesVerified": true,
+      "simulatedCU": 4144,
+      "landedCU": 4144,
+      "error": null
+    },
+    {
+      "label": "create-initialize-source",
+      "category": "native-provisioning",
+      "signature": "4CPTKhEQPvYWDQXJiksqnoXoqpifQX4EuJP8scpHywSpwV4uT2C9udJGxtfLR3uRrP9uXz8TuNoJoQLCZ9npkWKX",
+      "bytes": 463,
+      "slot": 413,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "error": null
+    },
+    {
+      "label": "create-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "2kpVcsadbcR1Lxv2bZwvHs3rKgdnnD2SsaLzzm7yb1vE4TXpfEfJfygfavuKA8yVqy7JTV4EypFa9XJJ8gZ8Y1is",
+      "bytes": 361,
+      "slot": 414,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "HLjgvhk76oU77DAbNeWEwynrEaAcpeit1cjx8S8YXCXv4TTEdDeFyWiBfawGg1suF4e4yUYxb5YX2bFV3MWuyPv",
+      "bytes": 374,
+      "slot": 415,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "error": null
+    },
+    {
+      "label": "configure-source",
+      "category": "native-provisioning",
+      "signature": "4U51uaQF4Zj6Qg7xiayQ3yfqDvqqS6h7TfGwHcH9Wd4r1DQ28s7sgUjesf84rzJ8wAxjhSYR8nmEmn6JNFrqvpis",
+      "bytes": 454,
+      "slot": 416,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "error": null
+    },
+    {
+      "label": "fund-source",
+      "category": "native-provisioning",
+      "signature": "4e2FmsPdRRh3qPjLXqsyTmiNbzptj2Pco6QCi5GeBUXg74YpjYKwUt5YqyLHEFgDo4aLqCSFE8z9q9fd72udXKfs",
+      "bytes": 451,
+      "slot": 417,
+      "signaturesVerified": true,
+      "simulatedCU": 19955,
+      "landedCU": 19955,
+      "error": null
+    },
+    {
+      "label": "create-initialize-destination",
+      "category": "native-provisioning",
+      "signature": "3getG8sPtjSWz6h6avev7FrqAwnabwoueKDaJoekKimLqwKBTJ9qSiXn5EtxzmSMc3QePvqvRWxBBLsDB8gXoVNg",
+      "bytes": 463,
+      "slot": 418,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "error": null
+    },
+    {
+      "label": "create-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "45xUwhMDTGfgBWwQYr8rUdgFpmDvLVem6SrMt2HjngJbu61TKeHRcTF9WVfgkvVmTdRLDCVJV5KQ64DUwrtvFArD",
+      "bytes": 361,
+      "slot": 419,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "2UV4cmz9MwumHpEhWy1SFS5BvX22URqUeEizRAxY4QkxToDJwS9XnWBoQvF11w3s2jrmyikPMPvYtYACKfztZD16",
+      "bytes": 374,
+      "slot": 420,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "error": null
+    },
+    {
+      "label": "configure-destination",
+      "category": "native-provisioning",
+      "signature": "kkx67NiuNfyYizidNDyMzDQdgAx8BpxjeooYByMGv85dBZ1QDvqeCZCChKvKVVuHuEEnaFvL2xLEpx4e6Cosiup",
+      "bytes": 454,
+      "slot": 421,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "error": null
+    },
+    {
+      "label": "create-initialize-source",
+      "category": "native-provisioning",
+      "signature": "2XnnNZEGVu4LUmR2cPgWkeGkUNz6FAihciddfyyv5NTJqhjpWBsYpcZzKkkd7Dh2j1rVkMKgHUuWq6tBrQDvmEQL",
+      "bytes": 463,
+      "slot": 422,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "error": null
+    },
+    {
+      "label": "create-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "2cJsXxdw1kwaC1wjdNxJWXtR3h69bq3bmzNBb3jUAwivU7j9L5HoTpqRXgqSU1XgPV2SPbsnoHVeigqCdk9C3kUb",
+      "bytes": 361,
+      "slot": 423,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "2aZdHkmHohgqgWMqZZUKk7cPVXWRc9jgXSMcPQQomvmWBijX9UisRx8axcGVsCwV41hQzZCX1kuyQsRDi8mw4joV",
+      "bytes": 374,
+      "slot": 424,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "error": null
+    },
+    {
+      "label": "configure-source",
+      "category": "native-provisioning",
+      "signature": "UD3ymw9MSetWKv5FzQgPTg749ahCXihhBdHuJLhXJmq4yqUty93gRCKmuo6gfUg5wkaWHACSKcfJmyqQUKBR9EJ",
+      "bytes": 454,
+      "slot": 425,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "error": null
+    },
+    {
+      "label": "fund-source",
+      "category": "native-provisioning",
+      "signature": "2cUhvKKGtRi8y8r9ouZyhf3WkcmRQsvPJAxCAnZKnRjW8Wngt9aoxKexH9L8RUqccHijZ3EfzEZ8wpZhQSeZpv73",
+      "bytes": 451,
+      "slot": 426,
+      "signaturesVerified": true,
+      "simulatedCU": 19955,
+      "landedCU": 19955,
+      "error": null
+    },
+    {
+      "label": "create-initialize-destination",
+      "category": "native-provisioning",
+      "signature": "tyER88J6euSLssZ3pfLneXy3mNfrRyyduWVwLhovJzPBPHuQ5wkEUnAGcchVPyeEAfpVBQS6NQ759YwTkCwnBMH",
+      "bytes": 463,
+      "slot": 427,
+      "signaturesVerified": true,
+      "simulatedCU": 2860,
+      "landedCU": 2860,
+      "error": null
+    },
+    {
+      "label": "create-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "641eoryiZoDtj94Y62SruHWGbsPj15nvjWjg45nqFXguFS4Tpgi1q9pvuFwN9b43uQA34VaKsSsWZVMRDpW78aTZ",
+      "bytes": 361,
+      "slot": 428,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-pubkey",
+      "category": "native-provisioning",
+      "signature": "2s9DTWpkaAMDEZwQhNb7gpximYaJMwkqmm2ShNdjmycMnG4vjBLcFy4wDQRyoX2ho8p65EyYDPJJe7i271enQe2K",
+      "bytes": 374,
+      "slot": 429,
+      "signaturesVerified": true,
+      "simulatedCU": 2750,
+      "landedCU": 2750,
+      "error": null
+    },
+    {
+      "label": "configure-destination",
+      "category": "native-provisioning",
+      "signature": "qsY3RMHeGQoqZSFzDMRXh8txxkv4wQqsQZ2881LrA2g2zx11RYgJRqnviu6Q1G6tyAZPwFEG57ZZ3rZQm4odynS",
+      "bytes": 454,
+      "slot": 430,
+      "signaturesVerified": true,
+      "simulatedCU": 2317,
+      "landedCU": 2317,
+      "error": null
+    },
+    {
+      "label": "create-proof-equality",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "4zg9h6rrkaSZx2ZbudvpCzzFdYYUPG5mB12b6fwHSqhYor2Mv9TdG7jgmSoK122RW8t6B5NSjmbvBoS6joJq3oKB",
+      "bytes": 361,
+      "slot": 435,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-equality",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "4xcuNTDNM3ZBJmim85gMoy3a8BtraFQ7Lqg8W5rsjDcQDwCbp95C2hFNpXZ5FCmjtvTTZCT1kaUHGLRdchyQqvYX",
+      "bytes": 599,
+      "slot": 436,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "error": null
+    },
+    {
+      "label": "create-proof-grouped",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "5aoVpXQk82c2nood4P5oPacM6oJQ6yN7hakNQctFweNDSqhYK7Ax1sW3SWmerN1Jvm5P8h1B6ejY7xa5agcQxCBB",
+      "bytes": 361,
+      "slot": 437,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-grouped",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "8745WmTyVnySH1jgfKycph4kdBRpAnvsZHNmWBjBJLUjciDJDzkRDnh57y1c4fuaYoZyiAQfhwuqAbS75cAaV3H",
+      "bytes": 823,
+      "slot": 438,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "error": null
+    },
+    {
+      "label": "create-proof-range",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "3kyFu697AC6jKZrhvxt3Xq8bNWHAjTDMcBCJpMpzi4Wkmniam56tEjDPNsLn88hruL3DXzQvWABxCg9J4YUTTKpJ",
+      "bytes": 361,
+      "slot": 439,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "create-proof-buffer",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "3DRvfRrsYd1X6KkRMZ3DBtMdCG4fzFc5U72hTL6QN5qGbA1J2q6m7ht25iCQMPctzFxsNzStAggBxu8Cq8kvvejV",
+      "bytes": 361,
+      "slot": 440,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "upload-proof-0",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "4zFiB2K8b7SVewTvztVRxzyRqrEVGpSTiVZwvxT7ihy8Yuni6oVbwYnJCJWNZyoBppUJm9fzPtfLbQw3ipX2DcYh",
+      "bytes": 1014,
+      "slot": 441,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "error": null
+    },
+    {
+      "label": "upload-proof-700",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "46my2kVXwJGcLP3MLkPZc49EXnaAkfvNBRPvUF4hYJgc4PYjKjjUCANeYYo4S5sQozLUY28AnvDbikb2VV8bggzF",
+      "bytes": 614,
+      "slot": 442,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "error": null
+    },
+    {
+      "label": "verify-proof-range",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "2w2hz6D7EzCwd4d6LVxVc9pyfqfqrQ6dSD9xz9oHJiuc8e4fTibyi1CKY51BjfnD71VxZauoHPkcDejDfruXVPE",
+      "bytes": 315,
+      "slot": 443,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "error": null
+    },
+    {
+      "label": "close-proof-buffer",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "59t8Rc9RZWrBka5gLu4B7dDydWajYXcMz4Ei6LEirD1XJnegmJXSrG6jRrutGNgUg3DiNBm7BHoG416NoUaCPwqN",
+      "bytes": 310,
+      "slot": 444,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "error": null
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "5S5hed6CET4XEBcxpipgVhHz91F1LSi22KoR7TpDnZMqJtqickSNqYAkAWgbPCcHsTf3r63ZAgY676qLbYHydj24",
+      "bytes": 361,
+      "slot": 446,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "create-proof-equality",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "5qv1cda8jGjbirxJguiRnPfgVimNxdDpeaDjBcaZincQadvTztWZCRWiswjCG42qWxD6DSQVqnxVFC8TqgCiWUj1",
+      "bytes": 361,
+      "slot": 493,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-equality",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "5kgoL5MxGQZcfo27yraZqeKmPfj2Deb15cM9BgzEmixbw1acqMS9QQhqgS5hBJpPqvwX2Z7LEijdkA2wVY1Uzaza",
+      "bytes": 599,
+      "slot": 494,
+      "signaturesVerified": true,
+      "simulatedCU": 6550,
+      "landedCU": 6550,
+      "error": null
+    },
+    {
+      "label": "create-proof-grouped",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "4oZUFHMnXeqyo8CVgtZk3se42uD2te8PCGY1dFFPfQiVonbbqnTQWx1gce83wiBwKuJTmNxHjNFoLHL85EBJifk1",
+      "bytes": 361,
+      "slot": 495,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "verify-proof-grouped",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "kvSmbEKT9CVR9ReKAZ8RjTiB7KWe6xnMeNVypP7Ku9L7TYNzRvKMzn2eYkj3tuxvpfaphvTqRjigsAAnoiDYVDj",
+      "bytes": 823,
+      "slot": 496,
+      "signaturesVerified": true,
+      "simulatedCU": 16550,
+      "landedCU": 16550,
+      "error": null
+    },
+    {
+      "label": "create-proof-range",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "41MyJ7TZmwudLKrGijbU8SLmEPQwMW5xN3HiA3Sd7yVscPRFSSmwztQD9SYi5z3qa8ycBg7LkpQ8UuXT3buUeeBS",
+      "bytes": 361,
+      "slot": 497,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "create-proof-buffer",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "489qyFmrWfTkyHbNVJtB4ohvN8mriKJLMHbu8rkQV3dmUkvhqgT7iaBT5FfwFAviymghoZvabPATWpJ1SFKPDKm7",
+      "bytes": 361,
+      "slot": 498,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    },
+    {
+      "label": "upload-proof-0",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "NzFFNuzMXJnbSV89gsNEc4PEhJ23VpZTmrUeVBfoqFgt2YxFaL8ZqhXBfAMLUTSuR3h3ciyAdiPEd4TNZuemHep",
+      "bytes": 1014,
+      "slot": 499,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "error": null
+    },
+    {
+      "label": "upload-proof-700",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "5vxUmmtdyZgcvtg3yu9AFKFyK9nMssu6GSkHVea5CCB3hWNSqy2rF6GC9FY67AWMbk1bueDDiAoo2UiMYTMovTfS",
+      "bytes": 614,
+      "slot": 500,
+      "signaturesVerified": true,
+      "simulatedCU": 617,
+      "landedCU": 617,
+      "error": null
+    },
+    {
+      "label": "verify-proof-range",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "4WGm23iudcGHD8hBVYfZtpk6rfQUffhjzVGC6pJHtfn7suCdVgfkF2LA3yaTvd7hN24siDNY6HanxZFCqh9RiGPD",
+      "bytes": 315,
+      "slot": 501,
+      "signaturesVerified": true,
+      "simulatedCU": 200150,
+      "landedCU": 200150,
+      "error": null
+    },
+    {
+      "label": "close-proof-buffer",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "JE22VzSoa77WTM35LqarQz4r1LFU9LWUtUvj9dG1Foug8fqbD6fMzuyQkeQVCWwK3iuvwoZJ7yLvBgS22YhTu5g",
+      "bytes": 310,
+      "slot": 502,
+      "signaturesVerified": true,
+      "simulatedCU": 970,
+      "landedCU": 970,
+      "error": null
+    },
+    {
+      "label": "create-uninitialized-permit",
+      "category": "native-proof-and-permit-provisioning",
+      "signature": "ozNmLRdjy9pXQ1TtcwyTvfcNtiC8q4sfp6AmKENsX833VoGsgu11NEgEdqdQiJL2rrooMfx2K5V3sQDB3okLm9a",
+      "bytes": 361,
+      "slot": 504,
+      "signaturesVerified": true,
+      "simulatedCU": 300,
+      "landedCU": 300,
+      "error": null
+    }
+  ],
+  "executed_client_source_manifest": [
+    {
+      "path": "examples/two-consumers/operation.mjs",
+      "bytes": 2379,
+      "sha256": "f14293ea2a59113cb1a56f825b85ccd6812e72f59be2a984ff0f9a7fae6189f5"
+    },
+    {
+      "path": "examples/two-consumers/recover-operation.mjs",
+      "bytes": 9620,
+      "sha256": "aa5c221d391e9baa958893ffadb6c97bb76622368b40f929b9bdc13f25e1f51a"
+    },
+    {
+      "path": "examples/two-consumers/run.mjs",
+      "bytes": 34167,
+      "sha256": "d2bfcb169fd551ed970534e1ed37560df07ecf0442530beb81f885f6a0e1ec40"
+    },
+    {
+      "path": "examples/two-consumers/transport.mjs",
+      "bytes": 233,
+      "sha256": "f685c7eea3c2a0d7e84ed54d401d6462c0fc2ab8354212b85ddd9f524e852d41"
+    },
+    {
+      "path": "packages/local-client/src/durable-transaction.mjs",
+      "bytes": 18366,
+      "sha256": "ad604101f8ed08e7b5d18de35690559d0fe8b9380a2faf46d9d2990c9633c8e7"
+    },
+    {
+      "path": "packages/local-client/src/hook-metadata.mjs",
+      "bytes": 1823,
+      "sha256": "533d9738ec8c0691b39b8a9b1c6d45a7407b55fb99cbdaba6416783135599d59"
+    },
+    {
+      "path": "packages/local-client/src/index.mjs",
+      "bytes": 772,
+      "sha256": "917dbc2e24c50bfdb59ec01f2a4dcdddeb39a334049a44835a037abfcbb26f5e"
+    },
+    {
+      "path": "packages/local-client/src/mint-profile.mjs",
+      "bytes": 2178,
+      "sha256": "0bd343878e5840a1bb7853c5898bf85143a313393bd6820f8bb8549f7afc1d79"
+    },
+    {
+      "path": "packages/local-client/src/operation-client.mjs",
+      "bytes": 20030,
+      "sha256": "d8e84d8754b36adcbfb0cfb31abcd7e8650d98fb53caa221216a265a11530f41"
+    },
+    {
+      "path": "packages/local-client/src/operation-plan.mjs",
+      "bytes": 5490,
+      "sha256": "8aea3a5d49de8c4e051b785f73975267759efdffaea7d49410d36c962b74e87d"
+    },
+    {
+      "path": "packages/local-client/src/operation-ticket.mjs",
+      "bytes": 9075,
+      "sha256": "0240298336d675ef366e4bc835a67fd23b1d0c5d37926bd19329c30f0cbfee3d"
+    },
+    {
+      "path": "packages/local-client/src/prepare-transfer.mjs",
+      "bytes": 3223,
+      "sha256": "f550895f5e294d3e9347da07071f22d97a322c338a0026b93b91b03b5e91364e"
+    },
+    {
+      "path": "packages/local-client/src/prepared-action.mjs",
+      "bytes": 3402,
+      "sha256": "a1de46db59fffed100f84e2ad9b10036ad21a7f3449c37875a7c1c1a45c5e2e3"
+    },
+    {
+      "path": "packages/local-client/src/proofs.mjs",
+      "bytes": 4107,
+      "sha256": "847a2008d3603335f1ed676c3d980962a876db3cd44ca39afe8c200b209e9333"
+    },
+    {
+      "path": "packages/local-client/src/provision.mjs",
+      "bytes": 5152,
+      "sha256": "32640d5eab5a871c03d2f7900cf06df7b49449bdb8889e46ab7faa1e7ba0822d"
+    },
+    {
+      "path": "packages/local-client/src/runtime.mjs",
+      "bytes": 8862,
+      "sha256": "7d0c754b603e4ca553886b6db2cb1d71dc9e6e7de77c1d6a5ee6088d9922fa2f"
+    },
+    {
+      "path": "packages/local-client/src/transaction-sender.mjs",
+      "bytes": 7723,
+      "sha256": "33047e664584a2fe912b72cb40c914cee50df9666e8da28f19031905ea47e9d6"
+    },
+    {
+      "path": "packages/sdk/src/builders.mjs",
+      "bytes": 3375,
+      "sha256": "1c352492317d3184a9a8dcb5dc40333b0444517f5687ed40a3c8c84396665579"
+    },
+    {
+      "path": "packages/sdk/src/codec.mjs",
+      "bytes": 5421,
+      "sha256": "9ac9ebb40b02278f721ecb2245fbb01a56d184dbaf0706c456f878b2121ff167"
+    },
+    {
+      "path": "packages/sdk/src/index.mjs",
+      "bytes": 10838,
+      "sha256": "2075f6e8476882f8215c1ec35e3d110ef154479c8fb57195f36b711bf821bebf"
+    },
+    {
+      "path": "packages/sdk/src/local.mjs",
+      "bytes": 253,
+      "sha256": "3802915a939e7f663b77a486ae1a0fb080dd293160f4d278ca28d8b714158b4b"
+    },
+    {
+      "path": "packages/sdk/src/transport.mjs",
+      "bytes": 3187,
+      "sha256": "fec822327a632cffb92528cd9e2308115ab4345d90cfb72f32663faf09c468cb"
+    }
+  ],
+  "compiled_program_source_manifest": {
+    "commit": "a659d864ea5f67bd7f4ae2968a39716bbc07c71d",
+    "files": {
+      "crates/hook-routing/Cargo.lock": "001f288faf776d0d4c08ada06bffbc5d15d1b59266cc6b58884e7034e02ac861",
+      "crates/hook-routing/Cargo.toml": "3c163fcd494bbd26b9f78bd80b1d0df1db41dcb933d1c1e2c59a9d61f284e365",
+      "crates/hook-routing/src/lib.rs": "d2806399d284ecd5d6f115815b7d44eb727a36b1c7de46c974447b032ae0d0c6",
+      "crates/hook-routing/tests/routing.rs": "37b527640eb553db1c592a09d1d94906c967d60e650e1c619759cf2a578799d7",
+      "crates/native-admission/Cargo.lock": "9912d3df91cadfed41ee92d73bed40ff64f459cad1436f9f1399a99067eacdbc",
+      "crates/native-admission/Cargo.toml": "7b1953b384b70b351612e07788561bd57528ac3c35e155a5de8a9a23693416a4",
+      "crates/native-admission/src/arithmetic.rs": "35a5c290e6aa6c579cb449ad5330b381784c1bbaa489fee4bdc008df97f85567",
+      "crates/native-admission/src/lib.rs": "741d62f15bd6d78bf94ddce2935809279066419397d7ab39c366717f1997138d",
+      "crates/native-admission/tests/admission.rs": "decb9eaae83b681056bb7d3444e9bdf00db733c031764cf10c4579e119ef28d9",
+      "crates/pda-provisioning/Cargo.lock": "0c6847d4c8bbb495c6d08b3a5de7e25f36501938c0c3d8ce28480b46af79be14",
+      "crates/pda-provisioning/Cargo.toml": "165471e3d09e08c95e0c707ec3d25ae3a8038935fcbb96acc7299597a0adc51f",
+      "crates/pda-provisioning/src/lib.rs": "05106018df2b34987b458444b6ad28c62386b0ef539f2c8aca0bc9615d92c541",
+      "programs/auth/Cargo.lock": "adb3b4fa7a4abf6dbed7edacc07425bd674d58bb1709a2846df74426f01b60de",
+      "programs/auth/programs/cyperlink_auth/Cargo.toml": "1cd901085eb898ff9f6ef4eaf857e7b96b40c1bfd09b324e4d497a0271de1d74",
+      "programs/auth/programs/cyperlink_auth/src/lib.rs": "b560ef7671e94156825667e276411fa3e2f69faf9d70da35bcea1fcf1387dfcf",
+      "programs/native/Cargo.lock": "3c10e62aa136a0866d479606fe04b42af4018f76a566bdc17a48d1b55edac749",
+      "programs/native/Cargo.toml": "983841fdebfc08e134547c46b8ca8a83bbfb3c4a589fab5e4a5010619a60f196",
+      "programs/native/guard/Cargo.toml": "87249474604193531a8b130711eaf8e2f0fd09219f84c93ac58ab3f7ca977632",
+      "programs/native/guard/src/lib.rs": "b71db00b6d14c448fe51e3d6a186071862c8987e3949280108a7eaba9def0bfa",
+      "programs/native/interface/Cargo.toml": "3d3d6368cd4d7e586e2aed682f76952d0913424b581180bf2cc4a9e8a7510c63",
+      "programs/native/interface/src/lib.rs": "f61c747ac8f78e02aedc4e30ae84b8c0334c5e4541cb24e7c94dc11585c6ee3e",
+      "programs/native/license/Cargo.toml": "3e3f4c06924a52662526788a4be8ba81280428b1f3e2a06cbd1525e153fcc36b",
+      "programs/native/license/src/lib.rs": "c2641c552a449adbfe66c5ba1a1e5c76e99781b65536c9a7bb2b0290cf452607",
+      "programs/native/merchant/Cargo.toml": "add74ef929f927393bdd0ccff5f7850b5d62c6d11bc1a905e18b808360a9bb88",
+      "programs/native/merchant/src/lib.rs": "38a7c40956c522f8088e06a80bc527c4f0de9406ac065ffd3fba57d2d85f5664",
+      "programs/native/policy/Cargo.toml": "f2084fa9f189a5c3a47cac6248973d6ccf6bcce6133878c13bd2b575b538f775",
+      "programs/native/policy/src/lib.rs": "e73b3a933b853013fc36f4351a699423d9a7ffdd6b38461330df0dfb95c0f8e1",
+      "programs/native/proof-buffer/Cargo.toml": "d281d6531053ce180fb2d17c708d8f2aae65708d8cdb7db48981ccec45e95eec",
+      "programs/native/proof-buffer/src/lib.rs": "136c3cbff4947815a3babff21bb2cd76475c2264f3540e447e3d9eb704bd2f4f"
+    }
+  },
+  "locally_retained_operation_descriptors": [
+    {
+      "profile": "local-native-ct-v0",
+      "consumerKind": "merchant",
+      "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+      "computation": "HJnJM69829Y8WFUNJDfrF231cHbqA1YZhMkc4yqKB5Fy",
+      "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+      "owner": "F1y4K9Yg77C1YWuoGumdgxX2yb89W6Qf6P2mcv7dvs4r",
+      "admin": "66G62fzqZN5cQ4QzBsLBhfm4cD7ywdxxhfpgUvZPbwSf",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+      "templateHex": "00000000000000000000000000000000f2e0e62052ab6a8518369caf0ac0177fc4098c4736d7b88fcae2db55d48f4f5400000000000000000000000000000000000000000000000000000000000000007833bc4a1cebcb5a61c9583f70050b80ced2af801483a7e849c706bdb52f75618721eb7e2d3d8330a3a1d607859451ba118fbe9675f91894a4367b2e230498fee3b5deacd2c6b0c78f8ae87b2d32a2272b02d25585b5191f4390286d2ea0473ad043003e98759d7166d8daaf0837c85025de208170f5e79689d1cfc5b0acb4efe91b9a1dacf7812185dd18336b12fe9202d6e45340be7ab4f546ab700a1cdbaadeb7ee96f28434df4d2454f2bafe6a60bc707afeefcd3dff0ae059f7a3ba5cda46c10b06e0a13f3241492e6e688fc70414b4c3ec2ce461835feeec76f35c726eaa39bb3eae3114be4a4d5986f56cf8e4d29c0a427e6a233df3065af60d646110ca85fbd11e016a35b8677f7d45d6af37206378b67ed037224fc613a1caf26f790c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb53535353535353535353535353535353535353535353535353535353535353531593c26607ea987649d2e372d41a2b020364978c003e74d9dc2e23b694a49c67020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c708000000000000",
+      "inputsHashHex": "0eb742d6c53831485d8b1b377cc0174cd3bbee1a0f0855fdcf1736069239e23a",
+      "queryStateHashHex": "58b6a15bd5b075ef67f8bb5b7f11beb4161d61bcf8dc94793c18873eb890c9af",
+      "sku": "7",
+      "path": ".local/demo-sdk-compatible-v13/operation-a40/operation-descriptor.json"
+    },
+    {
+      "profile": "local-native-ct-v0",
+      "consumerKind": "license",
+      "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+      "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+      "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+      "owner": "HRXAykDQhKMvzcarGMCqTMhb8KjX1VsYzzotKuaz4kfN",
+      "admin": "66G62fzqZN5cQ4QzBsLBhfm4cD7ywdxxhfpgUvZPbwSf",
+      "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+      "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+      "templateHex": "000000000000000001000000000000008817f476739a198dd43b99ccb8a2d95d5bdcb55467d9294b4809ed184c6ea9790000000000000000000000000000000000000000000000000000000000000000db5023fe49d0af1a2a1ce46406685d73f51bf70130ed33d8433898c51ac885738721eb7e2d3d8330a3a1d607859451ba118fbe9675f91894a4367b2e230498fe2d33d1bb11e50da56e2237daebfe751e82e8b0fa89972bf860f926ea99153766f4030bbe71499b9e88d2762a70b7136c17b73ff4e1a965c5d5db60563b3ffb65e484c9f97a6d8c783f6e7e0fee09a4f0811999471dd7acdf71c6930d79856e2444565e11e49cee6e6424f3eb7cc8a0f17100e58e0bcf6e6781d3a0e08948b435261d99aa43b8c3e93bdcb7cae2db45900b0ea2986aa5defd9a3dd1c40a005d3394e04b2df73048a6f165f8bd02300980d42f0e4b6a2426e776768829ccef1a5a72be8447be2d192167d551680a2ee483b4da5c8ffc475b5cafd986a1a4d2213e0c73a0f7134c5c6cbfb4091e13b20b69f75248a574f95b189bbda04f3d496ddb54545454545454545454545454545454545454545454545454545454545454544f17ad1ef86bdcfa8a4e613591e3812389e60f684f75be97db4459486741e4fc0300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000109000000000000",
+      "inputsHashHex": "c2bd7434e67a6636f233e46d8e64fa75a05a13a50665712a39f214ea9dacabf7",
+      "queryStateHashHex": "e7366a833c7a362c1f1cf5d9ab96e1f487ae44b7844aa11d0c9b5cc6d7a2cb7c",
+      "productHex32": "4be48fe675784b42e1b54f00fb379caf3f164b0ff183663871780c0507356d36",
+      "licenseExpirySlot": "1440",
+      "path": ".local/demo-sdk-compatible-v13/operation-b40-honest-fresh/operation-descriptor.json"
+    }
+  ],
+  "cost_scope": "Validator CU and fees are separate by category. Callback elapsed time is queue-to-observed committed callback including polling/RPC overhead. Distributed worker CPU, preprocessing, network traffic and production pricing are not measured.",
+  "bootstrap_provenance": {
+    "scope": "fresh generated local bootstrap; preparation only, no execution claim",
+    "profile": "provisioned161",
+    "bootstrap": "fresh-upstream-generated",
+    "research_checkout_required": false,
+    "run_id": "sdk-compatible-v13",
+    "compose_project": "cyperlink-sdk-compatible-v13",
+    "subnet": "172.28.0.0/24",
+    "payer": "66G62fzqZN5cQ4QzBsLBhfm4cD7ywdxxhfpgUvZPbwSf",
+    "genesis_accounts": 60,
+    "generation_manifest_sha256": "a931c1ce1f08a2d2c2567af02962f76ad9df06af674200de8e6df8c03af76b5b",
+    "validator_sha256": "b87abf1b5985e39f99a3cd13a9df196d89513922c674bb34341c62d0456ce4aa",
+    "preparation": {
+      "path": ".local/localnet-sdk-compatible-v13/preparation.json",
+      "bytes": 31850,
+      "sha256": "64686a1c89e8a797899ed4f7c43db6435c6ebaa205a64555b2b83b48089261d1"
+    },
+    "generation": {
+      "schema": 1,
+      "scope": "fresh upstream localnet genesis generation only; no validator or MPC execution",
+      "payer": "66G62fzqZN5cQ4QzBsLBhfm4cD7ywdxxhfpgUvZPbwSf",
+      "auth_program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "cluster_offset": 0,
+      "nodes": 2,
+      "recovery_identity_count": 8,
+      "cached_mxe_keys": false,
+      "arcium_version": "0.15.0",
+      "arcium_cli_sha256": "8f831e2a9afa6b37dc95ed72bad527b6df815b5570dbc92ade93bbf1ffe1ba44",
+      "keygen_sha256": "419b2b21dce0c9efe0fd89f595e53ffa363ca8c871bc79d7b8df5613cb83b34b",
+      "limitations": [
+        "CLI digest currently qualified for Darwin ARM64 only; other platform binaries need explicit version and digest qualification.",
+        "Generated genesis is synthetic upstream localnet bootstrap, not signed public-network initialization.",
+        "Two nodes share this developer host and use trusted-dealer preprocessing; generated recovery identities do not prove recovery execution.",
+        "Upstream generated Compose contains mutable latest tags: the preparation layer must replace them with qualified digests before launch.",
+        "No runtime source reproducibility or binary redistribution license is inferred from pinned artifact hashes."
+      ],
+      "elf_sha256": {
+        "arcium": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+        "staking": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+        "lighthouse": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb"
+      }
+    },
+    "public_ip_patches": [
+      {
+        "file": "cluster_acc_0.json",
+        "offset": 9,
+        "old": "172.20.0.99",
+        "new": "172.28.0.99"
+      },
+      {
+        "file": "arx_node_GP1c_9pbN.json",
+        "offset": 72,
+        "old": "172.20.0.100",
+        "new": "172.28.0.100"
+      },
+      {
+        "file": "arx_node_58Dq_j2Uk.json",
+        "offset": 72,
+        "old": "172.20.0.101",
+        "new": "172.28.0.101"
+      }
+    ],
+    "deployments": [
+      {
+        "address": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+        "upgradeable": true,
+        "sha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6"
+      },
+      {
+        "address": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+        "upgradeable": false,
+        "sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784"
+      },
+      {
+        "address": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+        "upgradeable": false,
+        "sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8"
+      },
+      {
+        "address": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+        "upgradeable": false,
+        "sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78"
+      },
+      {
+        "address": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+        "upgradeable": false,
+        "sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327"
+      },
+      {
+        "address": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+        "upgradeable": false,
+        "sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f"
+      },
+      {
+        "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "upgradeable": false,
+        "sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda"
+      },
+      {
+        "address": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "upgradeable": false,
+        "sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828"
+      },
+      {
+        "address": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+        "upgradeable": false,
+        "sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb"
+      },
+      {
+        "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "upgradeable": false,
+        "sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469"
+      }
+    ],
+    "staged_public_genesis": [
+      {
+        "pubkey": "7EbMUTLo5DjdzbN7s8BXeZwXzEwNQb1hScfRvWg8a6ot",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 33,
+        "sha256": "31c0a6980fed71785e25b78bb2e1356658558a65586c87588eaf4756bb6d82a8",
+        "staged_sha256": "31c0a6980fed71785e25b78bb2e1356658558a65586c87588eaf4756bb6d82a8"
+      },
+      {
+        "pubkey": "G2sRWJvi3xoyh5k2gY49eG9L8YhAEWQPtNb1zb1GXTtC",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 9,
+        "sha256": "af29f6117875483c7240e474b86b2ebd0f4cba04bdd96b5e4109009933c2e22b",
+        "staged_sha256": "af29f6117875483c7240e474b86b2ebd0f4cba04bdd96b5e4109009933c2e22b"
+      },
+      {
+        "pubkey": "2koaNRgmuzpXJTeCiBgZstaqDe6Kb9JuC26mS6d1ztZ4",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 9,
+        "sha256": "9fc408ec048bb1900652f37ee47623004cab508aa27edb20a5e461893c2d9a45",
+        "staged_sha256": "9fc408ec048bb1900652f37ee47623004cab508aa27edb20a5e461893c2d9a45"
+      },
+      {
+        "pubkey": "BKCFM21bTa75X2FMahRkXpPg9e97HLiAwjd4JDAZmTba",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "57a105dbe90c6887e7e3647ec07e475310f279bf7053a7ea24eba88dc3f2712e",
+        "staged_sha256": "57a105dbe90c6887e7e3647ec07e475310f279bf7053a7ea24eba88dc3f2712e"
+      },
+      {
+        "pubkey": "HDLNf6Cqf2Kb4hBBQEQCBkt1T6JD7hXm2mmqBa713j1J",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "494f8cc024319d47975c5728ae92caa57a6998ab6b8a1cc79d727b0b1985a97a",
+        "staged_sha256": "494f8cc024319d47975c5728ae92caa57a6998ab6b8a1cc79d727b0b1985a97a"
+      },
+      {
+        "pubkey": "5Abqy8sRrYaHQonfUWsyhjVbZ8XXLS2SPrz7jJhkr1uj",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "95263ab49cabffecc3ab7543be33ba27297db13d16202a825686a4e4186586ed",
+        "staged_sha256": "95263ab49cabffecc3ab7543be33ba27297db13d16202a825686a4e4186586ed"
+      },
+      {
+        "pubkey": "9KtEPWK6F4p6hkaEMgYs98taaLcbA7Jp3rPTGRzPq26k",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "3acbec217994208854bdddb20de825d8bec55312a81e72e27318b26f5e39e594",
+        "staged_sha256": "3acbec217994208854bdddb20de825d8bec55312a81e72e27318b26f5e39e594"
+      },
+      {
+        "pubkey": "ARXwZkNAtzPfdcoqQiduJn8EPv9fKiDfGn2KyggyDrFs",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 82,
+        "sha256": "eeababfcae3f611b21fae02fde224a0551815fefc65e6679ba269d65036750f0",
+        "staged_sha256": "eeababfcae3f611b21fae02fde224a0551815fefc65e6679ba269d65036750f0"
+      },
+      {
+        "pubkey": "6vNwQe3fiU1u4JxTM2XkvPou9uH7EZNrskLZJrRYM8WJ",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 252,
+        "sha256": "c7fe66a91354364320b80510389a656399f5e55d07735dae0794acc7a9cffd13",
+        "staged_sha256": "98f5876afebf3faa5b20f9984f51e8afd5a4ae10cbb6a53c284bfd2afa07266d"
+      },
+      {
+        "pubkey": "A1N143n3x4iF7wfvqiqFXtbQxnyNaHBySnPcaYmi9Xak",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 252,
+        "sha256": "aacfaa404bcca0c22a2608db58ff3b3032d9eed521e5324c1a92a974aa658cca",
+        "staged_sha256": "70e505dfa3dde4225b398a56e62d3fefda91c4685a06c983eab02aa5ff395e2e"
+      },
+      {
+        "pubkey": "2zFyw5qgSVTb7jqrBPYN4H3ZBogALa6uEBnv5sJ1spqk",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "1b928196bbd30a2bcbd878199590b7b149426b6eb277ee9947ffc21bdf5433d8",
+        "staged_sha256": "1b928196bbd30a2bcbd878199590b7b149426b6eb277ee9947ffc21bdf5433d8"
+      },
+      {
+        "pubkey": "2uhK5G8niKCN1yEncfzjqDfrwvUKmLxeeR2LzBMzqCyC",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "30bce96981cadd0d1cefb1c4d58dca3285efb241ebda4b615fb338384e0cabf5",
+        "staged_sha256": "30bce96981cadd0d1cefb1c4d58dca3285efb241ebda4b615fb338384e0cabf5"
+      },
+      {
+        "pubkey": "4Qi6abJDVRfKxv9XkLehQ1Vs8r67kKe4gXgv5nESryyn",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "0159356caa091a4a9178ca23c9771096d4fd6fe2e7e370a2c75e8082d1a75376",
+        "staged_sha256": "0159356caa091a4a9178ca23c9771096d4fd6fe2e7e370a2c75e8082d1a75376"
+      },
+      {
+        "pubkey": "A5Hd1pDRAtXFUijMfbC6fN3QDTQp6zjXfN1GzDLJ15Tr",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "c4e4e8fbfb01dcc81f9d37184aedd8de18331df8878f4baad2bbfb7a88dfd9f5",
+        "staged_sha256": "c4e4e8fbfb01dcc81f9d37184aedd8de18331df8878f4baad2bbfb7a88dfd9f5"
+      },
+      {
+        "pubkey": "2mSLmLbgq3ngMNNjSWAJFQtJU7ZVinEXEtRBWev8UcnH",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "fd40f64c46d2e81b621f65c3f02b57dc8019e21d67c64b6a456de9ed25cd7410",
+        "staged_sha256": "fd40f64c46d2e81b621f65c3f02b57dc8019e21d67c64b6a456de9ed25cd7410"
+      },
+      {
+        "pubkey": "ARhr4p9hvZQj611UEZDkfeZH8Ua1FyxnYWJ9WrjwgZrX",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "14c9b001d4cfc77186e33a9c536246f6169185550d76ba4fb6213a495617bba7",
+        "staged_sha256": "14c9b001d4cfc77186e33a9c536246f6169185550d76ba4fb6213a495617bba7"
+      },
+      {
+        "pubkey": "J8gAhskdWQkmXV3KvdUJRfjK1TZQ6HV5m9Bwq9fjATJ4",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "e7e1ba14340e5acf20c983c2f3e4ceb13420b6afe21b13e8bfcd12bf0b0fd3bd",
+        "staged_sha256": "e7e1ba14340e5acf20c983c2f3e4ceb13420b6afe21b13e8bfcd12bf0b0fd3bd"
+      },
+      {
+        "pubkey": "Ez2rcYzEf2J1razC2SCgH7PP9Xzcz6N4NGgc9SuH2L9q",
+        "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "data_bytes": 165,
+        "sha256": "d4357d8734fa70a1f1b75aa96fc0248c64d8cc615ef6dbae3b624857cb14175f",
+        "staged_sha256": "d4357d8734fa70a1f1b75aa96fc0248c64d8cc615ef6dbae3b624857cb14175f"
+      },
+      {
+        "pubkey": "CuTp9LKzoY9hy77TkrickLpVTUFgvnRfQHB9tnhG2ypt",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 541,
+        "sha256": "9762d83e4e9ae29d6a9617f07d0bf1b26caa394700db4353840250e7da86408f",
+        "staged_sha256": "b225dd81600bd660dc14f8689bb4fb4b8e75bcc28213c7fed6a116ae0393e1d6"
+      },
+      {
+        "pubkey": "9EDLm5KDKc1Pf8m587kdxPMvQBNETNahcCfHLNcQ1M8W",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 664,
+        "sha256": "d34c0fbfec27b990540fc317f90cfdeb87d61e1301c00f73f2b07b11a4c11a96",
+        "staged_sha256": "d34c0fbfec27b990540fc317f90cfdeb87d61e1301c00f73f2b07b11a4c11a96"
+      },
+      {
+        "pubkey": "9rUSnh5VrMtRUrJrgAUwcyWvL9NYkscAsDFS5RjPW6Da",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 87896,
+        "sha256": "6d0ce337d15d1a861dff7f5c7b83829dac458607d9e9359dbb867832c00f6682",
+        "staged_sha256": "6d0ce337d15d1a861dff7f5c7b83829dac458607d9e9359dbb867832c00f6682"
+      },
+      {
+        "pubkey": "6QfZzcLxbrEcfVcBgBtXnDamNfvznjLQeryzD3eyDbZZ",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 295,
+        "sha256": "f1ce3dc2eaf8f68ae6695b00ae7c4db92c267d5dcea922936b52667743e66ea3",
+        "staged_sha256": "f1ce3dc2eaf8f68ae6695b00ae7c4db92c267d5dcea922936b52667743e66ea3"
+      },
+      {
+        "pubkey": "H6Nbq2HPa16uUNguRDYfkLtTLaGye5kb1zsjCgdJZbRQ",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 199,
+        "sha256": "ed5acf6f58044db0602cb79f0a3fb8eff329bba94f6aa931b664915ea7d73a22",
+        "staged_sha256": "ed5acf6f58044db0602cb79f0a3fb8eff329bba94f6aa931b664915ea7d73a22"
+      },
+      {
+        "pubkey": "7aCeR6PzSFmDcUmTi9w4Eo3RWJkfxKeF4CDEBWgiWqwK",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 139,
+        "sha256": "7ce3e4b5f8bcae420b2d955eb3cb6d06e5b297aecc97da9fa23a3204178cfb53",
+        "staged_sha256": "7ce3e4b5f8bcae420b2d955eb3cb6d06e5b297aecc97da9fa23a3204178cfb53"
+      },
+      {
+        "pubkey": "3tEZEWiNo8iyaYKrxws7XXuzcidhZDJGfPLjeDMeE7tZ",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 56,
+        "sha256": "599d5af798b3243e57b68965e75a98d4d4ba045a57ea61a5b110ebd7f81479e6",
+        "staged_sha256": "599d5af798b3243e57b68965e75a98d4d4ba045a57ea61a5b110ebd7f81479e6"
+      },
+      {
+        "pubkey": "DrSR3HzXyx5GcmBygudtFAY7xiHhUmjmEsxTmwUXuEov",
+        "owner": "AddressLookupTab1e1111111111111111111111111",
+        "data_bytes": 216,
+        "sha256": "b91db89270a345495a77b0c71c65e54c48e4747da0bb35b7723f60d35e6bfb7d",
+        "staged_sha256": "b91db89270a345495a77b0c71c65e54c48e4747da0bb35b7723f60d35e6bfb7d"
+      },
+      {
+        "pubkey": "6LtBnAHH6pgiemVTDnZF5pr3Pexq9tynWJGH8JqQoYKh",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 22,
+        "sha256": "0665ae9f396785fb6855b0c7fc8b267366b53819976b7577e44372325c567e7e",
+        "staged_sha256": "0665ae9f396785fb6855b0c7fc8b267366b53819976b7577e44372325c567e7e"
+      },
+      {
+        "pubkey": "Gs8v2fkpwwvceTWCzfwzN3nkgB4MX7N4DBJjm7wzTJ3V",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 22,
+        "sha256": "0764012772873381760c0621e7e3c283cab7779973636344f9849b066c1da47a",
+        "staged_sha256": "0764012772873381760c0621e7e3c283cab7779973636344f9849b066c1da47a"
+      },
+      {
+        "pubkey": "4QZkE3sZheByNb3EDMeMf87yVGcrR3b9cnK5MiYProkw",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "b8d61917924104b75e8f06e50095186131f764bee2b5cef988b9951c05ad2627",
+        "staged_sha256": "b8d61917924104b75e8f06e50095186131f764bee2b5cef988b9951c05ad2627"
+      },
+      {
+        "pubkey": "9tcW59pGZCBG9XZB7RcWm9uahFDVkd3wJrQWTXZkWyMW",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "107db53885522b51e42c221319153afc7d4c84e5de63ee87723ad5048beb1142",
+        "staged_sha256": "107db53885522b51e42c221319153afc7d4c84e5de63ee87723ad5048beb1142"
+      },
+      {
+        "pubkey": "B3bG6Cij6swLZuksH3bmdDuraq6hEKzc133mgREgULvZ",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "5e47529ee8566b220f581c25191dfa636b9e62cd6e7af12358909071b347d714",
+        "staged_sha256": "5e47529ee8566b220f581c25191dfa636b9e62cd6e7af12358909071b347d714"
+      },
+      {
+        "pubkey": "2k8g7tRZWULMsgWNBpar3zQc6eCDhK7KjxDzotwYYTVc",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "0f936c88801644c9ae0d1d16cd2734d3002e16ec9003d5f993c1b1d98a7c5bef",
+        "staged_sha256": "0f936c88801644c9ae0d1d16cd2734d3002e16ec9003d5f993c1b1d98a7c5bef"
+      },
+      {
+        "pubkey": "AZNidfS5rMh5LmgEiXLVic2nw8kgz6QfVXuE4JiHxkBh",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "518ea8bc0fda84322599fdc504ffb67b27019f95a08f21b18cffa974f19395bf",
+        "staged_sha256": "518ea8bc0fda84322599fdc504ffb67b27019f95a08f21b18cffa974f19395bf"
+      },
+      {
+        "pubkey": "CQb5oozB4AFVep3wJRhrAG8yRXMGQHrgnWngQrMjQhGA",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "8865532598f6cf9de849cb586bd8ccd2aed1e3bcd5dbd2cb522640ad16e08e56",
+        "staged_sha256": "8865532598f6cf9de849cb586bd8ccd2aed1e3bcd5dbd2cb522640ad16e08e56"
+      },
+      {
+        "pubkey": "DgW6WiL1V1D8fM8e26m2x33vPuMvqA946mWpTJVyctco",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "f862285aa4b1181173cff0fb5bd80d464176a4fdfe85d0181cc6f18f724c627d",
+        "staged_sha256": "f862285aa4b1181173cff0fb5bd80d464176a4fdfe85d0181cc6f18f724c627d"
+      },
+      {
+        "pubkey": "DsAJt2YHSGVnER19LnD7RwzbJuAoTUhmAm8TJygWYQ4J",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "05009846c73815ca3af238c76367307b05a3b0189daf31517923a1e80683c8e8",
+        "staged_sha256": "05009846c73815ca3af238c76367307b05a3b0189daf31517923a1e80683c8e8"
+      },
+      {
+        "pubkey": "6bKDeVttUvUXBupAuocCoCETe3nnqe2k3XWGyds34pFm",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "a856dca7b980b0dad1a3e0d08a9495f07595c3e5c6e6dbb0a415f4679a192b73",
+        "staged_sha256": "a856dca7b980b0dad1a3e0d08a9495f07595c3e5c6e6dbb0a415f4679a192b73"
+      },
+      {
+        "pubkey": "63VgjdUiKTyTjavFVhs9UCYCi9oyHQb6RTZC66W68y6p",
+        "owner": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+        "data_bytes": 652,
+        "sha256": "febff6bafca75145e00d885a64ad696f0b8d358e660929c9e1d8d7f875af0d95",
+        "staged_sha256": "febff6bafca75145e00d885a64ad696f0b8d358e660929c9e1d8d7f875af0d95"
+      },
+      {
+        "pubkey": "2WZ28C3xTvujKFydHdRJc3fT7Gok43Fj8L7acnJg8XUc",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 16940,
+        "sha256": "372375df814952227dcb1880f4e1f8be94669a4b36cc332fc4da32bf1d8f72bc",
+        "staged_sha256": "372375df814952227dcb1880f4e1f8be94669a4b36cc332fc4da32bf1d8f72bc"
+      },
+      {
+        "pubkey": "67YaC1R2r8UTHu2bzAnn3wuhLeeWtYb7haCFN5aXFjSZ",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "8682bf007bccb35236e8d301f2b331dacce0a992cddfca890eff7c0c3581a8bb",
+        "staged_sha256": "8682bf007bccb35236e8d301f2b331dacce0a992cddfca890eff7c0c3581a8bb"
+      },
+      {
+        "pubkey": "3FjPFN1qiuxXaxRM3sd4BExAdUYstLJTNo7189EvTwF8",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "23bce3ab0efe5b8ccac55583af59cb2334e68117bfbfea0014cb6ff2f0f4e0cd",
+        "staged_sha256": "23bce3ab0efe5b8ccac55583af59cb2334e68117bfbfea0014cb6ff2f0f4e0cd"
+      },
+      {
+        "pubkey": "AWSm1yXCBboxJF6Es6PA6N5f1PhXKNYmxq2pzpggv8uW",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "8f6a3eb62de97edbdc65c29a15aba19eb1430115469a103339dd7b7a965fff0d",
+        "staged_sha256": "8f6a3eb62de97edbdc65c29a15aba19eb1430115469a103339dd7b7a965fff0d"
+      },
+      {
+        "pubkey": "Edr5sFrf4bp4wB3MH3VYYLV1ju9mRUDegLLtbYmXNkH2",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "f113e896c9907a5e55fdfe2044d1f71b04d94c93aa3cd6230bcc40204cb6f5e7",
+        "staged_sha256": "f113e896c9907a5e55fdfe2044d1f71b04d94c93aa3cd6230bcc40204cb6f5e7"
+      },
+      {
+        "pubkey": "HaJaCFTzf6D92p3WBYVzGCNxmoQVPnXvgMUqAPZ9XXkk",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "f9d3da1ffe31352a5c4598c28daade6c46231018cfd654bcea1f8d72436e4321",
+        "staged_sha256": "f9d3da1ffe31352a5c4598c28daade6c46231018cfd654bcea1f8d72436e4321"
+      },
+      {
+        "pubkey": "Et7qsXHZYqCWHQySsA7E5mpfKQZQFi5iKBQKP9sQcDdx",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "b4b5245288109cc91f0702dcca3f984148722a4289a64ef0362a5e2860736444",
+        "staged_sha256": "b4b5245288109cc91f0702dcca3f984148722a4289a64ef0362a5e2860736444"
+      },
+      {
+        "pubkey": "74Mb8Zeb3cyfaqPjg4odAwgB5PCG32ewCshWGYoiyWUs",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "64980a09534e7f447f289993b6234f7e2f7ab5fd573471b49d64d15be8fc23d5",
+        "staged_sha256": "64980a09534e7f447f289993b6234f7e2f7ab5fd573471b49d64d15be8fc23d5"
+      },
+      {
+        "pubkey": "24fAfJ8M6DazbDeh6qHuRbpawE6GiBmNBfE5VmLSmhnb",
+        "owner": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+        "data_bytes": 109,
+        "sha256": "a192b015afc903a9dceae4a58444ebac2e75f3868748732f44efe4eb6b43b9f8",
+        "staged_sha256": "a192b015afc903a9dceae4a58444ebac2e75f3868748732f44efe4eb6b43b9f8"
+      },
+      {
+        "pubkey": "58Dq3PuERi38ckmjCqpJmkcomT1BcvrTGxcPbJrNj2Uk",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "df2b591133c4b915627961bf2eb27b058a94964c34c6dc47dfae7ac25470bdd1",
+        "staged_sha256": "df2b591133c4b915627961bf2eb27b058a94964c34c6dc47dfae7ac25470bdd1"
+      },
+      {
+        "pubkey": "66G62fzqZN5cQ4QzBsLBhfm4cD7ywdxxhfpgUvZPbwSf",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "10549704b3423e69dfc3f5d6bd0e438b4210de837a0baac16d80a855442f60d2",
+        "staged_sha256": "10549704b3423e69dfc3f5d6bd0e438b4210de837a0baac16d80a855442f60d2"
+      },
+      {
+        "pubkey": "GP1cTUNUc5a87xgRKewegKgEPtVEacX3mtiouHzF9pbN",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "5a39f54f491185fc4fb4c9fc068a452542f121bb6edc6b9f06cffa758f4175e6",
+        "staged_sha256": "5a39f54f491185fc4fb4c9fc068a452542f121bb6edc6b9f06cffa758f4175e6"
+      },
+      {
+        "pubkey": "6wQtPcBnBf5gx8iMiUubzkaxBbYyK1awnGSmtDac3cYP",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "05feac0cdda1f50525c88ad00c20f3afac9fdf69f3e4f34ed31b50129936d879",
+        "staged_sha256": "05feac0cdda1f50525c88ad00c20f3afac9fdf69f3e4f34ed31b50129936d879"
+      },
+      {
+        "pubkey": "DFcnKsAzisZMJFBN4hBEPS5LcmoYv561fg4iWivzqjHH",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "bd86b2e046770175b392565db60e0c0a3391f2a401e8815182f042a134dce8d6",
+        "staged_sha256": "bd86b2e046770175b392565db60e0c0a3391f2a401e8815182f042a134dce8d6"
+      },
+      {
+        "pubkey": "CwPbReWmjooqUhowTzRWs4cyRXJ3zoCX7sMjUfZEVvFC",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "37cd962d7a73d1961cd4cbc78bdb5f4cbcda7b689217a72379857edeffb04f8e",
+        "staged_sha256": "37cd962d7a73d1961cd4cbc78bdb5f4cbcda7b689217a72379857edeffb04f8e"
+      },
+      {
+        "pubkey": "EB5tsiqiPfSHw9zTVaeSQaiuZWZiBe92dg65DfkCVaWf",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "25fb80f1e26113ceea68d7a522de8c8b752a5a794cbabc3de4abc96dbce78db8",
+        "staged_sha256": "25fb80f1e26113ceea68d7a522de8c8b752a5a794cbabc3de4abc96dbce78db8"
+      },
+      {
+        "pubkey": "8crutQCBTW8fjVWWm4Sk2MAtvu2P1xrYYuJsKhnsERcJ",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "56e4c133aa0a64b4a8b5adac9563dcf7d5ddf1cf623a50f961c2914085f98684",
+        "staged_sha256": "56e4c133aa0a64b4a8b5adac9563dcf7d5ddf1cf623a50f961c2914085f98684"
+      },
+      {
+        "pubkey": "566QRaz47TQMQ6KdGyYrUQWxjVm2GauC8wojKJpuZT6x",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "b0c104a6bb5b2ff46dbcce9efa76c74991531daa9c11a8b33ec023867487c97e",
+        "staged_sha256": "b0c104a6bb5b2ff46dbcce9efa76c74991531daa9c11a8b33ec023867487c97e"
+      },
+      {
+        "pubkey": "DoeXUFnUEF1Ciy5piuQT7Et5kUwdBe2Ntx7MA2f6Nw9n",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "8332de43cd90cd4c9dcf8eb8e6bbf86910ddb4549c2822eac7729ed029dc8c5c",
+        "staged_sha256": "8332de43cd90cd4c9dcf8eb8e6bbf86910ddb4549c2822eac7729ed029dc8c5c"
+      },
+      {
+        "pubkey": "EPinwsBdR242B6S4rXZeRyQLSosy3TkP7XernmwGt4qi",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "6ddd425807bba1de401793799d5f6694eb455736ba06229d13713c7635302a77",
+        "staged_sha256": "6ddd425807bba1de401793799d5f6694eb455736ba06229d13713c7635302a77"
+      },
+      {
+        "pubkey": "9A5wxoDdnYKeoGxK4neefGKqrsNe3Rme6LWekWEXJjzP",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "6eb4b0ebafb0323e03499fd78f505ecc69a2342e7c2dfd8a4f208da0ec473696",
+        "staged_sha256": "6eb4b0ebafb0323e03499fd78f505ecc69a2342e7c2dfd8a4f208da0ec473696"
+      },
+      {
+        "pubkey": "8gWUAE1TdfrMwXyifTTXTvytF9iZfW36sUUHJmnXGpqy",
+        "owner": "11111111111111111111111111111111",
+        "data_bytes": 0,
+        "sha256": "f05b664ef90208207163b4202e4ba2131ae2dac2ecf02e7060479ab4ed71d03a",
+        "staged_sha256": "f05b664ef90208207163b4202e4ba2131ae2dac2ecf02e7060479ab4ed71d03a"
+      }
+    ],
+    "support_files_at_export": [
+      {
+        "path": "scripts/generate_runtime.py",
+        "bytes": 9677,
+        "sha256": "cd07600189c496652ec872fc706b1e24efa56cdbd1eb1eba60d602018789232d"
+      },
+      {
+        "path": "scripts/prepare_localnet.py",
+        "bytes": 12911,
+        "sha256": "9948a7996950f16a1f1b8b4a74d95a018bc1fbef807e2697ace9fc9833dd7fe9"
+      },
+      {
+        "path": "scripts/setup_local_toolchain.py",
+        "bytes": 14390,
+        "sha256": "109696c0a46af72476a63f80766529e8cd1f2b87f738dc0e5960eccda7dc4c88"
+      },
+      {
+        "path": "scripts/setup_local_js.py",
+        "bytes": 9361,
+        "sha256": "395d896856f22146e71ef1707aaaafad77749e680e5de5726b8a1a198217673e"
+      },
+      {
+        "path": "scripts/build_local.py",
+        "bytes": 4467,
+        "sha256": "941ca92337d8c3490582c9d7b27e3dee39f39dab05dfb18a729ba5d9cb5b1fc8"
+      },
+      {
+        "path": "config/local-toolchain.json",
+        "bytes": 4269,
+        "sha256": "d793aaad0b0fa8c28984dccb3448552167daf180a3216c1895d2ffacd4b952c3"
+      }
+    ],
+    "support_files_qualification": "Hashes observed at export time; not asserted to be source snapshots captured before generation.",
+    "staged_public_configuration": [
+      {
+        "path": ".local/localnet-sdk-compatible-v13/app/Arcium.toml",
+        "bytes": 98,
+        "sha256": "ba58f1707514c3f16ea3f6fe855c4ca633685181bb57c5f8cdd43c7531379714"
+      },
+      {
+        "path": ".local/localnet-sdk-compatible-v13/app/Anchor.toml",
+        "bytes": 297,
+        "sha256": "3918552a3a353403ef80a3dd673fd77345474ae66c5d8b63e92e98e8cc4ea8bb"
+      },
+      {
+        "path": ".local/localnet-sdk-compatible-v13/app/genesis-args.json",
+        "bytes": 10599,
+        "sha256": "059337323947bb687c0153077d0788b0f32c99022c1d365ebeb0d35b42266d49"
+      },
+      {
+        "path": ".local/localnet-sdk-compatible-v13/app/validator-command.json",
+        "bytes": 12725,
+        "sha256": "144ebb2e0e8a5e02d951daf73b1bf3f02e670334d0cb8e723048321865603029"
+      },
+      {
+        "path": ".local/localnet-sdk-compatible-v13/app/run-validator.py",
+        "bytes": 428,
+        "sha256": "86a6e3bd89d08927d634418f44db0b0946812f2cbf99106ea1fdef2477e14cf3"
+      }
+    ]
+  },
+  "recoveries": [
+    {
+      "label": "a40-submit-retained-query",
+      "schema": 1,
+      "processId": 17839,
+      "action": "submit-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "ebb4bb59154e3185063bc35853b150b55814ec12a42eb3aee32a6cbcbf2b9cc4",
+        "bytes": 13389
+      },
+      "retainedTicket": {
+        "sha256": "07a06484cb406d4767cb37bd8a6fe22a10eb491a7bc891f95096c7bdb5edd7b8",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "computation": "HJnJM69829Y8WFUNJDfrF231cHbqA1YZhMkc4yqKB5Fy",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "owner": "F1y4K9Yg77C1YWuoGumdgxX2yb89W6Qf6P2mcv7dvs4r",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX"
+      },
+      "observation": {
+        "status": "queued",
+        "slot": 483,
+        "commitment": "confirmed",
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "observe",
+          "cancel-with-owner"
+        ]
+      },
+      "delivery": {
+        "status": "landed",
+        "canBroadcast": false,
+        "attempts": 1,
+        "signature": "5i78u1EmrvrCTTtDUvAMCXbSEZjsgMTMLio2QM1oficFhqDEGrgP57nNS2wiAFkkZ5SHpcXc3TrWMvttKTmf2y3q",
+        "role": "query",
+        "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+        "wireSha256": "65b46c25706f402d9b9e7311d2816fb9109c3ccbd149e132944154fdf1364ba4",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:01.036Z",
+            "response": {
+              "signature": "5i78u1EmrvrCTTtDUvAMCXbSEZjsgMTMLio2QM1oficFhqDEGrgP57nNS2wiAFkkZ5SHpcXc3TrWMvttKTmf2y3q",
+              "wireSha256": "65b46c25706f402d9b9e7311d2816fb9109c3ccbd149e132944154fdf1364ba4",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:01.052Z",
+              "outcome": "accepted",
+              "returnedSignature": "5i78u1EmrvrCTTtDUvAMCXbSEZjsgMTMLio2QM1oficFhqDEGrgP57nNS2wiAFkkZ5SHpcXc3TrWMvttKTmf2y3q"
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "query",
+          "wireSha256": "65b46c25706f402d9b9e7311d2816fb9109c3ccbd149e132944154fdf1364ba4",
+          "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+          "instructionSha256": "e11c6f79a5f7c79c55303086537998d3f6cda628e3601722b09b5532f99deafc",
+          "liveLookupTablesChecked": 1,
+          "preparedAction": {
+            "address": "34J5qXypjjo9giwqtqJSuSem5i8ZUeHLEZSasFmMoXcw",
+            "owner": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+            "executable": false,
+            "slot": 482,
+            "dataBase64": "WS2EdySZ6kPQQwA+mHWdcWbY2q8IN8hQJd4ggXD155aJ0c/FsKy07wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDO8Shzry1phyVg/cAULgM7Sr4AUg6foSccGvbUvdWGHIet+LT2DMKOh1geFlFG6EY++lnX5GJSkNnsuIwSY/uO13qzSxrDHj4roey0yoicrAtJVhbUZH0OQKG0uoEc60EMAPph1nXFm2NqvCDfIUCXeIIFw9eeWidHPxbCstO/pG5odrPeBIYXdGDNrEv6SAtbkU0C+erT1RqtwChzbqt637pbyhDTfTSRU8rr+amC8cHr+7809/wrgWfejulzaRsELBuChPzJBSS5uaI/HBBS0w+ws5GGDX+7sdvNccm6qObs+rjEUvkpNWYb1bPjk0pwKQn5qIz3zBlr2DWRhEMqF+9EeAWo1uGd/fUXWrzcgY3i2ftA3Ik/GE6HK8m95DHOg9xNMXGy/tAkeE7ILafdSSKV0+VsYm72gTz1JbdtTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTUxWTwmYH6ph2SdLjctQaKwIDZJeMAD502dwuI7aUpJxnqQAAABsHSfQIbgF9L+AgPC9GJqC/PuJlsHAZvk3/oaZuizmOHifWhkzJUHcmUVV8TS6vwuX+X+t9RER/LCYVx84y/nbp1yVk8n4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANTeE+lCGzbRrsxsrgWD0rr377Xv0FX/GHPLMSLyrEwUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "sha256": "d566fda8a1f899dc0445c7af91888dbc955065722d01edfeec31d49d20dc21a6"
+          }
+        },
+        "receipt": {
+          "slot": 483,
+          "landedCU": 180375,
+          "feeLamports": 10000,
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "a40-after-callback",
+      "schema": 1,
+      "processId": 17935,
+      "action": "observe",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "ebb4bb59154e3185063bc35853b150b55814ec12a42eb3aee32a6cbcbf2b9cc4",
+        "bytes": 13389
+      },
+      "identity": {
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "computation": "HJnJM69829Y8WFUNJDfrF231cHbqA1YZhMkc4yqKB5Fy",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "owner": "F1y4K9Yg77C1YWuoGumdgxX2yb89W6Qf6P2mcv7dvs4r",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX"
+      },
+      "observation": {
+        "status": "authorized",
+        "slot": 488,
+        "commitment": "confirmed",
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "a40-submit-retained-commit",
+      "schema": 1,
+      "processId": 17946,
+      "action": "submit-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "ebb4bb59154e3185063bc35853b150b55814ec12a42eb3aee32a6cbcbf2b9cc4",
+        "bytes": 13389
+      },
+      "retainedTicket": {
+        "sha256": "16cfb5ce643691b107a69d7cf5a1b22fd30c5a46bb80675ae01dcabc65c69ea6",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "computation": "HJnJM69829Y8WFUNJDfrF231cHbqA1YZhMkc4yqKB5Fy",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "owner": "F1y4K9Yg77C1YWuoGumdgxX2yb89W6Qf6P2mcv7dvs4r",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX"
+      },
+      "observation": {
+        "status": "committed",
+        "slot": 490,
+        "commitment": "confirmed",
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      "delivery": {
+        "status": "landed",
+        "canBroadcast": false,
+        "attempts": 1,
+        "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+        "role": "commit",
+        "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+        "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:04.083Z",
+            "response": {
+              "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+              "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:04.098Z",
+              "outcome": "accepted",
+              "returnedSignature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ"
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "commit",
+          "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+          "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+          "instructionSha256": "c94653e84dd3d7224385086ab9253ae92b4563e5ab8fafc0cc329d6ca0a0c850",
+          "liveLookupTablesChecked": 0
+        },
+        "receipt": {
+          "slot": 490,
+          "landedCU": 86557,
+          "feeLamports": 10000,
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "a40-after-commit",
+      "schema": 1,
+      "processId": 17964,
+      "action": "recover-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "ebb4bb59154e3185063bc35853b150b55814ec12a42eb3aee32a6cbcbf2b9cc4",
+        "bytes": 13389
+      },
+      "retainedTicket": {
+        "sha256": "16cfb5ce643691b107a69d7cf5a1b22fd30c5a46bb80675ae01dcabc65c69ea6",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "computation": "HJnJM69829Y8WFUNJDfrF231cHbqA1YZhMkc4yqKB5Fy",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "owner": "F1y4K9Yg77C1YWuoGumdgxX2yb89W6Qf6P2mcv7dvs4r",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX"
+      },
+      "observation": {
+        "status": "committed",
+        "slot": 490,
+        "commitment": "confirmed",
+        "job": "9utBJPk9cL3MVTZLw8UQ6SwYgs5948SnTEyXC4rroF8t",
+        "permit": "PtYw6Bw73MnmeaobChGh2kBicp7tENjXcoMCD7NSNxN",
+        "effect": "B7Mv3HCaQPaGTVWDQ8sK9JKnu8D5Qa1UKXBEmTTBWxTX",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      "delivery": {
+        "status": "landed",
+        "canBroadcast": false,
+        "attempts": 1,
+        "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+        "role": "commit",
+        "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+        "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:04.083Z",
+            "response": {
+              "signature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ",
+              "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:04.098Z",
+              "outcome": "accepted",
+              "returnedSignature": "2C5MCLbWuWnJaT3q4BkyYx7KHm4Ri3va5sWzXwifmoLt5LnhF9LagrQ3JZYiF7gibrEK79rXn5EuXY9srU7WCPLZ"
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "commit",
+          "wireSha256": "134eb5511829a9ceba8840eb5234b885cffe635f3eea37229ea113447d9da6d0",
+          "descriptorSha256": "ce6110a37bc6d9760e8b532b4994659a38ee623eba2a990313b29419060fc2fe",
+          "instructionSha256": "c94653e84dd3d7224385086ab9253ae92b4563e5ab8fafc0cc329d6ca0a0c850",
+          "liveLookupTablesChecked": 0
+        },
+        "receipt": {
+          "slot": 490,
+          "landedCU": 86557,
+          "feeLamports": 10000,
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "b40-honest-fresh-lost-response",
+      "schema": 1,
+      "processId": 18919,
+      "action": "recover-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "31dd9dbb8eb54e7c6f0adf992669b56690dbf4d591aee661e1e7276d06381639",
+        "bytes": 13574
+      },
+      "retainedTicket": {
+        "sha256": "7935ba377c1323e4ff490bf91b03852c9dc99d488a776e9623f3dfa84c00ee32",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "owner": "HRXAykDQhKMvzcarGMCqTMhb8KjX1VsYzzotKuaz4kfN",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT"
+      },
+      "observation": {
+        "status": "unobserved",
+        "slot": 538,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "observe"
+        ],
+        "reason": "No Job at this commitment; this does not prove a submitted transaction failed"
+      },
+      "delivery": {
+        "status": "pending",
+        "canBroadcast": true,
+        "attempts": 1,
+        "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+        "role": "query",
+        "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+        "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+        "lastSendError": "TEST ONLY: dropped real RPC send response",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:28.714Z",
+            "response": {
+              "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+              "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:28.728Z",
+              "outcome": "error",
+              "error": {
+                "name": "Error",
+                "message": "TEST ONLY: dropped real RPC send response"
+              }
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "query",
+          "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+          "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+          "instructionSha256": "f176152a367badba8102cd474737b12363a837f5a46346e01eec7145524541c4",
+          "liveLookupTablesChecked": 1,
+          "preparedAction": {
+            "address": "DSWejGe8QMaVZ84WdyBPbxWsFVa3JCbRCn39vUEWaE2w",
+            "owner": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+            "executable": false,
+            "slot": 538,
+            "dataBase64": "WS2EdySZ6kP0Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA21Aj/knQrxoqHORkBmhdc/Ub9wEw7TPYQziYxRrIhXOHIet+LT2DMKOh1geFlFG6EY++lnX5GJSkNnsuIwSY/i0z0bsR5Q2lbiI32uv+dR6C6LD6iZcr+GD5JuqZFTdm9AMLvnFJm56I0nYqcLcTbBe3P/ThqWXF1dtgVjs/+2XkhMn5em2MeD9ufg/uCaTwgRmZRx3XrN9xxpMNeYVuJERWXhHknO5uZCTz63zIoPFxAOWOC89uZ4HToOCJSLQ1Jh2ZqkO4w+k73LfK4ttFkAsOophqpd79mj3RxAoAXTOU4Est9zBIpvFl+L0CMAmA1C8OS2okJud2dogpzO8aWnK+hEe+LRkhZ9VRaAou5IO02lyP/EdbXK/ZhqGk0iE+DHOg9xNMXGy/tAkeE7ILafdSSKV0+VsYm72gTz1JbdtUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVE8XrR74a9z6ik5hNZHjgSOJ5g9oT3W+l9tEWUhnQeT8qQAAABsHg2caqnLnAJiu/NfKdxlNUc67UwqXKPud+pgpPwfgZePqaTxGoFg9jp84nXvGOUXPBi2SBLhr5ZWO/8VCmfA3kJXS4ksAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH6PUoHO4f36+XPyGD+vZvFmT/VCCQWxlU+O61VoAxU5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "sha256": "6ca16c5d72cec079450febcf634bbd6eb59c6f8277a9a2145be0f7010afde9fd"
+          }
+        }
+      }
+    },
+    {
+      "label": "b40-honest-fresh-submit-retained-query",
+      "schema": 1,
+      "processId": 18922,
+      "action": "submit-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "31dd9dbb8eb54e7c6f0adf992669b56690dbf4d591aee661e1e7276d06381639",
+        "bytes": 13574
+      },
+      "retainedTicket": {
+        "sha256": "7935ba377c1323e4ff490bf91b03852c9dc99d488a776e9623f3dfa84c00ee32",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "owner": "HRXAykDQhKMvzcarGMCqTMhb8KjX1VsYzzotKuaz4kfN",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT"
+      },
+      "observation": {
+        "status": "queued",
+        "slot": 539,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "observe",
+          "cancel-with-owner"
+        ]
+      },
+      "delivery": {
+        "status": "landed",
+        "canBroadcast": false,
+        "attempts": 1,
+        "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+        "role": "query",
+        "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+        "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+        "lastSendError": "TEST ONLY: dropped real RPC send response",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:28.714Z",
+            "response": {
+              "signature": "3cnNFqejdve6LiBmVZTcQswgYoTfjuwdE8cEyhXGSzBBd6xtiecvCe6QvaEuK89kxMQ7UDzat9cD8hdN59Hm3Cns",
+              "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:28.728Z",
+              "outcome": "error",
+              "error": {
+                "name": "Error",
+                "message": "TEST ONLY: dropped real RPC send response"
+              }
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "query",
+          "wireSha256": "186a0af130cf3d4e5e59a95acb3ee2a15227d935a01673795fc429c5691869be",
+          "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+          "instructionSha256": "f176152a367badba8102cd474737b12363a837f5a46346e01eec7145524541c4",
+          "liveLookupTablesChecked": 1,
+          "preparedAction": {
+            "address": "DSWejGe8QMaVZ84WdyBPbxWsFVa3JCbRCn39vUEWaE2w",
+            "owner": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+            "executable": false,
+            "slot": 539,
+            "dataBase64": "WS2EdySZ6kP0Awu+cUmbnojSdipwtxNsF7c/9OGpZcXV22BWOz/7ZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA21Aj/knQrxoqHORkBmhdc/Ub9wEw7TPYQziYxRrIhXOHIet+LT2DMKOh1geFlFG6EY++lnX5GJSkNnsuIwSY/i0z0bsR5Q2lbiI32uv+dR6C6LD6iZcr+GD5JuqZFTdm9AMLvnFJm56I0nYqcLcTbBe3P/ThqWXF1dtgVjs/+2XkhMn5em2MeD9ufg/uCaTwgRmZRx3XrN9xxpMNeYVuJERWXhHknO5uZCTz63zIoPFxAOWOC89uZ4HToOCJSLQ1Jh2ZqkO4w+k73LfK4ttFkAsOophqpd79mj3RxAoAXTOU4Est9zBIpvFl+L0CMAmA1C8OS2okJud2dogpzO8aWnK+hEe+LRkhZ9VRaAou5IO02lyP/EdbXK/ZhqGk0iE+DHOg9xNMXGy/tAkeE7ILafdSSKV0+VsYm72gTz1JbdtUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVE8XrR74a9z6ik5hNZHjgSOJ5g9oT3W+l9tEWUhnQeT8qQAAABsHg2caqnLnAJiu/NfKdxlNUc67UwqXKPud+pgpPwfgZePqaTxGoFg9jp84nXvGOUXPBi2SBLhr5ZWO/8VCmfA3kJXS4ksAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH6PUoHO4f36+XPyGD+vZvFmT/VCCQWxlU+O61VoAxU5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "sha256": "6ca16c5d72cec079450febcf634bbd6eb59c6f8277a9a2145be0f7010afde9fd"
+          }
+        },
+        "receipt": {
+          "slot": 539,
+          "landedCU": 165135,
+          "feeLamports": 10000,
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "b40-honest-fresh-after-callback",
+      "schema": 1,
+      "processId": 19003,
+      "action": "observe",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "31dd9dbb8eb54e7c6f0adf992669b56690dbf4d591aee661e1e7276d06381639",
+        "bytes": 13574
+      },
+      "identity": {
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "owner": "HRXAykDQhKMvzcarGMCqTMhb8KjX1VsYzzotKuaz4kfN",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT"
+      },
+      "observation": {
+        "status": "authorized",
+        "slot": 544,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": false,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "b40-honest-fresh-submit-retained-commit",
+      "schema": 1,
+      "processId": 19029,
+      "action": "submit-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "31dd9dbb8eb54e7c6f0adf992669b56690dbf4d591aee661e1e7276d06381639",
+        "bytes": 13574
+      },
+      "retainedTicket": {
+        "sha256": "a44b8108af9dff5e3b4df9e192a6a0f815eb6da783244b5a5f890d03a6f761ef",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "owner": "HRXAykDQhKMvzcarGMCqTMhb8KjX1VsYzzotKuaz4kfN",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT"
+      },
+      "observation": {
+        "status": "committed",
+        "slot": 546,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": true,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      "delivery": {
+        "status": "landed",
+        "canBroadcast": false,
+        "attempts": 1,
+        "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+        "role": "commit",
+        "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+        "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:32.148Z",
+            "response": {
+              "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+              "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:32.169Z",
+              "outcome": "accepted",
+              "returnedSignature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK"
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "commit",
+          "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+          "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+          "instructionSha256": "b0835ab5d27a1004644c7ded192d2debfcd78c08cdda9d6f016e1b3c77017299",
+          "liveLookupTablesChecked": 0
+        },
+        "receipt": {
+          "slot": 546,
+          "landedCU": 85275,
+          "feeLamports": 10000,
+          "error": null
+        }
+      }
+    },
+    {
+      "label": "b40-honest-fresh-after-commit",
+      "schema": 1,
+      "processId": 19065,
+      "action": "recover-ticket",
+      "evidenceLevel": "separate-process-local-operation-reconciliation",
+      "genesisHash": "D4WKph42PCh4nQHkJjhJBVvSx55s6hC1TmdFSEMosNXx",
+      "generatesKeysProofsOrOperationIdentity": false,
+      "createsNewSignedTransaction": false,
+      "passed": true,
+      "retainedPlan": {
+        "sha256": "31dd9dbb8eb54e7c6f0adf992669b56690dbf4d591aee661e1e7276d06381639",
+        "bytes": 13574
+      },
+      "retainedTicket": {
+        "sha256": "a44b8108af9dff5e3b4df9e192a6a0f815eb6da783244b5a5f890d03a6f761ef",
+        "bytes": 500
+      },
+      "identity": {
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "computation": "85d1fTuix2vZWYRde7tD6g8cnvsvgTvaV7XHHGugRCP3",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "owner": "HRXAykDQhKMvzcarGMCqTMhb8KjX1VsYzzotKuaz4kfN",
+        "quota": "qc9zZrjjzConf2TmLvkCkwZNsCrWfNwGEzjLCvtbsE2",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT"
+      },
+      "observation": {
+        "status": "committed",
+        "slot": 546,
+        "commitment": "confirmed",
+        "job": "FZ6A3Zr1rYE1c7j3LXZUi9beNqbfechVu94cxwAtRZwp",
+        "permit": "5rScieNttKEcDJaghY6KUqUEyWioZEVr9SKz9h3Uk2Ma",
+        "effect": "DhpgTvMJthwTAsLGhBFtBifUjQ99zQTPYxjPQSqs7abT",
+        "consumerKind": "license",
+        "licenseExpirySlot": "1440",
+        "licenseActive": true,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      "delivery": {
+        "status": "landed",
+        "canBroadcast": false,
+        "attempts": 1,
+        "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+        "role": "commit",
+        "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+        "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+        "retryPolicy": {
+          "maxBroadcasts": 3,
+          "rpcMaxRetries": 5
+        },
+        "broadcasts": [
+          {
+            "attempt": 1,
+            "rpcMaxRetries": 5,
+            "startedAt": "2026-10-02T11:04:32.148Z",
+            "response": {
+              "signature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK",
+              "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+              "attempt": 1,
+              "completedAt": "2026-10-02T11:04:32.169Z",
+              "outcome": "accepted",
+              "returnedSignature": "29kV2xg1SeTnKeNrXW3pySGmBscuDpaL6KPH97n8meLS52CFAuUCXAhPT9jDM44MuVpjhht1431fqJZfhtHZgZHK"
+            }
+          }
+        ],
+        "semanticBinding": {
+          "role": "commit",
+          "wireSha256": "043b8fbd829997d618bd25facbaa89b5b18ab10f356868288a3ea94742a371ba",
+          "descriptorSha256": "693d303619f8be046272efe7897d332710d9bedff851aa528e50b6d0f6d4162f",
+          "instructionSha256": "b0835ab5d27a1004644c7ded192d2debfcd78c08cdda9d6f016e1b3c77017299",
+          "liveLookupTablesChecked": 0
+        },
+        "receipt": {
+          "slot": 546,
+          "landedCU": 85275,
+          "feeLamports": 10000,
+          "error": null
+        }
+      }
+    }
+  ],
+  "recovery_evidence_scope": "Worker results come from separate local Node processes and retained operation plans/signed tickets. Dropped send responses are deliberate test fault injection after invoking the real local RPC send; transaction receipt fields describe actual signed local-validator transactions. Read-only recovery never broadcasts; submit-ticket may broadcast only the retained signed bytes. A passing recovery check is not itself evidence of payment; the SDK observation distinguishes application state.",
+  "full_evidence": {
+    "path": ".local/demo-sdk-compatible-v13/results.json",
+    "bytes": 5238416,
+    "sha256": "8163b2a6a41e15f42e1d56d2db20fdd705ed0d9e9205f4c3aee878bda561f11c"
+  },
+  "exporter": {
+    "path": "scripts/export_demo_evidence.py",
+    "bytes": 14064,
+    "sha256": "e3fbd18c910e4cf05c5c635b939e6e797a85510aab3d2c7b7ade758fd6c62755"
+  }
+}
