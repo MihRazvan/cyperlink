@@ -15,18 +15,35 @@ def fields(names):
 
 TRANSACTION = fields('label category signature bytes slot signaturesVerified simulatedCU landedCU feeLamports')
 OPERATION = fields('label kind requestedAmountObserverDisclosure status source destination permit job consumer record quotaVersionAtAdmission')
-DESCRIPTOR = fields('profile consumerKind job computation permit owner admin quota effect templateHex inputsHashHex sku productHex32 licenseExpirySlot')
+DESCRIPTOR = fields('profile consumerKind job computation permit owner admin quota effect templateHex inputsHashHex queryStateHashHex sku productHex32 licenseExpirySlot')
 OBSERVATION = fields('status slot commitment job permit effect consumerKind licenseExpirySlot licenseActive quotaVersion expectedQuotaVersion actions reason')
 CHECK = fields('label address lamports evidence_level simulatedCU actualCustomError consumerPdaRecomputed allTrackedDataUnchanged allFiveAccountDataUnchanged changedAccounts') | {'observation': OBSERVATION}
 CALLBACK = fields('label job computation signature status elapsedFromQueueMs slot landedCU feeLamports') | {'output': fields('field0 field1 field2')}
 LOADED = fields('matched program_owner programdata last_deploy_slot elf_bytes elf_sha256 loaded_elf_sha256 loaded_account_payload_sha256 padding_zero_bytes program rpc_slot genesis_hash evidence_level executes_program')
-SNAPSHOT = fields('label commitment') | {'context': fields('apiVersion slot'), 'accounts': [fields('address owner executable lamports dataBase64')]}
+ACCOUNT = fields('address owner executable lamports dataBase64')
+SNAPSHOT = fields('label commitment') | {'context': fields('apiVersion slot'), 'accounts': [ACCOUNT]}
+QUERY_SNAPSHOT = fields('slot commitment addresses trackedAddresses') | {'accounts': [('nullable', ACCOUNT)]}
+QUERY_REJECTION = fields('actualCustomError signature exactSignedWireReused jobPermitClaimAndComputationAbsent quotaAndPermitUnchanged trackedAddresses operationLabel') | {
+    'before': QUERY_SNAPSHOT, 'after': QUERY_SNAPSHOT, 'descriptor': DESCRIPTOR,
+}
+RECOVERY = fields('label schema processId action evidenceLevel genesisHash generatesKeysProofsOrOperationIdentity createsNewSignedTransaction passed') | {
+    'retainedPlan': fields('sha256 bytes'), 'retainedTicket': fields('sha256 bytes'),
+    'identity': fields('job computation permit owner quota effect'), 'observation': OBSERVATION,
+    'delivery': fields('status canBroadcast attempts signature role descriptorSha256 wireSha256 lastSendError') | {
+        'retryPolicy': fields('maxBroadcasts rpcMaxRetries'),
+        'broadcasts': [fields('attempt rpcMaxRetries startedAt') | {'response': ('nullable', fields('signature wireSha256 attempt completedAt outcome returnedSignature') | {'error': fields('name message code')})}],
+        'semanticBinding': fields('role wireSha256 descriptorSha256 instructionSha256 liveLookupTablesChecked'),
+        'receipt': fields('slot landedCU feeLamports'),
+    },
+}
 QUOTA = fields('version counter nonce stateHash ciphertext')
 CATEGORIES = ('adversarial-prefunding-setup', 'application', 'arcium-definition', 'arcium-circuit-upload', 'arcium-queue', 'lookup-table', 'adversarial-consumer-binding', 'adversarial-native-settlement', 'native-settlement', 'native-provisioning', 'native-proof-and-permit-provisioning', 'arcium-signed-callback')
 
 
 def project(value, schema):
     """Only schema-listed fields cross this boundary, including nested objects."""
+    if isinstance(schema, tuple) and schema[0] == 'nullable':
+        return None if value is None else project(value, schema[1])
     if schema is None:
         if isinstance(value, list):
             if any(isinstance(item, (dict, list)) for item in value):
@@ -78,6 +95,14 @@ def error_summary(error):
     return {'InstructionError': [instruction[0], detail]}
 
 
+def recovery_summary(value):
+    result = project(value, RECOVERY)
+    receipt = value.get('delivery', {}).get('receipt')
+    if receipt is not None:
+        result['delivery']['receipt']['error'] = error_summary(receipt.get('error'))
+    return result
+
+
 def build_report(raw, preparation, sources, client_manifest, descriptors, provenance):
     if raw.get('passed') is not True:
         raise ValueError('Only a completed passing run may be exported')
@@ -104,6 +129,16 @@ def build_report(raw, preparation, sources, client_manifest, descriptors, proven
     result['locally_retained_operation_descriptors'] = [project(d, DESCRIPTOR | fields('path')) for d in descriptors]
     result['cost_scope'] = ('Validator CU and fees are separate by category. Callback elapsed time is queue-to-observed committed callback including polling/RPC overhead. Distributed worker CPU, preprocessing, network traffic and production pricing are not measured.')
     result['bootstrap_provenance'] = provenance
+    if 'recoveries' in raw:
+        result['recoveries'] = [recovery_summary(value) for value in raw['recoveries']]
+        result['recovery_evidence_scope'] = (
+            'Worker results come from separate local Node processes and retained operation plans/signed tickets. '
+            'Dropped send responses are deliberate test fault injection after invoking the real local RPC send; '
+            'transaction receipt fields describe actual signed local-validator transactions. '
+            'Read-only recovery never broadcasts; submit-ticket may broadcast only the retained signed bytes. '
+            'A passing recovery check is not itself evidence of payment; the SDK observation distinguishes application state.')
+    if 'querySnapshotRejection' in raw:
+        result['querySnapshotRejection'] = project(raw['querySnapshotRejection'], QUERY_REJECTION)
     return result
 
 

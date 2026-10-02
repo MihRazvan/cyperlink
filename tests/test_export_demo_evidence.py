@@ -91,6 +91,49 @@ class PublicEvidenceExport(unittest.TestCase):
         self.assertNotIn('snapshot', result)
         self.assertNotIn('SENSITIVE_SENTINEL', json.dumps(result))
 
+    def test_recovery_allowlist_retains_binding_and_actual_error_without_wire_or_keys(self):
+        raw, _, _ = self.fixture()
+        raw['recoveries'] = [{'label': 'delayed-query-rejected', 'passed': True, 'processId': 200,
+            'action': 'recover-ticket', 'retainedPlan': {'sha256': 'a' * 64, 'bytes': 100, 'secret': 'SENSITIVE_SENTINEL'},
+            'delivery': {'status': 'failed', 'signature': 'signature', 'role': 'query', 'wireSha256': 'b' * 64,
+                'record': {'wireBase64': 'SENSITIVE_SENTINEL'}, 'wireBase64': 'SENSITIVE_SENTINEL',
+                'semanticBinding': {'instructionSha256': 'c' * 64, 'secret': 'SENSITIVE_SENTINEL'},
+                'receipt': {'slot': 42, 'landedCU': 400, 'feeLamports': 5000,
+                    'error': {'InstructionError': [1, {'Custom': 6004, 'secret': 'SENSITIVE_SENTINEL'}]},
+                    'logs': ['SENSITIVE_SENTINEL']}},
+            'observation': {'status': 'unobserved', 'privateKey': 'SENSITIVE_SENTINEL'}}]
+        result = self.report(raw)
+        self.assertNotIn('SENSITIVE_SENTINEL', json.dumps(result))
+        self.assertEqual(result['recoveries'][0]['delivery']['receipt']['error'], {'InstructionError': [1, {'Custom': 6004}]})
+        self.assertEqual(result['recoveries'][0]['observation']['status'], 'unobserved')
+        self.assertIn('deliberate test fault injection', result['recovery_evidence_scope'])
+
+    def test_query_snapshot_rejection_preserves_null_absence_and_public_bytes(self):
+        raw, _, _ = self.fixture()
+        snapshot = {'slot': 42, 'accounts': [
+            {'address': 'quota', 'owner': 'program', 'lamports': 3, 'executable': False, 'dataBase64': 'AQID'},
+            {'address': 'permit', 'owner': 'program', 'lamports': 4, 'executable': False, 'dataBase64': 'AAAA'}, None, None, None]}
+        raw['querySnapshotRejection'] = {'actualCustomError': 6004, 'signature': 'signature',
+            'trackedAddresses': ['quota', 'permit', 'job', 'computation', 'claim'],
+            'before': snapshot, 'after': snapshot, 'exactSignedWireReused': True,
+            'jobPermitClaimAndComputationAbsent': True, 'quotaAndPermitUnchanged': True,
+            'descriptor': {'queryStateHashHex': 'd' * 64, 'privateKey': 'SENSITIVE_SENTINEL'},
+            'privateKey': 'SENSITIVE_SENTINEL'}
+        result = self.report(raw)['querySnapshotRejection']
+        self.assertEqual(result['before'], snapshot)
+        self.assertEqual(result['after']['accounts'][2:], [None, None, None])
+        self.assertEqual(result['descriptor']['queryStateHashHex'], 'd' * 64)
+        self.assertNotIn('SENSITIVE_SENTINEL', json.dumps(result))
+
+    def test_extended_source_snapshots_remain_public_hash_records(self):
+        raw, preparation, sources = self.fixture()
+        clients = [{'path': 'packages/local-client/src/operation-client.mjs', 'sha256': 'c' * 64, 'bytes': 10, 'sourcePrivateKey': 'SENSITIVE_SENTINEL'},
+                   {'path': 'examples/two-consumers/recover-operation.mjs', 'sha256': 'd' * 64, 'bytes': 20}]
+        result = exporter.build_report(raw, preparation, sources, clients, [{'queryStateHashHex': 'e' * 64}], {})
+        self.assertEqual(len(result['executed_client_source_manifest']), 2)
+        self.assertEqual(result['locally_retained_operation_descriptors'][0]['queryStateHashHex'], 'e' * 64)
+        self.assertNotIn('SENSITIVE_SENTINEL', json.dumps(result))
+
 
 if __name__ == '__main__':
     unittest.main()

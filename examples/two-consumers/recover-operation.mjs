@@ -16,6 +16,18 @@ import { OperationReader, LocalRpcTransport } from '../../packages/sdk/src/index
 const ACTIONS = new Set(['observe', 'recover-ticket', 'submit-ticket']);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 
+export function summarizeDeliveryDiagnostics(result) {
+  const pick = (value, fields) => Object.fromEntries(fields.filter(key => value?.[key] !== undefined).map(key => [key, value[key]]));
+  const broadcasts = (result.broadcasts ?? []).slice(0, 10).map(item => ({
+    ...pick(item, ['attempt', 'rpcMaxRetries', 'startedAt']), response: item.response ? {
+      ...pick(item.response, ['signature', 'wireSha256', 'attempt', 'completedAt', 'outcome', 'returnedSignature']),
+      ...(item.response.error ? { error: { ...pick(item.response.error, ['name', 'code']), message: String(item.response.error.message).slice(0, 16384) } } : {}),
+    } : null,
+  }));
+  return { retryPolicy: pick(result.retryPolicy, ['maxBroadcasts', 'rpcMaxRetries']), broadcasts,
+    ...(result.lastSendError !== undefined ? { lastSendError: String(result.lastSendError).slice(0, 16384) } : {}) };
+}
+
 export function assertTicketBinding(plan, ticket, record, role) {
   ensure(['query', 'commit'].includes(role), 'Explicit query or commit role required');
   ensure(ticket.genesisHash === plan.genesisHash && record.genesisHash === plan.genesisHash, 'Ticket genesis differs from retained plan');
@@ -111,6 +123,7 @@ async function createLocalAdapter(options) {
     const result = submit ? await sender.send(ticket) : await sender.recover(ticket);
     reader.minimumSlot = Math.max(reader.minimumSlot ?? 0, record.minContextSlot, result.receipt?.slot ?? 0);
     return { status: result.status, canBroadcast: result.canBroadcast, attempts: result.attempts,
+      ...summarizeDeliveryDiagnostics(result),
       signature: result.signature, semanticBinding, role: record.role, descriptorSha256: record.descriptorSha256, wireSha256: record.wireSha256,
       ...(result.receipt ? { receipt: { slot: result.receipt.slot, error: result.receipt.meta.err,
         landedCU: result.receipt.meta.computeUnitsConsumed, feeLamports: result.receipt.meta.fee } } : {}) };

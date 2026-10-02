@@ -4,10 +4,18 @@ import { mkdtemp, writeFile, readFile, rm, symlink, mkdir } from 'node:fs/promis
 import { resolve } from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { parseArguments, readRetainedJson, runRecovery, assertTicketBinding } from './recover-operation.mjs';
+import { parseArguments, readRetainedJson, runRecovery, assertTicketBinding, summarizeDeliveryDiagnostics } from './recover-operation.mjs';
 import { descriptorDigest } from '../../packages/local-client/src/operation-plan.mjs';
 
 const execute = promisify(execFile);
+test('delivery diagnostics retain bounded response cause without signed wire or secrets', () => {
+  const result = summarizeDeliveryDiagnostics({ retryPolicy: { maxBroadcasts: 3, rpcMaxRetries: 5, secret: 'SECRET' },
+    broadcasts: [{ attempt: 1, rpcMaxRetries: 5, response: { outcome: 'error', wireSha256: 'hash', wireBase64: 'SECRET',
+      error: { name: 'Error', message: 'TEST ONLY: dropped real RPC send response', secret: 'SECRET' } } }], lastSendError: 'x'.repeat(17000) });
+  assert.equal(result.lastSendError.length, 16384);
+  assert.equal(result.broadcasts[0].response.error.message, 'TEST ONLY: dropped real RPC send response');
+  assert(!JSON.stringify(result).includes('SECRET'));
+});
 async function fixture(t) {
   const local = resolve('.local'); await mkdir(local, { recursive: true });
   const directory = await mkdtemp(resolve(local, 'recovery-worker-test-'));
