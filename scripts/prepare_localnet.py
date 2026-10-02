@@ -17,6 +17,25 @@ from rebuild_circuits import check_artifacts
 from setup_local_js import load_config, check_installed
 
 ROOT = Path(__file__).resolve().parents[1]
+# SIMD-0500 rejects new deployment of SBPF v0/v1/v2. The qualified build
+# toolchain still emits v0; disabling this feature is an explicit fresh-local
+# genesis exception, never a version upgrade or a public-network operation.
+DISABLE_LEGACY_SBPF_DEPLOYMENT = 'B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g'
+
+
+def validator_feature_options(validator, allow_pinned_sbf_v0_deployment=False):
+    if not allow_pinned_sbf_v0_deployment:
+        return [], []
+    help_text = subprocess.check_output([str(validator), '--help'], text=True)
+    if '--deactivate-feature <FEATURE_PUBKEY>' not in help_text:
+        raise ValueError('Pinned validator does not support explicit genesis feature deactivation')
+    return ['--deactivate-feature', DISABLE_LEGACY_SBPF_DEPLOYMENT], [{
+        'feature': DISABLE_LEGACY_SBPF_DEPLOYMENT,
+        'action': 'deactivate-at-fresh-local-genesis',
+        'reason': 'Allow deployment of the pinned SBF tools1.57 arch-v0 artifacts; SIMD-0500 otherwise rejects v0/v1/v2 deployment',
+        'scope': 'local-only explicit opt-in; not default Agave4.3.0 feature parity or public-network deployability',
+        'opt_in': '--allow-pinned-sbf-v0-deployment',
+    }]
 
 
 def digest(path):
@@ -83,6 +102,8 @@ def main():
     parser.add_argument('--circuits', type=Path, default=ROOT / 'programs/auth/build')
     parser.add_argument('--rpc-port', type=int, default=8899)
     parser.add_argument('--metrics-port', type=int, default=9091)
+    parser.add_argument('--allow-pinned-sbf-v0-deployment', action='store_true',
+                        help='Fresh local genesis only: deactivate SIMD-0500 to deploy pinned arch-v0 builds; default feature set unchanged')
     args = parser.parse_args()
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,48}', args.run_id):
         parser.error('run-id must contain 1–49 lowercase letters, numbers or hyphens')
@@ -111,6 +132,7 @@ def main():
             raise ValueError(f'Program pin mismatch: {pin["name"]}')
     if not subprocess.check_output([str(executables['validator']), '--version'], text=True).startswith('solana-test-validator 4.3.0 '):
         raise ValueError('Unqualified validator version')
+    feature_args, feature_deviations = validator_feature_options(executables['validator'], args.allow_pinned_sbf_v0_deployment)
     modules = args.module_root.absolute()
     if not modules.is_relative_to(ROOT / '.local'):
         raise ValueError('JS environment must be beneath repository .local')
@@ -180,6 +202,7 @@ def main():
         shutil.copyfile(programs[name], target)
         deployments.append({'address': address, 'elf': str(target), 'upgradeable': False})
     command = [str(executables['validator']), '--ledger', str(app / 'ledger'), '--bind-address', '127.0.0.1', '--rpc-port', str(args.rpc_port), '--quiet']
+    command += feature_args
     for d in deployments:
         command += ['--upgradeable-program' if d['upgradeable'] else '--bpf-program', d['address'], d['elf']]
         if d['upgradeable']: command += [str(app / 'local-test-wallet.json')]
@@ -204,6 +227,7 @@ os.execv(args[0], args)
               'subnet': str(subnet), 'payer': generation['payer'], 'genesis_accounts': len(generation['genesis_accounts']),
               'generation_manifest_sha256': digest(app / 'generation.json'), 'public_ip_patches': patches,
               'module_root': str(modules), 'validator_sha256': digest(executables['validator']),
+              'validator_feature_deviations': feature_deviations,
               'deployments': [{**d, 'sha256': digest(d['elf'])} for d in deployments],
               'staged_public_genesis': [{**r, 'staged_sha256': digest(r['path'])} for r in generation['genesis_accounts']]}
     (out / 'preparation.json').write_text(json.dumps(report, indent=2) + '\n')

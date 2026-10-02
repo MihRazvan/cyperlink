@@ -24,6 +24,24 @@ class PreparationTests(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
+    def test_default_feature_set_unchanged_and_opt_in_targets_only_deployment_gate(self):
+        with patch.object(localnet.subprocess, 'check_output') as help_call:
+            self.assertEqual(localnet.validator_feature_options('/pinned/validator'), ([], []))
+            help_call.assert_not_called()
+        with patch.object(localnet.subprocess, 'check_output', return_value='--deactivate-feature <FEATURE_PUBKEY>...\n deactivate this feature in genesis.') as help_call:
+            arguments, deviations = localnet.validator_feature_options('/pinned/validator', True)
+        help_call.assert_called_once_with(['/pinned/validator', '--help'], text=True)
+        self.assertEqual(arguments, ['--deactivate-feature', 'B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g'])
+        self.assertEqual(len(deviations), 1)
+        self.assertEqual(deviations[0]['feature'], arguments[1])
+        self.assertEqual(deviations[0]['action'], 'deactivate-at-fresh-local-genesis')
+        self.assertIn('not default Agave4.3.0 feature parity', deviations[0]['scope'])
+
+    def test_feature_override_fails_if_exact_validator_option_is_unavailable(self):
+        with patch.object(localnet.subprocess, 'check_output', return_value='different validator help'):
+            with self.assertRaisesRegex(ValueError, 'does not support explicit genesis'):
+                localnet.validator_feature_options('/pinned/validator', True)
+
     def peer(self, data):
         path = self.root / 'peer.json'
         path.write_text(json.dumps({'account': {'data': [base64.b64encode(data).decode(), 'base64']}}))
