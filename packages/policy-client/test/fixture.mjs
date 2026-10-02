@@ -2,8 +2,9 @@ import { validateOperationPlan, queryStateDigest, hash, le } from '../src/operat
 import { buildActionTemplate, buildMerchantDigest, buildLicenseDigest, publicKeyBytes as bytes, publicKeyAddress as address } from '../../sdk/src/index.mjs';
 const key = n => address(Buffer.alloc(32, n));
 const deployment = { schema: 1, profile: 'local-custom-policy-v1', releaseHashHex: 'aa'.repeat(32), schemaHashHex: 'bb'.repeat(32), domainHashHex: 'cc'.repeat(32), mxePublicKeyHex: '19'.repeat(32), genesisHash: key(20), quota: key(81), cipher: 'cspl-rescue-scalar253-v1', stateFields: [{name:'remaining',type:'u64'},{name:'count',type:'u64'}], programs: { auth:key(80), policy:key(82), guard:key(83), kernel:key(84), merchant:key(85), license:key(86), proofBuffer:key(89) } };
-import { canonicalHash } from '../src/deployment.mjs';
+import { canonicalHash, policyDomainHash } from '../src/deployment.mjs';
 deployment.schemaHashHex=canonicalHash({profile:deployment.profile,cipher:deployment.cipher,stateFields:deployment.stateFields,slots:4});
+deployment.domainHashHex=policyDomainHash(deployment);
 const P = {...deployment.programs, quota:deployment.quota,name:deployment.profile};
 import { stateHash, decodeQuota } from '../src/codec.mjs';
 
