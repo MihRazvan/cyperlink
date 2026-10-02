@@ -55,9 +55,13 @@ function receiptMessage(raw, web3) {
 export async function reviewRecoveryArchive({ resultsPath, moduleRoot }) {
   const rawBytes = await readFile(resultsPath), results = JSON.parse(rawBytes), directory = dirname(resolve(resultsPath));
   assert.equal(results.passed, true); assert(results.recoveries?.length > 0, 'No restart evidence');
+  assert(['conflict', 'compatible'].includes(results.scenario), 'Unsupported recovery scenario');
+  const conflict = results.scenario === 'conflict';
+  if (conflict) assert(results.querySnapshotRejection, 'Conflict scenario requires actual query snapshot rejection evidence');
+  else assert.equal(results.querySnapshotRejection, undefined, 'Compatible scenario does not expect query snapshot rejection');
   const web3 = await loadWeb3(moduleRoot), plans = new Map(), reviewed = new Map();
   const require = createRequire(resolve(moduleRoot, 'package.json')), base58Module = require('bs58'), base58 = base58Module.default ?? base58Module;
-  const labels = [...results.operations.map(operation => operation.label), results.querySnapshotRejection.operationLabel];
+  const labels = [...results.operations.map(operation => operation.label), ...(conflict ? [results.querySnapshotRejection.operationLabel] : [])];
   for (const label of new Set(labels)) {
     const path = resolve(directory, `operation-${safeLabel(label)}`, 'operation-plan.json'), raw = await readFile(path);
     const plan = validateOperationPlan(JSON.parse(raw)); assert.equal(plan.genesisHash, results.genesis_hash);
@@ -113,9 +117,12 @@ export async function reviewRecoveryArchive({ resultsPath, moduleRoot }) {
     reviewed.set(ticket.signature, { signature: ticket.signature, role: record.role, wireSha256: record.wireSha256, descriptorSha256: binding.descriptorSha256,
       receiptSlot: landed.slot, receiptError: landed.error, lookupEvidence: 'archived receipt resolution, not a live reread' });
   }
-  const rejectionPlan = [...plans.values()].find(({ plan }) => plan.label === results.querySnapshotRejection.operationLabel)?.plan; assert(rejectionPlan);
-  const rejection = verifyQuerySnapshotRejection(results, rejectionPlan, web3);
-  return { schema: 1, passed: true, evidenceLevel: 'offline-recovery-journal-and-receipt-crosscheck', genesisHash: results.genesis_hash,
+  let rejection = { expected: false, reason: 'Compatible purchases do not include the delayed-query rejection scenario.' };
+  if (conflict) {
+    const rejectionPlan = [...plans.values()].find(({ plan }) => plan.label === results.querySnapshotRejection.operationLabel)?.plan; assert(rejectionPlan);
+    rejection = verifyQuerySnapshotRejection(results, rejectionPlan, web3);
+  }
+  return { schema: 1, passed: true, scenario: results.scenario, evidenceLevel: 'offline-recovery-journal-and-receipt-crosscheck', genesisHash: results.genesis_hash,
     input: { path: relative(REPO, resolve(resultsPath)), bytes: rawBytes.length, sha256: sha(rawBytes) },
     counts: { workers: results.recoveries.length, distinctRecordedProcessIds: new Set(results.recoveries.map(value => value.processId)).size, signedTickets: reviewed.size },
     tickets: [...reviewed.values()], querySnapshotRejection: rejection,

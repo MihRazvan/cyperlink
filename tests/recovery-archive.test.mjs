@@ -2,9 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
+import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { loadWeb3, REPO } from '../packages/local-client/src/runtime.mjs';
-import { INITIAL_PROFILE as P } from '../packages/sdk/src/index.mjs';
-import { verifyQuerySnapshotRejection } from '../scripts/verify_recovery_archive.mjs';
+import { INITIAL_PROFILE as P, buildActionTemplate, buildMerchantDigest, publicKeyBytes } from '../packages/sdk/src/index.mjs';
+import { hash, le, queryStateDigest } from '../packages/local-client/src/operation-plan.mjs';
+import { verifyQuerySnapshotRejection, reviewRecoveryArchive } from '../scripts/verify_recovery_archive.mjs';
 const web3 = await loadWeb3(process.env.CYPERLINK_JS_MODULE_ROOT ?? resolve(REPO, '.local/toolchain/js'));
 const key = n => new web3.PublicKey(Buffer.alloc(32, n)).toBase58();
 function fixture() {
@@ -48,4 +50,43 @@ test('wrong rejection cause, substituted absent addresses, and disclosed callbac
     f => f.results.callbacks.push({ job: f.plan.descriptor.job })]) {
     const f = fixture(); mutate(f); assert.throws(() => verifyQuerySnapshotRejection(f.results, f.plan, web3));
   }
+});
+
+test('top-level compatible archive verifies retained worker without conflict-only rejection', async t => {
+  // Synthetic host serialization fixture: no native proof, RPC execution, or real payment claim.
+  const directory = await mkdtemp(resolve(REPO, '.local/recovery-compatible-test-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const { plan: partial } = fixture(), quota = Buffer.from(partial.quotaSnapshotHex, 'hex');
+  const descriptor = { ...partial.descriptor, profile: P.name, consumerKind: 'merchant', owner: key(5), admin: key(4), effect: key(9), sku: '7' };
+  const binding = { sourceDataHex: '01', nativeDataHex: '02', proofAddresses: [key(11), key(12), key(13)], proofDataHex: ['03', '04', '05'] };
+  const query = { offset: '29', expiry: '100', publicKeyHex: '15'.repeat(32), clientNonceHex: '16'.repeat(16), amountCiphertextHex: '17'.repeat(32), openingCiphertextHex: '18'.repeat(32) };
+  const digest = buildMerchantDigest({ effect: publicKeyBytes(descriptor.effect), sku: '7', owner: publicKeyBytes(descriptor.owner), destination: publicKeyBytes(key(8)), mint: publicKeyBytes(key(7)) });
+  const template = Buffer.alloc(520);
+  buildActionTemplate({ source: publicKeyBytes(key(6)), mint: publicKeyBytes(key(7)), destination: publicKeyBytes(key(8)), owner: publicKeyBytes(descriptor.owner),
+    sourceData: Buffer.from('01', 'hex'), nativeData: Buffer.from('02', 'hex'), proofKeys: binding.proofAddresses.map(publicKeyBytes), proofData: binding.proofDataHex.map(value => Buffer.from(value, 'hex')),
+    newSource: Buffer.alloc(64, 7), commitment: Buffer.alloc(32, 8), quota: publicKeyBytes(P.quota), consumer: publicKeyBytes(P.merchant), consumerContract: digest }).copy(template);
+  quota.subarray(8, 40).copy(template, 16); le(3n, 16).copy(template, 464); le(100n).copy(template, 512);
+  Object.assign(descriptor, { templateHex: template.toString('hex'), queryStateHashHex: queryStateDigest(quota).toString('hex'),
+    inputsHashHex: hash(...['publicKeyHex', 'clientNonceHex', 'amountCiphertextHex', 'openingCiphertextHex'].map(name => Buffer.from(query[name], 'hex')), quota.subarray(40, 88), le(3n, 16), template.subarray(336, 368)).toString('hex') });
+  const plan = { schema: 1, contextSlot: 1, label: 'host-recovery', action: key(19), genesisHash: key(20), mxePublicKeyHex: '19'.repeat(32), quotaSnapshotHex: quota.toString('hex'), descriptor, binding, query };
+  const planBytes = Buffer.from(JSON.stringify(plan));
+  await mkdir(resolve(directory, 'operation-host-recovery'));
+  await writeFile(resolve(directory, 'operation-host-recovery/operation-plan.json'), planBytes);
+  const worker = { passed: true, action: 'observe', processId: 123, genesisHash: plan.genesisHash,
+    generatesKeysProofsOrOperationIdentity: false, createsNewSignedTransaction: false,
+    retainedPlan: { bytes: planBytes.length, sha256: hash(planBytes).toString('hex') },
+    identity: Object.fromEntries(['job', 'computation', 'permit', 'owner', 'quota', 'effect'].map(name => [name, descriptor[name]])), observation: { status: 'authorized', slot: 2 } };
+  await writeFile(resolve(directory, 'recovery-host-observe.json'), JSON.stringify(worker));
+  const results = { passed: true, scenario: 'compatible', genesis_hash: plan.genesisHash, operations: [{ label: plan.label }], recoveries: [{ label: 'host-observe', ...worker }], transactions: [] };
+  const resultsPath = resolve(directory, 'results.json'), options = { resultsPath, moduleRoot: resolve(REPO, '.local/toolchain/js') };
+  await writeFile(resultsPath, JSON.stringify(results));
+  const report = await reviewRecoveryArchive(options);
+  assert.equal(report.passed, true); assert.equal(report.scenario, 'compatible'); assert.equal(report.counts.workers, 1);
+  assert.equal(report.querySnapshotRejection.expected, false);
+  results.recoveries[0].retainedPlan.sha256 = '00'.repeat(32);
+  await writeFile(resultsPath, JSON.stringify(results));
+  await assert.rejects(reviewRecoveryArchive(options), /Embedded worker result changed/);
+  results.recoveries[0].retainedPlan.sha256 = hash(planBytes).toString('hex'); results.scenario = 'conflict';
+  await writeFile(resultsPath, JSON.stringify(results));
+  await assert.rejects(reviewRecoveryArchive(options), /Conflict scenario requires actual/);
 });
