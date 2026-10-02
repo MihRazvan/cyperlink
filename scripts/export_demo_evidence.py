@@ -32,7 +32,9 @@ RECOVERY = fields('label schema processId action evidenceLevel genesisHash gener
     'delivery': fields('status canBroadcast attempts signature role descriptorSha256 wireSha256 lastSendError') | {
         'retryPolicy': fields('maxBroadcasts rpcMaxRetries'),
         'broadcasts': [fields('attempt rpcMaxRetries startedAt') | {'response': ('nullable', fields('signature wireSha256 attempt completedAt outcome returnedSignature') | {'error': fields('name message code')})}],
-        'semanticBinding': fields('role wireSha256 descriptorSha256 instructionSha256 liveLookupTablesChecked'),
+        'semanticBinding': fields('role wireSha256 descriptorSha256 instructionSha256 liveLookupTablesChecked') | {
+            'preparedAction': fields('address owner executable slot dataBase64 sha256'),
+        },
         'receipt': fields('slot landedCU feeLamports'),
     },
 }

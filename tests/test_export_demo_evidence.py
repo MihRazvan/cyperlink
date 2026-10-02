@@ -108,6 +108,16 @@ class PublicEvidenceExport(unittest.TestCase):
         self.assertEqual(result['recoveries'][0]['observation']['status'], 'unobserved')
         self.assertIn('deliberate test fault injection', result['recovery_evidence_scope'])
 
+    def test_prepared_action_evidence_preserves_public_bytes_and_drops_unknown_private_fields(self):
+        raw, _, _ = self.fixture()
+        evidence = {'address': 'prepared-action', 'owner': 'auth', 'executable': False,
+                    'slot': 42, 'dataBase64': 'AQID', 'sha256': 'a' * 64}
+        raw['recoveries'] = [{'delivery': {'semanticBinding': {'preparedAction': evidence | {
+            'privateKey': 'SENSITIVE_SENTINEL', 'wire': 'SENSITIVE_SENTINEL', 'logs': ['SENSITIVE_SENTINEL']}}}}]
+        result = self.report(raw)
+        self.assertEqual(result['recoveries'][0]['delivery']['semanticBinding']['preparedAction'], evidence)
+        self.assertNotIn('SENSITIVE_SENTINEL', json.dumps(result))
+
     def test_query_snapshot_rejection_preserves_null_absence_and_public_bytes(self):
         raw, _, _ = self.fixture()
         snapshot = {'slot': 42, 'accounts': [

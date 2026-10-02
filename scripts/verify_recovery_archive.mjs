@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import { loadWeb3, REPO } from '../packages/local-client/src/runtime.mjs';
 import { validateOperationPlan, descriptorDigest } from '../packages/local-client/src/operation-plan.mjs';
 import { validateOperationTicket } from '../packages/local-client/src/operation-ticket.mjs';
+import { validatePreparedActionEvidence } from '../packages/local-client/src/prepared-action.mjs';
 import { decodeQuota, INITIAL_PROFILE } from '../packages/sdk/src/index.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -50,6 +51,16 @@ function receiptMessage(raw, web3) {
   return new web3.MessageV0({ ...raw, staticAccountKeys: raw.staticAccountKeys.map(key => new web3.PublicKey(key)),
     compiledInstructions: raw.compiledInstructions.map(ix => ({ ...ix, data: Buffer.from(ix.data.data ?? Object.values(ix.data)) })),
     addressTableLookups: raw.addressTableLookups.map(lookup => ({ ...lookup, accountKey: new web3.PublicKey(lookup.accountKey) })) });
+}
+
+export function verifyPreparedActionRecovery(plan, record, recovery) {
+  const evidence = recovery.delivery.semanticBinding?.preparedAction;
+  if (record.role !== 'query') return evidence;
+  assert(evidence, 'Query recovery requires immutable PreparedAction account evidence');
+  validatePreparedActionEvidence(plan, evidence);
+  assert(evidence.slot >= record.minContextSlot, 'PreparedAction evidence predates signed ticket context');
+  assert(evidence.slot <= recovery.observation.slot, 'Operation observation predates its PreparedAction check');
+  return evidence;
 }
 
 export async function reviewRecoveryArchive({ resultsPath, moduleRoot }) {
@@ -95,6 +106,7 @@ export async function reviewRecoveryArchive({ resultsPath, moduleRoot }) {
       const recorded = recovery.delivery.broadcasts[attempt - 1]; assert.equal(recorded.attempt, attempt);
       if (recorded.response) assert.deepEqual(recorded.response, await parse(resolve(journal, `${ticket.signature}.response-${attempt}.json`)));
     }
+    const preparedAction = verifyPreparedActionRecovery(plan, record, recovery);
     if (reviewed.has(ticket.signature)) continue;
     const landed = results.transactions.find(item => item.signature === ticket.signature); assert(landed, 'No final actual receipt for retained ticket');
     const tx = web3.VersionedTransaction.deserialize(Buffer.from(record.wireBase64, 'base64'));
@@ -113,9 +125,20 @@ export async function reviewRecoveryArchive({ resultsPath, moduleRoot }) {
       for (const index of lookup.readonlyIndexes) addresses[index] = new web3.PublicKey(loaded.readonly[readonly++]);
       tables.set(lookup.accountKey.toBase58(), { context: { slot: landed.slot }, value: { key: lookup.accountKey, state: { addresses } } });
     }
-    const binding = await validateOperationTicket(plan, record, web3, { getAddressLookupTable: async key => { assert(tables.has(key.toBase58())); return tables.get(key.toBase58()); } });
+    const binding = await validateOperationTicket(plan, record, web3, {
+      getAddressLookupTable: async key => { assert(tables.has(key.toBase58())); return tables.get(key.toBase58()); },
+      getAccountInfoAndContext: async (address, config) => {
+        assert(preparedAction, 'Missing archived PreparedAction evidence');
+        assert.equal(address.toBase58(), preparedAction.address);
+        assert.equal(config.commitment, 'confirmed'); assert(preparedAction.slot >= config.minContextSlot);
+        return { context: { slot: preparedAction.slot }, value: { owner: new web3.PublicKey(preparedAction.owner),
+          executable: preparedAction.executable, data: Buffer.from(preparedAction.dataBase64, 'base64') } };
+      },
+    });
     reviewed.set(ticket.signature, { signature: ticket.signature, role: record.role, wireSha256: record.wireSha256, descriptorSha256: binding.descriptorSha256,
-      receiptSlot: landed.slot, receiptError: landed.error, lookupEvidence: 'archived receipt resolution, not a live reread' });
+      receiptSlot: landed.slot, receiptError: landed.error,
+      ...(preparedAction ? { preparedAction: { address: preparedAction.address, slot: preparedAction.slot, sha256: preparedAction.sha256, bytes: Buffer.from(preparedAction.dataBase64, 'base64').length } } : {}),
+      lookupEvidence: 'archived receipt resolution, not a live reread' });
   }
   let rejection = { expected: false, reason: 'Compatible purchases do not include the delayed-query rejection scenario.' };
   if (conflict) {
@@ -128,6 +151,7 @@ export async function reviewRecoveryArchive({ resultsPath, moduleRoot }) {
     tickets: [...reviewed.values()], querySnapshotRejection: rejection,
     limitations: ['No RPC calls, public-network writes, key access or fresh execution; trusted archived RPC receipts are not historical state proofs.',
       'Signed wire semantics reuse the operation-ticket validator; signature checks use Node Ed25519. This does not independently verify BLS or reconstruct runtime execution.',
+      'Every query-ticket recovery requires retained immutable PreparedAction account bytes matching its local plan; these are archived RPC observations, not a new live account read.',
       'Process IDs and test response-loss classifications are archived runner evidence, not independent operating-system attestations.'] };
 }
 
