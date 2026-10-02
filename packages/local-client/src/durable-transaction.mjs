@@ -66,8 +66,9 @@ function loadedAddresses(tx, tables) {
 /** Local, append-only signed-wire journal. A receipt establishes transaction outcome, not application payment. */
 export class DurableTransactionSender {
   constructor(options, manifest) { Object.assign(this, options); this.manifest = manifest; }
-  static async create({ web3, connection, endpoint, directory, maxBroadcasts = 3 }) {
+  static async create({ web3, connection, endpoint, directory, maxBroadcasts = 3, rpcMaxRetries = 5 }) {
     ensure(Number.isSafeInteger(maxBroadcasts) && maxBroadcasts > 0 && maxBroadcasts <= 10, 'maxBroadcasts must be 1..10');
+    ensure(Number.isSafeInteger(rpcMaxRetries) && rpcMaxRetries >= 0 && rpcMaxRetries <= 10, 'rpcMaxRetries must be 0..10');
     const normalized = loopbackEndpoint(endpoint);
     ensure(loopbackEndpoint(connection.rpcEndpoint) === normalized, 'Connection endpoint mismatch');
     const path = resolve(directory);
@@ -75,18 +76,20 @@ export class DurableTransactionSender {
     ensure(path.startsWith(resolve(REPO, '.local') + sep) && await realpath(dirname(path)) === dirname(path), 'Invalid journal parent');
     const genesisHash = await connection.getGenesisHash(); new web3.PublicKey(genesisHash);
     await mkdir(path, { mode: 0o700 }); await checkedDirectory(path);
-    const manifest = { schemaVersion: 1, genesisHash, endpoint: normalized, commitment, maxBroadcasts };
+    const manifest = { schemaVersion: 2, genesisHash, endpoint: normalized, commitment, maxBroadcasts, rpcMaxRetries };
     await publish(resolve(path, 'journal.json'), manifest); await syncDirectory(dirname(path));
     return new this({ web3, connection, endpoint: normalized, directory: path }, manifest);
   }
   static async open({ web3, connection, endpoint, directory }) {
     const path = await checkedDirectory(directory), manifest = await readRecord(resolve(path, 'journal.json'));
     const normalized = loopbackEndpoint(endpoint);
-    ensure(manifest.schemaVersion === 1 && manifest.commitment === commitment && manifest.endpoint === normalized && loopbackEndpoint(connection.rpcEndpoint) === normalized, 'Journal profile/endpoint mismatch');
+    ensure([1, 2].includes(manifest.schemaVersion) && manifest.commitment === commitment && manifest.endpoint === normalized && loopbackEndpoint(connection.rpcEndpoint) === normalized, 'Journal profile/endpoint mismatch');
     ensure(Number.isSafeInteger(manifest.maxBroadcasts) && manifest.maxBroadcasts > 0 && manifest.maxBroadcasts <= 10, 'Invalid journal broadcast limit');
+    ensure(manifest.schemaVersion === 1 ? !Object.hasOwn(manifest, 'rpcMaxRetries') : Number.isSafeInteger(manifest.rpcMaxRetries) && manifest.rpcMaxRetries >= 0 && manifest.rpcMaxRetries <= 10, 'Invalid journal RPC retry limit');
     const sender = new this({ web3, connection, endpoint: normalized, directory: path }, manifest);
     await sender.assertGenesis(); return sender;
   }
+  get rpcMaxRetries() { return this.manifest.schemaVersion === 1 ? 0 : this.manifest.rpcMaxRetries; }
   async assertGenesis() { ensure(await this.connection.getGenesisHash() === this.manifest.genesisHash, 'Validator genesis differs from signed transaction journal'); }
   async prepare({ label, transaction, blockhash, category = 'application', expectedError, addressLookupTables = [], descriptorSha256, role = label, minContextSlot = 0, requireSimulation = false }) {
     await this.assertGenesis(); await checkedDirectory(this.directory);
@@ -115,17 +118,27 @@ export class DurableTransactionSender {
     ensure(Number.isSafeInteger(record.blockhash.lastValidBlockHeight) && record.blockhash.lastValidBlockHeight >= 0 && Number.isSafeInteger(record.minContextSlot) && record.minContextSlot >= 0, 'Invalid recorded lifetime');
     const files = (await readdir(this.directory)).filter(name => name.startsWith(`${ticket.signature}.attempt-`) && name.endsWith('.json'));
     ensure(files.length <= this.manifest.maxBroadcasts, 'Broadcast journal exceeds limit');
+    const broadcasts = [];
     for (let i = 0; i < files.length; i++) {
       const filename = `${ticket.signature}.attempt-${i + 1}.json`;
       ensure(files.includes(filename), 'Noncontiguous broadcast journal');
       const attempt = await readRecord(resolve(this.directory, filename));
       ensure(attempt.signature === ticket.signature && attempt.wireSha256 === record.wireSha256 && attempt.attempt === i + 1, 'Broadcast intent differs from signed wire');
+      ensure(this.manifest.schemaVersion === 1 ? attempt.rpcMaxRetries === undefined || attempt.rpcMaxRetries === 0 : attempt.rpcMaxRetries === this.rpcMaxRetries, 'Broadcast intent RPC retry limit differs from journal');
+      let response = null;
+      try { response = await readRecord(resolve(this.directory, `${ticket.signature}.response-${i + 1}.json`)); }
+      catch (error) { if (error.code !== 'ENOENT') throw error; }
+      if (response) {
+        ensure(response.signature === ticket.signature && response.wireSha256 === record.wireSha256 && response.attempt === i + 1 && ['accepted', 'error'].includes(response.outcome), 'Broadcast response binding mismatch');
+        ensure(response.outcome === 'accepted' ? typeof response.returnedSignature === 'string' : typeof response.error?.message === 'string', 'Malformed broadcast response');
+      }
+      broadcasts.push({ attempt: i + 1, rpcMaxRetries: attempt.rpcMaxRetries ?? 0, startedAt: attempt.startedAt ?? null, response });
     }
     let simulation;
     try { simulation = await readRecord(resolve(this.directory, `${ticket.signature}.simulation.json`)); }
     catch (error) { if (error.code !== 'ENOENT') throw error; }
     if (simulation) ensure(simulation.signature === ticket.signature && simulation.wireSha256 === record.wireSha256, 'Simulation binding mismatch');
-    return { record, wire, ...verified, attempts: files.length, simulation: simulation?.simulation };
+    return { record, wire, ...verified, attempts: files.length, broadcasts, simulation: simulation?.simulation };
   }
   async recordSimulation(ticket, simulation) {
     const { record } = await this.read(ticket);
@@ -134,8 +147,10 @@ export class DurableTransactionSender {
   }
   async recover(ticket) {
     await this.assertGenesis(); const saved = await this.read(ticket);
-    const { record, signatures, message, attempts, simulation } = saved;
-    const result = { ticket, signature: record.signature, attempts, canBroadcast: false, record, simulation };
+    const { record, signatures, message, attempts, broadcasts, simulation } = saved;
+    const result = { ticket, signature: record.signature, attempts, canBroadcast: false, record, simulation, broadcasts,
+      retryPolicy: { maxBroadcasts: this.manifest.maxBroadcasts, rpcMaxRetries: this.rpcMaxRetries },
+      lastSendError: broadcasts.findLast(item => item.response?.outcome === 'error')?.response.error.message };
     const receipt = await this.connection.getTransaction(record.signature, { commitment, maxSupportedTransactionVersion: 0 });
     if (receipt) {
       ensure(Number.isSafeInteger(receipt.slot) && receipt.slot >= record.minContextSlot && receipt.meta && Object.hasOwn(receipt.meta, 'err'), 'Invalid landed receipt context');
@@ -162,23 +177,31 @@ export class DurableTransactionSender {
   }
   async send(ticket, { pollAttempts = 280, pollIntervalMs = 250, retryEvery = 20 } = {}) {
     ensure(Number.isSafeInteger(pollAttempts) && pollAttempts >= 0 && pollAttempts <= 1000 && Number.isSafeInteger(pollIntervalMs) && pollIntervalMs >= 0 && pollIntervalMs <= 1000 && Number.isSafeInteger(retryEvery) && retryEvery >= 1, 'Invalid bounded polling options');
-    let observed = await this.recover(ticket), lastSendError;
+    let observed = await this.recover(ticket);
     for (let poll = 0; poll <= pollAttempts; poll++) {
-      if (['landed', 'failed', 'expired-unresolved', 'simulation-required', 'simulation-rejected'].includes(observed.status)) return { ...observed, lastSendError };
+      if (['landed', 'failed', 'expired-unresolved', 'simulation-required', 'simulation-rejected'].includes(observed.status)) return observed;
       if (observed.canBroadcast && poll % retryEvery === 0) {
         await this.assertGenesis(); const saved = await this.read(ticket);
         ensure(saved.attempts < this.manifest.maxBroadcasts, 'Broadcast limit reached');
         // An interrupted send may have reached RPC. Consume intent before network access, never roll it back.
         await publish(resolve(this.directory, `${ticket.signature}.attempt-${saved.attempts + 1}.json`), {
-          signature: ticket.signature, wireSha256: saved.record.wireSha256, attempt: saved.attempts + 1,
+          signature: ticket.signature, wireSha256: saved.record.wireSha256, attempt: saved.attempts + 1, rpcMaxRetries: this.rpcMaxRetries, startedAt: new Date().toISOString(),
         });
-        let signature;
-        try { signature = await this.connection.sendRawTransaction(saved.wire, { skipPreflight: saved.record.expectedError !== undefined, preflightCommitment: commitment, maxRetries: 0, minContextSlot: saved.record.minContextSlot }); }
-        catch (error) { lastSendError = String(error.message ?? error); }
+        let signature, failure;
+        try { signature = await this.connection.sendRawTransaction(saved.wire, { skipPreflight: saved.record.expectedError !== undefined, preflightCommitment: commitment, maxRetries: this.rpcMaxRetries, minContextSlot: saved.record.minContextSlot }); }
+        catch (error) {
+          failure = { name: String(error.name ?? 'Error').slice(0, 120), message: String(error.message ?? error).slice(0, 16384) };
+          if (typeof error.code === 'number' || typeof error.code === 'string') failure.code = String(error.code).slice(0, 120);
+        }
+        await publish(resolve(this.directory, `${ticket.signature}.response-${saved.attempts + 1}.json`), {
+          signature: ticket.signature, wireSha256: saved.record.wireSha256, attempt: saved.attempts + 1,
+          completedAt: new Date().toISOString(), outcome: failure ? 'error' : 'accepted',
+          ...(failure ? { error: failure } : { returnedSignature: signature }),
+        });
         if (signature !== undefined) ensure(signature === ticket.signature, 'RPC returned a different transaction signature');
         observed = await this.recover(ticket);
       }
-      if (poll === pollAttempts) return { ...observed, lastSendError };
+      if (poll === pollAttempts) return observed;
       if (pollIntervalMs) await new Promise(resolve => setTimeout(resolve, pollIntervalMs));
       observed = await this.recover(ticket);
     }

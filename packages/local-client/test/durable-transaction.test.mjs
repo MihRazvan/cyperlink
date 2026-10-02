@@ -27,7 +27,7 @@ async function fixture(t, overrides = {}) {
     getLatestBlockhash: async () => { state.latestCalls++; return latest; },
     simulateTransaction: async () => ({ context: { slot: 20 }, value: { err: state.simulationError ?? null, unitsConsumed: 200 } }),
     sendRawTransaction: async (wire, config) => {
-      assert.equal(config.maxRetries, 0); state.sends.push(Buffer.from(wire));
+      assert.equal(config.maxRetries, state.expectedRpcRetries ?? 5); state.sends.push(Buffer.from(wire));
       if (state.onSend) return state.onSend(wire);
       return state.ticket.signature;
     },
@@ -72,6 +72,10 @@ test('lost broadcast response reconciles exact landed receipt; reopening never r
   const reopened = await DurableTransactionSender.open(f.options);
   assert.equal((await reopened.send(f.ticket, { pollAttempts: 0 })).status, 'landed');
   assert.equal(f.state.sends.length, 1); assert.equal(f.state.latestCalls, 0);
+  const recovered = await reopened.recover(f.ticket);
+  assert.match(recovered.lastSendError, /Response lost/);
+  assert.equal(recovered.broadcasts[0].response.outcome, 'error');
+  assert.deepEqual(recovered.retryPolicy, { maxBroadcasts: 3, rpcMaxRetries: 5 });
 });
 
 test('restart preserves broadcast budget and only retransmits identical signed bytes', async t => {
@@ -177,4 +181,34 @@ test('real ALT compilation retains exact resolved keys and rejects changed lande
   assert.equal((await f.sender.recover(ticket)).status, 'landed');
   f.state.receipt.meta.loadedAddresses.writable = [key(91)];
   await assert.rejects(f.sender.recover(ticket), /lookup resolution differs/);
+});
+
+test('RPC retry limit is retained across restart and legacy journals keep zero retries', async t => {
+  const f = await fixture(t), path = resolve(f.options.directory, 'journal.json');
+  const manifest = JSON.parse(await readFile(path));
+  assert.equal(manifest.schemaVersion, 2); assert.equal(manifest.rpcMaxRetries, 5);
+  manifest.schemaVersion = 1; delete manifest.rpcMaxRetries;
+  await writeFile(path, JSON.stringify(manifest)); f.state.expectedRpcRetries = 0;
+  const legacy = await DurableTransactionSender.open(f.options);
+  const result = await legacy.send(f.ticket, { pollAttempts: 0 });
+  assert.equal(result.retryPolicy.rpcMaxRetries, 0); assert.equal(result.broadcasts[0].rpcMaxRetries, 0);
+  assert.equal(result.broadcasts[0].response.outcome, 'accepted');
+  assert.equal(result.broadcasts[0].response.returnedSignature, f.ticket.signature);
+  assert.equal(result.status, 'pending'); // RPC acceptance is not transaction delivery.
+  manifest.schemaVersion = 2; manifest.rpcMaxRetries = 11; await writeFile(path, JSON.stringify(manifest));
+  await assert.rejects(DurableTransactionSender.open(f.options), /RPC retry limit/);
+});
+
+test('missing response remains unknown after restart; corrupted response cannot change binding', async t => {
+  const f = await fixture(t);
+  await f.sender.send(f.ticket, { pollAttempts: 0 });
+  const responsePath = resolve(f.options.directory, `${f.ticket.signature}.response-1.json`);
+  const response = JSON.parse(await readFile(responsePath));
+  assert.equal(response.outcome, 'accepted'); assert.equal(typeof response.completedAt, 'string');
+  await rm(responsePath); // Crash after send, before publishing its response.
+  const reopened = await DurableTransactionSender.open(f.options);
+  const unknown = await reopened.recover(f.ticket);
+  assert.equal(unknown.attempts, 1); assert.equal(unknown.broadcasts[0].response, null);
+  response.signature = 'different'; await writeFile(responsePath, JSON.stringify(response), { mode: 0o600 });
+  await assert.rejects(reopened.recover(f.ticket), /response binding mismatch/);
 });
