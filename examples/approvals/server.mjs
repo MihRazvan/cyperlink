@@ -6,7 +6,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ApprovalsService } from './service.mjs';
 import { RealApprovalsAdapter } from './adapter.mjs';
-import { privateJson, sessionDirectory } from './store.mjs';
+import { privateJson, sessionDirectory, acquireSessionLock } from './store.mjs';
 
 const publicDirectory = resolve(dirname(fileURLToPath(import.meta.url)), 'public');
 const files = new Map([['/', ['index.html', 'text/html']], ['/app.mjs', ['app.mjs', 'text/javascript']], ['/style.css', ['style.css', 'text/css']]]);
@@ -45,6 +45,42 @@ export function createApprovalsServer(service, port) {
   });
 }
 
+/** Production defaults use the real adapter; host tests inject explicit fake factories. */
+export async function startLockedApprovals({ bootstrap, directory, port, registerSignals = false,
+  connect = (bootstrap, directory) => RealApprovalsAdapter.connect(bootstrap, directory),
+  openService = options => ApprovalsService.open(options),
+}) {
+  directory = await sessionDirectory(directory);
+  const lock = await acquireSessionLock(directory);
+  let service, server, startup, closeTask, stopping = false;
+  const handlers = new Map();
+  const close = () => closeTask ??= (async () => {
+    stopping = true;
+    // Startup and already-authorized work must quiesce before another process can own this session.
+    await startup?.catch(() => {});
+    if (server?.listening) await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+    await Promise.allSettled([service?.task, service?.refreshing, service?.saving]);
+    try { return await lock.release(); }
+    finally { for (const [signal, handler] of handlers) process.removeListener(signal, handler); }
+  })();
+  if (registerSignals) for (const signal of ['SIGINT', 'SIGTERM']) {
+    const handler = () => { void close().then(() => process.exit(0), error => { console.error(error.message); process.exit(1); }); };
+    handlers.set(signal, handler); process.on(signal, handler);
+  }
+  startup = (async () => {
+    const adapter = await connect(bootstrap, directory); if (stopping) return;
+    service = await openService({ directory, bootstrap, adapter }); if (stopping) return;
+    server = createApprovalsServer(service, port);
+    await new Promise((resolve, reject) => {
+      const failed = error => { server.removeListener('listening', ready); reject(error); };
+      const ready = () => { server.removeListener('error', failed); resolve(); };
+      server.once('error', failed); server.once('listening', ready); server.listen(port, '127.0.0.1');
+    });
+  })();
+  try { await startup; return { server, service, close }; }
+  catch (error) { await close(); throw error; }
+}
+
 async function main() {
   const options = {}, allowed = new Set(['--bootstrap', '--session', '--port']);
   for (let i = 2; i < process.argv.length; i += 2) {
@@ -54,9 +90,7 @@ async function main() {
   const port = Number(options['--port'] ?? 4317);
   if (!options['--bootstrap'] || !options['--session'] || !Number.isSafeInteger(port) || port < 1024 || port > 65535) throw Error('Require local bootstrap, session directory and unprivileged port');
   const bootstrap = await privateJson(options['--bootstrap']), directory = await sessionDirectory(options['--session']);
-  const adapter = await RealApprovalsAdapter.connect(bootstrap, directory);
-  const service = await ApprovalsService.open({ directory, bootstrap, adapter });
-  const server = createApprovalsServer(service, port);
-  server.listen(port, '127.0.0.1', () => console.log(`CyperLink Approvals: http://127.0.0.1:${port} (local client; explicit approvals only)`));
+  const { server } = await startLockedApprovals({ bootstrap, directory, port, registerSignals: true });
+  if (server?.listening) console.log(`CyperLink Approvals: http://127.0.0.1:${port} (local client; explicit approvals only)`);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(error => { console.error(error.message); process.exitCode = 1; });
