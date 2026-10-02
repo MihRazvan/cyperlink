@@ -4,13 +4,33 @@ Updated 2026-10-02. CyperLink continues the selected Solana-native product: make
 
 ## Active milestone: customer-authored private policies
 
-The new [implementation plan](custom-policy-implementation.md) supersedes the
-previous next-work ordering. Work is underway on a separate versioned custom-policy
-profile, authored Rust expressions compiled to MPC, generated deployment identities
-and manifest-aware client tooling. The cipher-domain integration gate is being
-checked before committing to the compiler path. Typed authoring, circuit compilation, the new fixed-state onchain ABI and custom
-SDK host checks now pass; local deployment integration is underway. No custom-policy
-end-to-end result is claimed yet. Completed Approvals/Permissions results below remain intact.
+The [implementation plan](custom-policy-implementation.md) supersedes the previous
+next-work ordering. The typed Rust expression fallback preserves the tested
+ScalarField253/CSpl native amount/opening bridge. Customer source, schemas, host
+tests, canonical releases, generated SDK bindings and a fresh local deployment
+CLI are implemented. Budget-plus-count and an independently authored internal
+minimum-reserve example compile through the same API without name branches.
+
+Live custom-policy qualification is still underway. On v20, five generated
+programs plus five dependencies deployed with matching actual loaded bytes, and
+upstream two-node MXE initialization produced a genuine new encryption key.
+State provisioning then rejected834 because a shared build cache had reused
+native binaries containing the preceding deployment's constants. The deployment
+builder now isolates each generated workspace/cache; a fresh instance is building.
+The failed instance and its receipts remain preserved. No completed custom-policy
+payment is claimed yet.
+
+Agave4.3.0's default local feature set rejected new pinned SBPFv0 deployment on
+v19. V20 explicitly disables only SIMD-0500 at fresh genesis using
+`--allow-pinned-sbf-v0-deployment`; this is recorded local feature divergence,
+not default-cluster parity. Before stopping v19, the legacy budget-only40 control
+paid a merchant entitlement and recovered the exact transaction through a separate
+keyless worker. Its ten loaded programs and callback were checked; raw evidence
+is `.local/custom-policy-budget-control-v19/`. Historical ledgers remain intact.
+
+Current checks: all eight CLI groups, the wider Node suite and82 Python tests
+pass. Host results do not replace the pending real custom-policy acceptance matrix.
+Completed Approvals/Permissions results below remain intact.
 
 ## Latest continuation: interactive Approvals and isolated Permissions
 
