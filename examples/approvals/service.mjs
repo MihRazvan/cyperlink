@@ -5,6 +5,8 @@ import { ensure, writeNew } from '../../packages/local-client/src/runtime.mjs';
 
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const terminal = new Set(['committed', 'denied', 'stale', 'expired', 'cancelled', 'invalidated']);
+const actionRole = { 'approve-query': 'query', 'approve-commit': 'commit', 'resubmit-query': 'query', 'resubmit-commit': 'commit' };
+const recoveryRole = op => op.recoveryRole ?? actionRole[op.interrupted] ?? (op.tickets.commit ? 'commit' : 'query');
 export const approvalDigest = (op, role) => digest(['cyperlink-local-human-approval-v1', role, op.id, op.amount, op.consumer, op.planHash]);
 export function phaseOf(op) {
   if (op.queryDraftStale) return 'stale';
@@ -68,6 +70,9 @@ export class ApprovalsService {
   }
   async start(action, op, work) {
     ensure(!this.busy, 'Another explicit operation is in progress');
+    // Persist the intended role before staging or discovery. A later recovery failure must not
+    // overwrite an interrupted commit's identity with an older, successfully admitted query.
+    if (actionRole[action] || action === 'recover') op.recoveryRole = actionRole[action] ?? recoveryRole(op);
     this.busy = { action, operationId: op.id }; op.inFlight = action; delete op.error;
     if (this.refreshing) await this.refreshing;
     await this.save();
@@ -122,6 +127,7 @@ export class ApprovalsService {
       await this.refresh(); ensure(op.observation?.status === 'authorized', 'Authorization is stale, expired, denied or not yet ready');
       ensure(input.loseResponse === undefined || typeof input.loseResponse === 'boolean', 'Invalid test fault option');
     }
+    if (action.startsWith('resubmit-')) ensure(actionRole[action] === recoveryRole(op), 'Recover the most recent retained transaction role before resubmitting');
     return this.start(action, op, async () => {
       if (action.startsWith('approve-')) {
         const role = action === 'approve-query' ? 'query' : 'commit';
@@ -141,10 +147,15 @@ export class ApprovalsService {
             : 'Owner approved the exact native payment and application effect. Paid status requires the SDK committed observation.');
         }
       } else {
-        const role = action === 'resubmit-query' ? 'query' : action === 'resubmit-commit' ? 'commit' : op.tickets.commit ? 'commit' : 'query';
+        const role = recoveryRole(op);
         const ticket = op.tickets[role] ?? await this.adapter.discoverTicket(op, role);
         ensure(ticket, 'No retained transaction found; inspect preparation before any new authorization');
-        op.tickets[role] = ticket; await this.save();
+        ensure(ticket.role === role && typeof ticket.signature === 'string' && ticket.signature.length > 0, 'Discovered transaction does not match the recovery role');
+        op.tickets[role] = ticket;
+        if (op.delivery?.role !== role || op.delivery?.signature !== ticket.signature) {
+          op.delivery = { status: 'unresolved-delivery', signature: ticket.signature, role, canBroadcast: false };
+        }
+        await this.save();
         const result = await this.adapter.recover(op, ticket, action.startsWith('resubmit-'));
         op.delivery = { status: result.delivery.status, signature: ticket.signature, role, attempts: result.delivery.attempts,
           canBroadcast: result.delivery.canBroadcast, slot: result.delivery.receipt?.slot };
@@ -163,7 +174,7 @@ export class ApprovalsService {
         if (!op.tickets.query && !op.interrupted && !op.queryDraftStale && !terminal.has(op.observation?.status)) actions.push('approve-query');
         if (op.observation?.status === 'authorized' && !op.tickets.commit && !op.interrupted) actions.push('approve-commit');
         if (op.tickets.query || op.tickets.commit || op.interrupted) actions.push('recover');
-        if (op.delivery?.canBroadcast) actions.push(`resubmit-${op.delivery.role}`);
+        if (op.delivery?.canBroadcast && op.delivery.role === recoveryRole(op)) actions.push(`resubmit-${op.delivery.role}`);
       }
       const paid = op.observation?.status === 'committed';
       return { id: op.id, label: op.label, consumer: op.consumer, purpose: op.consumer === 'merchant' ? 'Developer asset pack · SKU 7' : 'Analytics application license',

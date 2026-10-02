@@ -126,3 +126,49 @@ test('concurrent prepare during an in-flight read reserves one task and creates 
   f.service.refreshing = null;
   assert.equal(f.calls.filter(value => value === 'prepare').length, 1);
 });
+
+test('journaled commit staging failure recovers commit rather than older query and never signs twice', async t => {
+  const f = await fixture(t), op = await prepare(f); await approve(f, op, 'query');
+  const querySignature = op.tickets.query.signature;
+  f.observations.set(op.id, { status: 'authorized', slot: 13 }); await f.service.refresh();
+  let stages = 0;
+  f.adapter.stage = async (_op, role) => { assert.equal(role, 'commit'); stages++; throw Error('Commit journal persisted; simulation response lost'); };
+  await approve(f, op, 'commit'); assert.equal(op.interrupted, 'approve-commit'); assert.equal(op.tickets.commit, undefined);
+  assert.equal(op.recoveryRole, 'commit');
+  op.delivery.canBroadcast = true; // Older query delivery advice must not override the interrupted payment.
+  assert(!f.service.projection().operations[0].actions.includes('resubmit-query'));
+  // A failed first discovery and process reopen must not erase which stage was interrupted.
+  f.adapter.discoverTicket = async (_op, role) => { assert.equal(role, 'commit'); return null; };
+  await f.service.act(op.id, 'recover'); await f.service.task;
+  assert.equal(op.interrupted, 'recover'); assert.equal(op.recoveryRole, 'commit');
+  await assert.rejects(f.service.act(op.id, 'resubmit-query'), /most recent retained/);
+  f.service = await ApprovalsService.open(f); const reopened = f.service.operation(op.id);
+  const commitTicket = { role: 'commit', signature: 'original-journaled-commit-wire' };
+  f.adapter.discoverTicket = async (_op, role) => { assert.equal(role, 'commit'); return commitTicket; };
+  let recoveries = 0;
+  f.adapter.recover = async (recovering, ticket, submit) => {
+    assert.deepEqual(ticket, commitTicket); assert.equal(submit, false); recoveries++;
+    assert.equal(recovering.delivery.role, 'commit'); assert.equal(recovering.delivery.signature, commitTicket.signature);
+    assert.equal(recovering.delivery.status, 'unresolved-delivery');
+    return { processId: 123, delivery: { status: 'simulation-required', canBroadcast: false, attempts: 0 }, observation: { status: 'authorized', slot: 14 } };
+  };
+  await f.service.act(op.id, 'recover'); await f.service.task;
+  assert.equal(recoveries, 1); assert.equal(stages, 1);
+  assert.equal(reopened.tickets.query.signature, querySignature); assert.deepEqual(reopened.tickets.commit, commitTicket);
+  assert.equal(reopened.delivery.role, 'commit'); assert.equal(reopened.delivery.status, 'simulation-required');
+  await assert.rejects(f.service.act(op.id, 'approve-commit', { approvalDigest: approvalDigest(reopened, 'commit') }), /already retained/);
+  assert.equal(stages, 1);
+});
+
+test('legacy interrupted commit infers its role and wrong-role discovered ticket fails closed', async t => {
+  const f = await fixture(t), op = await prepare(f); await approve(f, op, 'query');
+  f.observations.set(op.id, { status: 'authorized', slot: 13 }); await f.service.refresh();
+  op.interrupted = 'approve-commit'; delete op.recoveryRole; await f.service.save();
+  const queryTicket = op.tickets.query;
+  f.adapter.discoverTicket = async (_op, role) => { assert.equal(role, 'commit'); return queryTicket; };
+  let recovered = false; f.adapter.recover = async () => { recovered = true; };
+  await f.service.act(op.id, 'recover'); await f.service.task;
+  assert.equal(recovered, false); assert.equal(op.tickets.commit, undefined);
+  assert.equal(op.recoveryRole, 'commit'); assert.equal(op.interrupted, 'recover');
+  assert(!f.service.projection().operations[0].actions.includes('approve-commit'));
+});
