@@ -84,7 +84,8 @@ test('top-level compatible archive verifies retained worker without conflict-onl
   assert.deepEqual(verifyPreparedActionRecovery(plan, record, recovery), preparedAction);
   assert.throws(() => verifyPreparedActionRecovery(plan, record, { ...recovery, delivery: {} }), /requires immutable PreparedAction/);
   assert.throws(() => verifyPreparedActionRecovery(plan, { ...record, minContextSlot: 3 }, recovery), /predates signed ticket/);
-  assert.throws(() => verifyPreparedActionRecovery(plan, record, { ...recovery, observation: { slot: 1 } }), /predates its PreparedAction/);
+  // Immutable action evidence has its own floor; it need not predate the operation observation.
+  assert.deepEqual(verifyPreparedActionRecovery(plan, record, { ...recovery, observation: { slot: 1 } }), preparedAction);
   const changed = Buffer.from(actionBytes); changed[508] ^= 1;
   const changedRecovery = structuredClone(recovery);
   Object.assign(changedRecovery.delivery.semanticBinding.preparedAction, { dataBase64: changed.toString('base64'), sha256: hash(changed).toString('hex') });

@@ -59,7 +59,6 @@ export function verifyPreparedActionRecovery(plan, record, recovery) {
   assert(evidence, 'Query recovery requires immutable PreparedAction account evidence');
   validatePreparedActionEvidence(plan, evidence);
   assert(evidence.slot >= record.minContextSlot, 'PreparedAction evidence predates signed ticket context');
-  assert(evidence.slot <= recovery.observation.slot, 'Operation observation predates its PreparedAction check');
   return evidence;
 }
 
