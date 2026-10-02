@@ -92,3 +92,35 @@ node --test examples/approvals/*.test.mjs
 ```
 
 No dependency version or qualified on-chain program is changed by this interface.
+
+## Verify an interactive session
+
+Once explicit user actions have completed and the application is idle, keep its
+validator running and run the keyless reviewer:
+
+```sh
+node examples/approvals/verify-session.mjs \
+  --bootstrap .local/approvals-01/approvals-bootstrap.json \
+  --session .local/approvals-session-01 \
+  --out .local/approvals-session-01/independent-review.json
+```
+
+The reviewer uses only loopback account and transaction reads. It never loads a
+signer, prepares proofs, submits a transaction, or resumes an operation. It checks
+all ten loaded program binaries, retained operation intent, owner/administrator
+signatures, exact landed messages, immutable action bytes, and fresh SDK
+observations of the Job, permit, quota and application effect. A committed effect
+also requires the exact successful query and settlement receipts. Available
+keyless recovery artifacts are matched to retained plans and signed tickets.
+
+The create-only report excludes requested amounts, secret material, raw signed
+wires and private session events. `passed` means the review checks passed; each
+operation's fresh `observation.status` identifies whether payment committed.
+Query/settlement validator fees and CU are recomputed from live receipts;
+bootstrap totals are separately labelled archived reports. Later proof setup
+and callback costs are excluded from those receipt totals, and worker resource
+costs remain unmeasured. This review trusts confirmed local RPC evidence and
+reuses upstream verification and SDK interpretation; it is not an independent
+cryptographic audit or a historical state proof. Reuse of an output filename or
+retained intent or signed tickets changing during review fails closed. Cached
+UI observations may refresh; the verifier obtains its own chain observations.
