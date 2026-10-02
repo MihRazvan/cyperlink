@@ -6,7 +6,9 @@ CyperLink joins an exact native confidential payment, authenticated private shar
 
 The initial implementation supports synthetic local Token-2022 assets, one private allowance/MXE, explicit owner and administrator query signatures, and two internal consumers: a merchant SKU and an expiring product license. Fees, including fee extensions configured at 0 bps, require a separate adapter.
 
-Start with the [current status and decisions](docs/STATUS.md), [supported profile](docs/initial-profile.md), and [validation matrix](docs/validation.md). For local execution, follow the [fresh bootstrap guide](docs/local-bootstrap.md), then the [two-consumer demo](examples/two-consumers/README.md). The current path uses repository sources and pinned upstream artifacts; historical research stays read-only. New ledgers, keys and evidence stay under ignored `.local/` directories.
+Start with the [current status and decisions](docs/STATUS.md), [supported profile](docs/initial-profile.md), and [validation matrix](docs/validation.md). For local execution, follow the [fresh bootstrap guide](docs/local-bootstrap.md), then the [interactive Approvals client](examples/approvals/README.md) or [scripted two-consumer demo](examples/two-consumers/README.md). The current path uses repository sources and pinned upstream artifacts; historical research stays read-only. New ledgers, keys and evidence stay under ignored `.local/` directories.
+
+[Interactive qualification and screenshots](docs/approvals-qualification.md) cover compatible payments, stale rejection, fresh denial and restart recovery. [Permissions feasibility](docs/permissions-feasibility.md) is a separate scoped escrow experiment; it is not enabled in the supported Approvals profile.
 
 Developer APIs:
 

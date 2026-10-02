@@ -2,22 +2,51 @@
 
 Updated 2026-10-02. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
-## Active continuation: Approvals, then isolated Permissions
+## Latest continuation: interactive Approvals and isolated Permissions
 
-The [product continuation plan](product-continuation.md) supersedes the previous
-research ordering. The completed SDK/recovery milestone below is preserved.
-A loopback-only interactive client now uses the real SDK with separate query and
-final payment approvals, durable retained tickets, keyless recovery, and distinct
-owner/public projections. Eleven host tests pass; these tests use explicit host
-adapters and are not new validator evidence. Fresh UI/runtime qualification is in
-progress; do not yet cite the interface as a completed end-to-end demonstration.
+**Interactive human-approved spending passes fresh real local qualification.**
+The [Approvals interface](../examples/approvals/README.md) uses the completed SDK,
+with separate query/final approvals, exact paid effects, durable tickets and
+keyless recovery. Account decryption keys stay in the local client. Public and
+owner projections label synthetic test-observer disclosures. Desktop/mobile
+browser checks passed; see [qualification and screenshots](approvals-qualification.md).
 
-The isolated [Permissions probe](permissions-feasibility.md) investigates native
-authority and a separate scoped escrow profile. It does not enable delegates in
-the supported Approvals adapter or claim Arcium permission integration. Exact
-execution results and remaining key/recovery limitations are recorded separately.
-Second-machine installation and cross-MXE research remain open, not prerequisites
-for this first local product experience.
+- Compatible-v16: merchant40 and freshly recomputed license40 both paid. A lost
+  send acknowledgement, actual server restart and separate keyless worker
+  reconciled the original payment signature. Ten loaded ELFs, four signed tickets,
+  two paid effects and two real runtime callbacks independently checked.
+- Conflict-v18: both60 requests authorized; A paid, B became stale. Direct stale
+  API submission rejected400 with no new payment ticket (client guard, not a new
+  native803 claim). Explicit fresh B60 was denied. Four signed tickets, three
+  authenticated callbacks (allow/allow/deny), ten loaded ELFs and final
+  committed/stale/denied effects checked.
+- Validation:106 Node SDK/client/example/snapshot/verifier tests and80 Python
+  tests passed. Host adapters do not stand in for the real runs. Session exclusion,
+  durable save ordering and recovery of a journaled commit before an older query
+  are covered. Existing on-chain programs/circuits/dependency versions unchanged.
+
+**Permissions has a bounded feasibility result, not a second product SDK mode.**
+The [isolated probe](permissions-feasibility.md) rejects ordinary native delegate
+spending, then proves a different scoped-escrow profile on a real local validator:
+fresh agent-generated proofs and sole agent execution signature after an owner
+grant; native encrypted funding depletion and atomic scoped receipt; seven
+signed adversarial failures, revocation and honest refund. Offline review checked
+75 messages/125 signatures and seven unchanged account snapshot pairs. No Arcium
+policy, priced entitlement, wallet-key sharing or malicious-cache recovery claim
+is made. The original Approvals profile is preserved.
+
+Current inspection: `http://127.0.0.1:4317` remains running on v18; RPC8971 and its
+named two-node compose project are active. Exact paths/PIDs/stop guidance are in
+[qualification](approvals-qualification.md). v16 and Permissions services stopped.
+Original evidence and user-owned `00-START-HERE` remain untouched. Small slices
+are committed and pushed to `origin/main`.
+
+Next: improve client provisioning/recovery ergonomics; before a Permissions SDK,
+qualify malicious balance-cache recovery, wrong executor/use-limit exhaustion,
+post-native application rollback and a useful exact-priced consumer. Finite
+private-query authority must be implemented before joining autonomous grants to
+Arcium policy. Cross-MXE and second-machine qualification remain separate work,
+not prerequisites retroactively attached to this completed local milestone.
 
 ## Latest completed milestone: SDK lifecycle and restart recovery
 

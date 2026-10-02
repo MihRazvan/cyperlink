@@ -7,6 +7,16 @@ supersedes the research-first ordering, not the qualified SDK/profile. Baseline:
 infrastructure for Solana. Approvals and Permissions are working names for two
 authority modes over shared infrastructure, not two launched products.
 
+## Current result
+
+The interactive milestone passed on fresh compatible-v16 and conflict-v18 ledgers,
+including real browser approvals and paid effects, restart recovery, stale client
+rejection and fresh authenticated denial. The isolated Permissions probe also
+passed for a dedicated native-balance escrow with a scoped receipt, preserving
+explicit limits. See [qualification](approvals-qualification.md) and
+[authority feasibility](permissions-feasibility.md). These are local results,
+not a general-availability launch or Arcium-integrated Permissions mode.
+
 ## First milestone: interactive human-approved spending
 
 - A thin loopback-only browser surface uses `LocalOperationClient` for real native
