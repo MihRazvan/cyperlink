@@ -44,7 +44,7 @@ export async function run({deployments,directory,scenario='combined'}){
   for(const instance of instances){
    const deployment=await json(instance.results);assert(deployment.passed&&deployment.genesisHash===evidence.genesisHash,'Deployment qualification is incomplete or belongs to another ledger');
    const required=['auth','policy','guard','merchant','license','proofBuffer'].map(name=>instance.descriptor.programs[name]);
-   required.push('TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb','Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ','ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq');
+   required.push('TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb','Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ','ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq','L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95');
    for(const address of required){
     const previous=deployment.loadedPrograms.find(item=>item.program===address);assert(previous?.matched&&previous.local_elf_path,'Missing actual loaded ELF deployment evidence');
     assert.equal(previous.genesis_hash,evidence.genesisHash);
