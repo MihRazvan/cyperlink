@@ -15,7 +15,11 @@ actual runtime results; that qualification is currently pending.
 
 ## Write, test and build a package
 
-Use the pinned prerequisites from [fresh bootstrap](local-bootstrap.md). Run these
+Use the pinned prerequisites from [fresh bootstrap](local-bootstrap.md). The CLI
+checks host Rust `1.95.0 (59807616e)` and Cargo `1.95.0 (f2d3ce0bd)` before
+compilation/deployment; a different installed toolchain fails explicitly. Native
+SBF builds still use pinned platform-tools1.57 and the Auth workspace retains its
+Rust1.89 specification. Run these
 commands from the repository root; no global CLI installation is required:
 
 ```sh

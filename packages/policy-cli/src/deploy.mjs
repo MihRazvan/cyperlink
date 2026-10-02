@@ -3,7 +3,7 @@ import { randomBytes } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { readFile, writeFile, mkdir, readdir, realpath, lstat } from 'node:fs/promises';
 import { resolve, join, dirname } from 'node:path';
-import { ROOT, PROFILE, CIPHER, sha, canonical, json, freshJson, command, readRelease } from './package.mjs';
+import { ROOT, PROFILE, CIPHER, sha, canonical, json, freshJson, command, readRelease, assertHostCompiler } from './package.mjs';
 import { LocalSession, createPrivateRun, loadWeb3, loadSigner, saveSigner, loopbackEndpoint, TOKEN_PROGRAM } from '../../local-client/src/runtime.mjs';
 import { SignedInstructionSender, sleep } from '../../local-client/src/transaction-sender.mjs';
 import { verifyUploadedCircuit } from './circuit-evidence.mjs';
@@ -12,6 +12,7 @@ import { validateDeployment, policyDomainHash } from '../../policy-client/src/de
 import { decodeQuota } from '../../policy-client/src/index.mjs';
 
 async function pinnedTools(){
+ await assertHostCompiler();
  const installation=await json(join(ROOT,'.local/toolchain/native/installation.json')),pins=await json(join(ROOT,'config/local-toolchain.json'));
  for(const name of['sbf','anchor','validator']){const record=installation.executables[name];assert.equal(sha(await readFile(record.path)),record.sha256);assert.equal(record.sha256,pins.executables[name].sha256);}
  const solana=join(dirname(installation.executables.validator.path),'solana');

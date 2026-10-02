@@ -34,7 +34,13 @@ export async function initPackage(directory){
 }
 async function filesUnder(directory){const out=[];for(const entry of await readdir(directory,{withFileTypes:true})){if(['target','build','.git'].includes(entry.name))continue;const path=join(directory,entry.name);if(entry.isDirectory())out.push(...await filesUnder(path));else if(entry.isFile()&&(/\.(rs|toml|lock|py)$/.test(entry.name)))out.push(path);}return out.sort();}
 export async function platformSources(){const files=[...await filesUnder(join(ROOT,'crates/policy-authoring')),...await filesUnder(join(ROOT,'crates/custom-policy-layout')),...await filesUnder(join(ROOT,'crates/native-admission')),...await filesUnder(join(ROOT,'crates/hook-routing')),...await filesUnder(join(ROOT,'crates/pda-provisioning')),...await filesUnder(join(ROOT,'programs/custom-policy'))];return Object.fromEntries(await Promise.all(files.map(async path=>[path.slice(ROOT.length+1),sha(await readFile(path))])));}
+export async function assertHostCompiler(){
+ const bin=join(process.env.HOME,'.cargo/bin');
+ assert.equal((await command(join(bin,'rustc'),['--version'])).trim(),'rustc 1.95.0 (59807616e 2026-04-14)','Use the qualified host Rust compiler; do not silently rebuild with another toolchain');
+ assert.equal((await command(join(bin,'cargo'),['--version'])).trim(),'cargo 1.95.0 (f2d3ce0bd 2026-03-21)','Use the qualified host Cargo version');
+}
 async function stageCompiler(directory){
+ await assertHostCompiler();
  directory=await realpath(resolve(directory));const manifest=validateManifest(await json(join(directory,'policy.json')));const source=await readFile(join(directory,manifest.entrypoint));
  const work=join(directory,'.cyperlink/work',randomUUID());await mkdir(join(work,'src'),{recursive:true});await writeFile(join(work,'src/policy.rs'),source);
  const dependency=JSON.stringify(join(ROOT,'crates/policy-authoring'));
