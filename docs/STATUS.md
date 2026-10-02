@@ -2,6 +2,23 @@
 
 Updated 2026-10-02. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
+## Active continuation: Approvals, then isolated Permissions
+
+The [product continuation plan](product-continuation.md) supersedes the previous
+research ordering. The completed SDK/recovery milestone below is preserved.
+A loopback-only interactive client now uses the real SDK with separate query and
+final payment approvals, durable retained tickets, keyless recovery, and distinct
+owner/public projections. Eleven host tests pass; these tests use explicit host
+adapters and are not new validator evidence. Fresh UI/runtime qualification is in
+progress; do not yet cite the interface as a completed end-to-end demonstration.
+
+The isolated [Permissions probe](permissions-feasibility.md) investigates native
+authority and a separate scoped escrow profile. It does not enable delegates in
+the supported Approvals adapter or claim Arcium permission integration. Exact
+execution results and remaining key/recovery limitations are recorded separately.
+Second-machine installation and cross-MXE research remain open, not prerequisites
+for this first local product experience.
+
 ## Latest completed milestone: SDK lifecycle and restart recovery
 
 **The bounded local SDK lifecycle and recovery milestone passes.** The [local operation API](../packages/local-client/OPERATION.md) prepares native proofs/actions, obtains explicit owner/admin query signatures, retains exact signed transactions, submits and observes paid effects. Separate keyless processes reconcile or explicitly retransmit retained bytes without replacing signatures, blockhashes, query identities or private inputs. Query recovery verifies the live immutable PreparedAction against the retained native payment and consumer template. Reusable account decryption keys remain client-side.
@@ -15,7 +32,7 @@ Validation: 80 Python tests, 77 Node SDK/client/example/snapshot tests, five rec
 
 Delivery investigation preserved failed v8/v10/v11 attempts. Agave's rooted-bank lookup resolution could not yet see newly confirmed ALT extensions; simulation succeeded while ingress dropped packets. The sender now waits for finalized table visibility before obtaining a fresh application blockhash and signing. V9 failed preparation because the generator probed an occupied default RPC port; v14 failed startup because the prior validator still held faucet port 9900. Neither is chain execution evidence. V12 passed the conflict flow before the final immutable-action recovery check and remains an earlier local archive. All those services are stopped; no ledger was reset. Follow the single-validator startup guidance in [local bootstrap](local-bootstrap.md).
 
-Next: build the interactive two-consumer experience on these APIs, then qualify the full installation on a second machine. This milestone starts recovery after a complete retained operation; arbitrary interrupted native provisioning, cleanup, wallet/KMS support and production deployment remain out of scope. See the [completed implementation plan](lifecycle-implementation.md).
+Continuation: build the interactive experience, then probe bounded Permissions as described above. Second-machine installation remains a separate qualification gate. This milestone starts recovery after a complete retained operation; arbitrary interrupted native provisioning, cleanup, wallet/KMS support and production deployment remain out of scope. See the [completed implementation plan](lifecycle-implementation.md).
 
 ## Latest completed continuation: fresh bootstrap
 
