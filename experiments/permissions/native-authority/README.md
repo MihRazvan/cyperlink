@@ -10,6 +10,7 @@ From repository root, after the pinned local toolchain is installed:
 mkdir -p .local/permissions-authority-v2
 CARGO_TARGET_DIR="$PWD/.local/permissions-authority-build" cargo run \
   --manifest-path experiments/permissions/native-authority/Cargo.toml \
+  --bin cyperlink-permissions-native-authority \
   --locked --offline -- \
   .local/toolchain/native/programs/token-2022.so \
   .local/permissions-authority-v2/report.json

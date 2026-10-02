@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "classification": "Isolated native-capacity Permissions feasibility; not a launched product or shared private policy profile",
+  "run": "permissions-escrow-v3",
+  "result": {
+    "schema_version": 1,
+    "evidence_level": "real-local-validator-signed-native-capacity-escrow",
+    "distributed": false,
+    "passed": true,
+    "checks": [
+      {
+        "name": "owner-authorized-grant",
+        "signature": "BcwzUaUN3MnSvZMYb6CtthtggqkQmqcPXiM1tBbo9hD7y6c8tUJQify4wXLGrVPKCfktgPN8ciGULSBdLSr3bVo",
+        "grant": "A68fHKjtUdrq5iTPQrYZNoc6jvgxzHa4PEBNELoteqww",
+        "expiry": 2059
+      },
+      {
+        "name": "wrong-recipient",
+        "signature": "39DrqwS6GqG4cu4EcXvZXKTim8rwLTLBDgR8DdLzwnbkBd62njSYFsiHRV9ypr9EpKG8NCQMKeQ9nddMme6wHwrP",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 907
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      },
+      {
+        "name": "wrong-action",
+        "signature": "45KfSbVtkCotaJfZHsh2JCVPXxkya3jRjbpQuPhxdc4zVDnPevgTvfJJrNxZQJGwRgq9b9L3u4742pdFCWSs3k1g",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 908
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      },
+      {
+        "name": "agent-only-native-transfer",
+        "signature": "AyQJtujytXLaWrsWyy4AhaUPkXRRA4JVqFkHG3VsLSzTfMzs6BnMrishQPxaS5LgL2oUX6Tadf2h5VcF3csHtNK",
+        "ownerExecutionSignatureAbsent": true
+      },
+      {
+        "name": "execution-replay",
+        "signature": "2KQthRWPyLSkyNbd2bDBEhyX9mYyn1ApipWjYPHxf7F7nDEa2PZqQKSBqeFZQ4b2zEYfKr7QtuPfGbUwi3RL3g9y",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 906
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      },
+      {
+        "name": "overspend-stale-funding-proof",
+        "signature": "3rD9mJbWUENb4bkTf5fD4mhmfNU4weyVndjNhfCjFbrpAH7yhEmhwDv2TQtsQ18rECs2kLfbagynjouiUTeKAzLK",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 27
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      },
+      {
+        "name": "fresh-overspend-proof-builder-rejection",
+        "evidence_level": "client-only"
+      },
+      {
+        "name": "topup-cannot-renew",
+        "signature": "38SsYa6i6ENiBjLhw2EDyHzsUNebQXuPMcRx6YPhoCVA4dJSDVA2dTz3PaKNhy2tb2cdrAfdiGtfB8zuAT5UB77P",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 25
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      },
+      {
+        "name": "owner-revocation",
+        "signature": "482p2ce4B6pkAkEXgnvLuazRqD1t3umqJ1gPKhsLi9K6PFtYHYfGtzu4VP94nuMZEtMoam6UzV46Dv6bjvJnrgYi"
+      },
+      {
+        "name": "revoked-grant",
+        "signature": "3oTBDKrfrM8ZR613cftxTXp9xxZuJmjroCU5QKJ84xSwzfAy4CdKWRE54q5txjgkuXzDd1sLbZpcYwb16QjJrz93",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 905
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      },
+      {
+        "name": "honest-owner-refund",
+        "signature": "2ou6qhQPQKWh4wbHvW8YUzFDNHHqVfWTXoeWNAxf8ZiUT2z9xUfNay5BRqDTN35Nf8gZD4hx7ZDHjHuHbWrPftfL"
+      },
+      {
+        "name": "owner-authorized-grant",
+        "signature": "3fKtqtHrcTXkEsTZoPY7V6XqGTDxLvn6hAieV7s8YyEsganczQJaDinU7WGjj4qV8DjbnkRnf5LQZst3fD7bhMzg",
+        "grant": "6uxUxC4bqWfpvtfGUGR7hoPR2U1KHbWDoJDARy9ZDsJS",
+        "expiry": 107
+      },
+      {
+        "name": "expired-grant",
+        "signature": "3KqXdPXxMZ4KyKBGo61Y8W1cZCVvnFmuCAGox93HFcxgm5icUV16M5dyMhDG5mrRbVcCVMqm6FrG4zCJ7HDuMfu2",
+        "error": {
+          "InstructionError": [
+            1,
+            {
+              "Custom": 904
+            }
+          ]
+        },
+        "accountsUnchanged": true
+      }
+    ],
+    "limitations": [
+      "Separate experimental authority profile; no Arcium/shared business quota",
+      "Application effect is a scoped execution receipt, not a priced merchant entitlement",
+      "Dedicated escrow key is shared with executor and backed up by grantor; no wallet key is shared",
+      "Honest refund does not qualify recovery after malicious decryptable-balance corruption"
+    ],
+    "test_observer_disclosures": {
+      "initial": 100,
+      "spend": 60,
+      "refund": 40
+    },
+    "genesis": "aSfQbn2N9soEGQspwwbqr1hKRuGM2iPEVwcjWaGSQFG",
+    "loadedElfs": [
+      {
+        "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+        "bytes": 1382016
+      },
+      {
+        "program": "79cu2QNvp92chEmBhBgcUfERDT9KHnUcr8eiJb5WzKML",
+        "sha256": "b7b981b4cdf8085c3587521090b6b70ebe7959d841150e1e3f63a1e033c7e07e",
+        "bytes": 98352
+      },
+      {
+        "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+        "sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+        "bytes": 16504
+      }
+    ]
+  },
+  "offline_checks": {
+    "schema_version": 1,
+    "passed": true,
+    "scope": "offline checks of archived real-local-validator evidence",
+    "genesis": "aSfQbn2N9soEGQspwwbqr1hKRuGM2iPEVwcjWaGSQFG",
+    "results_sha256": "8cd0d351a94c67aa579c1395b7f90faadeafb96bee72a2f6618e57df047562fb",
+    "signed_wires": 75,
+    "ed25519_signatures": 125,
+    "landed_failures": 7,
+    "unchanged_snapshot_pairs": 7,
+    "owner_absent_from_execution_message": true,
+    "native_source_successor_exact": true,
+    "scoped_effect_counter_and_digest_exact": true,
+    "revocation_restored_native_owner": true,
+    "limitations": [
+      "Historical RPC archives are not independently authenticated bank state proofs",
+      "ELF equality is retained runner evidence, not a fresh offline RPC read",
+      "Amounts are disclosed test setup; no independent private balance decryption",
+      "No distributed computation, priced merchant entitlement, or malicious executor recovery claim"
+    ]
+  },
+  "source_manifest": {
+    "qualification": "Source bytes captured immediately after the v3 run; runner/build paths unchanged during execution. Retained ELF equality, not reproducible source-to-ELF proof.",
+    "files": [
+      {
+        "path": "experiments/permissions/scoped-escrow/src/lib.rs",
+        "sha256": "94378c127240fff583a68eaa22444cf62c3628697da72d5dea74abc6022c02bf"
+      },
+      {
+        "path": "experiments/permissions/scoped-escrow/Cargo.toml",
+        "sha256": "17c4cda76ce7cae4b0e300e18a76289b419d3902ad04966dbb9cdf6c891dcfd9"
+      },
+      {
+        "path": "experiments/permissions/scoped-escrow/Cargo.lock",
+        "sha256": "c5f6f6c5d4409e43966513cf8284a28eed43c0c75e86a1f6c84ddc125d5ab8f8"
+      },
+      {
+        "path": "experiments/permissions/native-authority/src/bin/provision.rs",
+        "sha256": "0a5ba12fc2c8ce61ac4cf7ab20a4db9feeefdb1c66d2df6aaa15d21ad882a0d0"
+      },
+      {
+        "path": "experiments/permissions/native-authority/Cargo.toml",
+        "sha256": "62ad4ba7f04f25a86e07d80d9437aa01d7b587cc7be86bfb0cf0addb54b418e9"
+      },
+      {
+        "path": "experiments/permissions/native-authority/Cargo.lock",
+        "sha256": "ddbba7c0c3ed0a7e305aefb1c8f70f6298759990b41dc302bcbda338567369e5"
+      },
+      {
+        "path": "experiments/permissions/live.mjs",
+        "sha256": "d1238ec3c78380bdc2657b9d63492fcf3f8b90fb0303108188e825a3846334ac"
+      },
+      {
+        "path": "crates/pda-provisioning/src/lib.rs",
+        "sha256": "05106018df2b34987b458444b6ad28c62386b0ef539f2c8aca0bc9615d92c541"
+      },
+      {
+        "path": "crates/client-proofs/src/lib.rs",
+        "sha256": "60616552fa0202f07d8e385a7290839a47a4be8aca42a5116dcce9f8c00a0893"
+      },
+      {
+        "path": "crates/client-proofs/src/main.rs",
+        "sha256": "aca27be8d971e0eb769a9c9d7d40d893e32e6ff88edbe52b44d6d2a4832766e1"
+      },
+      {
+        "path": "crates/client-proofs/Cargo.lock",
+        "sha256": "2c7208766a24ac4c6c8a2f26195beca0a2986a1f16539d6832f9293043979fa1"
+      },
+      {
+        "path": "packages/local-client/src/runtime.mjs",
+        "sha256": "7d0c754b603e4ca553886b6db2cb1d71dc9e6e7de77c1d6a5ee6088d9922fa2f"
+      },
+      {
+        "path": "packages/local-client/src/proofs.mjs",
+        "sha256": "847a2008d3603335f1ed676c3d980962a876db3cd44ca39afe8c200b209e9333"
+      }
+    ]
+  },
+  "historical_failed_runs": [
+    "v1 startup confirmed payer-credit race; no grant or spend",
+    "v2 first setup transaction simulated but delivery remained unconfirmed; ledger retained, no grant or spend"
+  ]
+}
