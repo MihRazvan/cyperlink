@@ -45,7 +45,7 @@ below 2^48. The example amount is a test-observer disclosure.
 | --- | --- |
 | `prepare(...)` | Explicitly creates fresh native proofs, verifies them natively, initializes a blank permit/consumer record, prepares an immutable action, and retains an encrypted query plan. |
 | `stageQuery(plan,{owner})` | Checks the current quota snapshot and runtime key, obtains owner/admin signatures, and journals the signed query before simulation. |
-| `submit(plan,ticket)` | Checks actual signed instruction semantics and live ALT resolution, then sends only the retained signed bytes within the journal's broadcast budget. |
+| `submit(plan,ticket)` | Checks actual signed instruction semantics, live ALT resolution and the query's immutable action account, then sends only the retained signed bytes within the journal's broadcast budget. |
 | `observe(plan)` | Reads Job, permit, quota, and consumer effect together; never creates or submits a private query. |
 | `stageCommit(plan,{owner})` | Requires an authorized observation, signs the exact native payment and consumer effect, and journals it. |
 | `recover(plan,ticket)` | Reconciles transaction delivery and operation state; never broadcasts or refreshes authorization. |
@@ -56,6 +56,13 @@ commit instructions, encrypted inputs, native bytes, proof context snapshots, an
 ledger genesis. Expectations are not adopted from a returned Job. Account-wide
 ElGamal/AES keys stay in the Rust client's private files. The separate operation
 witness is also private; it is never a recovery-worker input.
+
+For query tickets, recovery fetches the signed instruction's immutable
+`PreparedAction` account and checks its program ownership, account encoding,
+source owner, native instruction and consumer-bound template against the retained
+plan. It keeps the public account bytes and observation slot for offline review.
+Signed journal metadata alone cannot substitute another prepared action. Commit
+tickets encode their consumer payload directly and do not need this account read.
 
 To resume in a new process without any signing key, use:
 
