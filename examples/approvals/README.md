@@ -124,3 +124,24 @@ reuses upstream verification and SDK interpretation; it is not an independent
 cryptographic audit or a historical state proof. Reuse of an output filename or
 retained intent or signed tickets changing during review fails closed. Cached
 UI observations may refresh; the verifier obtains its own chain observations.
+
+Capture the corresponding distributed-runtime callback receipts separately,
+while the same validator is still running:
+
+```sh
+node examples/approvals/verify-session-callbacks.mjs \
+  --bootstrap .local/approvals-01/approvals-bootstrap.json \
+  --session .local/approvals-session-01 \
+  --out .local/approvals-session-01/callback-review.json
+```
+
+This requires one successful callback per retained queued operation. It verifies
+actual transaction Ed25519 signatures, the auth callback discriminator and exact
+Job/computation/permit association, the disclosed native amount commitment, and
+the policy decision against live Job/permit state. Authorized successors must
+match the callback ciphertext; denials must leave an empty permit. The report
+contains public receipt hashes and callback-only validator costs. Full signed
+RPC receipts and public account snapshots are retained locally in the adjacent
+`.receipts.json` file, both create-only. Runtime BLS authenticity relies on the
+successful on-chain callback check; this tool does not claim an independent BLS
+verification or measure distributed worker resource costs.
