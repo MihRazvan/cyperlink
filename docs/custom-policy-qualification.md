@@ -27,7 +27,7 @@ callbacks, upstream native proofs and owner/admin signatures.
 | --- | --- |
 | Count rule | Synthetic initial remaining100/count4; merchant40 paid and advanced both private fields; fresh1 denied with funding remaining. |
 | Private reserve | Synthetic private remaining100/reserve70; merchant40 denied; license20 paid. |
-| Budget-only control | Separate retained v19 legacy instance paid merchant40 and recovered its exact transaction, with ten matching ELFs. |
+| Budget-only control | [Separate v19 legacy control](../evidence/2026-10-02/custom-policy-budget-control-v19.json) paid merchant40 and recovered its exact transaction, with ten matching ELFs. |
 | Native input binding | Altered encrypted amount, opening and wrong cipher domain each produced an authenticated denial; no business-state advancement. |
 | Query authority/isolation | Wrong source owner/admin6001, foreign state2004, MXE/definition2012, wrong native contexts/profile6000, wrong permit length6002, unauthorized init/reinit6001. |
 | Callback authority | Direct replay9999 and wrong computation association6000 rejected. |
@@ -127,9 +127,38 @@ compose project `cyperlink-custom-policies-v20`. Validator PID45794 was verified
 for this ledger. Verify process ownership again before stopping it. Do not reset
 or delete the ledger. V18/v19 services are stopped and their evidence retained.
 
-The existing Approvals UI supports the verified custom instance with selected
-policy/release/schema/MXE and real allow/deny outcomes. Desktop/mobile read-only
-checks pass; the final additional reserve UI payment is being qualified separately.
+The existing Approvals UI exposes selected policy/release/schema/MXE and actual
+allow/deny outcomes without initialization values or inferred remaining balances.
+The [separate browser qualification](../evidence/2026-10-02/custom-policy-ui-v20-review.json)
+passed desktop1440px and mobile390px visual checks without horizontal overflow,
+prepared merchant5, obtained explicit query/final approvals, observed its real
+allowed callback and paid entitlement, injected send-response loss, restarted the
+server and recovered the identical payment through keyless process7571. Only one
+query and one payment ticket exist. Four ciphertext slots committed at reserve
+version2; a separate final bank read verified the count state entirely unchanged.
+
+UI query/callback/payment used180,357/159,532/88,619 Solana CU respectively, with
+10,000/5,000/10,000 local lamport fees. These exclude proof/setup/runtime-resource
+costs and are separate from the earlier matrix totals. Browser session/raw receipts
+are `.local/custom-policy-ui-reserve-v20/`; final images are
+`browser/reserve-paid-desktop.png` and `browser/reserve-paid-public-mobile.png`. Server PID6705 serves
+<http://127.0.0.1:4317>; the prior count UI and server PID93133 are stopped.
+Restart using the same retained session after verifying/releasing its live process:
+
+```sh
+node examples/approvals/server.mjs \
+  --bootstrap .local/custom-policies-v20-reserve/instance.json \
+  --session .local/custom-policy-ui-reserve-v20 --port 4317
+```
+
+Verify process ownership before stopping either service. To stop this runtime's
+containers without deleting evidence:
+
+```sh
+docker compose -p cyperlink-custom-policies-v20 \
+  -f .local/localnet-custom-policies-v20/app/artifacts/compose.json stop
+```
+
 
 ## Preserved failures and explicit limits
 

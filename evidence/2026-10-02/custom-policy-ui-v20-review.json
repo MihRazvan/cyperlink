@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidence": "real-local-browser-sdk-validator-Arcium-and-keyless-recovery",
+  "genesisHash": "B7NXk9pQWhap2c9aZvfkwEiXcgv9DLyLecJnkKjTAusm",
+  "policyName": "minimum-reserve",
+  "releaseHashHex": "7640e480c3fe9c005a9c7e221299386928ebc0f6dbb4c1cabc73c0a264c5d75a",
+  "schemaHashHex": "d56fd7c9c11ec1edd12bfe67b58823e8505cf34b6b1c8e703c65d9f25a43dd8d",
+  "observerDisclosures": {
+    "requestedAmount": 5,
+    "note": "Requested amount is known to the approving client. No private initialization or MXE field values are reported."
+  },
+  "operationId": "05820bf3-99d4-4a3b-9fad-6463436a12da",
+  "queryCount": 1,
+  "paymentCount": 1,
+  "restart": {
+    "beforeProcessId": 93133,
+    "afterProcessId": 6705,
+    "keylessProcessId": 7571,
+    "classification": "operator-observed process restart, not OS attestation"
+  },
+  "tickets": [
+    {
+      "role": "query",
+      "signature": "4rrGKxWiub8XzS6C3iHD4quvKSseLkL9TWW7fgLMED1tZgjCX3394L21SfZvwU9bAGtM187J1igYQR22znMcu45j",
+      "wireSha256": "c30121dee9072b79595f2f638dded530e81005f1ce7f983cc93e092f9ec655b2",
+      "signaturesVerified": 2,
+      "liveLookupTablesChecked": 1,
+      "immutableActionChecked": true
+    },
+    {
+      "role": "commit",
+      "signature": "3H45vagixNWiUU3hv8wGrte4UaGYfZmtQZ59yeTgEGiJRejJZv9RQ3txCWB4JrYFCiucLDonZLDvyweE62ydBtB7",
+      "wireSha256": "6955b20ad5e6213a48c2364227c48cbb6ab53ffa44e6e225b00955f8a1bfa28b",
+      "signaturesVerified": 2,
+      "liveLookupTablesChecked": 0,
+      "immutableActionChecked": false
+    }
+  ],
+  "callbacks": [
+    {
+      "signature": "5MNKqGay93z5GiZ7CfDCcNibKgC5KKVhkJ9CtJbpRZiabeEJs9JM4QaCxi6geCLQrvhm2FSYZBtRmjoQBdixEvxE",
+      "slot": 2801,
+      "allowed": true,
+      "nativeCommitmentMatched": true,
+      "allFourSuccessorSlotsMatched": true,
+      "businessStateUnchanged": true,
+      "signaturesVerified": 1
+    }
+  ],
+  "validatorCosts": {
+    "arcium-queue": {
+      "transactions": 1,
+      "landedCU": 180357,
+      "feeLamports": 10000
+    },
+    "native-settlement": {
+      "transactions": 1,
+      "landedCU": 88619,
+      "feeLamports": 10000
+    },
+    "arcium-signed-callback": {
+      "transactions": 1,
+      "landedCU": 159532,
+      "feeLamports": 5000
+    }
+  },
+  "limitations": [
+    "Confirmed local RPC observations, not historical consensus proofs",
+    "Onchain authenticated Arcium callback verified; no independent BLS implementation here",
+    "Same-host local operators, synthetic assets, no production or public-network claim",
+    "Proof/provisioning and distributed worker resource costs are not included in query/callback/payment totals"
+  ],
+  "recovery": {
+    "signature": "3H45vagixNWiUU3hv8wGrte4UaGYfZmtQZ59yeTgEGiJRejJZv9RQ3txCWB4JrYFCiucLDonZLDvyweE62ydBtB7",
+    "wireSha256": "6955b20ad5e6213a48c2364227c48cbb6ab53ffa44e6e225b00955f8a1bfa28b",
+    "processId": 7571,
+    "attempts": 1,
+    "createsNewSignedTransaction": false,
+    "generatesKeysProofsOrOperationIdentity": false
+  },
+  "paidEffect": {
+    "kind": "merchant",
+    "sku": "7",
+    "effect": "EqXVJzDTjPjAGuGB2o3TKCrf2JPWCjQNUhnEdzeWLa4e",
+    "paymentSignature": "3H45vagixNWiUU3hv8wGrte4UaGYfZmtQZ59yeTgEGiJRejJZv9RQ3txCWB4JrYFCiucLDonZLDvyweE62ydBtB7",
+    "slot": 2938,
+    "quotaVersion": "2",
+    "allFourSuccessorSlotsCommitted": true
+  },
+  "additionalFinalIsolation": {
+    "genesisHash": "B7NXk9pQWhap2c9aZvfkwEiXcgv9DLyLecJnkKjTAusm",
+    "slot": 3606,
+    "countStateUnchangedSinceMatrix": true,
+    "reserveVersion": "2"
+  }
+}

@@ -43,8 +43,12 @@ all historical ledgers remain intact. V19's separate real legacy budget40 contro
 also paid/recovered successfully before its services stopped.
 
 Current local services: v20 RPC8983, two-node compose `cyperlink-custom-policies-v20`,
-and custom Approvals HTTP4317. Its selected-policy desktop/mobile display passes;
-an additional live reserve UI payment/restart check is in progress. Raw archives
+and custom Approvals HTTP4317 (restarted server PID6705). The live custom UI paid
+merchant5 after explicit query/final approvals, lost its send acknowledgement, then
+recovered the identical payment after an actual server restart through a separate
+keyless process. Reserve state advanced to version2; an independent final read
+confirmed the entire count state unchanged. No private initialization/remaining
+values are exposed. See [UI evidence](../evidence/2026-10-02/custom-policy-ui-v20-review.json). Raw archives
 and stop/restart guidance are in qualification. User-owned `00-START-HERE` untouched.
 
 Remaining scope: independently operated/public deployment, second-machine builds,

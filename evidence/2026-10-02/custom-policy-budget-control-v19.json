@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "passed": true,
+  "profile": "local-native-ct-v0",
+  "genesisHash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+  "qualification": "real-local-validator-and-two-node-Arcium",
+  "observerDisclosures": {
+    "initialAllowance": 100,
+    "requestedAmount": 40,
+    "inferredRemainingAfterPayment": 60,
+    "note": "Synthetic test-observer inputs and expected inference, not live MXE decryption"
+  },
+  "committedObservation": {
+    "status": "committed",
+    "slot": 1177,
+    "commitment": "confirmed",
+    "job": "DSqexwYYPuoofjkYWbVVTEinvAVye9NvyY2WDxNn8M3e",
+    "permit": "6xNDPNPX2LG37ahhBM3tmD33n6U4jF7PLNvRof9XdfsA",
+    "effect": "EcafzCmEpbP8Cg6c2afkXkkRgGnjE66FSx6CCgnFJUwa",
+    "consumerKind": "merchant",
+    "quotaVersion": "1",
+    "expectedQuotaVersion": "0",
+    "actions": [],
+    "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+  },
+  "callback": {
+    "signature": "49eNp3eFgsbHYAbFgK1T5PgvYgzSA2oFSsfKpXnwL5BhdwPCfH2ZV9rSrCSbtWbQyrSk1sj1pu3WyJVxwxCDPjiA",
+    "slot": 1176,
+    "landedCU": 151106,
+    "feeLamports": 5000
+  },
+  "loadedPrograms": [
+    {
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "elf_sha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "loaded_elf_sha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loaded_elf_sha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loaded_elf_sha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loaded_elf_sha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loaded_elf_sha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loaded_elf_sha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loaded_elf_sha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loaded_elf_sha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loaded_elf_sha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    },
+    {
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loaded_elf_sha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "genesis_hash": "Dbsms19YK5tgWrnjAkq4adtXXL5ca7y7J24Q6sUD5pvL",
+      "matched": true
+    }
+  ],
+  "recovery": {
+    "processId": 44135,
+    "passed": true,
+    "createsNewSignedTransaction": false,
+    "signature": "39YVWKCYCEmMCsww6DDMx7sxai3Vh782T7L1JUZQNB2Fce6pGTHqW11rNSLSQZMTY2ey45RvJfShY42EsytRPzn6",
+    "observation": "committed"
+  },
+  "rawArchive": ".local/custom-policy-budget-control-v19/"
+}
