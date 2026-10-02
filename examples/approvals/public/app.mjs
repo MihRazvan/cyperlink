@@ -77,6 +77,10 @@ function operationCard(op) {
   const details = node('details', 'operation-details'); details.append(node('summary', '', 'Operation & receipt details'));
   const dl = node('dl', 'details-list');
   for (const [label, value] of [['Operation', op.id], ['Buyer', op.owner], ['Source', op.source], ['Destination', op.destination], ['Effect account', op.effect], ['SDK status', op.sdkStatus || op.observation?.status], ['Observed slot', op.observation?.slot], ['Delivery', op.delivery?.status], ['Signed role', op.delivery?.role], ['Signature', op.delivery?.signature]]) if (value !== undefined && value !== null) detail(dl, label, value, ['Buyer', 'Source', 'Destination', 'Effect account', 'Signature'].includes(label));
+  for (const [label, value] of [['SKU', op.terms?.sku], ['Product identifier', op.terms?.productHex32],
+    ['License expiry slot', op.terms?.licenseExpirySlot ?? op.observation?.licenseExpirySlot],
+    ['Authorization expiry slot', op.terms?.queryExpirySlot], ['Policy profile', op.terms?.policyProfile],
+    ['Query state binding', op.terms?.queryStateHash]]) if (value !== undefined && value !== null) detail(dl, label, value, label === 'Product identifier' || label === 'Query state binding');
   details.append(dl); article.append(details); return article;
 }
 function render() {
@@ -159,6 +163,10 @@ async function post(path, payload) {
 }
 function requestAction(op, action) {
   if (['observe', 'recover'].includes(action)) { void post(`/api/operations/${encodeURIComponent(op.id)}/${action}`, {}); return; }
+  if (action.startsWith('approve-') && op.consumer === 'license'
+    && (!op.terms?.productHex32 || !(op.terms?.licenseExpirySlot ?? op.observation?.licenseExpirySlot))) {
+    message('The exact license product and expiry are unavailable. Refresh before approving this request.', true); return;
+  }
   dialogAction = { op, action }; $('#dialog-facts').replaceChildren(); $('#lose-response').checked = false; $('#loss-option').hidden = action !== 'approve-commit';
   const descriptions = {
     'approve-query': ['Authorize this private check', 'The buyer and policy administrator approve this exact query. Its result may disclose allow or deny. This does not pay the application.'],
@@ -170,6 +178,13 @@ function requestAction(op, action) {
   const [title, description] = descriptions[action]; $('#dialog-title').textContent = title; $('#dialog-description').textContent = description;
   detail($('#dialog-facts'), 'Application', op.purpose || consumerName(op));
   if (op.amount !== undefined) detail($('#dialog-facts'), 'Amount', `${display(op.amount)} synthetic units`);
+  if (op.terms?.sku !== undefined) detail($('#dialog-facts'), 'SKU', op.terms.sku);
+  if (op.consumer === 'license') {
+    detail($('#dialog-facts'), 'Product ID', op.terms?.productHex32);
+    detail($('#dialog-facts'), 'License ends', `Slot ${display(op.terms?.licenseExpirySlot ?? op.observation?.licenseExpirySlot)}`);
+  }
+  if (op.terms?.queryExpirySlot !== undefined) detail($('#dialog-facts'), 'Approval ends', `Slot ${display(op.terms.queryExpirySlot)}`);
+  if (op.terms?.policyProfile) detail($('#dialog-facts'), 'Policy', op.terms.policyProfile);
   for (const [term, value] of [['Buyer', op.owner], ['Recipient', op.destination], ['Effect', op.effect], ['Operation', op.id]]) if (value) detail($('#dialog-facts'), term, value);
   $('#dialog-confirm').textContent = actionNames[action]; $('#dialog-confirm').disabled = Boolean(state?.busy || posting || !connectionHealthy);
   $('#approval-dialog').showModal(); $('#dialog-cancel').focus();
