@@ -55,8 +55,8 @@ export async function deployPackage(directory,options){
   const configPath=join(output,'deployment-bytes.json');await freshJson(configPath,config);
   const workspace=join(output,'programs');await command('python3',[join(ROOT,'programs/custom-policy/stage.py'),'--config',configPath,'--out',workspace,'--circuits',join(releaseDirectory,'circuits')]);
   const deploy=join(workspace,'target/deploy');await mkdir(deploy,{recursive:true});
-  const env={PATH:join(process.env.HOME,'.cargo/bin')+':'+process.env.PATH,CARGO_TARGET_DIR:join(ROOT,'.local/custom-policy-sbf-target')};
-  for(const [name,path]of[['native','native/Cargo.toml'],['auth','auth/programs/cyperlink_auth/Cargo.toml']])await command(tools.sbf,['--manifest-path',join(workspace,path),'--tools-version','v1.57','--arch','v0','--sbf-out-dir',deploy,'--offline','--','--locked'],{env,log:join(output,`build-${name}.log`)});
+  const env={PATH:join(process.env.HOME,'.cargo/bin')+':'+process.env.PATH,CARGO_TARGET_DIR:join(workspace,'target/build-cache')};
+  for(const [name,path]of[['native','native/Cargo.toml'],['auth','auth/programs/cyperlink_auth/Cargo.toml']])await command(tools.sbf,['--manifest-path',join(workspace,path),'--tools-version','v1.57','--arch','v0','--sbf-out-dir',deploy,'--offline','--','--locked'],{cwd:join(workspace,name),env,log:join(output,`build-${name}.log`)});
   await mkdir(join(workspace,'auth/target/idl'),{recursive:true});await mkdir(join(workspace,'auth/target/types'),{recursive:true});
   await command(tools.anchor,['idl','build','-p','cyperlink_auth','-o','target/idl/cyperlink_auth.json','-t','target/types/cyperlink_auth.ts'],{cwd:join(workspace,'auth'),env,log:join(output,'build-idl.log')});
   assert.equal((await readRelease(directory)).release.releaseHashHex,release.releaseHashHex,'Release changed during program build');
