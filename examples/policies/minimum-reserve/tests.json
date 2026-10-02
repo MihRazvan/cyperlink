@@ -1,0 +1,12 @@
+[
+  {"name":"above private reserve", "amount":20, "state":[100,50], "allow":true, "next":[80,50]},
+  {"name":"exact reserve is permitted", "amount":50, "state":[100,50], "allow":true, "next":[50,50]},
+  {"name":"budget accepts but reserve denies", "amount":60, "state":[100,50], "allow":false, "next":[100,50]},
+  {"name":"private reserve changes decision", "amount":60, "state":[100,30], "allow":true, "next":[40,30]},
+  {"name":"native underflow fails closed", "amount":101, "state":[100,50], "allow":false, "next":[100,50]},
+  {"name":"already below reserve", "amount":1, "state":[10,20], "allow":false, "next":[10,20]},
+  {"name":"zero cannot issue a paid effect", "amount":0, "state":[100,50], "allow":false, "next":[100,50]},
+  {"name":"native amount mismatch", "amount":20, "native_amount":21, "state":[100,50], "allow":false, "next":[100,50]},
+  {"name":"unused padding is not hidden state", "amount":20, "state":[100,50,1,0], "allow":false, "next":[100,50,1,0]},
+  {"name":"u64 maximum remains exact", "amount":1, "state":["18446744073709551615","18446744073709551614"], "allow":true, "next":["18446744073709551614","18446744073709551614"]}
+]
