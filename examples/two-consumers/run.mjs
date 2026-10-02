@@ -17,7 +17,7 @@ const execute = promisify(execFile);
 const AUTH = '5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ';
 
 export async function run(options) {
-  local.ensure(['conflict', 'compatible'].includes(options.scenario), 'Choose conflict or compatible');
+  local.ensure(['conflict', 'compatible', 'bootstrap'].includes(options.scenario), 'Choose conflict, compatible or bootstrap');
   const endpoint = local.loopbackEndpoint(options.endpoint ?? 'http://127.0.0.1:8899');
   const preparation = JSON.parse(await readFile(options.preparation, 'utf8'));
   local.ensure(preparation.profile === 'provisioned161' && local.loopbackEndpoint(preparation.rpc) === endpoint,
@@ -27,7 +27,7 @@ export async function run(options) {
     evidence_level: 'real-local-validator-and-two-node-runtime', rpc: endpoint,
     scope: 'synthetic same-mint assets, one quota/MXE, administrator co-signed queries',
     transactions: [], callbacks: [], checks: [], operations: [],
-    observer_disclosures: { initial_allowance: 100, purchase_amounts: options.scenario === 'conflict' ? [60, 60, 60] : [40, 40],
+    observer_disclosures: { initial_allowance: 100, purchase_amounts: options.scenario === 'bootstrap' ? [] : options.scenario === 'conflict' ? [60, 60, 60] : [40, 40],
       note: 'Setup and requested amounts are disclosed to the test observer. Remaining allowance is inferred from committed purchases, not decrypted from MXE state.' },
     limitations: ['No public-network execution or production claim', 'Internal reference consumers, no external integration commitment',
       'CU/fees measure validator transactions; wall-clock callback latency is separate from distributed runtime resource costs, which are not measured'] };
@@ -173,6 +173,30 @@ export async function run(options) {
     await transport.send('initialize-hook-metadata', [new TransactionInstruction({ programId: H, data: Buffer.from([7]), keys: [
       { pubkey: mint, isSigner: false, isWritable: false }, { pubkey: metadata, isSigner: false, isWritable: true },
       { pubkey: payer.publicKey, isSigner: true, isWritable: true }, { pubkey: SystemProgram.programId, isSigner: false, isWritable: false }] })]);
+    if (options.scenario === 'bootstrap') {
+      // Stop before owner loading, operation preparation, query signing or purchase admission.
+      evidence.qualification = 'bootstrap-only-not-purchase';
+      await finalizeEvidence();
+      const manifest = { schema: 1, passed: true, qualification: evidence.qualification,
+        genesisHash: evidence.genesis_hash, endpoint, moduleRoot: resolve(options.moduleRoot),
+        payerKeyfile: resolve(options.payerKeyfile), idl: resolve(options.idl), proofCli: resolve(options.proofCli),
+        preparation: resolve(options.preparation), bootstrapDirectory: directory,
+        assetDirectories: { merchant: resolve(directory, 'asset-a'), license: resolve(directory, 'asset-b') },
+        initialAllowance: 100, observerDisclosures: evidence.observer_disclosures,
+        results: resolve(directory, 'results.json'), idlSha256: evidence.idl_sha256,
+        runtimeMxePublicKeyHex: evidence.runtime_mxe_public_key_hex,
+        loadedPrograms: evidence.loaded_programs.map((item, index) => ({ program: item.program, matched: item.matched,
+          elfSha256: item.elf_sha256, loadedElfSha256: item.loaded_elf_sha256, genesisHash: item.genesis_hash,
+          evidenceFile: resolve(directory, `loaded-program-${index}.json`) })),
+        validatorCostByCategory: evidence.validatorCostByCategory,
+        limitations: [...evidence.limitations, 'Only initial encrypted allowance and native accounts are provisioned; no purchase query or payment has been prepared or submitted.'] };
+      const manifestPath = resolve(directory, 'approvals-bootstrap.json');
+      await local.writeNew(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      evidence.passed = true; await save();
+      console.log(JSON.stringify({ passed: true, qualification: evidence.qualification, bootstrap: manifestPath,
+        results: manifest.results }, null, 2));
+      return evidence;
+    }
     const owners = { a: await local.loadSigner(resolve(directory, 'asset-a/source-owner-signer.json'), web3),
       b: await local.loadSigner(resolve(directory, 'asset-b/source-owner-signer.json'), web3) };
     async function recoverInProcess(op, action, ticket, label, expectedStatus) {
@@ -360,26 +384,29 @@ export async function run(options) {
       evidence.observer_disclosures.inferred_remaining_allowance = 20;
       assert.equal(parseQuota(await quotaBytes()).version, '2');
     }
-    evidence.finalQuota = parseQuota(await quotaBytes());
-    // Include every provisioning/upload receipt in cost accounting, without exposing private files.
-    async function collect(path) {
-      for (const entry of await readdir(path, { withFileTypes: true })) {
-        const full = resolve(path, entry.name);
-        if (entry.isDirectory()) await collect(full);
-        else if (entry.name.endsWith('-landed.json') && !full.startsWith(transactionsDir)) {
-          const receipt = JSON.parse(await readFile(full, 'utf8'));
-          evidence.transactions.push({ ...receipt, category: full.includes('/asset-') ? 'native-provisioning' : 'native-proof-and-permit-provisioning' });
+    async function finalizeEvidence() {
+      evidence.finalQuota = parseQuota(await quotaBytes());
+      // Include every provisioning/upload receipt in cost accounting, without exposing private files.
+      async function collect(path) {
+        for (const entry of await readdir(path, { withFileTypes: true })) {
+          const full = resolve(path, entry.name);
+          if (entry.isDirectory()) await collect(full);
+          else if (entry.name.endsWith('-landed.json') && !full.startsWith(transactionsDir)) {
+            const receipt = JSON.parse(await readFile(full, 'utf8'));
+            evidence.transactions.push({ ...receipt, category: full.includes('/asset-') ? 'native-provisioning' : 'native-proof-and-permit-provisioning' });
+          }
         }
       }
+      await collect(directory);
+      const all = [...evidence.transactions, ...evidence.callbacks.map(item => ({ ...item, category: 'arcium-signed-callback' }))];
+      const unique = [...new Map(all.map(item => [item.signature, item])).values()];
+      evidence.validatorCostByCategory = {};
+      for (const tx of unique) {
+        const group = evidence.validatorCostByCategory[tx.category] ??= { transactions: 0, landedCU: 0, feeLamports: 0 };
+        group.transactions++; group.landedCU += tx.landedCU ?? 0; group.feeLamports += tx.feeLamports ?? tx.transaction?.meta?.fee ?? 0;
+      }
     }
-    await collect(directory);
-    const all = [...evidence.transactions, ...evidence.callbacks.map(item => ({ ...item, category: 'arcium-signed-callback' }))];
-    const unique = [...new Map(all.map(item => [item.signature, item])).values()];
-    evidence.validatorCostByCategory = {};
-    for (const tx of unique) {
-      const group = evidence.validatorCostByCategory[tx.category] ??= { transactions: 0, landedCU: 0, feeLamports: 0 };
-      group.transactions++; group.landedCU += tx.landedCU ?? 0; group.feeLamports += tx.feeLamports ?? tx.transaction?.meta?.fee ?? 0;
-    }
+    await finalizeEvidence();
     evidence.passed = true; await save();
     console.log(JSON.stringify({ passed: true, scenario: options.scenario, finalQuota: evidence.finalQuota,
       observerInferredRemainingAllowance: evidence.observer_disclosures.inferred_remaining_allowance, results: resolve(directory, 'results.json') }, null, 2));
