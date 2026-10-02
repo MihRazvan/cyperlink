@@ -6,3 +6,5 @@ export { initializeHookMetadata, hookMetadataAddress } from './hook-metadata.mjs
 export { validateSyntheticMint } from './mint-profile.mjs';
 export { DurableTransactionSender } from './durable-transaction.mjs';
 export { SignedInstructionSender } from './transaction-sender.mjs';
+export { LocalOperationClient } from './operation-client.mjs';
+export { readOperationPlan, validateOperationPlan, descriptorDigest, queryStateDigest } from './operation-plan.mjs';

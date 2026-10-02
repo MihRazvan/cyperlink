@@ -4,7 +4,20 @@
   "private": true,
   "type": "module",
   "description": "Local-profile operation evidence and recovery SDK",
-  "exports": {".": {"types": "./src/index.d.ts", "import": "./src/index.mjs"}},
-  "engines": {"node": ">=22"},
-  "scripts": {"test": "node --test"}
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs"
+    },
+    "./local": {
+      "types": "./src/local.d.ts",
+      "import": "./src/local.mjs"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
 }

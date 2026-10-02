@@ -10,6 +10,8 @@ export interface BaseOperation {
   templateHex: string;
   /** SHA256 of the authorized encrypted inputs, retained from the request. */
   inputsHashHex: string;
+  /** New local query ABI: signed SHA256(domain || quota[0..96]); historical reader descriptors may omit it. */
+  queryStateHashHex?: string;
 }
 export interface MerchantOperation extends BaseOperation {
   /** Omission retains the original merchant-only API behavior. */
