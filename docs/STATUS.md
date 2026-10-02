@@ -4,7 +4,11 @@ Updated 2026-10-02. CyperLink continues the selected Solana-native product: make
 
 ## Active milestone: SDK lifecycle and restart recovery
 
-Implementation underway; [scope and ordered plan](lifecycle-implementation.md). Review found that delayed queries could select a newer quota/counter than their retained client intent. The new explicit snapshot digest rejects that drift before private computation; host tests pass, live qualification is pending. Durable same-wire submission, reusable preparation/settlement APIs and separate-process recovery tests are being integrated. Historical passing reports below do not qualify these source changes.
+Final qualification underway; [scope and ordered plan](lifecycle-implementation.md). The reusable local SDK now prepares, explicitly signs, submits and observes operations. A private durable journal retains exact signed bytes before broadcast; separate keyless processes reconcile or explicitly retransmit them without replacing signatures, blockhashes or query identities. Query recovery validates the live immutable PreparedAction against the retained native payment and consumer template.
+
+Fresh conflict-v12 passed with rebuilt Auth and ten matching actual loaded ELFs: the new snapshot digest rejected a delayed signed query with error6004 before computation; quota/permit stayed unchanged and Job/claim/computation stayed absent. Eleven recovery processes reconciled five retained tickets, including deliberately lost send responses. A60 paid, B stale803 rejected, fresh B60 denied, and all existing binding/replay/rollback cases passed. This run precedes the final PreparedAction recovery check; v13 compatible and v14 conflict will qualify that client change. Full v12 evidence remains under `.local/demo-sdk-conflict-v12`.
+
+Delivery investigation preserved failed v8/v10/v11 attempts. Agave's rooted-bank lookup resolution could not yet see newly confirmed ALT extensions; simulation succeeded while ingress dropped packets. The sender now waits for finalized table visibility before obtaining a fresh application blockhash and signing. Bounded retransmission still preserves exact bytes. These attempts are diagnostic only; v9 failed during preparation because the upstream generator probed an occupied default RPC port. Their services are stopped. Host client/SDK/example/snapshot tests currently pass77 groups; final archive/export checks are pending.
 
 ## Latest completed continuation: fresh bootstrap
 
