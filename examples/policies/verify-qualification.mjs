@@ -39,7 +39,7 @@ export async function review({resultsPath,instancePaths,output}){
   for(const directory of Object.values(instance.assetDirectories))for(const name of await readdir(directory))if(name.endsWith('-landed.json'))add({...await json(resolve(directory,name)),category:'native-asset-provisioning'});
   try{const evidence=await json(resolve(dirname(instance.results),'supplemental-deployment-receipts.json'));assert.equal(evidence.genesisHash,results.genesisHash);for(const entry of evidence.transactions)add(entry);supplementalEvidence.push(evidence);}catch(error){if(error.code!=='ENOENT')throw error;}
  }
- for(const entry of[...results.transactions,...results.callbacks])add(entry);
+ for(const entry of[...results.transactions,...results.callbacks.map(c=>({...c,category:'arcium-signed-callback'}))])add(entry);
  const report={schema:1,passed:false,classification:'offline-custom-policy-signed-archive-review',genesisHash:results.genesisHash,resultsSha256:digest(raw),counts:{},rejections:[],initializers:[],callbacks:[],paidEffects:[],recoveries:[],circuitArtifacts:[],loadedPrograms:[],limitations:[
   'Offline checks of retained confirmed RPC receipts/account snapshots; no fresh RPC reads or independent historical consensus-state proof.',
   'Ed25519 signed messages are independently verified. BLS authenticity rests on successful matched-program onchain verification; this is not a separate offline BLS verifier.',
@@ -101,10 +101,14 @@ export async function review({resultsPath,instancePaths,output}){
  for(const label of['count-fifth-purchase','private-reserve-compatible-license20']){
   const{op,plan}=opMap.get(label),entry=results.transactions.find(t=>t.label===label+'-atomic-paid-entitlement');assert(entry);const checked=transactions.get(entry.signature).checked,{before,after,effect}=verifyPaidTransition(snap(label+'-payment-before'),snap(label+'-payment-after'),entry,op);
   const expected=expectedOperationInstruction(plan,'commit',web3),ix=checked.instructions.find(i=>i.program===expected.programId.toBase58());assert(ix);assert(ix.data.equals(expected.data));assert.deepEqual(ix.accounts,expected.keys.map(k=>k.pubkey.toBase58()));
-  const template=validateOperation(plan.descriptor).template;for(const address of[template.source,template.destination]){assert.equal(before.get(address).owner,TOKEN);assert.equal(after.get(address).owner,TOKEN);assert(!before.get(address).data.equals(after.get(address).data));}
+  const template=validateOperation(plan.descriptor).template;
+  const otherInstance=instances.find(i=>i.descriptor.quota!==plan.descriptor.quota);assert.deepEqual(before.get(otherInstance.descriptor.quota),after.get(otherInstance.descriptor.quota),'Payment changed another policy instance');
+  for(const address of[template.mint,...plan.binding.proofAddresses,plan.action,plan.descriptor.job])assert.deepEqual(before.get(address),after.get(address),`Payment changed immutable admission evidence ${address}`);
+  for(const address of[template.source,template.destination]){assert.equal(before.get(address).owner,TOKEN);assert.equal(after.get(address).owner,TOKEN);assert(!before.get(address).data.equals(after.get(address).data));}
   assert(effect.subarray(8,40).equals(new web3.PublicKey(plan.descriptor.owner).toBuffer()));assert(effect.subarray(40,effect.length-1).equals(ix.data.subarray(1,op.consumer==='merchant'?9:41)));assert(entry.transaction.meta.logMessages.includes(`Program ${TOKEN} success`));
   report.paidEffects.push({label,signature:entry.signature,consumer:op.consumer,exactAction:true,allFourSuccessorCiphertexts:true});
  }
+ assert.equal(results.finalStates.length,2);for(const instance of instances){const final=results.finalStates.find(s=>s.quota===instance.descriptor.quota);assert(final);const data=Buffer.from(final.dataBase64,'base64');checkState(data,instance.descriptor);assert.equal(data.readBigUInt64LE(0),1n);}
  const tickets=new Map();
  for(const{op,plan}of opMap.values())for(const role of['query','commit']){
   let ticket;try{ticket=await json(resolve(dirname(op.planPath),role+'-ticket.json'));}catch(error){if(error.code==='ENOENT')continue;throw error;}
