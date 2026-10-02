@@ -32,3 +32,15 @@ test('custom adapter rejects incomplete deployments, renamed rules and transplan
       const f=fixture();mutate(f);assert.throws(()=>policyBootstrap(f.instance,f.results,f.release));
   }
 });
+
+test('deployment archives retain private-file checks with a separate bounded capacity for circuit upload receipts', async t => {
+  const {mkdtemp,chmod,writeFile,rm,truncate,symlink}=await import('node:fs/promises');
+  const {resolve}=await import('node:path');const {REPO}=await import('../../packages/local-client/src/runtime.mjs');
+  const {readDeploymentResults}=await import('./policy-adapter.mjs');
+  const directory=await mkdtemp(resolve(REPO,'.local/policy-archive-host-test-'));await chmod(directory,0o700);t.after(()=>rm(directory,{recursive:true,force:true}));
+  const file=resolve(directory,'results.json');await writeFile(file,JSON.stringify({receiptPadding:'x'.repeat(9*1024*1024),passed:true}),{mode:0o600});
+  assert.equal((await readDeploymentResults(file)).passed,true);
+  await chmod(file,0o644);await assert.rejects(readDeploymentResults(file),/private bounded/);await chmod(file,0o600);
+  await symlink(file,resolve(directory,'alias.json'));await assert.rejects(readDeploymentResults(resolve(directory,'alias.json')),/nonsymlink/);
+  await truncate(file,64*1024*1024);await assert.rejects(readDeploymentResults(file),/private bounded/);
+});

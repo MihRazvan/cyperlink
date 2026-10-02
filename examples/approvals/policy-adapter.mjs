@@ -1,5 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, open, realpath } from 'node:fs/promises';
+import { constants } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -11,6 +12,19 @@ import { privateJson, sessionDirectory } from './store.mjs';
 
 const execute = promisify(execFile), hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const runtimePrograms = ['Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ', 'ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq', 'L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95'];
+
+/** Circuit upload receipts make deployment archives larger than operation/session files. */
+export async function readDeploymentResults(filename) {
+  const path = resolve(filename);
+  ensure(path.startsWith(resolve(REPO, '.local') + '/') && await realpath(path) === path, 'Expected nonsymlink local deployment archive');
+  const file = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const stat = await file.stat();
+    ensure(stat.isFile() && stat.uid === process.getuid() && !(stat.mode & 0o077) && stat.size > 0 && stat.size < 64 * 1024 * 1024,
+      'Expected private bounded deployment archive');
+    return JSON.parse(await file.readFile('utf8'));
+  } finally { await file.close(); }
+}
 
 /** Public, allowlisted metadata only. No initializer values become observer disclosures. */
 export function policyBootstrap(instance, results, release) {
@@ -41,7 +55,7 @@ export function policyBootstrap(instance, results, release) {
 /** Real custom SDK adapter. The legacy adapter continues handling historical v0 sessions. */
 export class PolicyApprovalsAdapter extends RealApprovalsAdapter {
   static async connect(instance, directory) {
-    const results = await privateJson(instance.results), release = JSON.parse(await readFile(resolve(instance.releaseDirectory, 'release.json')));
+    const results = await readDeploymentResults(instance.results), release = JSON.parse(await readFile(resolve(instance.releaseDirectory, 'release.json')));
     const bootstrap = policyBootstrap(instance, results, release);
     directory = await sessionDirectory(directory);
     // Recheck retained circuit files against the authenticated release before opening a signing client.
