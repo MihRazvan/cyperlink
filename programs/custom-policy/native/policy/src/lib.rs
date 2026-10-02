@@ -1,6 +1,4 @@
-use cyperlink_hook_routing::{
-    canonical_metadata, validate_metadata, ACTIVE_PERMIT_OFFSET,
-};
+use cyperlink_hook_routing::{canonical_metadata, validate_metadata, ACTIVE_PERMIT_OFFSET};
 use solana_account_info::AccountInfo;
 use solana_address::Address;
 use solana_clock::Clock;
@@ -18,10 +16,16 @@ use spl_token_2022_interface::{
 };
 
 entrypoint!(process);
-mod deployment { include!("../../deployment.rs"); }
+mod deployment {
+    include!("../../deployment.rs");
+}
+use cyperlink_custom_policy_layout::{
+    state_hash, valid_permit, valid_state, PERMIT_LEN, STATE_IDENTITY, STATE_LEN as QUOTA_LEN,
+};
 use deployment::*;
-use cyperlink_custom_policy_layout::{STATE_LEN as QUOTA_LEN, PERMIT_LEN, STATE_IDENTITY, state_hash, valid_state, valid_permit};
-fn identity() -> [u8;96] { cyperlink_custom_policy_layout::identity(&RELEASE_ID,&SCHEMA_ID,&DOMAIN_ID) }
+fn identity() -> [u8; 96] {
+    cyperlink_custom_policy_layout::identity(&RELEASE_ID, &SCHEMA_ID, &DOMAIN_ID)
+}
 const G: Address = Address::new_from_array(GUARD_ID);
 const Q: Address = Address::new_from_array(QUOTA_ID);
 fn e(n: u32) -> ProgramError {
@@ -34,7 +38,9 @@ fn authorized(a: &AccountInfo) -> bool {
     a.key == &p && a.is_signer
 }
 fn live(p: &[u8]) -> ProgramResult {
-    if !valid_permit(&p, &identity()) || u64::from_le_bytes(p[512..520].try_into().unwrap()) < Clock::get()?.slot {
+    if !valid_permit(&p, &identity())
+        || u64::from_le_bytes(p[512..520].try_into().unwrap()) < Clock::get()?.slot
+    {
         return Err(e(830));
     }
     Ok(())
@@ -315,19 +321,19 @@ mod provisioning_tests {
             changed[i] ^= 1;
             assert_eq!(live(&changed), Err(e(830)), "identity byte {i}");
         }
-        assert_eq!(live(&[0;520]),Err(e(830)));
+        assert_eq!(live(&[0; 520]), Err(e(830)));
     }
     #[test]
     fn extra_ciphertexts_do_not_shift_native_hook_pointer() {
-        let mut quota=[0;QUOTA_LEN];
+        let mut quota = [0; QUOTA_LEN];
         quota[STATE_IDENTITY..].copy_from_slice(&identity());
         quota[161..257].fill(99);
         idle(&quota).unwrap();
-        quota[129]=1;
-        assert_eq!(idle(&quota),Err(e(831)));
-        quota[129]=0;
-        quota[321]^=1;
-        assert_eq!(idle(&quota),Err(e(831)));
+        quota[129] = 1;
+        assert_eq!(idle(&quota), Err(e(831)));
+        quota[129] = 0;
+        quota[321] ^= 1;
+        assert_eq!(idle(&quota), Err(e(831)));
     }
     #[test]
     fn configured_quota_is_the_canonical_policy_pda() {
