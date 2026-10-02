@@ -4,3 +4,5 @@ export { prepareNativeTransfer } from './prepare-transfer.mjs';
 export { verifyPreparedProof, verifyTransferProofs } from './proofs.mjs';
 export { initializeHookMetadata, hookMetadataAddress } from './hook-metadata.mjs';
 export { validateSyntheticMint } from './mint-profile.mjs';
+export { DurableTransactionSender } from './durable-transaction.mjs';
+export { SignedInstructionSender } from './transaction-sender.mjs';
