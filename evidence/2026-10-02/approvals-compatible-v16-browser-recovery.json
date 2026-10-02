@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "scope": "operator observed real browser actions; not an independent chain verifier",
+  "time": "2026-10-02T12:07:30.270880+00:00",
+  "genesis": "9g7wsrHXtEY11RHqWJbEUsNqke3RemNm7aSrKgAeD77P",
+  "firstServerPid": 59274,
+  "restartedServerPid": 66094,
+  "merchantOperation": "32247444-78e4-4afc-8dce-633d29e33f6c",
+  "retainedCommitSignature": "2gvVGbuUPnDAnuiX2H7x4KxAqGxYoCm761mKqQ5nuWhEcbtMnTyDjG1tUnujYdMAfaQJpTLq3JCfxG5hk5NL5MN5",
+  "recovery": {
+    "processId": 66500,
+    "createsNewSignedTransaction": false
+  },
+  "observedStatus": "committed",
+  "fault": "sent real bytes, dropped RPC acknowledgement",
+  "tool": "cached @playwright/cli 0.1.19 / playwright 1.63.0-alpha-2026-08-31",
+  "screenshots": [
+    {
+      "path": "approvals-response-lost.png",
+      "sha256": "026c15809d4d48e89ae0fddb33896125e0d9e000887f222980b843beb020cb44"
+    },
+    {
+      "path": "approvals-preparing.png",
+      "sha256": "3b7a96b5fc439310523e63c664e25edb0be33f05d095f856c8832b762310bbc1"
+    },
+    {
+      "path": "approvals-exact-approval.png",
+      "sha256": "66898dafa10247d1c85150fbc7dbdea73797a3dcfdf2dd73b1ec1f1a43554fe6"
+    }
+  ]
+}

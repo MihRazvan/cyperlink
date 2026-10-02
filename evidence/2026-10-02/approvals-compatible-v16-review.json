@@ -1,0 +1,260 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "keyless-read-only-local-validator-session-review",
+  "genesisHash": "9g7wsrHXtEY11RHqWJbEUsNqke3RemNm7aSrKgAeD77P",
+  "sessionId": "e1efb46e-cc12-4094-b4d2-17b01ccf68e8",
+  "privateStateSha256": "88530a43393361109ad366a6e520605a19189fcb09f492f1687e2dc290edb57b",
+  "retainedIntentSha256": "238026c04108a2791461346d165460950dae1d5ceae9363f544e30352dae2452",
+  "loadedPrograms": [
+    {
+      "program": "5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ",
+      "elfSha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "loadedElfSha256": "b4a5a238670e62fed01bb04fc6042732533870aeb1c556a85b425f185c91aba6",
+      "slot": 855
+    },
+    {
+      "program": "6URwbPipuA4MJLG7LCRRZuWnms3JZ9cRG3z9indXWz8G",
+      "elfSha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "loadedElfSha256": "6a1ad96671fd90dfb0c81ae153f39fdba048e6416a984aad8feeade82cbda784",
+      "slot": 855
+    },
+    {
+      "program": "6YMEjhBqVTMaSRWcmVkLrnHZ22FWEDJEpTeonAg8GKSy",
+      "elfSha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "loadedElfSha256": "75728f54fa64523733a870cd3632d588f7f2ab91c2c3245710016e2285662aa8",
+      "slot": 855
+    },
+    {
+      "program": "6cGXszer5keoaWm8Co5G9f4KGBThuGz4NsKTqYij1emg",
+      "elfSha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "loadedElfSha256": "8ed525bc30ad48bddd0a1f957fb6b09bb7470987d42476c2284d839a12103f78",
+      "slot": 855
+    },
+    {
+      "program": "6gBq2J7rg3x2ic1de6QBSXq5WLfuaLfswGz7tvmKkz6P",
+      "elfSha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "loadedElfSha256": "3f8b14b98faf171abb0e4d3708283bba051b83abd3ca7f04df091d1129b65327",
+      "slot": 855
+    },
+    {
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "elfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loadedElfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "slot": 856
+    },
+    {
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "elfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loadedElfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "slot": 856
+    },
+    {
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "elfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loadedElfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "slot": 856
+    },
+    {
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "elfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loadedElfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "slot": 856
+    },
+    {
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "elfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loadedElfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "slot": 856
+    }
+  ],
+  "operations": [
+    {
+      "id": "32247444-78e4-4afc-8dce-633d29e33f6c",
+      "consumer": "merchant",
+      "planSha256": "ac0742253fa56da49a7838a7464f0056138f1f844c5bdb505e775c5b4c6d306c",
+      "descriptorSha256": "ee19570eec35ce1433d6ce3d17c0749a86dd9a080d163f0904c2f5b1d7e50f4b",
+      "owner": "A1oUqrE1PPYaRpskRqp5CmLqaBxS8vUgzaxvAnKUrCEU",
+      "job": "HFvN9N4QsvAYRQWKTop6GEjfWsz3p1esFRBPE5PE94tx",
+      "permit": "8Ka7BW6NgBPX4hUBvfS8Vs6f7XdkDJ6Sc4r4CbmocNuw",
+      "effect": "C6Uyy54h5jJzXLaC1hunbx8UqLZVjZDVTV3EZYACYF24",
+      "observation": {
+        "status": "committed",
+        "slot": 856,
+        "commitment": "confirmed",
+        "quotaVersion": "2"
+      },
+      "tickets": [
+        {
+          "role": "query",
+          "signature": "5f31XyYQ4yRhAM24TXAAao6dwvzzj7tyagmTXx9G2bhaBYyitRpC5Zv6uSA9fpqiaTS86f2YUfsV2E7hchMfSUzA",
+          "wireSha256": "e47ed560dd88425d436c19e0ad2eb291960ba06ca677d9a0225edf5e93874779",
+          "verifiedRequiredSigners": [
+            "ABvSZSHbZeQSurSwCdq7ZUYqHBmEjBew1JMgRu1rhBQ2",
+            "A1oUqrE1PPYaRpskRqp5CmLqaBxS8vUgzaxvAnKUrCEU"
+          ],
+          "broadcasts": 1,
+          "receipt": {
+            "slot": 301,
+            "succeeded": true,
+            "feeLamports": 10000,
+            "landedCU": 178379
+          },
+          "preparedAction": {
+            "address": "94NJMZ2Pfb529RWNyh3VZ7UjNSxyo9nXVGtwhtAhDbMQ",
+            "slot": 856,
+            "sha256": "dee18559f64fe00b9efc3c302e8ddd71384b6daaf561318d60942e9a4e0062e6"
+          }
+        },
+        {
+          "role": "commit",
+          "signature": "2gvVGbuUPnDAnuiX2H7x4KxAqGxYoCm761mKqQ5nuWhEcbtMnTyDjG1tUnujYdMAfaQJpTLq3JCfxG5hk5NL5MN5",
+          "wireSha256": "5814ce1512359e8decf70de8c84e6f84f5704920e871c3af72cacc4fabf2f822",
+          "verifiedRequiredSigners": [
+            "ABvSZSHbZeQSurSwCdq7ZUYqHBmEjBew1JMgRu1rhBQ2",
+            "A1oUqrE1PPYaRpskRqp5CmLqaBxS8vUgzaxvAnKUrCEU"
+          ],
+          "broadcasts": 1,
+          "receipt": {
+            "slot": 433,
+            "succeeded": true,
+            "feeLamports": 10000,
+            "landedCU": 103057
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2417411-d854-42b0-bb3d-36da8853b969",
+      "consumer": "license",
+      "planSha256": "e50308d992956684e00533f51c2f04a683dc5205b6289783842785e300d3b352",
+      "descriptorSha256": "1c3bee95fcfb38e325a3b608eda385f163b2184a26d65c93695cf0eea98485bf",
+      "owner": "8qfGi4kZDaDMxvpiqqwAfZUEPo4BTJZCLNushkPEkByC",
+      "job": "F1RoVR7rQLHd6YRLZuatitZXLqFfMcitdmvJRuUWnDsn",
+      "permit": "6gnQSAgHGLtYAaMUgF6aQvsEnR94D9nuK8dFLi47i5P",
+      "effect": "6jvhPBj1ujjfXqAULztyuqe1wLi4qqnLcCcW96y29w24",
+      "observation": {
+        "status": "committed",
+        "slot": 856,
+        "commitment": "confirmed",
+        "quotaVersion": "2",
+        "licenseActive": true,
+        "licenseExpirySlot": "1541"
+      },
+      "tickets": [
+        {
+          "role": "query",
+          "signature": "KL1zd3pKhyvpmcvvjCBfyLjQfrZZs6BQ3f9FTqhzppTuBYhmYXkbHk9GRXH1hgFjCgyiWVERyxnC27v4wXzQCW4",
+          "wireSha256": "ce5f7266869978421d84bbb182a968af890e51cd3d1788b8c6d9e35e221b726d",
+          "verifiedRequiredSigners": [
+            "ABvSZSHbZeQSurSwCdq7ZUYqHBmEjBew1JMgRu1rhBQ2",
+            "8qfGi4kZDaDMxvpiqqwAfZUEPo4BTJZCLNushkPEkByC"
+          ],
+          "broadcasts": 1,
+          "receipt": {
+            "slot": 642,
+            "succeeded": true,
+            "feeLamports": 10000,
+            "landedCU": 171107
+          },
+          "preparedAction": {
+            "address": "BApy3J9Yj2NdfX7PduDeiFyhCnx1zWxbfWLha7qc9Vvf",
+            "slot": 856,
+            "sha256": "9c72c7a6e792a7076f0f021432d896efea456415244632bae134d24a8d0ef90c"
+          }
+        },
+        {
+          "role": "commit",
+          "signature": "31ogfQDE1RrP7iJwt6JMp1t2HirwH8mNigkrbmovDJr4fm1Tsy8GQjxfon5nK1gkd89eYVPgHy4HLy1SY8DEeex8",
+          "wireSha256": "f73166f55f4dcfe4928b531b522fc643f726f66ec4e5f67aa68658a9ab1b4ef9",
+          "verifiedRequiredSigners": [
+            "ABvSZSHbZeQSurSwCdq7ZUYqHBmEjBew1JMgRu1rhBQ2",
+            "8qfGi4kZDaDMxvpiqqwAfZUEPo4BTJZCLNushkPEkByC"
+          ],
+          "broadcasts": 1,
+          "receipt": {
+            "slot": 650,
+            "succeeded": true,
+            "feeLamports": 10000,
+            "landedCU": 94275
+          }
+        }
+      ]
+    }
+  ],
+  "recoveryWorkers": [
+    {
+      "artifactSha256": "7eae8800f6fffb13b6dbcdd9c999b6ed7e62cf6fe35d98685bf43fbf94e94010",
+      "processId": 66500,
+      "action": "recover-ticket",
+      "signature": "2gvVGbuUPnDAnuiX2H7x4KxAqGxYoCm761mKqQ5nuWhEcbtMnTyDjG1tUnujYdMAfaQJpTLq3JCfxG5hk5NL5MN5",
+      "wireSha256": "5814ce1512359e8decf70de8c84e6f84f5704920e871c3af72cacc4fabf2f822",
+      "deliveryStatus": "landed",
+      "observation": {
+        "status": "committed",
+        "slot": 528,
+        "commitment": "confirmed",
+        "quotaVersion": "1"
+      }
+    }
+  ],
+  "counts": {
+    "operations": 2,
+    "committed": 2,
+    "signedTickets": 4,
+    "recoveryWorkers": 1
+  },
+  "validatorCosts": {
+    "verifiedOperationReceipts": {
+      "query": {
+        "transactions": 2,
+        "landedCU": 349486,
+        "feeLamports": 20000
+      },
+      "commit": {
+        "transactions": 2,
+        "landedCU": 197332,
+        "feeLamports": 20000
+      }
+    },
+    "archivedBootstrapReported": {
+      "application": {
+        "transactions": 2,
+        "landedCU": 44002,
+        "feeLamports": 10000
+      },
+      "arcium-definition": {
+        "transactions": 2,
+        "landedCU": 82142,
+        "feeLamports": 10000
+      },
+      "arcium-circuit-upload": {
+        "transactions": 1178,
+        "landedCU": 10619294,
+        "feeLamports": 5890000
+      },
+      "arcium-queue": {
+        "transactions": 1,
+        "landedCU": 134650,
+        "feeLamports": 5000
+      },
+      "native-provisioning": {
+        "transactions": 19,
+        "landedCU": 76962,
+        "feeLamports": 170000
+      },
+      "arcium-signed-callback": {
+        "transactions": 1,
+        "landedCU": 145395,
+        "feeLamports": 5000
+      }
+    }
+  },
+  "limitations": [
+    "passed means these checks passed; paid effects are only operations observed committed. Cached UI observations may refresh during review; retained intent/tickets must remain unchanged.",
+    "No keys, witnesses, amounts, private session events or signed wires are exported; local operation state is read for retained intent.",
+    "Operation signatures/messages, current immutable action, loaded ELF and SDK effect observations are checked; upstream native proofs and runtime BLS are not independently re-executed.",
+    "Bootstrap cost totals are retained reports. Preparation and callback costs after bootstrap are excluded from operation receipt totals; distributed worker resource costs are unmeasured.",
+    "Worker process IDs and deliberate response-loss classifications are retained test evidence, not operating-system attestations. Confirmed RPC responses are not historical state proofs."
+  ]
+}
