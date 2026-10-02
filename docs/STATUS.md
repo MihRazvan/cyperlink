@@ -8,8 +8,9 @@ The new [implementation plan](custom-policy-implementation.md) supersedes the
 previous next-work ordering. Work is underway on a separate versioned custom-policy
 profile, authored Rust expressions compiled to MPC, generated deployment identities
 and manifest-aware client tooling. The cipher-domain integration gate is being
-checked before committing to the compiler path. No custom-policy end-to-end result
-is claimed yet. Completed Approvals/Permissions results below remain intact.
+checked before committing to the compiler path. Typed authoring, circuit compilation, the new fixed-state onchain ABI and custom
+SDK host checks now pass; local deployment integration is underway. No custom-policy
+end-to-end result is claimed yet. Completed Approvals/Permissions results below remain intact.
 
 ## Latest continuation: interactive Approvals and isolated Permissions
 
@@ -44,8 +45,8 @@ signed adversarial failures, revocation and honest refund. Offline review checke
 policy, priced entitlement, wallet-key sharing or malicious-cache recovery claim
 is made. The original Approvals profile is preserved.
 
-Current inspection: `http://127.0.0.1:4317` remains running on v18; RPC8971 and its
-named two-node compose project are active. Exact paths/PIDs/stop guidance are in
+The identified v18 HTTP/RPC/two-node services were stopped for the new custom-policy
+qualification; its ledger and reports are preserved. Exact paths/PIDs/stop guidance are in
 [qualification](approvals-qualification.md). v16 and Permissions services stopped.
 Original evidence and user-owned `00-START-HERE` remain untouched. Small slices
 are committed and pushed to `origin/main`.

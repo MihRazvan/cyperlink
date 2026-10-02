@@ -1,0 +1,68 @@
+[
+  {
+    "name": "fifth-purchase",
+    "amount": 40,
+    "state": [
+      100,
+      4
+    ],
+    "allow": true,
+    "next": [
+      60,
+      5
+    ]
+  },
+  {
+    "name": "count-exhausted-with-budget",
+    "amount": 1,
+    "state": [
+      60,
+      5
+    ],
+    "allow": false,
+    "next": [
+      60,
+      5
+    ]
+  },
+  {
+    "name": "overspend",
+    "amount": 101,
+    "state": [
+      100,
+      0
+    ],
+    "allow": false,
+    "next": [
+      100,
+      0
+    ]
+  },
+  {
+    "name": "zero",
+    "amount": 0,
+    "state": [
+      100,
+      4
+    ],
+    "allow": false,
+    "next": [
+      100,
+      4
+    ]
+  },
+  {
+    "name": "native-mismatch",
+    "amount": 39,
+    "native_amount": 40,
+    "state": [
+      100,
+      4
+    ],
+    "allow": false,
+    "next": [
+      100,
+      4
+    ]
+  }
+]

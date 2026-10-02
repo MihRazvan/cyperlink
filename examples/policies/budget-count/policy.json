@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "name": "budget-count",
+  "entrypoint": "policy.rs",
+  "profile": "local-custom-policy-v1",
+  "stateFields": [
+    {
+      "name": "remaining",
+      "type": "u64"
+    },
+    {
+      "name": "purchases",
+      "type": "u64"
+    }
+  ],
+  "inputs": {
+    "nativePayment": "token-2022-no-fee-owner-v1",
+    "additional": []
+  },
+  "effects": [
+    "merchant",
+    "license"
+  ],
+  "disclosure": [
+    "nativeAmountCommitment",
+    "allowed",
+    "encryptedSuccessor"
+  ],
+  "initialization": {
+    "authority": "deployment-administrator",
+    "mode": "initialize-once"
+  },
+  "queryAuthorization": "explicit-owner-and-administrator",
+  "compiler": {
+    "arcis": "0.15.0",
+    "nativeProofSdk": "7.0.1",
+    "cipher": "cspl-rescue-scalar253-v1",
+    "authoringApi": "0.1.0"
+  }
+}
