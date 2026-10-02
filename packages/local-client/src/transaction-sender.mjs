@@ -4,6 +4,28 @@ import { ensure } from './runtime.mjs';
 import { DurableTransactionSender } from './durable-transaction.mjs';
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+/** Agave 4.3 ingress resolves ALTs against the root bank, unlike confirmed RPC simulation. */
+export async function waitForFinalizedLookupTable(connection, key, expectedAddresses, {
+  attempts = 240, intervalMs = 250, wait = sleep,
+} = {}) {
+  ensure(Number.isSafeInteger(attempts) && attempts > 0 && attempts <= 240
+    && Number.isSafeInteger(intervalMs) && intervalMs >= 0 && intervalMs <= 1000, 'Invalid bounded ALT activation wait');
+  const expected = new Set(expectedAddresses.map(address => address.toBase58()));
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const response = await connection.getAddressLookupTable(key, { commitment: 'finalized' });
+    const table = response.value;
+    ensure(Number.isSafeInteger(response.context?.slot) && response.context.slot >= 0, 'Invalid finalized ALT context');
+    if (table) {
+      ensure(table.key.equals(key), 'Finalized ALT key differs from requested table');
+      const actual = new Set(table.state.addresses.map(address => address.toBase58()));
+      // A newly appended entry is usable only in a bank strictly after its extension slot.
+      if (response.context.slot > table.state.lastExtendedSlot && [...expected].every(address => actual.has(address))) return table;
+    }
+    if (attempt + 1 < attempts) await wait(intervalMs);
+  }
+  throw Error('Finalized ALT activation timeout; no application transaction was staged');
+}
+
 /** Explicit signing + simulation; submissions and recovery retain exactly the staged wire. */
 export class SignedInstructionSender {
   constructor(session, record = async () => {}) { this.session = session; this.record = record; this.lookup = null; this.journal = null; }
@@ -34,11 +56,7 @@ export class SignedInstructionSender {
       await this.send('extend-demo-alt', [web3.AddressLookupTableProgram.extendLookupTable({ lookupTable: this.lookup,
         authority: payer.publicKey, payer: payer.publicKey, addresses: wanted.slice(start, start + 20) })], [], { alt: false, category: 'lookup-table' });
     }
-    table = (await connection.getAddressLookupTable(this.lookup)).value;
-    for (let attempt = 0; await connection.getSlot('confirmed') <= table.state.lastExtendedSlot; attempt++) {
-      ensure(attempt < 100, 'ALT activation timeout'); await sleep(100);
-    }
-    return table;
+    return waitForFinalizedLookupTable(connection, this.lookup, [...table.state.addresses, ...wanted]);
   }
   async stage(label, ixs, additionalSigners = [], { expectedError, alt = true, category = 'application', descriptorSha256, role = label, minContextSlot = 0 } = {}) {
     const { web3, connection, payer } = this.session;
