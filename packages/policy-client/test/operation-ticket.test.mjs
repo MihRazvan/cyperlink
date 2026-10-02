@@ -17,6 +17,7 @@ const key = byte => new web3.PublicKey(Buffer.alloc(32, byte));
 import {canonicalHash,policyDomainHash} from '../src/deployment.mjs';
 import {stateHash,decodeQuota} from '../src/codec.mjs';
 const deployment={schema:1,profile:'local-custom-policy-v1',cipher:'cspl-rescue-scalar253-v1',releaseHashHex:'aa'.repeat(32),schemaHashHex:'00'.repeat(32),domainHashHex:'cc'.repeat(32),mxePublicKeyHex:'01'.repeat(32),genesisHash:key(30).toBase58(),quota:key(71).toBase58(),stateFields:[{name:'remaining',type:'u64'}],programs:Object.fromEntries(['auth','policy','guard','kernel','merchant','license','proofBuffer'].map((name,i)=>[name,key(80+i).toBase58()]))};
+deployment.programs.kernel=deployment.programs.guard;
 deployment.schemaHashHex=canonicalHash({profile:deployment.profile,cipher:deployment.cipher,stateFields:deployment.stateFields,slots:4});
 deployment.domainHashHex=policyDomainHash(deployment);
 const P={...deployment.programs,name:deployment.profile,quota:deployment.quota};

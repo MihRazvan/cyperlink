@@ -10,7 +10,7 @@ export function validateDeployment(d) {
   requireEvidence(d?.schema === 1 && d.profile === 'local-custom-policy-v1', 'Unsupported custom policy deployment');
   for (const key of ['releaseHashHex', 'schemaHashHex', 'domainHashHex', 'mxePublicKeyHex']) requireEvidence(hex32(d[key]), `Invalid deployment ${key}`);
   for (const key of ['auth', 'policy', 'guard', 'kernel', 'merchant', 'license', 'proofBuffer']) publicKeyBytes(d.programs?.[key]);
-  requireEvidence(new Set(Object.values(d.programs)).size === 7, 'Deployment program aliases');
+  requireEvidence(d.programs.kernel === d.programs.guard && new Set(['auth', 'policy', 'guard', 'merchant', 'license', 'proofBuffer'].map(key => d.programs[key])).size === 6, 'Unsupported deployment kernel/guard identity or program aliases');
   publicKeyBytes(d.quota); publicKeyBytes(d.genesisHash);
   requireEvidence(d.cipher === 'cspl-rescue-scalar253-v1', 'Unsupported policy cipher domain');
   requireEvidence(Array.isArray(d.stateFields) && d.stateFields.length >= 1 && d.stateFields.length <= 4, 'Require one to four private state fields');
