@@ -18,6 +18,14 @@ fn policy<'a>(data:Vec<u8>,quota:AccountInfo<'a>,permit:Option<AccountInfo<'a>>,
  invoke_signed(&Instruction{program_id:H,accounts:metas,data},&infos,&[&[b"admission",&[bump]]])?;Ok(())
 }
 fn next_nonce(q:&[u8])->Result<u128>{require!(q.len()==161,JoinError::Context);Ok(u64::from_le_bytes(q[88..96].try_into().unwrap()).checked_add(1).ok_or(JoinError::Context)? as u128)}
+/// Bind the owner's signed query to one exact shared-state snapshot and nonce counter.
+/// Authority and idle-router checks remain separate: this digest covers bytes 0..96.
+fn require_query_snapshot(quota: &[u8], expected: &[u8; 32]) -> Result<()> {
+ require!(quota.len() == 161, JoinError::Context);
+ let actual = hashv(&[b"cyperlink-query-state-v1", &quota[..96]]).to_bytes();
+ require!(&actual == expected, JoinError::QueryStateChanged);
+ Ok(())
+}
 fn extra(key:Pubkey,w:bool)->arcium_client::idl::arcium::types::CallbackAccount{arcium_client::idl::arcium::types::CallbackAccount{pubkey:key,is_writable:w}}
 
 #[arcium_program]
@@ -63,7 +71,7 @@ pub mod cyperlink_auth {
   policy(data,ctx.accounts.quota.to_account_info(),None,ctx.accounts.admission.to_account_info(),ctx.accounts.policy_program.to_account_info())?;
   job.status=1;emit!(Admitted{job:job.key(),status:job.status});Ok(())
  }
- pub fn runtime_budget_bound(ctx:Context<RuntimeBudgetBound>,computation_offset:u64,pubkey:[u8;32],client_nonce:u128,amount_ct:[u8;32],opening_ct:[u8;32],expiry:u64)->Result<()> {
+ pub fn runtime_budget_bound(ctx:Context<RuntimeBudgetBound>,computation_offset:u64,pubkey:[u8;32],client_nonce:u128,amount_ct:[u8;32],opening_ct:[u8;32],expiry:u64,expected_query_state:[u8;32])->Result<()> {
   require!(ctx.remaining_accounts.len()==8 && ctx.accounts.action.owner==ctx.accounts.source_owner.key(),JoinError::Authority);
   let now=Clock::get()?.slot;require!(expiry>now && expiry<=now+2000,JoinError::State);
   require!(ctx.remaining_accounts[0].owner==&"TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb".parse::<Pubkey>().unwrap(),JoinError::Context);
@@ -110,6 +118,9 @@ pub mod cyperlink_auth {
   let q=ctx.accounts.quota.try_borrow_data()?;require!(q.len()==161 && q[128]==1,JoinError::State);
   require!(&q[96..128]==ctx.accounts.payer.key().as_ref(),JoinError::Authority);
   require!(q[129..161].iter().all(|byte| *byte == 0), JoinError::State);
+  // A competing query consumes a nonce even when it does not advance quota state.
+  // Reject either kind of drift before any MPC query or durable allocation survives.
+  require_query_snapshot(&q, &expected_query_state)?;
   let nonce=next_nonce(&q)?;let old_nonce=u128::from_le_bytes(q[40..56].try_into().unwrap());let old_ct:[u8;32]=q[56..88].try_into().unwrap();
   template[0]=0;template[1]=0;template[8..16].copy_from_slice(&q[..8]);template[16..48].copy_from_slice(&q[8..40]);template[48..80].fill(0);template[368..400].copy_from_slice(Q.as_ref());template[464..480].copy_from_slice(&nonce.to_le_bytes());template[480..512].fill(0);template[512..520].copy_from_slice(&expiry.to_le_bytes());drop(q);
   ctx.accounts.permit_claim.job=ctx.accounts.job.key();ctx.accounts.permit_claim.owner=owner;
@@ -190,7 +201,7 @@ pub struct Cancel<'info> {
  pub admission:UncheckedAccount<'info>,
 }
 #[event] pub struct Admitted {pub job:Pubkey,pub status:u8}
-#[error_code] pub enum JoinError {Context,Authority,State,Denied}
+#[error_code] pub enum JoinError {Context,Authority,State,Denied,QueryStateChanged}
 
 #[queue_computation_accounts("runtime_budget_init", payer)]
 #[derive(Accounts)]
@@ -476,3 +487,58 @@ pub struct InitRuntimeBudgetBoundCompDef<'info> {
 
 #[account]
 pub struct PermitClaim {pub job:Pubkey,pub owner:Pubkey}
+
+#[cfg(test)]
+mod query_snapshot_tests {
+ use super::*;
+
+ fn snapshot() -> ([u8; 161], [u8; 32]) {
+  let mut quota = [0u8; 161];
+  quota[..8].copy_from_slice(&7u64.to_le_bytes());
+  quota[40..56].copy_from_slice(&11u128.to_le_bytes());
+  quota[56..88].fill(53);
+  let state_hash = hashv(&[&quota[40..88]]);
+  quota[8..40].copy_from_slice(state_hash.as_ref());
+  quota[88..96].copy_from_slice(&13u64.to_le_bytes());
+  quota[96..128].fill(42);
+  quota[128] = 1;
+  let digest = hashv(&[b"cyperlink-query-state-v1", &quota[..96]]).to_bytes();
+  (quota, digest)
+ }
+
+ #[test]
+ fn exact_signed_snapshot_is_accepted_without_mutation() {
+  let (quota, digest) = snapshot();
+  let before = quota;
+  require_query_snapshot(&quota, &digest).unwrap();
+  assert_eq!(quota, before);
+  assert_eq!(next_nonce(&quota).unwrap(), 14);
+ }
+
+ #[test]
+ fn competing_query_counter_change_is_rejected_even_if_quota_version_is_unchanged() {
+  let (mut quota, digest) = snapshot();
+  quota[88..96].copy_from_slice(&14u64.to_le_bytes());
+  assert!(require_query_snapshot(&quota, &digest).is_err());
+ }
+
+ #[test]
+ fn settlement_version_and_each_encrypted_state_field_are_bound() {
+  let (quota, digest) = snapshot();
+  for offset in [0, 8, 40, 56] {
+   let mut changed = quota;
+   changed[offset] ^= 1;
+   assert!(require_query_snapshot(&changed, &digest).is_err(), "offset {}", offset);
+  }
+ }
+
+ #[test]
+ fn digest_is_domain_separated_and_layout_checked() {
+  let (quota, _) = snapshot();
+  let unscoped = hashv(&[&quota[..96]]).to_bytes();
+  assert!(require_query_snapshot(&quota, &unscoped).is_err());
+  for size in [0, 95, 96, 129, 160] {
+   assert!(require_query_snapshot(&quota[..size], &[0; 32]).is_err());
+  }
+ }
+}
