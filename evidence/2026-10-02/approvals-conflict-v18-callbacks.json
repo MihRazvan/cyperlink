@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "read-only-live-local-runtime-callback-receipts",
+  "genesisHash": "58EeUuFfAX3C7H688McxTqSkeXGEcmxTbSpMqbLE5uU4",
+  "callbacks": [
+    {
+      "signature": "4f9zXyU1RLWvqY7xBkr44JEEPQuBjyRSPYL6AzMezrsCLYkpQeRzm5Am2dDZYisgrh6irfyq2NY4fvJqVkXE9NVt",
+      "slot": 197,
+      "job": "2eE1w756erZcEYKPE1Bt5PfzWPGbbMUVSApGthurEWQh",
+      "computation": "29ym6uiXGX9hmKunnLpZ7oqjfMh9XWFzov6uDQPvH25P",
+      "authorizedDecision": true,
+      "successorCiphertextHex": "31b6bbb9433a498d0c1a03b8d41922d5f4338828619fc515e51e272928e29308",
+      "callbackInstructionSha256": "c1c6e2bf82398af4a920474c8fa7d5b3c2818a14292502ce59fe89e14e70702b",
+      "verifiedTransactionSigners": [
+        "9piiwyDAPk5V4geEAMiANuoxdr5Pag6xXRR7UYFncnNL"
+      ],
+      "landedCU": 151699,
+      "feeLamports": 5000,
+      "observedJobStatus": 1,
+      "observedOperationStatus": "committed",
+      "observationSlot": 558
+    },
+    {
+      "signature": "hpKg3Txx8L5GTLuQsFZM4J8uEkDnoagkoN1iSX5TodDmP6QZPviKBA5ZrVut5hiALcaRxM6x6MDbsGG34Bg5ebE",
+      "slot": 261,
+      "job": "8XJWkp6XUHZSUkpsjoEvFnC7pNxmZXYqGReKjtJMCp7c",
+      "computation": "EKNGk16MM5wF5EkyxfU3rF8dFR7M4JpK1MxHv5277vh",
+      "authorizedDecision": true,
+      "successorCiphertextHex": "5a8f7ea9769e7dd6dbd31f7ad8464e1c58fdb6e42b97ab353ca8921d0c2f7103",
+      "callbackInstructionSha256": "dc474bda671a85e2a9361c32f484e39e476d8859f22006cc7b54c28a4b7a50ac",
+      "verifiedTransactionSigners": [
+        "9piiwyDAPk5V4geEAMiANuoxdr5Pag6xXRR7UYFncnNL"
+      ],
+      "landedCU": 151115,
+      "feeLamports": 5000,
+      "observedJobStatus": 1,
+      "observedOperationStatus": "stale",
+      "observationSlot": 558
+    },
+    {
+      "signature": "4dCxjDpRjqbZLruHEqcZjv6NvxKYg4FjziWAFTbfp5XTRdTaLx8D3VG6AVfUj2cgdLJesspmbrQke35bg2Fg2mWq",
+      "slot": 520,
+      "job": "2MorvRu85Ead2TR4HGecGksaoCwHgesmzzKq87zVV8WA",
+      "computation": "AiaJsfCEQQchu5hsNCk8dLp7GVFjoheSpGPKWm9iVLp4",
+      "authorizedDecision": false,
+      "successorCiphertextHex": "af16bdc0dbd87f4d7bb0621464159d62ffec83722bbf748a590e17b4da41a106",
+      "callbackInstructionSha256": "5abe1c027533294b7f27fa86a8bd01253ee5e32a2d975200eaa8c67e925f287e",
+      "verifiedTransactionSigners": [
+        "DvPFva9vJ2Sc2PP7AeHzqMRvXehZNm1T34FYQSQrnN7w"
+      ],
+      "landedCU": 147550,
+      "feeLamports": 5000,
+      "observedJobStatus": 2,
+      "observedOperationStatus": "denied",
+      "observationSlot": 558
+    }
+  ],
+  "rawReceiptSha256": "a0ad8a3668d748bcfa85432dd0af04220667748eca7c9a9a0e8b8fb19b26ab4f",
+  "rawReceiptBytes": 153933,
+  "validatorCost": {
+    "category": "arcium-signed-callback",
+    "transactions": 3,
+    "landedCU": 450364,
+    "feeLamports": 15000
+  },
+  "limitations": [
+    "Actual transaction Ed25519 signatures and exact auth callback discriminator/Job/computation/account association are verified.",
+    "The loaded auth program verifies runtime signed output; this helper does not independently verify BLS or re-execute distributed computation.",
+    "Disclosed policy decisions and public transaction/account data are retained. No native account secrets or witnesses are loaded; requested amounts are not exported or used by callback verification.",
+    "CU/fees are validator callback costs only; distributed worker CPU/network costs are unmeasured. Confirmed RPC evidence is not a historical state proof."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "scope": "operator snapshot of SDK observations before first payment",
+  "time": "2026-10-02T12:17:17.484157+00:00",
+  "operations": [
+    {
+      "id": "7103d966-32d9-4d7d-a902-5eb3baf53a3e",
+      "consumer": "merchant",
+      "status": "authorized",
+      "querySignature": "ubag6FzzXfoEEbcFXbKrQ3TEG46EPJWQDHUQ4TfuumXP8p5zqCbfhQKcvBwLqCT7VePz6fhKWDS6SM6xCR1ZDmb",
+      "commitTicketPresent": false
+    },
+    {
+      "id": "fe5ce60f-88f6-4b08-8ea7-d4d8d2982b7d",
+      "consumer": "license",
+      "status": "authorized",
+      "querySignature": "4UUSfPoLjEMqDkfhKv3haGuZbXkavujjcGfTNTBi1QtXPnAtHT5SbVpDf1wqSwFjcjFfWuK2DMtz37cqyvYC3Bgg",
+      "commitTicketPresent": false
+    }
+  ]
+}

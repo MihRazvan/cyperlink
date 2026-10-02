@@ -50,7 +50,7 @@
   "limitations": [
     "Actual transaction Ed25519 signatures and exact auth callback discriminator/Job/computation/account association are verified.",
     "The loaded auth program verifies runtime signed output; this helper does not independently verify BLS or re-execute distributed computation.",
-    "Disclosed policy decisions and public transaction/account data are retained. No native account secrets, witnesses or requested amounts are read or exported.",
+    "Disclosed policy decisions and public transaction/account data are retained. No native account secrets or witnesses are loaded; requested amounts are not exported or used by callback verification.",
     "CU/fees are validator callback costs only; distributed worker CPU/network costs are unmeasured. Confirmed RPC evidence is not a historical state proof."
   ]
 }

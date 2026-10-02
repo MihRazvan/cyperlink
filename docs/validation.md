@@ -109,3 +109,18 @@ node --test tests/verify_demo_snapshots.test.mjs
 ```
 
 The exporter requires retained compiled/client source manifests and operation descriptors beside the results. The combined signed-message archive verifier currently qualifies conflict only; compatible has its separate snapshot review and independent final SDK reads. Neither offline review independently verifies BLS signatures or proves historical consensus state.
+
+
+## Interactive Approvals continuation — October2
+
+| Evidence | Scope and result |
+| --- | --- |
+| [Compatible-v16](../evidence/2026-10-02/approvals-compatible-v16-review.json) | Real browser → actual SDK → local validator/two-node runtime. Both40 purchases committed, four exact signed tickets, ten current ELF matches, keyless recovery of the original signature after server restart. |
+| [Conflict-v18](../evidence/2026-10-02/approvals-conflict-v18-review.json) | Both60 queries authorized; A paid, B stale, explicit fresh B denied. Four exact signed tickets and ten ELF matches. Stale client HTTP400 is separately classified, not a repeated native803 test. |
+| [Compatible callbacks](../evidence/2026-10-02/approvals-compatible-v16-callbacks.json), [conflict callbacks](../evidence/2026-10-02/approvals-conflict-v18-callbacks.json) | Actual transaction signatures, exact callback/Job/computation/commitment associations, decision and permit successor checks. BLS verification remains the loaded program's check; callback validator costs are separate from query/commit and worker resources. |
+| Host suites |106 Node SDK/client/example/snapshot/verifier tests;80 Python tests. Explicit fake adapters test signing gates, durable recovery, public projection and session exclusion; they do not claim native/MPC execution. |
+| [Isolated Permissions](../experiments/permissions/evidence/native-escrow-v3.json) | Separate real native escrow authority profile; one agent-only spend, scoped receipt, seven signed landed failures, honest refund.75 messages/125 signatures and seven raw unchanged snapshot pairs. No Arcium or priced application effect. |
+
+See [qualification](approvals-qualification.md) for browser captures, raw artifact
+locations, current local services and limits. No existing qualified on-chain
+program or cryptography/dependency version changed for the interface.

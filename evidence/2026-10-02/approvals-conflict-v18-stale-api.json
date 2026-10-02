@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "real-local-client-http-admission-not-native-803",
+  "operationId": "fe5ce60f-88f6-4b08-8ea7-d4d8d2982b7d",
+  "httpStatus": 400,
+  "error": "Authorization is stale, expired, denied or not yet ready",
+  "retainedTicketsUnchanged": true,
+  "noCommitTicketForStaleOperation": true
+}

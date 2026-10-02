@@ -39,9 +39,33 @@ license's issuance record persists after its displayed access expiry.
 
 ## Conflict run
 
-Fresh browser/runtime qualification is in progress. The completed SDK baseline
-already independently qualifies native stale803, fresh denial and adversarial
-rollback in conflict-v15; do not mistake that older evidence for new UI execution.
+Fresh run `approvals-conflict-v18`, genesis
+`58EeUuFfAX3C7H688McxTqSkeXGEcmxTbSpMqbLE5uU4`, passed through the browser.
+Both60 requests were authorized before merchant A paid. License B became stale;
+a direct stale commit request returned HTTP400 with no new signed ticket. This
+is a **local client admission rejection**, not a newly executed native803.
+The independently archived conflict-v15 remains the native803/rollback evidence.
+
+The user action “Start a fresh request” only filled the form. A separate Prepare
+and explicit query approval created fresh B60, which the real private computation
+denied. Final SDK states were committed/stale/denied; quota version1. Three
+callbacks independently matched their native amount commitments and Job statuses
+(allow/allow/deny). Ten loaded ELFs matched and four exact signed tickets were
+reviewed. See the [actual interface](assets/approvals-local-conflict.png).
+
+Public evidence: [session review](../evidence/2026-10-02/approvals-conflict-v18-review.json),
+[callbacks](../evidence/2026-10-02/approvals-conflict-v18-callbacks.json),
+[stale API rejection](../evidence/2026-10-02/approvals-conflict-v18-stale-api.json).
+Compatible evidence: [session review](../evidence/2026-10-02/approvals-compatible-v16-review.json),
+[callbacks](../evidence/2026-10-02/approvals-compatible-v16-callbacks.json),
+[browser restart observation](../evidence/2026-10-02/approvals-compatible-v16-browser-recovery.json).
+
+Validation passed106 Node tests across SDK/client/examples/snapshot and verifier
+suites, plus80 Python tests. Explicit host adapters remain distinct from these
+real browser, validator and distributed-computation runs. The final UI regression
+coverage includes no signing on reads, explicit final approval, exact retained
+recovery, concurrent request exclusion and commit discovery after a signing-stage
+failure. No qualified on-chain source changed.
 
 ## Reproduction and continuation
 
@@ -63,3 +87,25 @@ provisioning recovery and lifecycle cleanup. Arbitrary preparation interruption
 is not handled by silently recreating proofs or nonces. The scoped Permissions
 experiment is [a separate authority and disclosure profile](permissions-feasibility.md),
 not a newly supported Approvals mode.
+
+## Current local services
+
+At handoff, v18 remains running for inspection at `http://127.0.0.1:4317`:
+server PID89462, validator PID86696 at RPC8971, Docker compose project
+`cyperlink-approvals-conflict-v18`. The active session is
+`.local/approvals-ui-conflict-v18`; its ledger is
+`.local/localnet-approvals-conflict-v18/app/ledger`. Opening the page only observes; further spending
+requires explicit approvals. Live observations may eventually show expiry instead
+of stale as slots advance; the retained qualification reports preserve the run.
+All v16 and Permissions services are stopped.
+
+Before stopping, verify the recorded PIDs still belong to these commands (PIDs
+can be reused). Send SIGTERM to the server and wait for `.server.lock` removal,
+then stop its compose project and validator. Preserve all ledgers and journals:
+
+```sh
+docker compose -f .local/localnet-approvals-conflict-v18/app/artifacts/compose.json down
+```
+
+A rejected v17 preparation used an occupied RPC port; it created no run directory
+or transactions. v18 used a separate free port and fresh generated state.
