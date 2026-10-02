@@ -177,7 +177,7 @@ test('custom policy UI exposes release and actual decision without inventing pri
   const f=await fixture(t);
   const directory=await mkdtemp(resolve(REPO,'.local/approvals-custom-host-test-'));await chmod(directory,0o700);
   t.after(()=>rm(directory,{force:true,recursive:true}));
-  const bootstrap={...f.bootstrap,bootstrapDirectory:directory,descriptor:{profile:'local-custom-policy-v1'},loadedPrograms:new Array(9),
+  const bootstrap={...f.bootstrap,bootstrapDirectory:directory,descriptor:{profile:'local-custom-policy-v1'},loadedPrograms:new Array(10),
     policy:{name:'minimum-reserve',release:'release-hash',schema:'schema-hash',state:'state-account',auth:'auth-program',domain:'domain-hash',mxe:'mxe-account'},
     initialAllowance:999999,initialPrivateFields:'PRIVATE-SENTINEL',observerDisclosures:{inferredRemaining:999999}};
   f.service=await ApprovalsService.open({directory,bootstrap,adapter:f.adapter});

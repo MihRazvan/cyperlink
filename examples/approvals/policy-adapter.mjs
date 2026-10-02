@@ -10,7 +10,7 @@ import { RealApprovalsAdapter } from './adapter.mjs';
 import { privateJson, sessionDirectory } from './store.mjs';
 
 const execute = promisify(execFile), hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const runtimePrograms = ['Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ', 'ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq'];
+const runtimePrograms = ['Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ', 'ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq', 'L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95'];
 
 /** Public, allowlisted metadata only. No initializer values become observer disclosures. */
 export function policyBootstrap(instance, results, release) {
@@ -24,7 +24,7 @@ export function policyBootstrap(instance, results, release) {
   ensure(canonicalHash(results.descriptor) === canonicalHash(descriptor), 'Instance differs from completed deployment descriptor');
   const expected = new Set([descriptor.programs.auth, descriptor.programs.policy, descriptor.programs.guard, descriptor.programs.merchant,
     descriptor.programs.license, descriptor.programs.proofBuffer, TOKEN_PROGRAM, ...runtimePrograms]);
-  ensure(expected.size === 9 && results.loadedPrograms?.length === 9, 'Require nine custom deployment program reports');
+  ensure(expected.size === 10 && results.loadedPrograms?.length === 10, 'Require ten custom deployment program reports');
   for (const report of results.loadedPrograms) {
     ensure(expected.delete(report.program) && report.matched === true && report.genesis_hash === descriptor.genesisHash,
       'Loaded program report set differs from custom deployment');

@@ -12,13 +12,13 @@ function fixture() {
   const release = {...body,releaseHashHex:canonicalHash(body)};
   descriptor.releaseHashHex=release.releaseHashHex;descriptor.domainHashHex=policyDomainHash(descriptor);
   const instance={schema:1,passed:true,descriptor,endpoint:'http://127.0.0.1:8899',results:'/Users/razvan/Repos/cyperlink/.local/synthetic-policy/results.json',policyName:'private-rule'};
-  const programs=[...new Set(Object.values(descriptor.programs)),TOKEN_PROGRAM,'Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ','ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq'];
+  const programs=[...new Set(Object.values(descriptor.programs)),TOKEN_PROGRAM,'Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ','ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq','L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95'];
   const results={passed:true,phase:'ready',genesisHash:descriptor.genesisHash,releaseHashHex:descriptor.releaseHashHex,descriptor:structuredClone(descriptor),loadedPrograms:programs.map(program=>({program,matched:true,genesis_hash:descriptor.genesisHash,elf_sha256:'ab'.repeat(32),loaded_elf_sha256:'ab'.repeat(32),local_elf_path:'/synthetic-host-only/program.so'}))};
   return {instance,results,release};
 }
-test('custom adapter derives public policy identity from matching completed release and nine program reports',()=>{
+test('custom adapter derives public policy identity from matching completed release and ten program reports',()=>{
   const {instance,results,release}=fixture(), bootstrap=policyBootstrap(instance,results,release);
-  assert.equal(bootstrap.policy.name,'private-rule');assert.equal(bootstrap.loadedPrograms.length,9);
+  assert.equal(bootstrap.policy.name,'private-rule');assert.equal(bootstrap.loadedPrograms.length,10);
   assert.equal(bootstrap.genesisHash,instance.descriptor.genesisHash);
   assert.equal(bootstrap.policy.release,instance.descriptor.releaseHashHex);
   assert.equal(bootstrap.initialAllowance,undefined);assert.equal(bootstrap.observerDisclosures,undefined);
