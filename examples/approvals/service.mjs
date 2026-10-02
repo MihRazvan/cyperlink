@@ -24,13 +24,16 @@ export function phaseOf(op) {
 export class ApprovalsService {
   static async open({ directory, bootstrap, adapter }) {
     directory = await sessionDirectory(directory);
+    const custom = bootstrap.descriptor?.profile === 'local-custom-policy-v1';
+    const policyIdentity = custom ? digest(bootstrap.policy) : undefined;
     const filename = resolve(directory, 'state.json'); let state;
     try { state = await privateJson(filename); }
     catch (error) {
       if (error.code !== 'ENOENT') throw error;
-      state = { schema: 1, id: randomUUID(), genesis: bootstrap.genesisHash, bootstrap: resolve(bootstrap.bootstrapDirectory), operations: [], events: [] };
+      state = { schema: 1, id: randomUUID(), genesis: bootstrap.genesisHash, bootstrap: resolve(bootstrap.bootstrapDirectory), operations: [], events: [], ...(custom ? { policyIdentity } : {}) };
     }
     ensure(state.schema === 1 && state.genesis === bootstrap.genesisHash && state.bootstrap === resolve(bootstrap.bootstrapDirectory), 'Session belongs to different bootstrap/ledger');
+    ensure(state.policyIdentity === policyIdentity, 'Session belongs to a different policy release or state instance');
     const service = new this({ directory, filename, bootstrap, adapter, state });
     for (const op of state.operations) {
       // Never resume signing or preparation automatically after a process stops.
@@ -179,18 +182,25 @@ export class ApprovalsService {
       const paid = op.observation?.status === 'committed';
       return { id: op.id, label: op.label, consumer: op.consumer, purpose: op.consumer === 'merchant' ? 'Developer asset pack · SKU 7' : 'Analytics application license',
         phase, sdkStatus: op.observation?.status ?? 'unobserved', owner: op.owner, source: op.source, destination: op.destination, effect: op.effect,
-        terms: op.terms,
+        terms: op.terms, policyDecision: ['authorized', 'committed'].includes(op.observation?.status) ? 'allowed' : op.observation?.status === 'denied' ? 'denied' : null,
         ...(view === 'owner' ? { amount: op.amount, approvalDigest: approvalDigest(op, 'query'), commitApprovalDigest: approvalDigest(op, 'commit') } : {}),
         delivery: op.delivery, observation: op.observation && { status: op.observation.status, slot: op.observation.slot, licenseActive: op.observation.licenseActive, licenseExpirySlot: op.observation.licenseExpirySlot },
         paidEffect: paid ? { kind: op.consumer, label: op.consumer === 'merchant' ? 'SKU 7 entitlement issued' : 'Exact product license issued',
           licenseActive: op.observation.licenseActive, expirySlot: op.observation.licenseExpirySlot } : null,
         actions, error: op.error, readUnavailable: Boolean(op.readUnavailable), recovery: op.lastRecovery };
     });
+    const custom = this.bootstrap.descriptor?.profile === 'local-custom-policy-v1';
     const paidAmounts = this.state.operations.filter(op => op.observation?.status === 'committed').reduce((sum, op) => sum + op.amount, 0);
-    return { schema: 1, view, session: { id: this.state.id, genesis: this.state.genesis, profile: 'local-native-ct-v0', local: true,
-      loadedPrograms: this.bootstrap.loadedPrograms.length, scope: 'Synthetic native token · two source owners · one quota / MXE', ...(view === 'owner' ? { initialAllowance: 100 } : {}) },
+    const policy = this.bootstrap.policy;
+    return { schema: 1, view, session: { id: this.state.id, genesis: this.state.genesis,
+      profile: custom ? 'local-custom-policy-v1' : 'local-native-ct-v0', local: true,
+      loadedPrograms: this.bootstrap.loadedPrograms.length,
+      scope: custom ? 'Synthetic native token · two source owners · customer-authored private state' : 'Synthetic native token · two source owners · one quota / MXE',
+      ...(custom ? { policy: { name: policy.name, release: policy.release, schema: policy.schema, state: policy.state, auth: policy.auth, domain: policy.domain, mxe: policy.mxe } }
+        : view === 'owner' ? { initialAllowance: 100 } : {}) },
       busy: this.busy, operations, events: this.state.events.slice(-30),
-      ...(view === 'owner' ? { observerDisclosures: { initialAllowance: 100, inferredRemaining: 100 - paidAmounts,
+      ...(!custom && view === 'owner' ? { observerDisclosures: { initialAllowance: 100, inferredRemaining: 100 - paidAmounts,
         note: 'TEST OBSERVER: allowance and remainder are inferred from known synthetic setup and paid purchases; the MXE quota was not decrypted. Requested amounts are known to the approving client.' } } : {}) };
+
   }
 }

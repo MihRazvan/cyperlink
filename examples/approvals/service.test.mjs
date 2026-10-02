@@ -172,3 +172,24 @@ test('legacy interrupted commit infers its role and wrong-role discovered ticket
   assert.equal(op.recoveryRole, 'commit'); assert.equal(op.interrupted, 'recover');
   assert(!f.service.projection().operations[0].actions.includes('approve-commit'));
 });
+
+test('custom policy UI exposes release and actual decision without inventing private state or denial reason', async t => {
+  const f=await fixture(t);
+  const directory=await mkdtemp(resolve(REPO,'.local/approvals-custom-host-test-'));await chmod(directory,0o700);
+  t.after(()=>rm(directory,{force:true,recursive:true}));
+  const bootstrap={...f.bootstrap,bootstrapDirectory:directory,descriptor:{profile:'local-custom-policy-v1'},loadedPrograms:new Array(9),
+    policy:{name:'minimum-reserve',release:'release-hash',schema:'schema-hash',state:'state-account',auth:'auth-program',domain:'domain-hash',mxe:'mxe-account'},
+    initialAllowance:999999,initialPrivateFields:'PRIVATE-SENTINEL',observerDisclosures:{inferredRemaining:999999}};
+  f.service=await ApprovalsService.open({directory,bootstrap,adapter:f.adapter});
+  const op=await prepare(f);f.observations.set(op.id,{status:'authorized',slot:12});await f.service.refresh();
+  assert.equal(f.service.projection().operations[0].policyDecision,'allowed');
+  f.observations.set(op.id,{status:'denied',slot:13});await f.service.refresh();
+  for(const view of ['owner','public']){
+    const projection=f.service.projection(view),encoded=JSON.stringify(projection);
+    assert.equal(projection.session.profile,'local-custom-policy-v1');assert.equal(projection.session.policy.name,'minimum-reserve');
+    assert.equal(projection.session.policy.mxe,'mxe-account');assert.equal(projection.operations[0].policyDecision,'denied');
+    assert.equal(projection.operations[0].paidEffect,null);
+    for(const fragment of ['initialAllowance','inferredRemaining','PRIVATE-SENTINEL','999999','reserve exhausted'])assert(!encoded.includes(fragment));
+  }
+  await assert.rejects(ApprovalsService.open({directory,bootstrap:{...bootstrap,policy:{...bootstrap.policy,release:'other-release'}},adapter:f.adapter}),/different policy release/);
+});

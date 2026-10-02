@@ -7,7 +7,7 @@ const labels = {
   'awaiting-final-approval': ['Payment approval needed', 'attention', 'The policy allowed this request. Approve the exact payment and application effect to continue.'],
   committed: ['Paid & fulfilled', 'success', 'The observed payment and exact application entitlement are committed together.'],
   denied: ['Policy denied', 'negative', 'The private policy declined this request. No paid entitlement was issued for it.'],
-  stale: ['Authorization stale', 'attention', 'The shared allowance or source state changed. A fresh request needs fresh, explicit authorization.'],
+  stale: ['Authorization stale', 'attention', 'The private policy state or source state changed. A fresh request needs fresh, explicit authorization.'],
   cancelled: ['Cancelled', 'neutral', 'This operation has been cancelled. A new request requires new approval.'],
   expired: ['Expired', 'attention', 'This authorization expired. Its signed transaction cannot be refreshed automatically.'],
   'unresolved-delivery': ['Delivery unresolved', 'attention', 'A missing response does not mean failure. Recover the saved operation before deciding what to do next.'],
@@ -80,6 +80,7 @@ function operationCard(op) {
   for (const [label, value] of [['SKU', op.terms?.sku], ['Product identifier', op.terms?.productHex32],
     ['License expiry slot', op.terms?.licenseExpirySlot ?? op.observation?.licenseExpirySlot],
     ['Authorization expiry slot', op.terms?.queryExpirySlot], ['Policy profile', op.terms?.policyProfile],
+    ['Customer policy', op.terms?.policyName], ['Policy release', op.terms?.policyRelease], ['State schema', op.terms?.policySchema], ['Owning MXE', op.terms?.policyMxe], ['Disclosed policy decision', op.policyDecision],
     ['Query state binding', op.terms?.queryStateHash]]) if (value !== undefined && value !== null) detail(dl, label, value, label === 'Product identifier' || label === 'Query state binding');
   details.append(dl); article.append(details); return article;
 }
@@ -90,12 +91,19 @@ function render() {
   $('#dialog-confirm').disabled = Boolean(state?.busy || posting || !connectionHealthy);
   $('#prepare-button').textContent = state?.busy?.action === 'prepare' ? 'Preparing request…' : 'Prepare request ↗';
   $('#request-count').textContent = state ? String(operations.length) : '—';
-  const amount = $('#allowance-value'); amount.replaceChildren(); $('#allowance-label').textContent = view === 'owner' ? 'SHARED ALLOWANCE' : 'PUBLIC OBSERVER PROJECTION';
+  const custom = state?.session?.profile === 'local-custom-policy-v1';
+  $('.intro-copy').textContent = custom ? 'Authorize application spending governed by customer-authored private rules. Each buyer keeps their own accounts and keys.' : 'Authorize application spending against a shared private allowance. Each buyer keeps their own accounts and keys.';
+  $('.scope-note p').textContent = custom ? 'A merchant purchase and a software license governed by the selected private policy.' : 'A merchant purchase and a software license, with independent buyers sharing the same allowance.';
+  const amount = $('#allowance-value'); amount.replaceChildren(); $('#allowance-label').textContent = view === 'owner' ? custom ? 'CUSTOMER POLICY' : 'SHARED ALLOWANCE' : 'PUBLIC OBSERVER PROJECTION';
   const allowanceDetail = $('#allowance-detail'); allowanceDetail.replaceChildren();
   if (view === 'public') {
     amount.append(node('span', '', 'Amounts private'));
     allowanceDetail.textContent = 'Account identities, timing and disclosed policy decisions remain visible.';
     $('#disclosure').textContent = 'Public observer projection, not an access-control boundary. Local execution uses synthetic assets. No real funds or public-network transactions.';
+  } else if (custom) {
+    amount.append(node('span', '', state.session.policy.name), node('span', 'unit', 'private state'));
+    allowanceDetail.textContent = 'Initialization values and current private fields are not disclosed. Each request reveals only its authenticated allow or deny result.';
+    $('#disclosure').textContent = 'Requested amounts are known to the approving client. Policy fields remain encrypted; this interface does not decrypt them or infer a private denial reason. Local synthetic assets only.';
   } else if (state?.session) {
     const initial = state.observerDisclosures?.initialAllowance ?? state.session.initialAllowance;
     amount.append(node('span', '', initial === undefined ? 'Not disclosed' : display(initial)), node('span', 'unit', 'synthetic units initially'));
@@ -127,7 +135,7 @@ function render() {
   }
   const session = $('#session-details'); session.replaceChildren();
   if (state?.session) {
-    for (const [term, value] of [['Session', state.session.id], ['Genesis', state.session.genesis], ['Profile', state.session.profile], ['Loaded programs', state.session.loadedPrograms], ['Scope', state.session.scope]]) if (value !== undefined) detail(session, term, typeof value === 'object' ? JSON.stringify(value) : value);
+    for (const [term, value] of [['Session', state.session.id], ['Genesis', state.session.genesis], ['Profile', state.session.profile], ['Loaded programs', state.session.loadedPrograms], ['Scope', state.session.scope], ['Customer policy', state.session.policy?.name], ['Policy release', state.session.policy?.release], ['State schema', state.session.policy?.schema], ['Owning MXE', state.session.policy?.mxe], ['Private state account', state.session.policy?.state]]) if (value !== undefined) detail(session, term, typeof value === 'object' ? JSON.stringify(value) : value);
   }
 }
 async function refresh(force = false) {
@@ -185,6 +193,7 @@ function requestAction(op, action) {
   }
   if (op.terms?.queryExpirySlot !== undefined) detail($('#dialog-facts'), 'Approval ends', `Slot ${display(op.terms.queryExpirySlot)}`);
   if (op.terms?.policyProfile) detail($('#dialog-facts'), 'Policy', op.terms.policyProfile);
+  for (const [label, value] of [['Customer policy', op.terms?.policyName], ['Release', op.terms?.policyRelease], ['State schema', op.terms?.policySchema], ['Owning MXE', op.terms?.policyMxe]]) if (value) detail($('#dialog-facts'), label, value);
   for (const [term, value] of [['Buyer', op.owner], ['Recipient', op.destination], ['Effect', op.effect], ['Operation', op.id]]) if (value) detail($('#dialog-facts'), term, value);
   $('#dialog-confirm').textContent = actionNames[action]; $('#dialog-confirm').disabled = Boolean(state?.busy || posting || !connectionHealthy);
   $('#approval-dialog').showModal(); $('#dialog-cancel').focus();

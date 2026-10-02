@@ -6,6 +6,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ApprovalsService } from './service.mjs';
 import { RealApprovalsAdapter } from './adapter.mjs';
+import { PolicyApprovalsAdapter } from './policy-adapter.mjs';
 import { privateJson, sessionDirectory, acquireSessionLock } from './store.mjs';
 
 const publicDirectory = resolve(dirname(fileURLToPath(import.meta.url)), 'public');
@@ -47,7 +48,8 @@ export function createApprovalsServer(service, port) {
 
 /** Production defaults use the real adapter; host tests inject explicit fake factories. */
 export async function startLockedApprovals({ bootstrap, directory, port, registerSignals = false,
-  connect = (bootstrap, directory) => RealApprovalsAdapter.connect(bootstrap, directory),
+  connect = (bootstrap, directory) => bootstrap.descriptor?.profile === 'local-custom-policy-v1'
+    ? PolicyApprovalsAdapter.connect(bootstrap, directory) : RealApprovalsAdapter.connect(bootstrap, directory),
   openService = options => ApprovalsService.open(options),
 }) {
   directory = await sessionDirectory(directory);
@@ -69,7 +71,7 @@ export async function startLockedApprovals({ bootstrap, directory, port, registe
   }
   startup = (async () => {
     const adapter = await connect(bootstrap, directory); if (stopping) return;
-    service = await openService({ directory, bootstrap, adapter }); if (stopping) return;
+    service = await openService({ directory, bootstrap: adapter.bootstrap ?? bootstrap, adapter }); if (stopping) return;
     server = createApprovalsServer(service, port);
     await new Promise((resolve, reject) => {
       const failed = error => { server.removeListener('listening', ready); reject(error); };
