@@ -24,6 +24,8 @@ Circuit rebuilding compiles both real runtime circuits from the locked source in
 
 Choose a new run ID and unused ports for each scenario:
 
+The pinned upstream generator probes `127.0.0.1:8899` even when a different final RPC port is requested. Stop your own validator on that port before preparation. If another service owns it, leave that service alone and prepare when the port is available. An occupied default port can make the upstream CLI select an unexpected `anchor test` path; our wrapper rejects that path. Preserve any failed preparation and choose a new run ID.
+
 ```sh
 python3 scripts/prepare_localnet.py --run-id demo-01 \
   --circuits .local/circuits-01/compiler/build

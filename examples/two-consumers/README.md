@@ -58,11 +58,27 @@ a **test-observer inference** from known setup/purchases, not a decryption of MX
 state. The encrypted quota bytes are captured and checked against each exact
 authenticated permit successor.
 
-The example exports reusable effect/template functions in `operation.mjs` and a
-signed sender with cached address tables in `transport.mjs`. It uses the actual
-client provisioning/proof APIs and `OperationReader` SDK. Each operation retains
-its expected full Job template and encrypted-input hash before submission;
-observation compares chain state with those locally authorized expectations.
+The example uses the reusable `LocalOperationClient` through preparation,
+explicit owner/admin signing, submission and observation. See the
+[local SDK operation API](../../packages/local-client/OPERATION.md). The retained
+plan includes the exact Job template, encrypted-input hash, native proof/action
+bindings and quota state/counter digest. `transport.mjs` is a thin compatibility
+export of the reusable signed sender.
+
+Each query and settlement is submitted from a separate keyless Node process
+using its retained plan and fully signed ticket. The B query deliberately drops
+the first real RPC send response; another process reconciles that signature and
+can retransmit only the same bytes. Further processes observe the authenticated
+callback and committed effects. These are explicit test fault injections; a
+successful worker invocation alone does not establish payment. The parent also
+requires an actual successful receipt and exact atomic effects.
+
+The conflict scenario stages another owner/admin-signed query before B advances
+the query counter, then submits those unchanged bytes. Error6004 must reject it
+before private computation: existing quota/permit accounts remain unchanged,
+and its Job, permit claim and computation remain absent. This isolates counter
+drift without a settled allowance-version change. The operation remains
+unobserved, and recovery does not request another policy decision.
 The demo explicitly observes at `confirmed`, matching its transaction receipt
 commitment. The SDK's default `finalized` observation can legitimately lag and
 return `unobserved` immediately after a confirmed callback; this is not rejection.
