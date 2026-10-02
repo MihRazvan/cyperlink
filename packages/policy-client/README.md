@@ -1,0 +1,49 @@
+# Custom-policy local client
+
+This is the explicit `local-custom-policy-v1` client. Legacy SDK decoding and
+historical plans remain unchanged. Generated bindings supply a deployment
+containing its release, schema, key domain and generated program identities.
+
+```js
+import { PolicyOperationClient } from './src/index.mjs';
+const client = await PolicyOperationClient.connect({
+  deployment, moduleRoot, endpoint, payerKeyfile, directory, idl, proofCli,
+});
+const plan = await client.prepare({label, directory: operationDirectory,
+  provisionedDirectory, amount, consumer: {kind: 'merchant', sku: '7'}});
+const query = await client.stageQuery(plan, {owner}); // explicit owner + admin approval
+await client.submit(plan, query);
+// Observe until the real authenticated callback has authorized the operation.
+const observation = await client.observe(plan);
+if (observation.status === 'authorized') {
+  const payment = await client.stageCommit(plan, {owner}); // separate exact owner approval
+  await client.submit(plan, payment);
+  // Only a complete committed observation proves the paid application effect.
+}
+```
+
+Retain each returned ticket with the existing private create-only writer before
+submitting it. `load`, `observe`, `recover` and `submit` preserve completed plans;
+none silently prepares another query or replaces a signed transaction. The
+separate `recover-operation.mjs` accepts the same arguments as the legacy
+keyless worker, but validates this profile's full state and generated deployment.
+It never takes a signing key or native witness.
+
+The supported transport is pinned CSplRescueCipher over ScalarField253. Four
+cipher slots are always present; unused slots are circuit-checked zero. State is
+353 bytes, permit712, Job1200, PreparedAction1200; the native/action template
+remains464 bytes and transient hook pointer remains at offset129. Hashes bind
+all slots plus release/schema/domain. The client checks live initialized state,
+its administrator and runtime public key before preparing/signing a query.
+Signed-ticket checks derive every runtime account, including the owning MXE and
+computation definition, rather than adopting them from retained instructions.
+
+The descriptor is public configuration, not independent trust. Deployment tooling
+must match loaded enforcement ELFs and registered circuit bytes to the release.
+Onchain state identity enforces the configured release; mutable program upgrade
+authorities remain trusted. This client does not claim to audit arbitrary rules.
+
+`node --test packages/policy-client/test/*.test.mjs` runs synthetic host tests,
+including real Ed25519 signing and mocked account/ALT reads. These are not live
+native proof verification or distributed execution. Runtime qualification is
+recorded separately by the deployment/evidence tools.
