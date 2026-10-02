@@ -1,8 +1,12 @@
 # Implementation status
 
-Updated 2026-10-01. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
+Updated 2026-10-02. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
-## Latest continuation: fresh bootstrap
+## Active milestone: SDK lifecycle and restart recovery
+
+Implementation underway; [scope and ordered plan](lifecycle-implementation.md). Review found that delayed queries could select a newer quota/counter than their retained client intent. The new explicit snapshot digest rejects that drift before private computation; host tests pass, live qualification is pending. Durable same-wire submission, reusable preparation/settlement APIs and separate-process recovery tests are being integrated. Historical passing reports below do not qualify these source changes.
+
+## Latest completed continuation: fresh bootstrap
 
 **Both scenarios now pass without the original research checkout as an execution input.** Repository installers preserve the exact JavaScript, native CLI, program and Docker versions. Both real runtime circuits were rebuilt from locked source: all eight artifacts match the reviewed bytes exactly. Each new run generated its own administrator and node identities plus 60 upstream runtime genesis accounts; native assets and all CyperLink state still came from signed instructions. Ten actual loaded ELFs matched in each run.
 
