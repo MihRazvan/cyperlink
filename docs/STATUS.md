@@ -2,6 +2,15 @@
 
 Updated 2026-10-02. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
+## Active milestone: customer-authored private policies
+
+The new [implementation plan](custom-policy-implementation.md) supersedes the
+previous next-work ordering. Work is underway on a separate versioned custom-policy
+profile, authored Rust expressions compiled to MPC, generated deployment identities
+and manifest-aware client tooling. The cipher-domain integration gate is being
+checked before committing to the compiler path. No custom-policy end-to-end result
+is claimed yet. Completed Approvals/Permissions results below remain intact.
+
 ## Latest continuation: interactive Approvals and isolated Permissions
 
 **Interactive human-approved spending passes fresh real local qualification.**
