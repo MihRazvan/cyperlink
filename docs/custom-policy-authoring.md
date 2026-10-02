@@ -5,13 +5,10 @@ and synthetic tests. CyperLink compiles the expressions into the same Arcium
 computation that authenticates the native payment amount. New rules do not
 require a CyperLink core branch or a new payment adapter.
 
-**Runtime qualification is in progress.** The commands below describe implemented
-tooling, not a completed two-policy settlement claim. See the
-[acceptance matrix](custom-policy-implementation.md#acceptance-matrix-pending-real-execution)
-and [current status](STATUS.md). The completed legacy Approvals and separate
-Permissions escrow evidence remain intact. The forthcoming
-[custom-policy qualification report](custom-policy-qualification.md) will record
-actual runtime results; that qualification is currently pending.
+**The bounded real local path passes.** Two customer packages execute through
+actual Arcium callbacks, native confidential settlement and exact recovery on one
+ledger. See [qualification, failures and limits](custom-policy-qualification.md)
+and the [implementation decisions](custom-policy-implementation.md).
 
 ## Write, test and build a package
 

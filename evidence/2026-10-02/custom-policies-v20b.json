@@ -1,0 +1,734 @@
+{
+  "schema": 1,
+  "passed": true,
+  "qualification": "real-local-validator-and-two-node-Arcium-runtime",
+  "profile": "local-custom-policy-v1",
+  "genesisHash": "B7NXk9pQWhap2c9aZvfkwEiXcgv9DLyLecJnkKjTAusm",
+  "policies": [
+    {
+      "name": "budget-count",
+      "descriptor": {
+        "schema": 1,
+        "profile": "local-custom-policy-v1",
+        "releaseHashHex": "0ae497b2addb729631f9fcca5f2b1a0fffd4417a51f09fc6c1fd8a855d96104a",
+        "schemaHashHex": "6851f47b4f2944a219ae9ed415fe5db9859d90925e8a829f6bcf0275bc20fdeb",
+        "programs": {
+          "auth": "CoP58mf2KaQvV91ueDdzFPkqxHP51guSH699RKterLrB",
+          "policy": "Hzj3A61A3VeDnZmdERQP3Vh5WQeFS9tAtq6hqTYDgSgV",
+          "guard": "64jkGRTPahFPLpzcW6R4FFVpmjFDyuoUUwWfRhrC1tvE",
+          "merchant": "DdYfJUWzaSLty7h1VM8ZeczNeq4a8CJ88HDBfshL72Z6",
+          "license": "5Lc7sFsqvNXJQ8yWHQkhDRzWAcYgXPUWngTnTULSA3mV",
+          "kernel": "64jkGRTPahFPLpzcW6R4FFVpmjFDyuoUUwWfRhrC1tvE",
+          "proofBuffer": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv"
+        },
+        "quota": "Gq5mQqPoHXB6v61WkD7YEFkBBce2S9eXGEJwhanx8rPM",
+        "genesisHash": "B7NXk9pQWhap2c9aZvfkwEiXcgv9DLyLecJnkKjTAusm",
+        "cipher": "cspl-rescue-scalar253-v1",
+        "stateFields": [
+          {
+            "name": "remaining",
+            "type": "u64"
+          },
+          {
+            "name": "purchases",
+            "type": "u64"
+          }
+        ],
+        "domainHashHex": "67ad7f9191638d54adc5372c6f048a22ed328b0313a03e47ebb4dade69074e4f",
+        "mxePublicKeyHex": "653bf27b2591658656fb6c83aafa51410db45349fffb49db6aa7efbb482e9760"
+      },
+      "sourceSha256": "5ab46d3001d03f90cf4b98f60e2c76a071d904775aedabe122a72477de82ef29",
+      "artifacts": {
+        "runtime_policy_init.arcis": {
+          "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+          "bytes": 1023894
+        },
+        "runtime_policy_init.idarc": {
+          "sha256": "3cb696cb618b27271a307ee8eec600e924d6709860f4eb11fbbaa0378a33c3dc",
+          "bytes": 556
+        },
+        "runtime_policy_init.hash": {
+          "sha256": "e3b4f71b66c17dd38c9997c2ddacd21f426be8f821f57bd30db468ce282cf768",
+          "bytes": 114
+        },
+        "runtime_policy_init.weight": {
+          "sha256": "5325d3fd1e5b796b62872937e6a1bcbcc401002e48ff8679f423f6cc74acd9c6",
+          "bytes": 479
+        },
+        "runtime_policy_evaluate.arcis": {
+          "sha256": "ffb1b0364c7482b60b20ed7d74c839121d5516e07f2acc4f5ac2e863b3853ef4",
+          "bytes": 1798157
+        },
+        "runtime_policy_evaluate.idarc": {
+          "sha256": "d739826c7e7364faf083c71ed27dd863558fa6b15276ac54fe8c5c15bf41869a",
+          "bytes": 2719
+        },
+        "runtime_policy_evaluate.hash": {
+          "sha256": "960d3c025e9342c60088d68c20b946b7f5a13998475a7339475a76b8f56eea02",
+          "bytes": 115
+        },
+        "runtime_policy_evaluate.weight": {
+          "sha256": "218a9456e37d312100b2632bcb8e36bce2468007b9bee4f63493ff537017dcae",
+          "bytes": 480
+        }
+      },
+      "repeatBuildMs": 14447,
+      "modeledCompilerACUs": {
+        "runtime_policy_init": 794133188,
+        "runtime_policy_evaluate": 1007031150
+      },
+      "privateRawDirectory": ".local/custom-policies-v20-count2"
+    },
+    {
+      "name": "minimum-reserve",
+      "descriptor": {
+        "schema": 1,
+        "profile": "local-custom-policy-v1",
+        "releaseHashHex": "7640e480c3fe9c005a9c7e221299386928ebc0f6dbb4c1cabc73c0a264c5d75a",
+        "schemaHashHex": "d56fd7c9c11ec1edd12bfe67b58823e8505cf34b6b1c8e703c65d9f25a43dd8d",
+        "programs": {
+          "auth": "CdASNBA82UUruLCzq3Lcm6un7Q7ng5bWdJRzpXw5DBjd",
+          "policy": "AbRk6hU8mN8jtY15x1EWGrq3C2bBuxgQAc1LWPKgDTWf",
+          "guard": "8m9RTwGWPYukbjwSA3xtsiETFn6xxmU7TbegLqatf39k",
+          "merchant": "DA9rgSRPyxsRChF9hmdKZm6qdVMatuNn6Sv2Bgu4RcQX",
+          "license": "9reGdtyM9uFhVn1AjZAmY83wruwUYFDADAf4CRDTAcuk",
+          "kernel": "8m9RTwGWPYukbjwSA3xtsiETFn6xxmU7TbegLqatf39k",
+          "proofBuffer": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv"
+        },
+        "quota": "DbbVXrVFCCt8fJNSChDvEQSAXfFTQXd5zY2bgGDRPtAv",
+        "genesisHash": "B7NXk9pQWhap2c9aZvfkwEiXcgv9DLyLecJnkKjTAusm",
+        "cipher": "cspl-rescue-scalar253-v1",
+        "stateFields": [
+          {
+            "name": "remaining",
+            "type": "u64"
+          },
+          {
+            "name": "reserve",
+            "type": "u64"
+          }
+        ],
+        "domainHashHex": "eb1cd25d53ba276a34c1d9e44956e15685d92bad91eea3ec6dbe96278c730954",
+        "mxePublicKeyHex": "92a3d835b5032f847e554d5ef093c42b44d6df469e884c614d1cd23f61460644"
+      },
+      "sourceSha256": "ffd90d765a3ada27e55dac26923e765d10a254274aa2b07a71a7969d9c1e4e34",
+      "artifacts": {
+        "runtime_policy_init.arcis": {
+          "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+          "bytes": 1023894
+        },
+        "runtime_policy_init.idarc": {
+          "sha256": "3cb696cb618b27271a307ee8eec600e924d6709860f4eb11fbbaa0378a33c3dc",
+          "bytes": 556
+        },
+        "runtime_policy_init.hash": {
+          "sha256": "e3b4f71b66c17dd38c9997c2ddacd21f426be8f821f57bd30db468ce282cf768",
+          "bytes": 114
+        },
+        "runtime_policy_init.weight": {
+          "sha256": "5325d3fd1e5b796b62872937e6a1bcbcc401002e48ff8679f423f6cc74acd9c6",
+          "bytes": 479
+        },
+        "runtime_policy_evaluate.arcis": {
+          "sha256": "78f757f241cf3d96d799737fd9233b85b6d0519cdac4a1580dff353a8c7f7978",
+          "bytes": 1635989
+        },
+        "runtime_policy_evaluate.idarc": {
+          "sha256": "d739826c7e7364faf083c71ed27dd863558fa6b15276ac54fe8c5c15bf41869a",
+          "bytes": 2719
+        },
+        "runtime_policy_evaluate.hash": {
+          "sha256": "d1b0b1ab4e700fe43efe3b9d55a2e7c1debbe894a65fded0ac024c48bf639663",
+          "bytes": 119
+        },
+        "runtime_policy_evaluate.weight": {
+          "sha256": "3091b8c7fb534db48d0501d0a7f2a6b501b36eaa3707373f03ec73792f7a28c2",
+          "bytes": 479
+        }
+      },
+      "repeatBuildMs": 12463,
+      "modeledCompilerACUs": {
+        "runtime_policy_init": 794133188,
+        "runtime_policy_evaluate": 961180764
+      },
+      "privateRawDirectory": ".local/custom-policies-v20-reserve"
+    }
+  ],
+  "observerDisclosures": {
+    "initialCountState": {
+      "remaining": 100,
+      "purchases": 4
+    },
+    "initialReserveState": {
+      "remaining": 100,
+      "reserve": 70
+    },
+    "note": "Synthetic initial/request values and expected successors are observer disclosures and arithmetic inferences, not decryption of live MXE state.",
+    "inferredCountState": {
+      "remaining": 60,
+      "purchases": 5
+    },
+    "inferredReserveState": {
+      "remaining": 80,
+      "reserve": 70
+    }
+  },
+  "checks": [
+    {
+      "label": "wrong-native-owner-authority",
+      "actualCustomError": 6001,
+      "signature": "5yMdfH1KWknV8pAdZsDB4a4KHENAKvBVGfZmV8FuL9dK7cpKzGGfvtXmS8imGUYruVwMhPUBrdFZNyjs2BdUVQUY",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "unauthorized-private-query-administrator",
+      "actualCustomError": 6001,
+      "signature": "bCbdAHZPAzwSMf78cHgaGBswqD6xoj2ZnuzWwRC75dbG1WuxNMar3idFnjqUK8ZS7ajHRUW92Z6oFKyF6AtpVxy",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "foreign-policy-state-instance",
+      "actualCustomError": 2004,
+      "signature": "4qkBtaYehFqPaBCM2uDSUVFhbW6bLugRJqm3jyPP33xFQUuDShZyRULqMC1DLXLibpZYbFNKMv9L6BbMcM8zKX3b",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "foreign-mxe-domain",
+      "actualCustomError": 2012,
+      "signature": "4ogEX9BLv6xLYyayaw451uSFVANykdSoJb5jHEK1gnDUWrsTzFsqGz7WixpgZsavDb9H7NHcw26Z9hHWaBcY1QqU",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "wrong-computation-definition",
+      "actualCustomError": 2012,
+      "signature": "3P7PhtdGNbgRmcc7qDwoE4exmYkmUxc7c6RhPA8QAaf6Eiu3c5vzEBNzWoYX4QBdUBCmqsf1p5FiswnhEoYYF8Gc",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "unsupported-successor-permit-length",
+      "actualCustomError": 6002,
+      "signature": "5BU9MUNvfDDRpcstX5wVzyHJpyKUvKuN8k9ExBraTHJn1JnMz5vnxySDxQHJ4j51PAjAs6cAhgprYcubpNMe5MmH",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "wrong-native-proof-context",
+      "actualCustomError": 6000,
+      "signature": "miwFJwfFKFtGHcW3w7NKg1q27PdG2G6C3K9JfsUk1FpTHwbcJGsQLgWyEjshbxFw9v8ArX1AS2UirK78BX4qCqo",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "unsupported-native-account-profile",
+      "actualCustomError": 6000,
+      "signature": "4bgNzQURNDec1XncjcWGzK3CvrhUfgi7VQzvhXw98UqftiLZ2BGMW6CzB5nj5914RcX7aXjou7wZD6Mc1czyUMEo",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "unauthorized-initialization",
+      "actualCustomError": 6001,
+      "signature": "4e7EhCFshNQkXq9k4Tg8NLGd4YobDwHvmpwWjaQnykZygGhrrHRairikMuaGePVBnjPx67fjccDy1XzuLgXyGT3T",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "reinitialization",
+      "actualCustomError": 6001,
+      "signature": "5hkUBXmxZP4NiQTVmyveP4j8AVcVTseDFRgNmzbaL23MucYV2SNV6EQvdaQk1256S3jHxVsckMMDbDChQZF87dFn",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "unbound-amount-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": false
+    },
+    {
+      "label": "unbound-opening-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": false
+    },
+    {
+      "label": "unbound-cipher-domain-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": false
+    },
+    {
+      "label": "expired-private-authorization-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": true
+    },
+    {
+      "label": "expired-permit-cannot-settle",
+      "actualCustomError": 830,
+      "signature": "4aLJXD54sJbnEoVfcKhcDYRbyP2htBUoxE5pi1eegPgwxVNNbYeu2LLanjJMR3sJkqC1tP4D99jBKdsN4SajLKoa",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "count-fifth-purchase-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": true,
+      "observation": {
+        "status": "authorized",
+        "slot": 2164,
+        "commitment": "confirmed",
+        "job": "GGZFMaNQTmweCn2rfpJwZsHcKohSGZ9taFbVNhdqgHsW",
+        "permit": "CY2byyrBemM5aw3YhaRAgA7XPPSnuye9Lp4BVGkgZ8Ef",
+        "effect": "GpmdC5PKTmEwwEzRdQGjcDkvT1gr7Mo2s6m4UJQMD8YD",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "signed-counter-only-drift-rejected-before-mpc",
+      "actualCustomError": 6004,
+      "signature": "5e2rpKxWvkjbrd2WFbvAdWmsdrvf6A2ZDAiSnG2XzFmVUk9pZd7jnuEjbZKH5VCjyMjU82ZmQRugHFefhLWjZeBE",
+      "exactWirePreserved": true
+    },
+    {
+      "label": "count-competing-license-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": true,
+      "observation": {
+        "status": "authorized",
+        "slot": 2264,
+        "commitment": "confirmed",
+        "job": "8kCHrUqX6i27cZyPzL8NeuKCDuFaGgra9UWWBYAAtKHa",
+        "permit": "BUUmHhb7ZQeaFea8LjYhcVJoPHp2fpGUhXgaCPtuJ9YJ",
+        "effect": "DSLFhN8FCAJLKixJ7nyKYhV7vjuLf8KE1NgGj87V4VBJ",
+        "consumerKind": "license",
+        "licenseExpirySlot": "3160",
+        "licenseActive": false,
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "direct-replayed-callback-authentication",
+      "actualCustomError": 9999,
+      "signature": "3hLmm9cLAzeFbPVhDhEkEkSnxs2nHBmAniguyv4tYLKJUBASdxse996N4nF4FTD6mXC4oDywHtRY1noZrqaRD8oc",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "callback-wrong-computation-association",
+      "actualCustomError": 6000,
+      "signature": "5tiTM9BL6iy1Mn1ZVGwZ6iEefrXGx6WtA5ffeGN7PLqT3Q4RtDJGwqAgXWEpuDEbZ99E8KrMh3o4VFAxoiEyCC9D",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "cancelled-private-authorization-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": true,
+      "observation": {
+        "status": "authorized",
+        "slot": 2319,
+        "commitment": "confirmed",
+        "job": "CQem5exxcPmTKdkPcytcumFJEm2z8YYS1XBQvWwYUNJN",
+        "permit": "2sq8gAV6Lm9funWPLSAV7nadk4M2t1EcCK68Tay14iqJ",
+        "effect": "CVVSRiH5JcXewJCLAfGxS9VN71mtRhuM41LEJhGD5sKX",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "cancelled-permit-cannot-settle",
+      "actualCustomError": 700,
+      "signature": "2N9G2LVAcwdtWpbye9FHKqERiUJUhQGmazx6WfhZg2NRnLEuLCK7QuVvuGPpmW2FSsqLP3JQpNXoiiTQmbb8kuNE",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "changed-recipient-binding",
+      "actualCustomError": 705,
+      "signature": "32LMGR8JpXX2CnzrfuXudk4cfhYJLB7kdyfJ1jXsF3rqo8ZnQwiz1retTFrknY6XcapscbgUspv7Mdn6bFrXyULf",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "changed-action-binding",
+      "actualCustomError": 705,
+      "signature": "42wHDTjXLVKbkti9NW3k67KzZCNs5d9QxFuK7FERXjTRmcjLxobiDnt1YGmBiAbmrBCrWLjKvNLbyRXSmF1xzQE8",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "changed-consumer-binding",
+      "actualCustomError": 705,
+      "signature": "5dCcVADomBka7kPnkZPWeiT5zSu4z3b3bzSpdXn5vFpLQdTenRuW6BmmT1yX7Gij8Rt9Pfy3YEcMG2AGNrzFkfWe",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "post-native-consumer-failure-entire-state-rollback",
+      "actualCustomError": 1099,
+      "signature": "5nccLwSpvZAGEndhZWoDeMDPxDtLYMirxefoeDzM1wY4QNBN32JSXnQU7MprDDij1pu9NW32CgFG8RpubPAf4bKx",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": true
+    },
+    {
+      "label": "count-fifth-purchase-atomic-native-payment-private-successor-and-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 2329,
+        "commitment": "confirmed",
+        "job": "GGZFMaNQTmweCn2rfpJwZsHcKohSGZ9taFbVNhdqgHsW",
+        "permit": "CY2byyrBemM5aw3YhaRAgA7XPPSnuye9Lp4BVGkgZ8Ef",
+        "effect": "GpmdC5PKTmEwwEzRdQGjcDkvT1gr7Mo2s6m4UJQMD8YD",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      "lostAcknowledgementInjected": true
+    },
+    {
+      "label": "competing-private-state-stale",
+      "actualCustomError": 803,
+      "signature": "r2pxLqk35NZ4uDdroNB7g3NPRfUdiTDSwQczLLzyuVd2AobnevgkTSjqsgYqjZohySETaMWRMzdHuEKAkCA4WHf",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "paid-application-replay",
+      "actualCustomError": 1001,
+      "signature": "cCNiwACLv2MHmerjnn59SajMyyhUrAHSX16i2odW9oBJNpeTrLD9KacJrArpYgTrMVvyg5DZKzsjmUDibmgeY9c",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "purchase-count-exhausted-with-budget-left-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": false,
+      "observation": {
+        "status": "denied",
+        "slot": 2384,
+        "commitment": "confirmed",
+        "job": "HAQMyvzVQqsXSb9xcwq23SwYCvsXUXpsruoDJevSz6mj",
+        "permit": "FsPdQHDqAJ6jTmXdpUmvbEZvEjTLJZALEndhLhK8Ut2e",
+        "effect": "DTxjSLLn8T974VhhEGmGB36XoNzqp95VEvZCSZveCqAY",
+        "consumerKind": "merchant",
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "1",
+        "actions": [
+          "prepare-fresh-with-owner-and-admin"
+        ]
+      }
+    },
+    {
+      "label": "private-reserve-rejects-budget-affordable40-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": false,
+      "observation": {
+        "status": "denied",
+        "slot": 2439,
+        "commitment": "confirmed",
+        "job": "BYycrTTMqzQDu2Qdv9rcpk35juKWmynAWGuzt6deLWJn",
+        "permit": "AoGdMgvASRG4mEp1GJ7fPvkpX23ZjxSErfKatzhVQoXs",
+        "effect": "GHUSrC4xfyirfGy2CJWQDjrEt9x8bFPVkSWStJ1gH6B6",
+        "consumerKind": "merchant",
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "prepare-fresh-with-owner-and-admin"
+        ]
+      }
+    },
+    {
+      "label": "budget-only-host-control-would-allow40",
+      "evidenceLevel": "observer-arithmetic-control-only",
+      "initialBudget": 100,
+      "requestedAmount": 40,
+      "remainingIfPaid": 60,
+      "privateReserve": 70,
+      "actualPolicyCallbackAllowed": false
+    },
+    {
+      "label": "private-reserve-compatible-license20-callback-only-not-paid",
+      "allFourCiphertextsUnchanged": true,
+      "admissionCounterAdvanced": true,
+      "authorized": true,
+      "observation": {
+        "status": "authorized",
+        "slot": 2492,
+        "commitment": "confirmed",
+        "job": "879uhai9BTVsmnkh9GERFMZKQQE5BR3U88P65ZPeeNfq",
+        "permit": "Dn6ENZKPcKUZqfDkKgn9diESyAFD7HSVtT3brBtEwmJs",
+        "effect": "44pGgGbZKgQSVdCcD5kkXjYD27P4CBaBWAjwuDBR9uu5",
+        "consumerKind": "license",
+        "licenseExpirySlot": "3389",
+        "licenseActive": false,
+        "quotaVersion": "0",
+        "expectedQuotaVersion": "0",
+        "actions": [
+          "submit-owner-signed-commit",
+          "cancel-with-owner"
+        ],
+        "reason": "Authorization is not a reservation; settlement revalidates current native state"
+      }
+    },
+    {
+      "label": "cross-instance-permit-transplant",
+      "actualCustomError": 700,
+      "signature": "5ePqVd3EL3VwesRcFK7qCkRP4GxM3TtDuw5Cu3HJzD5Y5eXdpDLaKS4SkKK6QzVmhZdDKs6bLPxUy3K4ZQTdaaXt",
+      "allTrackedAccountsUnchanged": true,
+      "postNativeTransfer": false
+    },
+    {
+      "label": "private-reserve-compatible-license20-atomic-native-payment-private-successor-and-entitlement",
+      "observation": {
+        "status": "committed",
+        "slot": 2494,
+        "commitment": "confirmed",
+        "job": "879uhai9BTVsmnkh9GERFMZKQQE5BR3U88P65ZPeeNfq",
+        "permit": "Dn6ENZKPcKUZqfDkKgn9diESyAFD7HSVtT3brBtEwmJs",
+        "effect": "44pGgGbZKgQSVdCcD5kkXjYD27P4CBaBWAjwuDBR9uu5",
+        "consumerKind": "license",
+        "licenseExpirySlot": "3389",
+        "licenseActive": true,
+        "quotaVersion": "1",
+        "expectedQuotaVersion": "0",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      },
+      "lostAcknowledgementInjected": false
+    }
+  ],
+  "callbackTimings": [
+    {
+      "label": "unbound-amount",
+      "signature": "3VLTvSZ5TXuaKbuX8dRqEKXzGmf5ki6smw1NdF5T2DErzrBEhLegBsLnsz5Z2HjLWU8PfSnQdTJqGiFWszMc1sY5",
+      "approvalStagingToObservedCallbackMs": 19538,
+      "solanaCU": 140340
+    },
+    {
+      "label": "unbound-opening",
+      "signature": "2frk6DjcDdAt77jRsqUtza3Wub7h799maZR2rfxTqpDjJrP7Nz3rNcZvG4nBoCdhEpqVVJEYxP9a3vT1zdjezA4Z",
+      "approvalStagingToObservedCallbackMs": 19542,
+      "solanaCU": 143662
+    },
+    {
+      "label": "unbound-cipher-domain",
+      "signature": "2u9qdSLrLJtshSRu3phaQjrgXkbCNnTJE4LB9x5baH4S8ksEg3qEvTqnUQq1MPvtdmKJ9uyzqLx3dhXN1jvQGR6d",
+      "approvalStagingToObservedCallbackMs": 19032,
+      "solanaCU": 140352
+    },
+    {
+      "label": "expired-private-authorization",
+      "signature": "2TdzwFqkz9M32XCSvrm8zVdUxmRf7gDMkWyje2GziqiD7bojC8vq8LPinwbvgVVBU3TQogGMZX41uVrvHRFoCKYa",
+      "approvalStagingToObservedCallbackMs": 20377,
+      "solanaCU": 160732
+    },
+    {
+      "label": "count-fifth-purchase",
+      "signature": "GxUTznpsAAJzvUTaZXC8R23dPkfeYecXxsZMyanvHmJZjD5y1Q2NPc1KxSfNkdghDfjzcMijtavTCgxsvwTwYRk",
+      "approvalStagingToObservedCallbackMs": 19851,
+      "solanaCU": 164042
+    },
+    {
+      "label": "count-competing-license",
+      "signature": "22oUKwWEdquZF2RnG6HwZaDABrk478SHY5masjiYFHRnWFHRzVT7boSh387YsbcXST2sDYF37VkX8tXDYsKT15MC",
+      "approvalStagingToObservedCallbackMs": 19843,
+      "solanaCU": 160295
+    },
+    {
+      "label": "cancelled-private-authorization",
+      "signature": "3XEHHvAQhD95ckMQ1Ja77vhW16w4SLXBeZd3jK5Dt1CeBCg6sjANVLcMZ4XucLhp29QhCdnPcwaHmqthNNeRt4QL",
+      "approvalStagingToObservedCallbackMs": 19354,
+      "solanaCU": 160884
+    },
+    {
+      "label": "purchase-count-exhausted-with-budget-left",
+      "signature": "P7fWtVdT81hZWifbLQC2w8BN9srVJFcat26U6zgH5E64SVvdMV4sighoLEHcnmQ46Tvqm1Yo51iuNPQbq4pJcxg",
+      "approvalStagingToObservedCallbackMs": 19351,
+      "solanaCU": 147581
+    },
+    {
+      "label": "private-reserve-rejects-budget-affordable40",
+      "signature": "MsckmmiWCB8jyKZsjHhFL2EXySo7jmF5VqU6R5ofgf8gYz7pKxAtQGiXtAmXCeuZAWUq9e6LGVtmSkVMLPDSPHj",
+      "approvalStagingToObservedCallbackMs": 20256,
+      "solanaCU": 139470
+    },
+    {
+      "label": "private-reserve-compatible-license20",
+      "signature": "5oigXJ92MMqdrLW1RYQd2hMvMQqEzEmRpP6krVQ9xqwmw5AQ1goUb8n2BqFF9jyngjfwNt4f8CEJrpxmZe21phUB",
+      "approvalStagingToObservedCallbackMs": 19584,
+      "solanaCU": 156408
+    }
+  ],
+  "timingQualification": "Timer starts before query staging and includes ALT/finalization/RPC and callback observation; not isolated MPC latency.",
+  "offlineReviewCounts": {
+    "signedMessages": 9087,
+    "ed25519Signatures": 9283,
+    "decodedCallbacks": 10,
+    "decodedInitializers": 2,
+    "landedRejections": 22,
+    "rollbackAccountComparisons": 319,
+    "paidEffects": 2,
+    "retainedExactTickets": 9,
+    "recoveryProcesses": 4,
+    "loadedElfs": 15,
+    "uploadedCircuitArtifacts": 4
+  },
+  "validatorCosts": {
+    "categories": {
+      "mxe-initialization": {
+        "transactions": 4,
+        "landedCU": 275488,
+        "feeLamports": 20000,
+        "failedTransactions": 0
+      },
+      "policy-provisioning": {
+        "transactions": 4,
+        "landedCU": 91854,
+        "feeLamports": 20000,
+        "failedTransactions": 0
+      },
+      "arcium-definition": {
+        "transactions": 4,
+        "landedCU": 200538,
+        "feeLamports": 20000,
+        "failedTransactions": 0
+      },
+      "arcium-circuit-upload": {
+        "transactions": 6775,
+        "landedCU": 62697329,
+        "feeLamports": 33875000,
+        "failedTransactions": 0
+      },
+      "arcium-queue": {
+        "transactions": 9,
+        "landedCU": 1427650,
+        "feeLamports": 80000,
+        "failedTransactions": 1
+      },
+      "arcium-signed-callback": {
+        "transactions": 12,
+        "landedCU": 1806210,
+        "feeLamports": 60000,
+        "failedTransactions": 0
+      },
+      "native-asset-provisioning": {
+        "transactions": 38,
+        "landedCU": 153924,
+        "feeLamports": 340000,
+        "failedTransactions": 0
+      },
+      "program-deployment": {
+        "transactions": 2038,
+        "landedCU": 4834560,
+        "feeLamports": 10290000,
+        "failedTransactions": 0
+      },
+      "application": {
+        "transactions": 16,
+        "landedCU": 155877,
+        "feeLamports": 160000,
+        "failedTransactions": 0
+      },
+      "adversarial-setup": {
+        "transactions": 4,
+        "landedCU": 24179,
+        "feeLamports": 35000,
+        "failedTransactions": 0
+      },
+      "lookup-table": {
+        "transactions": 23,
+        "landedCU": 204001,
+        "feeLamports": 115000,
+        "failedTransactions": 0
+      },
+      "adversarial-landed-failure": {
+        "transactions": 21,
+        "landedCU": 817684,
+        "feeLamports": 190000,
+        "failedTransactions": 21
+      },
+      "adversarial-private-query": {
+        "transactions": 4,
+        "landedCU": 730287,
+        "feeLamports": 40000,
+        "failedTransactions": 0
+      },
+      "cancellation": {
+        "transactions": 1,
+        "landedCU": 20226,
+        "feeLamports": 10000,
+        "failedTransactions": 0
+      },
+      "native-settlement": {
+        "transactions": 2,
+        "landedCU": 165456,
+        "feeLamports": 20000,
+        "failedTransactions": 0
+      },
+      "native-proof-and-operation-provisioning": {
+        "transactions": 132,
+        "landedCU": 2723448,
+        "feeLamports": 1140000,
+        "failedTransactions": 0
+      }
+    },
+    "programDeploymentIncluded": true,
+    "exclusions": [
+      "Distributed computation infrastructure resource costs",
+      "Rent and asset funding, which are not transaction fees"
+    ]
+  },
+  "rawArchive": ".local/custom-policy-qualification-v20b",
+  "featureDeviation": [
+    {
+      "feature": "B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g",
+      "action": "deactivate-at-fresh-local-genesis",
+      "reason": "Allow deployment of the pinned SBF tools1.57 arch-v0 artifacts; SIMD-0500 otherwise rejects v0/v1/v2 deployment",
+      "scope": "local-only explicit opt-in; not default Agave4.3.0 feature parity or public-network deployability",
+      "opt_in": "--allow-pinned-sbf-v0-deployment"
+    }
+  ],
+  "limitations": [
+    "Offline checks of retained confirmed RPC receipts/account snapshots; no fresh RPC reads or independent historical consensus-state proof.",
+    "Ed25519 signed messages are independently verified. BLS authenticity rests on successful matched-program onchain verification; this is not a separate offline BLS verifier.",
+    "Synthetic initial values and expected plaintext successors are observer inferences; encrypted live state is never decrypted.",
+    "Compilation, validator CU/fees and runtime latency remain separate quantities; no production, external adoption or independent-operator claim.",
+    "Synthetic no-fee assets, separate mint per customer hook, explicit owner/admin approvals.",
+    "Private state outcomes are test-observer arithmetic inferences; no live plaintext MXE-state decryption.",
+    "Two local MXEs share operators. Program upgrade/deployment authorities remain trusted.",
+    "Successor content and edited release/schema descriptor mutations are additionally host/SDK tests, not claimed as corresponding landed instruction failures.",
+    "No production, public-network, same-mint multi-policy or external customer adoption claim."
+  ]
+}

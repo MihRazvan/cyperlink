@@ -2,35 +2,56 @@
 
 Updated 2026-10-02. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
-## Active milestone: customer-authored private policies
+## Customer-authored private policies: real local path qualified
 
-The [implementation plan](custom-policy-implementation.md) supersedes the previous
-next-work ordering. The typed Rust expression fallback preserves the tested
-ScalarField253/CSpl native amount/opening bridge. Customer source, schemas, host
-tests, canonical releases, generated SDK bindings and a fresh local deployment
-CLI are implemented. Budget-plus-count and an independently authored internal
-minimum-reserve example compile through the same API without name branches.
+The authored-package → compiler → deployment → genuine private decision → native
+payment/effect → exact recovery path passes. See [developer quickstart](custom-policy-authoring.md),
+[qualification and reproduction](custom-policy-qualification.md),
+[safe run summary](../evidence/2026-10-02/custom-policies-v20b.json) and
+[independent review](../evidence/2026-10-02/custom-policy-v20b-offline-review.json).
 
-Live custom-policy qualification is still underway. On v20, five generated
-programs plus five dependencies deployed with matching actual loaded bytes, and
-upstream two-node MXE initialization produced a genuine new encryption key.
-State provisioning then rejected834 because a shared build cache had reused
-native binaries containing the preceding deployment's constants. The deployment
-builder now isolates each generated workspace/cache; a fresh instance is building.
-The failed instance and its receipts remain preserved. No completed custom-policy
-payment is claimed yet.
+- `budget-count` paid merchant40 at count4→5, then denied fresh1 with budget/funding
+  left. `minimum-reserve` denied40 and paid license20 against privately initialized
+  reserve70. Amounts and inferred private outcomes are synthetic observer disclosures.
+- Two independent customer directories use the same typed authoring/CLI/generated
+  SDK flow. The second was authored by another internal agent without a core
+  name branch. Distinct generated programs, MXEs/keys, states and mint hooks coexist
+  on v20. Same local operators and upgrade-authority trust remain explicit.
+- Real matrix passed exact input/authority/isolation failures, expired/cancelled
+  operations, counter-only delayed-query6004, callback authentication, post-native
+  rollback1099, stale803, replay1001 and keyless exact-byte recovery.
+- Independent review verified9,087 signed messages/9,283 Ed25519 signatures,
+  12 callbacks including initialization,22 landed rejections,319 unchanged account
+  comparisons,2 paid effects,9 exact tickets,4 recovery processes,15 loaded ELFs
+  and4 uploaded circuit byte/interface proofs. No independent offline BLS or
+  historical consensus-state-proof claim.
+- Validation:144 Node SDK/example/archive tests,8 CLI groups,82 Python tests,
+  plus targeted Rust checks and strict generated TypeScript compilation. CLI
+  enforces qualified host Rust/Cargo versions. No dependency upgrade was needed.
 
-Agave4.3.0's default local feature set rejected new pinned SBPFv0 deployment on
-v19. V20 explicitly disables only SIMD-0500 at fresh genesis using
-`--allow-pinned-sbf-v0-deployment`; this is recorded local feature divergence,
-not default-cluster parity. Before stopping v19, the legacy budget-only40 control
-paid a merchant entitlement and recovered the exact transaction through a separate
-keyless worker. Its ten loaded programs and callback were checked; raw evidence
-is `.local/custom-policy-budget-control-v19/`. Historical ledgers remain intact.
+The chosen fallback preserves the full native SDK7 amount/opening bridge in
+ScalarField253/CSpl. High-level Arcis's different cipher domain was not assumed
+compatible. New `local-custom-policy-v1` has353-byte state/712-byte permits and
+four encrypted slots; legacy profiles, fixtures, Approvals and Permissions survive.
 
-Current checks: all eight CLI groups, the wider Node suite and82 Python tests
-pass. Host results do not replace the pending real custom-policy acceptance matrix.
-Completed Approvals/Permissions results below remain intact.
+V20 explicitly disables only the default local SIMD-0500 deployment restriction
+for pinned SBPFv0; this is not default-cluster parity. An earlier shared build-cache
+fault rejected provisioning834; isolated generated build targets fixed it. The
+first matrix attempt stopped on a test-runner signer mismatch before payment;
+v20b reused untouched business states with nonces preserved. Failed archives and
+all historical ledgers remain intact. V19's separate real legacy budget40 control
+also paid/recovered successfully before its services stopped.
+
+Current local services: v20 RPC8983, two-node compose `cyperlink-custom-policies-v20`,
+and custom Approvals HTTP4317. Its selected-policy desktop/mobile display passes;
+an additional live reserve UI payment/restart check is in progress. Raw archives
+and stop/restart guidance are in qualification. User-owned `00-START-HERE` untouched.
+
+Remaining scope: independently operated/public deployment, second-machine builds,
+security review, fee/AUSD adapters, same-mint routing, richer authenticated inputs,
+state migration and arbitrary partial-deployment recovery. Those are extensions,
+not claims made by this local milestone. Autonomous Permissions remains its separate
+native escrow experiment; it has not acquired Arcium/delegated-wallet guarantees.
 
 ## Latest continuation: interactive Approvals and isolated Permissions
 

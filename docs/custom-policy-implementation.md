@@ -3,8 +3,8 @@
 Requested October2,2026; supersedes the previous next-work ordering. Baseline
 `0201b34` remains qualified. Research inputs are the custom-policy implementation
 prompt/research/direction and retained authoring probes in the read-only frontier
-research directory. This document records implementation decisions, not a passing
-end-to-end claim.
+research directory. This document records implementation decisions. The resulting bounded local
+path now passes; see [actual qualification](custom-policy-qualification.md).
 
 ## Compiler and authoring contract
 
@@ -78,7 +78,7 @@ bytes. Initialization and query successor nonces share one nonrecycled MXE domai
 6. Real two-package ledger qualification and minimal selected-policy display in
    Approvals; safe reports, source/ELF/circuit provenance and offline review.
 
-## Acceptance matrix (pending real execution)
+## Acceptance matrix
 
 - Build: novel source/schema, distinct changed artifacts/releases, tamper/malformed
   schema/unsupported expression rejection, integer bounds and all-branch overflow.

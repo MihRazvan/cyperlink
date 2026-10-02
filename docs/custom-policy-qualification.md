@@ -1,48 +1,154 @@
-# Customer policy qualification
+# Customer-authored policy qualification
 
-Status: live qualification in progress, 2026-10-02. This document does not yet
-claim the complete custom-policy milestone. See [authoring](custom-policy-authoring.md)
-for the implemented CLI and supported language, and [implementation plan](custom-policy-implementation.md)
-for the required matrix.
+The customer package → compiled circuit → fresh deployment → real private decision
+→ exact native payment/effect → recovery path passes on the bounded local profile.
+See the [developer quickstart](custom-policy-authoring.md),
+[safe run summary](../evidence/2026-10-02/custom-policies-v20b.json) and
+[independent offline review](../evidence/2026-10-02/custom-policy-v20b-offline-review.json).
 
-## Completed checks
+## What actually ran
 
-- Typed-expression compiler: checked private arithmetic/state, full native SDK7
-  amount/opening commitment binding, CSpl/ScalarField253 interfaces and novel
-  customer compositions. These are host/compiler results.
-- Eight CLI test groups,138 other Node tests and82 Python tests pass.
-- Legacy budget-only control on v19: actual merchant40 payment, entitlement,
-  authenticated runtime callback, ten matching loaded ELFs and independent
-  keyless reconciliation of the same signed payment. Private raw archive:
-  `.local/custom-policy-budget-control-v19/`. Synthetic amounts are test-observer
-  disclosures, not decryption of live MXE state.
-- A generated v20 instance deployed five programs, verified those and five
-  upstream dependencies against actual loaded bytes, and initialized an MXE
-  through upstream signed instructions and two-node key generation. This is
-  deployment evidence, not a successful custom-policy purchase.
+`budget-count` and `minimum-reserve` are separate customer directories containing
+original expressions and two-field private schemas. The second was authored by a
+separate internal agent using the documented API after the authoring core existed;
+no name-specific core branch was added. This is internal independent authoring,
+not external customer adoption.
 
-## Preserved failures and environment qualification
+Both instances coexist on genesis `B7NXk9pQWhap2c9aZvfkwEiXcgv9DLyLecJnkKjTAusm`.
+Each has five generated enforcement/application programs, its own genuinely
+initialized MXE and encryption key, state identity and synthetic mint hook. Both
+use the same two local Arcium operators. Ten distinct generated ELFs plus five
+shared dependencies were compared against actual loaded bytes. Four uploaded
+circuit artifacts and their registered interfaces were read and byte-checked.
+Private state initialization and every policy evaluation used real runtime
+callbacks, upstream native proofs and owner/admin signatures.
 
-V19 used the pinned Agave4.3.0 default local feature set. SIMD-0500 disallowed
-new SBPFv0 deployments. No compiler version or architecture was changed.
-V20 uses the explicit `--allow-pinned-sbf-v0-deployment` preparation flag, which
-disables only feature `B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g` at fresh
-genesis. `preparation.json` records the deviation. This is not default-cluster
-or public-network parity. Existing legacy genesis programs remain unchanged.
+| Check | Actual evidence |
+| --- | --- |
+| Count rule | Synthetic initial remaining100/count4; merchant40 paid and advanced both private fields; fresh1 denied with funding remaining. |
+| Private reserve | Synthetic private remaining100/reserve70; merchant40 denied; license20 paid. |
+| Budget-only control | Separate retained v19 legacy instance paid merchant40 and recovered its exact transaction, with ten matching ELFs. |
+| Native input binding | Altered encrypted amount, opening and wrong cipher domain each produced an authenticated denial; no business-state advancement. |
+| Query authority/isolation | Wrong source owner/admin6001, foreign state2004, MXE/definition2012, wrong native contexts/profile6000, wrong permit length6002, unauthorized init/reinit6001. |
+| Callback authority | Direct replay9999 and wrong computation association6000 rejected. |
+| Lifecycle | Allowed callbacks did not advance business state; expired permit830 and cancelled permit700 rejected. Counter-only drift rejected a retained owner/admin-signed query6004 before new MPC work. |
+| Exact action/atomicity | Recipient/action/consumer changes705; forced consumer1099 after native CPI rolled back complete state, token balances, permit and entitlement. |
+| Competition/replay | Winning merchant40 paid; competing license1 rejected stale803; replay1001; fresh1 denied by purchase count. |
+| Cross-instance settlement | Foreign policy permit rejected700; successful commits left the other policy's state unchanged. |
+| Recovery | Lost acknowledgement followed by separate keyless processes reconciled/retransmitted identical signed bytes; one paid effect, no hidden new query/signature. |
 
-The first v20 custom instance rejected state provisioning834 before initialization:
-a shared generated-program build cache had reused native ELFs containing v19
-addresses. Its loaded bytes matched the stale build, showing why that comparison
-alone cannot certify build provenance. The builder now uses a separate target
-for each generated workspace. Fresh rebuilt native ELFs differ from the retained
-stale outputs. Failed artifacts/ledgers were not reset or relabeled successful.
+Initial values, amounts and resulting plaintext arithmetic above are explicitly
+**synthetic test-observer disclosures/inferences**, not decryption of live MXE
+state. Paid transitions independently match all four successor ciphertext slots
+and nonce to the authenticated callback; untouched padding and identities remain
+bound. No staged authorized permit, injected verified context or fixture-key
+circuit participates.
 
-## Remaining acceptance work
+Edited release/schema descriptors and arbitrary successor-content corruption are
+covered by host SDK/layout/archive corruption checks. Those individual mutations
+are not labeled as corresponding landed runtime attacks. The live matrix includes
+wrong-length, cross-instance, callback-association, full-state rollback and stale
+execution tests. Compilation is not a correctness/privacy certification for
+arbitrary customer rules.
 
-Both authored policies must finish real initialization and coexist on v20 with
-distinct MXEs, programs and supported synthetic mints. The live matrix must then
-prove rule-dependent decisions, paid native effects, full-state atomicity,
-isolation/adversarial rejection, stale authorization, exact recovery and the
-existing UI integration. Independent archive review and separated cost summaries
-follow execution. No production-security, independent-operator or external-adoption
-claim is made.
+## Independent evidence review
+
+The offline reviewer checked9,087 signed messages and9,283 Ed25519 signatures,
+10 policy callbacks and2 initializer callbacks,22 landed rejections and319 unchanged
+application-account comparisons. It checked2 exact paid effects,9 retained tickets,
+4 recovery processes,15 loaded ELFs and4 actual uploaded circuit byte proofs.
+
+This reviews retained confirmed RPC messages/account snapshots. It is not a
+historical consensus-state proof. BLS authenticity rests on successful onchain
+verification by the matched program/runtime; this is not a second offline BLS
+implementation. No production-security or public-network claim is made.
+
+Host checks:144 Node SDK/example/archive tests,8 CLI groups and82 Python tests
+pass. Additional Rust compiler/layout/native/Auth tests remain described in
+[compiler gate](compiler-gate.md) and the implementation sources.
+Generated TypeScript bindings passed strict TypeScript5.9.3 NodeNext checking.
+
+## Costs and timing
+
+The safe review contains the complete deduplicated categorized validator table,
+including failed-transaction fees. Selected totals for the two deployments and
+qualification matrix:
+
+| Category | Transactions | Solana CU | Local lamport fees |
+| --- | ---: | ---: | ---: |
+| Program upload/deployment | 2,038 | 4,834,560 | 10,290,000 |
+| Circuit upload | 6,775 | 62,697,329 | 33,875,000 |
+| Native asset provisioning | 38 | 153,924 | 340,000 |
+| Proof/operation provisioning | 132 | 2,723,448 | 1,140,000 |
+| Runtime callbacks, including initialization | 12 | 1,806,210 | 60,000 |
+| Successful native settlement | 2 | 165,456 | 20,000 |
+
+Queue, initialization, lookup tables, cancellation, application setup and
+adversarial categories are separate in the JSON report. These are synthetic local
+validator fees/CU, not production pricing. Rent, funding and distributed-runtime
+resource costs are excluded. Uploaded setup is not per-purchase cost.
+
+Repeat builds produced identical release/artifact hashes in14,447ms(count) and
+12,463ms(reserve), on this host with caches and concurrent local services.
+Modeled evaluation compiler weights were1,007,031,150 and961,180,764ACUs;
+initialization was794,133,188 for each. ACUs are not Solana CU or measured latency.
+Observed evaluation timing was19,032–20,377ms from **before query staging** to
+callback observation, including ALT/finalization and RPC work. It does not isolate
+MPC latency or establish a performance benchmark.
+
+## Reproduce and preserve
+
+Follow [authoring](custom-policy-authoring.md) to build/deploy fresh instances,
+then run:
+
+```sh
+node examples/policies/qualify.mjs \
+  --deployments .local/COUNT/instance.json,.local/RESERVE/instance.json \
+  --out .local/NEW-qualification --scenario combined
+node packages/policy-cli/collect-deployment-evidence.mjs \
+  .local/COUNT/instance.json .local/COUNT/supplemental-deployment-receipts.json
+node packages/policy-cli/collect-deployment-evidence.mjs \
+  .local/RESERVE/instance.json .local/RESERVE/supplemental-deployment-receipts.json
+node examples/policies/verify-qualification.mjs \
+  --results .local/NEW-qualification/results.json \
+  --instances .local/COUNT/instance.json,.local/RESERVE/instance.json \
+  --out .local/NEW-qualification/offline-review.json
+```
+
+Use the documented synthetic count4/reserve70 initial values for this acceptance
+harness. Business state must be untouched at its start. The CLI is general across
+authored policies; this named acceptance harness tests these two examples.
+
+Raw archives are `.local/custom-policies-v20-count2/`,
+`.local/custom-policies-v20-reserve/`, `.local/custom-policy-qualification-v20b/`
+and `.local/custom-policy-budget-control-v19/`. Secrets remain ignored and local.
+The v20 ledger is `.local/localnet-custom-policies-v20/app/ledger`; RPC8983,
+compose project `cyperlink-custom-policies-v20`. Validator PID45794 was verified
+for this ledger. Verify process ownership again before stopping it. Do not reset
+or delete the ledger. V18/v19 services are stopped and their evidence retained.
+
+The existing Approvals UI supports the verified custom instance with selected
+policy/release/schema/MXE and real allow/deny outcomes. Desktop/mobile read-only
+checks pass; the final additional reserve UI payment is being qualified separately.
+
+## Preserved failures and explicit limits
+
+- V19 default Agave4.3.0 genesis rejected new SBPFv0 deployment. V20 explicitly
+  uses `--allow-pinned-sbf-v0-deployment`, disabling only SIMD-0500 feature
+  `B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g` at genesis. Preparation records
+  the deviation. This is not default-cluster/public-network parity.
+- First v20 deployment reused native binaries containing the preceding instance's
+  addresses through a shared build cache; provisioning rejected834 before state
+  initialization. Per-instance isolated build targets fixed this. Both final
+  deployments have different configured ELF hashes and pass actual execution.
+- First qualification attempt stopped before any payment because its callback
+  negative incorrectly supplied an owner signature for a nonsigner account.
+  The corrected v20b run retained the same untouched business states and their
+  advanced admission counters; no state or nonce was reset. Both archives remain.
+- Separate synthetic no-fee mints per hook; CPI Guard disabled; explicit owner/admin
+  approval for each private query and owner approval for each settlement.
+- Local trusted Cargo compilation, public source constants, approved Boolean
+  disclosure and trusted upgrade/deployment authorities. Private initialization
+  is not in the public manifest or UI. Arbitrary interrupted deployment recovery,
+  state migration, same-mint multi-policy routing, fee assets/AUSD, independent
+  operators, public deployment and autonomous grants are unqualified extensions.

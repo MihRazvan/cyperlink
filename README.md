@@ -12,7 +12,7 @@ Start with the [current status and decisions](docs/STATUS.md), [supported profil
 
 Developer APIs:
 
-- [Customer-authored private policies](docs/custom-policy-authoring.md): write original private rules/state, compile packages and use generated local SDK bindings; custom runtime qualification is in progress.
+- [Customer-authored private policies](docs/custom-policy-authoring.md): write original private rules/state, compile packages and use generated local SDK bindings; two distinct policies now pass real local Arcium/native settlement and exact recovery.
 - [`@cyperlink/sdk`](packages/sdk): exact native/action builders and authenticated merchant/license lifecycle observations; [operation contract](docs/operation-contract.md).
 - [Local client](packages/local-client): signed native account provisioning, fresh proof submission and proof-buffer cleanup.
 - [Rust client proofs](crates/client-proofs): persistent client-owned keys and pinned upstream cryptographic proof generation.
