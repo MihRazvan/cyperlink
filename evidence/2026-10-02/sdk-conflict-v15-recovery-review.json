@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "passed": true,
+  "scenario": "conflict",
+  "evidenceLevel": "offline-recovery-journal-and-receipt-crosscheck",
+  "genesisHash": "5u1pS6Bpe1D8jPadvT3t8ES3rZjGBuCN4pgfvQDyYou7",
+  "input": {
+    "path": ".local/demo-sdk-conflict-v15/results.json",
+    "bytes": 5666576,
+    "sha256": "76d1003fd3f4f87ec399fa7c6f572f2961bb149117111cba04824a5cc3dc2525"
+  },
+  "counts": {
+    "workers": 11,
+    "distinctRecordedProcessIds": 11,
+    "signedTickets": 5
+  },
+  "tickets": [
+    {
+      "signature": "31jhfM3d1Rww6GgF8poEAbJvz18GxxkUrnoLZXKbx1jPx62TL7rTPWdm4ERkWLvWbHdJcWumh9vCXQGfFdd8VUXf",
+      "role": "query",
+      "wireSha256": "7e1523dbdd6e47b540755ecfdf6d490ba0d2b60afea1f84eb8ad6891d4a7e7f2",
+      "descriptorSha256": "f084853a57b375b68e9140fd6ce0bcc4d497446ff6e058c27933e8d2ee5ab737",
+      "receiptSlot": 169,
+      "receiptError": null,
+      "preparedAction": {
+        "address": "9HSnoarBZ8eoFk2E3N7P6Nx1zQta5MX89Km8vgd44RJk",
+        "slot": 168,
+        "sha256": "37be49a71e46829fd1d0be6dfe2cfe0b245b01aa68bc4f008554b54e226919c7",
+        "bytes": 1200
+      },
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "rHF7NKAcmUYR4PnrZBqAEtNxy3935QcG3e8JjFvYdFhgZjVUYSYVYYSCGFhAA1MfyughTvka1WvQS2ZmkgrkYbQ",
+      "role": "query",
+      "wireSha256": "4a07d39fb5fdab69576c47d4463133bb4eea09121bed058db05d4377506cf2d6",
+      "descriptorSha256": "874c7d8a85084df1eec390a4cd795c86a0775a63abfef49fbdaf925f393eef7d",
+      "receiptSlot": 271,
+      "receiptError": null,
+      "preparedAction": {
+        "address": "Hzf9K6EQprYtKUBqNrTddBVegD67qYsLcMxu8MCdLjkx",
+        "slot": 270,
+        "sha256": "23f738e3c5e1e6e1acdf2777737877ea63ca034c0391a50b3a6c4e4d2640c6e3",
+        "bytes": 1200
+      },
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "2E3QmdzpmjsU4D8yXvYe7RXdRkg9QUmwwj12XnhYYMH1aRyrEUNE8FJW5S3KYG8h282PRn8yDGFUYzNTikohweke",
+      "role": "query",
+      "wireSha256": "622e6c58853c37430f043409fd47c47b30e977e71bfeaf68f853a389679d1dfc",
+      "descriptorSha256": "55cd98882da3a3d4e969c6e8c1caf888050329f609e8ce5d1fec3713935bb63e",
+      "receiptSlot": 273,
+      "receiptError": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6004
+          }
+        ]
+      },
+      "preparedAction": {
+        "address": "9JeYfaiBEXWvNBPXJCQ9cMnFFu2iCJcFCmjCL4cShdSY",
+        "slot": 273,
+        "sha256": "28a89911b3dbc440ebe7902646263b612ceef6dff108704d8a7d6aab3e1a6b1d",
+        "bytes": 1200
+      },
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "5twNugk5HNdNCVuCHo9Vd1gzYMtYVakQe4TGMsKRm7VjZSWhfSj1Zg473TyiwvLMBWMdWJWFAsFbPvb1vcp6zELE",
+      "role": "commit",
+      "wireSha256": "248c73428cd8f4f649a873b5cb6d70aaea7b5e4ca3a20d98c25ebb779416a3a7",
+      "descriptorSha256": "f084853a57b375b68e9140fd6ce0bcc4d497446ff6e058c27933e8d2ee5ab737",
+      "receiptSlot": 286,
+      "receiptError": null,
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    },
+    {
+      "signature": "zmpumakwCNqbg5g8T73W2hA47SuJpEjg87Z57Edj4uhB2pPwwjVyhkBQzunB1mGPvnTbs4RgMy5sPyVg4zxMLNc",
+      "role": "query",
+      "wireSha256": "ed015bc6e6f967c6b9926e68daeadb5dcae73177062260ac81e5884dd06ad928",
+      "descriptorSha256": "f27d468105567b93877ed337f73b180b3c6d76865ce4a1601217812f0e39c0af",
+      "receiptSlot": 335,
+      "receiptError": null,
+      "preparedAction": {
+        "address": "HqJ8Zq2M6LUqYtuPmfVLLqEmFVQAA5NGuWwYCJg8hj1A",
+        "slot": 334,
+        "sha256": "957794251a9c7c54f96e2bbe50698b99b76bf6512727e1646af1babd4c8d8ec1",
+        "bytes": 1200
+      },
+      "lookupEvidence": "archived receipt resolution, not a live reread"
+    }
+  ],
+  "querySnapshotRejection": {
+    "actualCustomError": 6004,
+    "signature": "2E3QmdzpmjsU4D8yXvYe7RXdRkg9QUmwwj12XnhYYMH1aRyrEUNE8FJW5S3KYG8h282PRn8yDGFUYzNTikohweke",
+    "slot": 273,
+    "retainedVersion": "0",
+    "currentVersion": "0",
+    "retainedCounter": "2",
+    "currentCounter": "3",
+    "unchangedExistingAccounts": 2,
+    "absentJobComputationClaim": 3,
+    "callbackForRejectedQuery": false
+  },
+  "limitations": [
+    "No RPC calls, public-network writes, key access or fresh execution; trusted archived RPC receipts are not historical state proofs.",
+    "Signed wire semantics reuse the operation-ticket validator; signature checks use Node Ed25519. This does not independently verify BLS or reconstruct runtime execution.",
+    "Every query-ticket recovery requires retained immutable PreparedAction account bytes matching its local plan; these are archived RPC observations, not a new live account read.",
+    "Process IDs and test response-loss classifications are archived runner evidence, not independent operating-system attestations."
+  ]
+}
