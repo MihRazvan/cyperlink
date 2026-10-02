@@ -54,6 +54,15 @@ in private state. Compilation does not certify arbitrary policy privacy.
 exposes synthetic state. It is never the deployed wrapper. Cargo is trusted
 local code execution, not a hosted malicious-code sandbox.
 
+The ergonomic test entrypoint is `test_vectors(FIELDS, policy, json_path)`,
+returning a JSON host-evidence report. Its file is an array of
+`{name, amount, state: [...], allow: true|false, next: [...]}` records, with
+integer values encoded as unsigned numbers or decimal strings. State arrays
+match the declared field order; optional four-slot arrays test padding. Optional
+`native_amount` and `corrupt_commitment_byte` exercise binding failures. These
+synthetic tests never send transactions. Actual compiler/host qualification and
+reproduction are in [the gate results](../experiments/custom-policy-compiler/README.md).
+
 ## Fixed wire interface
 
 Both interfaces use only client ephemeral X25519 public keys; no reusable wallet

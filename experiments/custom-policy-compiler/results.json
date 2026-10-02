@@ -1,0 +1,51 @@
+{
+  "qualification": "host-compiler-and-synthetic-IR-only",
+  "compiler": "arcis-compiler0.15.0",
+  "nativeCommitment": "solana-zk-sdk7.0.1",
+  "cipherDomain": "ScalarField253-CSplRescueCipher",
+  "highLevelDomainCompatible": false,
+  "syntheticVectors": 47,
+  "distributedExecution": false,
+  "nativeSettlement": false,
+  "artifacts": {
+    "runtime_policy_init": {
+      "arcis": {
+        "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+        "bytes": 1023894
+      },
+      "idarc": {
+        "sha256": "3cb696cb618b27271a307ee8eec600e924d6709860f4eb11fbbaa0378a33c3dc",
+        "bytes": 556
+      },
+      "hash": {
+        "sha256": "e3b4f71b66c17dd38c9997c2ddacd21f426be8f821f57bd30db468ce282cf768",
+        "bytes": 114
+      },
+      "weight": {
+        "sha256": "5325d3fd1e5b796b62872937e6a1bcbcc401002e48ff8679f423f6cc74acd9c6",
+        "bytes": 479
+      }
+    },
+    "runtime_policy_evaluate": {
+      "arcis": {
+        "sha256": "ffb1b0364c7482b60b20ed7d74c839121d5516e07f2acc4f5ac2e863b3853ef4",
+        "bytes": 1798157
+      },
+      "idarc": {
+        "sha256": "d739826c7e7364faf083c71ed27dd863558fa6b15276ac54fe8c5c15bf41869a",
+        "bytes": 2719
+      },
+      "hash": {
+        "sha256": "960d3c025e9342c60088d68c20b946b7f5a13998475a7339475a76b8f56eea02",
+        "bytes": 115
+      },
+      "weight": {
+        "sha256": "218a9456e37d312100b2632bcb8e36bce2468007b9bee4f63493ff537017dcae",
+        "bytes": 480
+      }
+    }
+  },
+  "outputPathIndependent": true,
+  "changedPolicyChangesArtifact": true,
+  "changedPolicyArtifactSha256": "8a8515b2f308fd5bbfe84e9b0cfa8329ee6824119424a57e85c6b8eb77a63d87"
+}
