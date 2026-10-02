@@ -28,7 +28,7 @@ export async function callback(client,op,expectedStatus,started,evidence,save){
    const ix=tx.transaction.message.compiledInstructions.find(ix=>keys.get(ix.programIdIndex).equals(client.program.programId));if(!ix)continue;
    const decoded=client.program.coder.instruction.decode(Buffer.from(ix.data)),output=decoded?.data?.output?.success?.[0];assert(output,'Missing signed successful runtime output');
    assert(ix.accountKeyIndexes.some(i=>keys.get(i).equals(jobKey))&&ix.accountKeyIndexes.some(i=>keys.get(i).equals(computation)));
-   const result={label:op.label,program:client.program.programId.toBase58(),job:jobKey.toBase58(),computation:computation.toBase58(),signature:entry.signature,status:job.status,output,elapsedFromQueueMs:Date.now()-started,slot:tx.slot,landedCU:tx.meta.computeUnitsConsumed,feeLamports:tx.meta.fee,transaction:tx};
+   const result={label:op.label,program:client.program.programId.toBase58(),job:jobKey.toBase58(),computation:computation.toBase58(),signature:entry.signature,status:job.status,output,approvalStagingToObservedCallbackMs:Date.now()-started,slot:tx.slot,landedCU:tx.meta.computeUnitsConsumed,feeLamports:tx.meta.fee,transaction:tx};
    evidence.callbacks.push(result);await save();return{result,instruction: new client.session.web3.TransactionInstruction({programId:client.program.programId,data:Buffer.from(ix.data),keys:ix.accountKeyIndexes.map(i=>({pubkey:keys.get(i),isSigner:tx.transaction.message.isAccountSigner(i),isWritable:tx.transaction.message.isAccountWritable(i)}))})};
   }await sleep(250);
  }throw Error(`${op.label}: no actual authenticated callback receipt`);
