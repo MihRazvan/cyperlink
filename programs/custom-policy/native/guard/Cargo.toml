@@ -1,0 +1,23 @@
+[package]
+name="ct-guard-spike"
+version="0.1.0"
+edition="2021"
+[lib]
+crate-type=["cdylib","lib"]
+[dependencies]
+solana-account-info={workspace=true}
+solana-address={workspace=true}
+solana-program-entrypoint={workspace=true}
+solana-program-error={workspace=true}
+solana-instruction={workspace=true}
+solana-cpi={workspace=true}
+solana-sha256-hasher={workspace=true}
+spl-token-2022-interface={workspace=true}
+bytemuck={workspace=true}
+solana-curve25519="=3.1.14"
+solana-zk-elgamal-proof-interface="=0.1.3"
+
+cyperlink-native-admission = { path = "../../../../crates/native-admission" }
+cyperlink-hook-routing = { path = "../../../../crates/hook-routing" }
+
+cyperlink-custom-policy-layout = { path = "../../../../crates/custom-policy-layout" }
