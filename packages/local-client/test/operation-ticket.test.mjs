@@ -7,6 +7,7 @@ import { loadWeb3, REPO, TOKEN_PROGRAM } from '../src/runtime.mjs';
 import { descriptorDigest, queryStateDigest, hash, le } from '../src/operation-plan.mjs';
 import { instructionJSON, validateOperationTicket } from '../src/operation-ticket.mjs';
 import { LocalOperationClient } from '../src/operation-client.mjs';
+import { validatePreparedActionEvidence, readPreparedActionEvidence } from '../src/prepared-action.mjs';
 import { INITIAL_PROFILE as P, buildActionTemplate, buildMerchantDigest, publicKeyBytes } from '../../sdk/src/index.mjs';
 
 const web3 = await loadWeb3(process.env.CYPERLINK_JS_MODULE_ROOT ?? resolve(REPO, '.local/toolchain/js'));
@@ -44,8 +45,13 @@ function fixture({ lookup = false } = {}) {
     }
     return { genesisHash: plan.genesisHash, descriptorSha256: descriptorDigest(descriptor), role: 'commit', wireBase64: wire.toString('base64'), wireSha256: hash(wire).toString('hex'), loadedAddresses: loaded, minContextSlot: 1 };
   }
-  const connection = { getAddressLookupTable: async () => ({ context: { slot: 2 }, value: table }) };
-  return { plan, instruction, recordFor, connection, table, owner, admin };
+  const actionData = Buffer.alloc(1200); hash(Buffer.from('account:PreparedAction')).subarray(0, 8).copy(actionData);
+  owner.publicKey.toBuffer().copy(actionData, 8); template.subarray(80, 464).copy(actionData, 120);
+  actionData.writeUInt32LE(nativeData.length, 504); nativeData.copy(actionData, 508);
+  const actionResponse = { context: { slot: 2 }, value: { owner: new web3.PublicKey(P.auth), executable: false, data: actionData } };
+  const connection = { getAddressLookupTable: async () => ({ context: { slot: 2 }, value: table }),
+    getAccountInfoAndContext: async (address, options) => { assert.equal(address.toBase58(), plan.action); assert(options.minContextSlot >= plan.contextSlot); return actionResponse; } };
+  return { plan, instruction, recordFor, connection, table, owner, admin, actionResponse };
 }
 
 test('exact signed native operation intent passes with and without ALT', async () => {
@@ -111,4 +117,46 @@ test('actual pinned Anchor query builder passes and changed expected query snaps
   const changed = new web3.TransactionInstruction({ ...query, data: Buffer.from(query.data) }); changed.data[changed.data.length - 1] ^= 1;
   const wrong = f.recordFor([web3.ComputeBudgetProgram.setComputeUnitLimit({ units: 1300000 }), changed]); wrong.role = 'query';
   await assert.rejects(validateOperationTicket(f.plan, wrong, web3, f.connection), /differs from retained intent/);
+});
+
+
+test('signed alternate PreparedAction cannot inherit another action descriptor through forged journal metadata', async () => {
+  const f = fixture({ lookup: true });
+  const connection = new web3.Connection('http://127.0.0.1:8899');
+  const provider = new anchor.AnchorProvider(connection, new anchor.Wallet(f.admin), { commitment: 'confirmed' });
+  const program = new anchor.Program(JSON.parse(await readFile(resolve(REPO, 'programs/auth/target/idl/cyperlink_auth.json'))), provider);
+  const client = new LocalOperationClient({ session: { web3, endpoint: connection.rpcEndpoint, payer: f.admin }, provider, program, ar, BN });
+  const acc = client.accounts(new BN(f.plan.query.offset));
+  f.plan.descriptor.job = acc.job.toBase58(); f.plan.descriptor.computation = acc.computationAccount.toBase58();
+  const retainedDescriptor = descriptorDigest(f.plan.descriptor);
+  f.plan.action = key(70).toBase58(); // A different immutable account, signed by the same owner/admin.
+  const query = await client.queryInstruction(f.plan);
+  f.plan.instructions.query = instructionJSON(query); f.table.state.addresses = query.keys.map(meta => meta.pubkey);
+  const record = f.recordFor([web3.ComputeBudgetProgram.setComputeUnitLimit({ units: 1300000 }), query]); record.role = 'query';
+  assert.equal(record.descriptorSha256, retainedDescriptor);
+  // Distinct merchant SKU contract; native/proof/state inputs are otherwise unchanged.
+  const otherSku = '43', otherEffect = web3.PublicKey.findProgramAddressSync([Buffer.from('purchase'), f.owner.publicKey.toBuffer(), le(otherSku)], new web3.PublicKey(P.merchant))[0];
+  const retainedTemplate = Buffer.from(f.plan.descriptor.templateHex, 'hex');
+  buildMerchantDigest({ effect: otherEffect.toBuffer(), sku: otherSku, owner: f.owner.publicKey.toBuffer(),
+    destination: retainedTemplate.subarray(144, 176), mint: retainedTemplate.subarray(112, 144) }).copy(f.actionResponse.value.data, 40 + 432);
+  await assert.rejects(validateOperationTicket(f.plan, record, web3, f.connection), /Immutable action template differs/);
+});
+
+test('public immutable action evidence can be checked offline and rejects account/byte substitutions', async () => {
+  const f = fixture();
+  const evidence = await readPreparedActionEvidence(f.plan, web3, f.connection);
+  assert.equal(validatePreparedActionEvidence(f.plan, evidence), evidence);
+  assert.equal(Buffer.from(evidence.dataBase64, 'base64').length, 1200);
+  for (const mutate of [e => { e.address = key(71).toBase58(); }, e => { e.owner = P.policy; }, e => { e.executable = true; },
+    e => { e.slot = 0; }, e => { e.sha256 = '00'.repeat(32); }, e => { e.dataBase64 = 'AA=='; }]) {
+    const changed = structuredClone(evidence); mutate(changed);
+    assert.throws(() => validatePreparedActionEvidence(f.plan, changed));
+  }
+  for (const offset of [0, 8, 40, 120, 504, 508, 1199]) {
+    const changed = structuredClone(evidence), data = Buffer.from(changed.dataBase64, 'base64'); data[offset] ^= 1;
+    changed.dataBase64 = data.toString('base64'); changed.sha256 = hash(data).toString('hex');
+    assert.throws(() => validatePreparedActionEvidence(f.plan, changed), `tampered offset ${offset}`);
+  }
+  f.actionResponse.context.slot = 1;
+  await assert.rejects(readPreparedActionEvidence(f.plan, web3, f.connection, { minContextSlot: 2 }), /unavailable at retained context/);
 });

@@ -3,6 +3,7 @@ import { createHash, verify } from 'node:crypto';
 import { ensure, instructionFromJSON, TOKEN_PROGRAM } from './runtime.mjs';
 import { descriptorDigest, hexBytes, le, validateOperationPlan } from './operation-plan.mjs';
 import { INITIAL_PROFILE as P, validateOperation } from '../../sdk/src/index.mjs';
+import { readPreparedActionEvidence } from './prepared-action.mjs';
 
 const sha = value => createHash('sha256').update(value).digest();
 export function instructionJSON(instruction) {
@@ -89,5 +90,6 @@ export async function validateOperationTicket(plan, record, web3, connection) {
   const allowed = new Set([plan.descriptor.admin, budget.programId.toBase58(), expected.programId.toBase58(), ...expected.keys.map(meta => meta.pubkey.toBase58())]);
   const keys = message.getAccountKeys({ accountKeysFromLookups: resolved });
   for (let i = 0; i < keys.length; i++) ensure(allowed.has(keys.get(i).toBase58()), 'Unexpected account in signed operation message');
-  return { role: record.role, wireSha256: record.wireSha256, descriptorSha256: record.descriptorSha256, instructionSha256: sha(Buffer.from(expected.data)).toString('hex'), liveLookupTablesChecked: message.addressTableLookups.length };
+  const preparedAction = record.role === 'query' ? await readPreparedActionEvidence(plan, web3, connection, { minContextSlot: record.minContextSlot }) : undefined;
+  return { ...(preparedAction ? { preparedAction } : {}), role: record.role, wireSha256: record.wireSha256, descriptorSha256: record.descriptorSha256, instructionSha256: sha(Buffer.from(expected.data)).toString('hex'), liveLookupTablesChecked: message.addressTableLookups.length };
 }

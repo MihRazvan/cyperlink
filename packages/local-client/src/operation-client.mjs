@@ -7,6 +7,7 @@ import { verifyTransferProofs } from './proofs.mjs';
 import { LocalSession, loadWeb3, loadSigner, saveSigner, writeNew, ensure, TOKEN_PROGRAM, PROOF_PROGRAM } from './runtime.mjs';
 import { SignedInstructionSender } from './transaction-sender.mjs';
 import { validateOperationTicket } from './operation-ticket.mjs';
+import { readPreparedActionEvidence } from './prepared-action.mjs';
 import { hash, hexBytes, decimal, le, queryStateDigest, descriptorDigest, validateOperationPlan, readOperationPlan } from './operation-plan.mjs';
 import { OperationReader, LocalRpcTransport, INITIAL_PROFILE as P, buildActionTemplate, buildMerchantDigest, buildLicenseDigest, validateOperation, decodeQuota } from '../../sdk/src/index.mjs';
 
@@ -161,11 +162,7 @@ export class LocalOperationClient {
   async stageQuery(plan, { owner }) {
     await this.assertChain(plan);
     ensure(owner.publicKey.toBase58() === plan.descriptor.owner && this.session.payer.publicKey.toBase58() === plan.descriptor.admin, 'Explicit owner and administrator signers required');
-    const action = await this.program.account.preparedAction.fetch(new this.session.web3.PublicKey(plan.action));
-    const retained = Buffer.from(plan.descriptor.templateHex, 'hex'), actionBytes = Buffer.from(action.template);
-    ensure(action.owner.toBase58() === plan.descriptor.owner && actionBytes.length === 464 && actionBytes.subarray(0, 80).every(v => v === 0)
-      && actionBytes.subarray(80).equals(retained.subarray(80, 464))
-      && Buffer.from(action.nativeData).equals(Buffer.from(plan.binding.nativeDataHex, 'hex')), 'Immutable action differs from retained intent');
+    await readPreparedActionEvidence(plan, this.session.web3, this.session.connection);
     const current = await this.session.connection.getAccountInfo(this.Q, 'confirmed');
     ensure(current?.owner.equals(this.H) && queryStateDigest(current.data).toString('hex') === plan.descriptor.queryStateHashHex, 'Query snapshot changed; explicit fresh preparation required');
     const mxe = await this.ar.getMXEPublicKey(this.provider, this.program.programId);

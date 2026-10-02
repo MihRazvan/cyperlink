@@ -22,6 +22,13 @@ function fixture(kind = 'merchant') {
   const state = { genesis, quota, runtimeKey, action: null, actionFetches: 0 };
   const connection = {
     async getGenesisHash() { return state.genesis; },
+    async getAccountInfoAndContext(address, options) {
+      state.actionFetches++; assert.equal(address.toBase58(), key(5).toBase58());
+      const data = Buffer.alloc(1200); hash(Buffer.from('account:PreparedAction')).subarray(0, 8).copy(data);
+      state.action.owner.toBuffer().copy(data, 8); Buffer.from(state.action.template).copy(data, 40);
+      data.writeUInt32LE(state.action.nativeData.length, 504); Buffer.from(state.action.nativeData).copy(data, 508);
+      return { context: { slot: Math.max(options.minContextSlot, 1) }, value: { owner: new PublicKey(P.auth), executable: false, data } };
+    },
     async getAccountInfo(address) { calls.fetched.push(address.toBase58()); return { owner: new PublicKey(P.policy), data: state.quota }; },
   };
   const program = { programId: new PublicKey(P.auth), account: { preparedAction: { async fetch(address) {
@@ -85,7 +92,7 @@ test('imported action owner, reserved header, native bytes and semantic template
   for (const mutate of [f => { f.state.action.owner = key(21); }, f => { f.state.action.template[0] = 1; },
     f => { f.state.action.template[432] ^= 1; }, f => { f.state.action.nativeData[2] ^= 1; }]) {
     const f = fixture(); mutate(f);
-    await assert.rejects(f.client.stageQuery(f.plan, { owner: f.owner }), /Immutable action differs/);
+    await assert.rejects(f.client.stageQuery(f.plan, { owner: f.owner }), /Immutable action .*differs/);
     assert.equal(f.calls.staged.length, 0); assert.equal(f.calls.fetched.length, 0);
   }
 });
