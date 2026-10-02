@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import {
   ROOT, PROFILE, CIPHER, canonical, sha, schemaDigest, defaultManifest,
   validateManifest, initPackage, testPackage, buildPackage, readRelease,
+  command,
 } from '../src/package.mjs';
 
 test('manifest schema rejects unsupported private inputs, outputs, authority and malformed fields', () => {
@@ -53,12 +54,15 @@ test('real package compiler, generated bindings, copied-directory identity and t
     assert.equal(tested.evidence, 'host-IR-only-not-distributed');
     const built = await buildPackage(app);
     assert.equal(built.evidence, 'compiled-artifacts-not-runtime');
+    const repeated = await buildPackage(app);
+    assert.equal(repeated.releaseHashHex, built.releaseHashHex, 'an identical source rebuild must retain release identity');
+    assert.equal(repeated.releaseDirectory, built.releaseDirectory, 'an identical release must be reusable');
     // Other agents can edit on-chain sources concurrently. This acceptance group
     // tests customer/package/artifact identity, with platform drift tested below.
     const original = await readRelease(app, { checkPlatform: false });
     assert.equal(original.release.releaseHashHex, built.releaseHashHex);
     assert.equal(Object.keys(original.release.artifacts).length, 8);
-    assert.match(await readFile(join(app, '.cyperlink/bindings.d.ts'), 'utf8'), /remaining: bigint/);
+    assert.match(await readFile(join(app, '.cyperlink/bindings.d.mts'), 'utf8'), /remaining: bigint/);
     const bindings = await readFile(join(app, '.cyperlink/bindings.mjs'), 'utf8');
     assert(bindings.includes(built.releaseHashHex));
     assert.match(bindings, /different policy release/);
@@ -101,6 +105,15 @@ test('real package compiler, generated bindings, copied-directory identity and t
     await writeFile(join(changedDirectory, 'release.json'), JSON.stringify({ ...body, releaseHashHex: changedHash }));
     await writeFile(join(app, '.cyperlink/current.json'), JSON.stringify({ releaseHashHex: changedHash }));
     await assert.rejects(readRelease(app), /Platform source changed/);
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});
+
+test('failed diagnostic persistence rejects the command instead of losing completion', { timeout: 10_000 }, async () => {
+  const temporary = await mkdtemp(join(ROOT, '.local/policy-cli-command-test-'));
+  try {
+    await assert.rejects(command(process.execPath, ['-e', 'process.stdout.write("completed")'], {
+      log: join(temporary, 'missing-directory', 'command.log'),
+    }), { code: 'ENOENT' });
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
