@@ -39,6 +39,22 @@ export async function run({deployments,directory,scenario='combined'}){
  }
  const save=()=>writeJson(resolve(directory,'results.json'),evidence);await save();
  try{
+  evidence.loadedPrograms=[];
+  const verified=new Map();
+  for(const instance of instances){
+   const deployment=await json(instance.results);assert(deployment.passed&&deployment.genesisHash===evidence.genesisHash,'Deployment qualification is incomplete or belongs to another ledger');
+   const required=['auth','policy','guard','merchant','license','proofBuffer'].map(name=>instance.descriptor.programs[name]);
+   required.push('TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb','Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ','ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq');
+   for(const address of required){
+    const previous=deployment.loadedPrograms.find(item=>item.program===address);assert(previous?.matched&&previous.local_elf_path,'Missing actual loaded ELF deployment evidence');
+    assert.equal(previous.genesis_hash,evidence.genesisHash);
+    if(verified.has(address)){assert.equal(verified.get(address).elf_sha256,previous.elf_sha256);continue;}
+    const out=resolve(directory,`loaded-${verified.size}.json`);
+    await execute('python3',[resolve(REPO,'scripts/verify_loaded_program.py'),'--program-id',address,'--elf',previous.local_elf_path,'--rpc',endpoint,'--output',out],{maxBuffer:1024*1024});
+    const current=await json(out);assert(current.matched);assert.equal(current.genesis_hash,evidence.genesisHash);assert.equal(current.elf_sha256,previous.elf_sha256);assert.equal(current.loaded_elf_sha256,previous.loaded_elf_sha256);
+    verified.set(address,current);evidence.loadedPrograms.push({...current,evidenceFile:out});await save();
+   }
+  }
   const clients=[];
   for(const [index,instance]of instances.entries()){
    const clientDir=await createPrivateRun(resolve(directory,`client-${index}`));
