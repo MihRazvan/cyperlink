@@ -8,12 +8,11 @@ import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { provision } from '../../packages/local-client/src/provision.mjs';
-import { prepareNativeTransfer } from '../../packages/local-client/src/prepare-transfer.mjs';
-import { verifyTransferProofs } from '../../packages/local-client/src/proofs.mjs';
+import { LocalOperationClient } from '../../packages/local-client/src/operation-client.mjs';
 import * as local from '../../packages/local-client/src/runtime.mjs';
 import { DemoTransport, sleep } from './transport.mjs';
 import { sha256, u64, actionTemplate, consumerDigest, parseQuota, assertSettlementEffect } from './operation.mjs';
-import { OperationReader, LocalRpcTransport } from '../../packages/sdk/src/index.mjs';
+import { OperationReader, LocalRpcTransport, validateOperation } from '../../packages/sdk/src/index.mjs';
 const execute = promisify(execFile);
 const AUTH = '5bgSoi3WbUndQNhWrkxJoURjkRd28BxxucZozwGR9AQQ';
 
@@ -77,6 +76,8 @@ export async function run(options) {
     const admission = PublicKey.findProgramAddressSync([Buffer.from('admission')], program.programId)[0];
     const transport = new DemoTransport(session, async result => { evidence.transactions.push(result); await save(); });
     const operationReader = new OperationReader(new LocalRpcTransport(endpoint, { commitment: 'confirmed' }));
+    const client = new LocalOperationClient({ session, provider, program, ar, BN, moduleRoot: options.moduleRoot,
+      payerKeyfile: options.payerKeyfile, proofCli: options.proofCli, transport });
     async function prefundPda(label, key) {
       if (options.prefundPdas !== 'true') return;
       local.ensure(!await connection.getAccountInfo(key), 'Prefunding test requires a previously absent PDA');
@@ -174,80 +175,86 @@ export async function run(options) {
       { pubkey: payer.publicKey, isSigner: true, isWritable: true }, { pubkey: SystemProgram.programId, isSigner: false, isWritable: false }] })]);
     const owners = { a: await local.loadSigner(resolve(directory, 'asset-a/source-owner-signer.json'), web3),
       b: await local.loadSigner(resolve(directory, 'asset-b/source-owner-signer.json'), web3) };
-    async function prepareAndAdmit(label, who, amount, expectedStatus = 1) {
-      const preparedRun = await prepareNativeTransfer({ ...common, directory: resolve(directory, `operation-${label}`),
-        provisionedDirectory: resolve(directory, `asset-${who}`), amount });
-      await verifyTransferProofs(preparedRun.session, preparedRun.prepared, preparedRun.contextSigners,
-        { bufferProgram: new PublicKey(Buffer.alloc(32, 89)).toBase58() });
-      const prepared = preparedRun.prepared, owner = owners[who], kind = who === 'a' ? 'merchant' : 'license';
+    async function recoverInProcess(op, action, ticket, label, expectedStatus) {
+      const ticketPath = resolve(directory, `recovery-${label}-ticket.json`), output = resolve(directory, `recovery-${label}.json`);
+      if (ticket) await local.writeNew(ticketPath, JSON.stringify(ticket));
+      const args = [resolve(local.REPO, 'examples/two-consumers/recover-operation.mjs'), '--plan', resolve(op.directory, 'operation-plan.json'),
+        '--rpc', endpoint, '--module-root', options.moduleRoot, '--action', action, '--out', output];
+      if (ticket) args.push('--ticket', ticketPath, '--role', ticket.role);
+      if (expectedStatus) args.push('--expect-status', expectedStatus);
+      await execute(process.execPath, args, { maxBuffer: 1024 * 1024 });
+      const result = JSON.parse(await readFile(output)); assert(result.passed && result.processId !== process.pid);
+      evidence.recoveries ??= []; evidence.recoveries.push({ label, ...result }); await save();
+      return result;
+    }
+    async function prepareOperation(label, who, amount, sku = '7') {
+      const owner = owners[who], kind = who === 'a' ? 'merchant' : 'license';
       const consumer = new PublicKey(Buffer.alloc(32, who === 'a' ? 83 : 84));
-      const product = who === 'a' ? u64(7) : sha256(Buffer.from('cyperlink-demo-license'));
-      const expiry = (await connection.getSlot('confirmed')) + 950;
-      const record = PublicKey.findProgramAddressSync([Buffer.from(who === 'a' ? 'purchase' : 'license'), owner.publicKey.toBuffer(), product], consumer)[0];
-      if (!await connection.getAccountInfo(record)) {
-        await prefundPda(`${label}-consumer-record`, record);
-        const ix = new TransactionInstruction({ programId: consumer, data: Buffer.concat([Buffer.from([0]), product]), keys: [
-          { pubkey: payer.publicKey, isSigner: true, isWritable: true }, { pubkey: owner.publicKey, isSigner: true, isWritable: false },
-          { pubkey: record, isSigner: false, isWritable: true }, { pubkey: SystemProgram.programId, isSigner: false, isWritable: false }] });
-        await transport.send(`${label}-initialize-consumer-record`, [ix], [owner]);
-      }
-      const source = new PublicKey(prepared.source), destination = new PublicKey(prepared.destination);
-      const contract = consumerDigest(kind, { record: record.toBuffer(), product, expiry, owner: owner.publicKey.toBuffer(), destination: destination.toBuffer(), mint: mint.toBuffer() });
-      const proofKeys = prepared.proofs.map(proof => new PublicKey(proof.context_address));
-      const proofAccounts = await connection.getMultipleAccountsInfo(proofKeys, 'confirmed');
-      local.ensure(proofAccounts.every(account => account?.owner.toBase58() === local.PROOF_PROGRAM), 'Proof contexts were not natively verified');
-      const sourceData = (await connection.getAccountInfo(source, 'confirmed')).data;
-      assert.equal(sha256(sourceData).toString('hex'), prepared.source_data_sha256);
-      const nativeData = Buffer.from(prepared.native_instruction.data, 'hex');
-      const template = actionTemplate({ source: source.toBuffer(), mint: mint.toBuffer(), destination: destination.toBuffer(), owner: owner.publicKey.toBuffer(),
-        sourceData, nativeData, proofKeys: proofKeys.map(key => key.toBuffer()), proofData: proofAccounts.map(account => account.data),
-        newSource: Buffer.from(prepared.expected_new_source_ciphertext, 'hex'), commitment: Buffer.from(prepared.expected_commitment, 'hex'),
-        quota: Q.toBuffer(), consumer: consumer.toBuffer(), consumerContract: contract });
-      const permitSigner = Keypair.generate(); await local.saveSigner(resolve(preparedRun.directory, 'permit-signer.json'), permitSigner);
-      await preparedRun.session.createAccount(permitSigner, 520, H, [], [], 'create-uninitialized-permit');
-      const actionId = new BN(randomBytes(8), 'le');
-      const action = PublicKey.findProgramAddressSync([Buffer.from('action'), owner.publicKey.toBuffer(), actionId.toArrayLike(Buffer, 'le', 8)], program.programId)[0];
-      await transport.send(`${label}-prepare-immutable-action`, [await program.methods.prepareAction(actionId, template, nativeData)
-        .accounts({ payer: payer.publicKey, sourceOwner: owner.publicKey, action }).instruction()], [owner]);
-      const offset = new BN(randomBytes(8), 'le'), clientNonce = randomBytes(16);
-      const witness = JSON.parse(await readFile(resolve(preparedRun.directory, 'operation-witness.json'), 'utf8'));
-      assert.equal(witness.amount, amount); assert.equal(Buffer.from(witness.commitment).toString('hex'), prepared.expected_commitment);
-      const encrypted = cipher.encrypt([BigInt(witness.amount), ar.deserializeLE(Uint8Array.from(witness.opening))], clientNonce);
-      const acc = { ...accounts('runtime_budget_bound', offset), sourceOwner: owner.publicKey, action, permit: permitSigner.publicKey,
-        permitClaim: PublicKey.findProgramAddressSync([Buffer.from('permit-claim'), permitSigner.publicKey.toBuffer()], program.programId)[0] };
-      const remaining = [source, mint, destination, ...proofKeys, consumer, metadata].map(pubkey => ({ pubkey, isSigner: false, isWritable: false }));
+      const product = kind === 'merchant' ? u64(sku) : sha256(Buffer.from('cyperlink-demo-license'));
+      const expiry = String((await connection.getSlot('confirmed')) + 950);
+      const record = PublicKey.findProgramAddressSync([Buffer.from(kind === 'merchant' ? 'purchase' : 'license'), owner.publicKey.toBuffer(), product], consumer)[0];
+      if (!await connection.getAccountInfo(record)) await prefundPda(`${label}-consumer-record`, record);
+      const operationDirectory = resolve(directory, `operation-${label}`);
+      const plan = await client.prepare({ label, directory: operationDirectory, provisionedDirectory: resolve(directory, `asset-${who}`), amount,
+        consumer: kind === 'merchant' ? { kind, sku } : { kind, productHex32: product.toString('hex'), expirySlot: expiry } });
+      // Reopen the persisted plan before signing; never infer expected intent from returned chain state.
+      const reopened = await client.load(operationDirectory); assert.deepEqual(reopened, plan);
+      const descriptor = plan.descriptor, { template: t } = validateOperation(descriptor);
+      return { label, kind, amount, owner, source: new PublicKey(t.source), destination: new PublicKey(t.destination),
+        proofKeys: plan.binding.proofAddresses.map(key => new PublicKey(key)), consumer, product, expiry: Number(expiry), record,
+        contract: Buffer.from(t.actionDigest), permit: new PublicKey(descriptor.permit), nativeData: Buffer.from(plan.binding.nativeDataHex, 'hex'),
+        job: new PublicKey(descriptor.job), descriptor, plan, directory: operationDirectory };
+    }
+    async function prepareAndAdmit(label, who, amount, expectedStatus = 1, onQueued = async () => {}) {
+      const op = await prepareOperation(label, who, amount), { plan, descriptor } = op;
       const before = await quotaBytes(), started = Date.now();
-      const jobExpiry = new BN((await connection.getSlot('confirmed')) + 1800);
-      const queuedTemplate = Buffer.alloc(520); template.copy(queuedTemplate);
-      before.subarray(0, 8).copy(queuedTemplate, 8); before.subarray(8, 40).copy(queuedTemplate, 16);
-      const successorNonce = Buffer.alloc(16); successorNonce.writeBigUInt64LE(before.readBigUInt64LE(88) + 1n);
-      successorNonce.copy(queuedTemplate, 464); u64(jobExpiry.toString()).copy(queuedTemplate, 512);
-      const inputHash = sha256(Buffer.from(publicKey), clientNonce, Buffer.from(encrypted[0]), Buffer.from(encrypted[1]),
-        before.subarray(40, 56), before.subarray(56, 88), successorNonce, Buffer.from(prepared.expected_commitment, 'hex'));
-      const descriptor = { profile: 'local-native-ct-v0', consumerKind: kind, job: acc.job.toBase58(),
-        computation: acc.computationAccount.toBase58(), permit: permitSigner.publicKey.toBase58(), owner: owner.publicKey.toBase58(),
-        admin: payer.publicKey.toBase58(), quota: Q.toBase58(), effect: record.toBase58(),
-        templateHex: queuedTemplate.toString('hex'), inputsHashHex: inputHash.toString('hex'),
-        ...(kind === 'merchant' ? { sku: '7' } : { productHex32: product.toString('hex'), licenseExpirySlot: String(expiry) }) };
-      await local.writeNew(resolve(preparedRun.directory, 'operation-descriptor.json'), JSON.stringify(descriptor, null, 2));
-      const ix = await program.methods.runtimeBudgetBound(offset, publicKey, bn(clientNonce), Array.from(encrypted[0]), Array.from(encrypted[1]),
-        jobExpiry).accountsPartial(acc).remainingAccounts(remaining).instruction();
-      await transport.send(`${label}-queue-owner-authorized-query`, [ix], [owner], { category: 'arcium-queue' });
+      const ticket = await client.stageQuery(plan, { owner: op.owner });
+      if (who === 'b') {
+        // Fault injection drops a real send response after journaling/broadcast. It does not fabricate a receipt.
+        const original = connection.sendRawTransaction.bind(connection);
+        connection.sendRawTransaction = async (...args) => { await original(...args); throw Error('TEST ONLY: dropped real RPC send response'); };
+        try { await (await transport.durable()).send(ticket, { pollAttempts: 0 }); }
+        finally { connection.sendRawTransaction = original; }
+        await recoverInProcess(op, 'recover-ticket', ticket, `${label}-lost-response`);
+      }
+      await recoverInProcess(op, 'submit-ticket', ticket, `${label}-submit-retained-query`);
+      const recovered = await client.recover(plan, ticket); assert(recovered.delivery.result && recovered.delivery.result.error === null);
+      evidence.transactions.push(recovered.delivery.result); await save();
+      await onQueued();
+      const acc = { job: op.job, computationAccount: new PublicKey(descriptor.computation) };
       const callback = await committedCallback(acc, expectedStatus, 'RuntimeBudgetBoundCallback', started);
       assert.equal(callback.output.field1, expectedStatus === 1, 'Unexpected disclosed policy decision');
-      assert(Buffer.from(callback.output.field0).equals(Buffer.from(prepared.expected_commitment, 'hex')), 'Native commitment mismatch in callback');
+      assert(Buffer.from(callback.output.field0).equals(Buffer.from(validateOperation(descriptor).template.amountCommitment)), 'Native commitment mismatch in callback');
       const after = await quotaBytes(); assert(before.subarray(0, 88).equals(after.subarray(0, 88)), 'Admission consumed quota');
-      const permit = (await connection.getAccountInfo(permitSigner.publicKey)).data;
-      if (expectedStatus === 1) { assert.equal(permit[0], 0); assert.equal(permit[1], 1); }
-      else assert(permit.every(byte => byte === 0), 'Denied query created an authorized permit');
-      const op = { label, kind, amount, owner, source, destination, proofKeys, consumer, product, expiry, record, contract,
-        permit: permitSigner.publicKey, nativeData, job: acc.job, descriptor };
-      const observation = await operationReader.observe(descriptor);
-      assert.equal(observation.status, expectedStatus === 1 ? 'authorized' : 'denied');
+      await recoverInProcess(op, 'observe', null, `${label}-after-callback`, expectedStatus === 1 ? 'authorized' : 'denied');
+      const observation = await client.observe(plan); assert.equal(observation.status, expectedStatus === 1 ? 'authorized' : 'denied');
       evidence.checks.push({ label: `${label}-sdk-observation`, observation });
-      evidence.operations.push({ label, kind, requestedAmountObserverDisclosure: amount, status: expectedStatus, source: source.toBase58(), destination: destination.toBase58(),
-        permit: op.permit.toBase58(), job: acc.job.toBase58(), consumer: consumer.toBase58(), record: record.toBase58(), quotaVersionAtAdmission: parseQuota(before).version });
+      evidence.operations.push({ label, kind: op.kind, requestedAmountObserverDisclosure: amount, status: expectedStatus, source: op.source.toBase58(), destination: op.destination.toBase58(),
+        permit: op.permit.toBase58(), job: op.job.toBase58(), consumer: op.consumer.toBase58(), record: op.record.toBase58(), quotaVersionAtAdmission: parseQuota(before).version });
       await save(); return op;
+    }
+    async function rejectDelayedQuery(op, ticket) {
+      const keys = [Q, op.permit, op.job, new PublicKey(op.descriptor.computation), PublicKey.findProgramAddressSync([Buffer.from('permit-claim'), op.permit.toBuffer()], program.programId)[0]];
+      const read = async () => {
+        const response = await connection.getMultipleAccountsInfoAndContext(keys, { commitment: 'confirmed' });
+        return { slot: response.context.slot, accounts: response.value.map((account, i) => account ? { address: keys[i].toBase58(), owner: account.owner.toBase58(),
+          lamports: account.lamports, executable: account.executable, dataBase64: account.data.toString('base64') } : null) };
+      };
+      const before = await read(); assert(before.accounts.slice(2).every(account => account === null));
+      // Preflight must be bypassed to retain an actual failing transaction; original signed bytes are unchanged.
+      const original = connection.sendRawTransaction.bind(connection);
+      connection.sendRawTransaction = (wire, config) => original(wire, { ...config, skipPreflight: true });
+      let receipt;
+      try { receipt = await (await transport.durable()).send(ticket); }
+      finally { connection.sendRawTransaction = original; }
+      assert.equal(receipt.status, 'failed'); assert.equal(receipt.receipt.meta.err.InstructionError[1].Custom, 6004);
+      const after = await read(); assert.deepEqual(after.accounts, before.accounts);
+      const result = transport.result(receipt, ticket); evidence.transactions.push(result);
+      evidence.querySnapshotRejection = { actualCustomError: 6004, signature: result.signature, before, after,
+        trackedAddresses: keys.map(key => key.toBase58()), operationLabel: op.label, descriptor: op.descriptor,
+        exactSignedWireReused: true, jobPermitClaimAndComputationAbsent: true, quotaAndPermitUnchanged: true };
+      await recoverInProcess(op, 'recover-ticket', ticket, 'delayed-query-rejected', 'unobserved');
+      await save();
     }
     function consume(op, fail = false) {
       const guardPda = PublicKey.findProgramAddressSync([Buffer.from('guard')], G)[0];
@@ -285,7 +292,11 @@ export async function run(options) {
     }
     async function commit(op) {
       const before = await state(op, `${op.label}-commit-before`);
-      await transport.send(`${op.label}-atomic-paid-entitlement`, [consume(op)], [op.owner], { category: 'native-settlement' });
+      const ticket = await client.stageCommit(op.plan, { owner: op.owner });
+      await recoverInProcess(op, 'submit-ticket', ticket, `${op.label}-submit-retained-commit`, 'committed');
+      const recovered = await client.recover(op.plan, ticket); assert.equal(recovered.observation.status, 'committed');
+      evidence.transactions.push(recovered.delivery.result);
+      await recoverInProcess(op, 'recover-ticket', ticket, `${op.label}-after-commit`, 'committed');
       const after = await state(op, `${op.label}-commit-after`);
       assertSettlementEffect(before[3].data, after[3].data, after[2].data, after[4].data, op.kind);
       assert(before[0].data.equals(after[0].data) === false && before[1].data.equals(after[1].data) === false, 'Native source and destination must both change');
@@ -332,7 +343,9 @@ export async function run(options) {
     }
     if (options.scenario === 'conflict') {
       const a = await prepareAndAdmit('a60', 'a', 60);
-      const b = await prepareAndAdmit('b60-stale', 'b', 60);
+      const delayed = await prepareOperation('delayed-query', 'a', 1, '99');
+      const delayedTicket = await client.stageQuery(delayed.plan, { owner: delayed.owner });
+      const b = await prepareAndAdmit('b60-stale', 'b', 60, 1, () => rejectDelayedQuery(delayed, delayedTicket));
       assert.equal(parseQuota(await quotaBytes()).version, '0');
       await bindingFailures(a);
       await reject(a, 'post-native-transfer-merchant-failure-rolls-back', 1099, true);
