@@ -4,13 +4,17 @@ Updated 2026-10-03. CyperLink continues the selected Solana-native product: make
 
 ## Research coordination
 
-The user-authorized [mailbox exchange](research-exchange.md) is active.
-Implementation-001 answers research-001 with source-backed recovery findings, a
-bounded proposed receipt-transport experiment and an outside-builder test. The
-existing account observer is already receipt-independent; thrown delivery RPC
-errors still prevent combined recovery from reaching it. No product behavior or
-runtime claims changed during the assessment. The bounded reply check ended at
-12:52 UTC without research-002; its reply remains pending for the next active turn.
+The user-authorized [mailbox exchange](research-exchange.md) continues with research-002.
+The bounded [receipt-outage recovery change](receipt-outage-recovery.md) is implemented
+and qualified against an existing paid operation in three fresh keyless processes.
+Typed transport uncertainty reaches the account observer; integrity failures remain
+fatal, uncertain delivery cannot broadcast, and observation floors survive restart.
+Six accounts and original journals stayed unchanged; ten loaded ELFs matched.
+No new payment/computation was executed. The live receipt was pruned, so restoring
+RPC demonstrates expired-unresolved delivery with a committed account effect, not
+retrieval of the original receipt. Exact receipt restoration is host-tested only.
+Next: freeze a bounded builder usability exercise and onboarding instructions;
+no external contact or full standalone enforcement rewrite is authorized/planned.
 
 ## Completed: explicit sessions and crash-window recovery
 

@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "real-local-read-only-existing-payment-recovery-with-injected-http-faults",
+  "archive": ".local/license-session-receipt-outage-v23b/results.json",
+  "archiveSha256": "54af26a153ad5313e3520390a6e2cb86ebc17e616412064156e114131847d014",
+  "originalPaymentArchive": ".local/license-session-qualification-v22b/results.json",
+  "originalPaymentArchiveSha256": "e3e2436d065f36f2a66ece6a24359d9527df85d6104a13573094f8a4c3b37789",
+  "genesisHash": "7t79QMPLFiBZuNbf9pyu2o7qXHR1PNvVE9J89PRV5FyA",
+  "signature": "5UTMAgauSxvMCfgWZXDN9ACB9XuKxYSA27ZfrMtspfNURJm2rofHkidZtpruk4hrCGDgRU6Z5Y2Mh4osYvfEAhtT",
+  "wireSha256": "774cd562e2448bf4349acc22cd8f99be9453ee2a815cc82a057708dacd142463",
+  "scenarios": [
+    {
+      "fault": "receipt-only",
+      "rpcMethods": [
+        "getVersion",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getTransaction",
+        "getSignatureStatuses",
+        "getGenesisHash",
+        "getMultipleAccounts"
+      ],
+      "delivery": {
+        "status": "delivery-unavailable",
+        "signature": "5UTMAgauSxvMCfgWZXDN9ACB9XuKxYSA27ZfrMtspfNURJm2rofHkidZtpruk4hrCGDgRU6Z5Y2Mh4osYvfEAhtT",
+        "wireSha256": "774cd562e2448bf4349acc22cd8f99be9453ee2a815cc82a057708dacd142463",
+        "role": "commit",
+        "attempts": 1,
+        "canBroadcast": false,
+        "observationSlot": 18378,
+        "availability": [
+          {
+            "method": "getTransaction",
+            "category": "http",
+            "status": 503
+          }
+        ]
+      },
+      "observation": {
+        "status": "committed",
+        "slot": 18378,
+        "commitment": "confirmed",
+        "job": "7n7nCDrfiFG2B842K7TxgrucFRycgWJkkWbYAwK5xeoh",
+        "permit": "DuUqyAeu37zDrjXXGeFXMtHE6oAE9vgAaRJ5NXahaqiy",
+        "effect": "FtP7YvaAkrPpzUSAWKBkrkXPdtojdSqjKBVX4Pwd8H2L",
+        "consumerKind": "license",
+        "licenseExpirySlot": "6955",
+        "licenseActive": false,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    },
+    {
+      "fault": "delivery-and-accounts",
+      "rpcMethods": [
+        "getVersion",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getTransaction",
+        "getSignatureStatuses",
+        "getGenesisHash",
+        "getMultipleAccounts"
+      ],
+      "delivery": {
+        "status": "delivery-unavailable",
+        "signature": "5UTMAgauSxvMCfgWZXDN9ACB9XuKxYSA27ZfrMtspfNURJm2rofHkidZtpruk4hrCGDgRU6Z5Y2Mh4osYvfEAhtT",
+        "wireSha256": "774cd562e2448bf4349acc22cd8f99be9453ee2a815cc82a057708dacd142463",
+        "role": "commit",
+        "attempts": 1,
+        "canBroadcast": false,
+        "observationSlot": 18378,
+        "availability": [
+          {
+            "method": "getTransaction",
+            "category": "http",
+            "status": 503
+          },
+          {
+            "method": "getSignatureStatuses",
+            "category": "http",
+            "status": 503
+          }
+        ]
+      },
+      "observation": {
+        "status": "unresolved",
+        "reason": "Account RPC unavailable",
+        "minContextSlot": 18378,
+        "availability": {
+          "method": "getMultipleAccounts",
+          "category": "http",
+          "status": 503
+        }
+      }
+    },
+    {
+      "fault": "restored",
+      "rpcMethods": [
+        "getVersion",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getGenesisHash",
+        "getTransaction",
+        "getSignatureStatuses",
+        "isBlockhashValid",
+        "getBlockHeight",
+        "getGenesisHash",
+        "getMultipleAccounts"
+      ],
+      "delivery": {
+        "status": "expired-unresolved",
+        "signature": "5UTMAgauSxvMCfgWZXDN9ACB9XuKxYSA27ZfrMtspfNURJm2rofHkidZtpruk4hrCGDgRU6Z5Y2Mh4osYvfEAhtT",
+        "wireSha256": "774cd562e2448bf4349acc22cd8f99be9453ee2a815cc82a057708dacd142463",
+        "role": "commit",
+        "attempts": 1,
+        "canBroadcast": false,
+        "observationSlot": 18378,
+        "availability": []
+      },
+      "observation": {
+        "status": "committed",
+        "slot": 18378,
+        "commitment": "confirmed",
+        "job": "7n7nCDrfiFG2B842K7TxgrucFRycgWJkkWbYAwK5xeoh",
+        "permit": "DuUqyAeu37zDrjXXGeFXMtHE6oAE9vgAaRJ5NXahaqiy",
+        "effect": "FtP7YvaAkrPpzUSAWKBkrkXPdtojdSqjKBVX4Pwd8H2L",
+        "consumerKind": "license",
+        "licenseExpirySlot": "6955",
+        "licenseActive": false,
+        "quotaVersion": "2",
+        "expectedQuotaVersion": "1",
+        "actions": [],
+        "reason": "Consumed bound permit, paid consumer entitlement and advanced quota observed together"
+      }
+    }
+  ],
+  "unchangedAccounts": 6,
+  "originalJournalUnchanged": true,
+  "copiedOriginalRecordsUnchanged": true,
+  "loadedElfs": 10,
+  "newTransactions": 0,
+  "newArciumComputations": 0,
+  "restoreLimitation": "Original receipt/status pruned by local validator; restored RPC returns null, exact signature remains expired-unresolved while live bound account effect is committed.",
+  "limitations": [
+    "Existing paid operation; no new payment or Arcium computation in this run.",
+    "Local trusted validator/program profile; no public-network or independent-operator claim.",
+    "HTTP503 is a test-injected fault. Account snapshots are genuine live reads.",
+    "Committed account effect does not prove the retained signature landed while its receipt is unavailable."
+  ],
+  "sourceSha256": {
+    "packages/sdk/src/rpc-availability.mjs": "b38b82aedbd4cdcea33bf7e4265dbd88bd8a15262974dd45b2e17db9ae2ecc74",
+    "packages/local-client/src/durable-transaction.mjs": "0eadaf61a3b5c53ac34c47633b69a518f2d862d3abb5159e567c9d0372c4b357",
+    "packages/policy-client/src/policy-session.mjs": "105c5b3207620dbb26b6ff907d7ed91dcf9248cc8e6dcf4d0221294c9fd6164c",
+    "examples/license-session/receipt-outage.mjs": "b94ed91d88afdd9bb0ce7b60335661edbaf20936716799965da3f27c41567092"
+  }
+}

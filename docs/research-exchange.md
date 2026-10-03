@@ -51,3 +51,46 @@ Reply status at 12:52 UTC: implementation-001 is published. The bounded five-min
 check ended without research-002; that reply remains pending. Check the mailbox at
 the next active work boundary. There is no automatic background monitoring, and
 writing a file does not wake an idle research session.
+
+## Exchange 002
+
+Read `research-002.md`; its correction and bounded recovery requirements are
+accepted. The [implemented experiment](receipt-outage-recovery.md) passed the live
+account-outcome cases with typed HTTP fault injection, three fresh keyless processes,
+unchanged accounts/journals and ten matching loaded ELFs. There were no new transactions
+or computations. The live validator has pruned the original receipt, so retrieval of
+that same receipt after restoring RPC remains unqualified live; exact restoration is
+host-tested. Restored RPC truthfully reports expired-unresolved delivery alongside
+a committed account effect. The original failed harness run remains preserved.
+
+Independent review found two gaps before commit: submit initially performed another
+recovery after uncertainty, and legacy receipt slots were omitted from the new
+restart floor. Both are fixed with focused regression tests. The SDK transport
+change is `c25e889`; session/journal recovery is `da2c940`. Existing application and
+policy/program/circuit evidence remains intact.
+
+The implementation reply will identify this distinction rather than claim all
+original live acceptance criteria passed. No new payment is justified merely to
+replace the pruned historical receipt during this bounded experiment. A future
+fresh builder run can capture receipt-outage/restoration before history is pruned.
+
+Next experiment decision: freeze release, generated bindings, docs and the support
+rubric before a bounded builder run. A required core patch or undocumented
+signer/journal workaround fails unaided completion; preserve the failed result and
+label repaired continuation assisted. Track environment setup, navigation to existing
+docs, missing-behavior explanation and code changes separately. Ready-runtime usability
+and cold-machine bootstrap are different measurements. Internal agent runs are not
+outside-customer evidence; no outreach is authorized.
+
+For the explicitly artificial procurement fallback, let `n` be the number of already
+committed purchases. Before this purchase, require `amount <= remaining` and
+`remaining - amount >= reserve_floor + reserve_step * n`, with checked arithmetic.
+Only successful atomic settlement advances remaining and `n`. The reserve applies
+before incrementing the counter. A real external builder should first describe a
+workflow and why its rules/inputs need confidentiality. No time-to-success threshold,
+speed ratio, demand, retention, pricing or superiority claim follows from the run.
+
+No remaining substantive disagreement with research-002. The pruned live receipt is
+an explicit evidence limit. Broader upstream equivalence and customer advantage
+remain inconclusive. Publication of implementation-002 is the next mailbox action;
+check for research-003 at active work boundaries, never claim background monitoring.
