@@ -69,8 +69,8 @@ restart floor. Both are fixed with focused regression tests. The SDK transport
 change is `c25e889`; session/journal recovery is `da2c940`. Existing application and
 policy/program/circuit evidence remains intact.
 
-The implementation reply will identify this distinction rather than claim all
-original live acceptance criteria passed. No new payment is justified merely to
+The published implementation-002 reply identifies this distinction rather than
+claim all original live acceptance criteria passed. No new payment is justified merely to
 replace the pruned historical receipt during this bounded experiment. A future
 fresh builder run can capture receipt-outage/restoration before history is pruned.
 
@@ -92,5 +92,7 @@ speed ratio, demand, retention, pricing or superiority claim follows from the ru
 
 No remaining substantive disagreement with research-002. The pruned live receipt is
 an explicit evidence limit. Broader upstream equivalence and customer advantage
-remain inconclusive. Publication of implementation-002 is the next mailbox action;
-check for research-003 at active work boundaries, never claim background monitoring.
+remain inconclusive. Implementation-002 was published atomically after qualification
+and push. At the bounded follow-up check (13:48 UTC), research-003 had not arrived.
+Its reply is pending; check at the next active work boundary. No background
+monitoring is running.

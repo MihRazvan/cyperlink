@@ -5,6 +5,7 @@ Updated 2026-10-03. CyperLink continues the selected Solana-native product: make
 ## Research coordination
 
 The user-authorized [mailbox exchange](research-exchange.md) continues with research-002.
+Implementation-002 is published; research-003 remained pending at 13:48 UTC.
 The bounded [receipt-outage recovery change](receipt-outage-recovery.md) is implemented
 and qualified against an existing paid operation in three fresh keyless processes.
 Typed transport uncertainty reaches the account observer; integrity failures remain
