@@ -1,8 +1,10 @@
 # Paid-license application rehearsal
 
 Started 2026-10-03 against `ffd23a5a5374ae9a50186fe448c29f65a22b58f7`.
-Status: implementation and fresh local qualification in progress; no new runtime
-success is claimed yet.
+Status: the internal application and fresh local qualification pass. See the
+[safe runtime summary](../evidence/2026-10-03/license-app-v21b.json). This is local
+technical integration evidence; the equivalent direct-upstream implementation and
+external developer comparison have not run.
 
 The next evidence gate is application integration, preserving the qualified
 native-payment profile. An internal agent is authoring a separate application
@@ -63,4 +65,105 @@ original rule/initializer on the isolated v21 ledger. The corrected harness uses
 two separately funded source owners for two license purchases against one shared
 policy state, isolating quota803 from native-source staleness. This is supported
 multi-owner use of the explicit administrator policy, not delegated execution.
-Its complete qualification remains pending until recorded below.
+Its complete qualification passes as recorded below.
+
+## Qualified result
+
+The original two-field policy compiled to release
+`d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f`.
+The generated native programs, state and runtime MXE were deployed through the
+normal CLI, initialized by an authenticated callback, and provisioned with native
+SDK proofs. Ten actual loaded ELFs and both uploaded circuit artifacts/interfaces
+match. No preauthorized permit, injected proof context or fixture-key circuit was
+used. No core policy, cryptographic adapter or native source change was needed.
+
+| Scenario | Real local result |
+| --- | --- |
+| Amount40 with private allowance50/cap30 | Authenticated denial although native funding and total allowance suffice. |
+| A30 and B30, separate sources and one private state | Both authorize before payment; callbacks leave business state and entitlements unchanged. |
+| Repeated A query approval in a new process | Original ticket reused, all tracked accounts unchanged, no fresh MPC query. |
+| Forced license failure after native transfer | Landed1199; all12 tracked accounts unchanged. |
+| A30 payment with lost acknowledgement | Native payment, exact buyer/product/expiry license and four encrypted successor slots commit together. |
+| Receipt RPC unavailable in another process | Reports unresolved; original ticket remains unchanged; no replacement signature/query. |
+| Keyless recovery | Observes the original payment's exact message/signatures and committed application effect. |
+| Old B30 authorization | SDK reports stale; direct signed native attempt lands803 with all12 accounts unchanged. |
+| A license replay | Lands1102 at the already-issued license check; not a new isolated kernel replay1001 claim. |
+| Explicit fresh B30 | Authenticated denial with inferred remaining20, despite independent native funding. |
+| Explicit fresh B20 | Actual compatible native payment and second paid license; private state version2/counter6. |
+
+Amounts, initial50/cap30 and inferred successor0/cap30 are **synthetic observer
+disclosures**. Live MXE state was not decrypted. Two local nodes on the same host
+execute the computations; this does not qualify independent operators. The two
+buyers retain separate account keys client-side. Every new private query has
+explicit owner/admin authorization, and each payment has separate approval.
+
+The application ran through24 separate CLI invocations, with5 callbacks and7
+saved query/payment tickets. The selected operation archive contains15 signed
+messages/25 Ed25519 signatures. Independent offline review checks exact ticket
+semantics, callback outputs, complete successors, rollback and recovery. Native
+proof/provisioning and deployment messages are separate from those15; BLS
+authenticity relies on matched onchain verification, not a second BLS verifier.
+Retained RPC snapshots are not independent historical consensus proofs.
+The [independent report](../evidence/2026-10-03/license-app-v21b-offline-review.json)
+includes36 unchanged rejection-account comparisons and two keyless workers. Its
+loaded-ELF check rehashes the local build against the retained live comparison
+report; it does not independently reconstruct historical ProgramData.
+Six [offline corruption checks](../evidence/2026-10-03/license-app-v21b-corruption-checks.json)
+reject altered signed messages, a changed fourth successor slot even with a
+recomputed state hash, missing circuit/fault evidence, duplicate loaded-program
+identity and changed accounts after repeated approval. These are archive-verifier
+checks, not six additional landed adversarial transactions. The original archive
+remained unchanged.
+
+Selected local validator costs:5 queues899,404CU/50,000 lamports;5 callbacks
+781,276CU/25,000 lamports;2 settlements165,674CU/20,000 lamports;3 landed failures
+136,191CU/30,000 lamports. These exclude per-operation proof provisioning and ALT
+setup. Deployment/upload costs are separately recorded in the summary. Rent,
+funding and distributed worker resources are excluded; none is production pricing.
+Observed20,296–21,050ms staging-to-callback includes ALT/RPC work, not isolated MPC
+latency. There is no measured performance or productivity comparison.
+
+## Reproduce without resetting evidence
+
+Follow [customer authoring](custom-policy-authoring.md) and prepare a new local
+environment or a fresh policy instance on your own running local environment.
+Use the same explicit SBPFv0 feature opt-in and pinned dependencies. Create an
+owner-only initializer with `remaining: "50"` and `purchase_cap: "30"`, then:
+
+```sh
+node packages/policy-cli/cyperlink.mjs policy test examples/license-app
+node packages/policy-cli/cyperlink.mjs policy build examples/license-app
+node packages/policy-cli/cyperlink.mjs policy deploy examples/license-app \
+  --local --environment .local/NEW-ENV/preparation.json \
+  --initial-state .local/NEW-initial.json --out .local/NEW-instance
+node examples/license-app/qualify.mjs \
+  .local/NEW-instance/instance.json .local/NEW-qualification
+node examples/license-app/verify.mjs \
+  --results .local/NEW-qualification/results.json \
+  --instance .local/NEW-instance/instance.json \
+  --output .local/NEW-qualification/independent-review.json
+```
+
+Qualification requires pristine business state and creates real signed local
+transactions. The test-only RPC preload is used by the harness for precisely
+scoped send-response/receipt faults; the application never imports it normally.
+Do not rerun against the already consumed instance or delete its ledger. Raw
+archives are `.local/license-app-qualification-v21{,b}/`; the current ledger and
+Compose are in `.local/localnet-license-app-v21/app/`. Check process ownership
+before stopping services. The old v20 UI is not the new CLI application.
+
+## What this changed
+
+The separate internal author succeeded with original rules and generated bindings,
+but needed recorded source assistance and a root review fix. This is adverse
+evidence for an unaided quickstart claim. The SDK now documents signer roles and
+original-journal recovery more clearly; automatic discovery of a ticket after
+staging but before application save remains open. An intent file prevents unsafe
+restaging in that window. Arbitrary provisioning interruption is also unqualified.
+
+The [pinned upstream comparison](license-app-upstream-comparison.md) recognizes
+existing Arcium callback polling, Anchor exact-byte retries and native cryptography.
+Our demonstrated contribution is their packaged operation/atomic-effect/recovery
+contract. A direct equivalent implementation may be competitive; no claim of
+customer advantage follows from this rehearsal. Independent builder reproduction
+and a measured equivalent baseline remain the product evidence gates.

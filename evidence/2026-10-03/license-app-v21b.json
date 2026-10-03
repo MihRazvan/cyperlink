@@ -1,0 +1,384 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "internal-docs-first-app-real-local-qualification",
+  "sourceCommit": "a27e08f",
+  "profile": "local-custom-policy-v1",
+  "genesisHash": "7t79QMPLFiBZuNbf9pyu2o7qXHR1PNvVE9J89PRV5FyA",
+  "releaseHashHex": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+  "schemaHashHex": "26869934482dcc2dbdc0ac5d8ccb4ec693166156ed861aab3cbbf028bf848d9b",
+  "domainHashHex": "9c01a1b6ba44d7d2674242697ab8bbc442589ab588ccfd0bfb10c5c626960672",
+  "rawArchive": ".local/license-app-qualification-v21b",
+  "resultsSha256": "e026ead2bc7e1a7054532f305e5e0c56fd2e786d80fbfc12973fda71b5334f85",
+  "observerDisclosures": {
+    "initialState": {
+      "remaining": 50,
+      "purchase_cap": 30
+    },
+    "amounts": [
+      40,
+      30,
+      30,
+      30,
+      20
+    ],
+    "note": "Synthetic fixture values and arithmetic inferences; no live MXE state decryption."
+  },
+  "checks": [
+    {
+      "label": "cap-rejects-funded40-authenticated-decision",
+      "allowed": false,
+      "callbackDoesNotPayOrAdvanceState": true
+    },
+    {
+      "label": "purchase-a30-authenticated-decision",
+      "allowed": true,
+      "callbackDoesNotPayOrAdvanceState": true
+    },
+    {
+      "label": "repeated-query-approval-reuses-ticket",
+      "allTrackedAccountsUnchanged": true
+    },
+    {
+      "label": "competing-b30-authenticated-decision",
+      "allowed": true,
+      "callbackDoesNotPayOrAdvanceState": true
+    },
+    {
+      "label": "license-post-native-failure",
+      "expectedError": 1199,
+      "signature": "4vjzzEe6qmG6Tuxzhugz1W85td2u9nFmJXca3z7DyaTr6vRiyALbfQZh9JSTYspjTNWUNVwHPbV8k6DiCcAkpvy2",
+      "accountsChecked": 12,
+      "postNativeCpi": true
+    },
+    {
+      "label": "purchase-a30-paid-license",
+      "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL",
+      "wireSha256": "327662aa1e129a03262d9b0c8d07c14d60682658ecd8816e7e50c814bf18da58",
+      "lostAcknowledgement": true,
+      "keylessWorker": 78685,
+      "exactFourSlotSuccessor": true,
+      "oneRetainedPaymentTicket": true
+    },
+    {
+      "label": "stale-predecessor-cannot-pay",
+      "expectedError": 803,
+      "signature": "mJ6GpRHcmuaQnvmmoxrYHVtA7QDxQYRUGxqQc1mC77h3ENdmCJAJss1AXy7HHuDXJxr1UTYz4ne47TMEqxPYh2J",
+      "accountsChecked": 12,
+      "postNativeCpi": false
+    },
+    {
+      "label": "issued-license-cannot-pay-twice",
+      "expectedError": 1102,
+      "signature": "49d2UzsabpGEXLPkwsUcTSaxHu2TC2FK17Ked1YXMKHk8YfX9vrD5kLNL6FWFkx8saS82yK5EoVeLfLGczrvDx8m",
+      "accountsChecked": 12,
+      "postNativeCpi": false
+    },
+    {
+      "label": "fresh-b30-allocation-denial-authenticated-decision",
+      "allowed": false,
+      "callbackDoesNotPayOrAdvanceState": true
+    },
+    {
+      "label": "fresh-compatible20-authenticated-decision",
+      "allowed": true,
+      "callbackDoesNotPayOrAdvanceState": true
+    },
+    {
+      "label": "fresh-compatible20-paid-license",
+      "signature": "5Wtb5DqTydMxXvwWTmG7CqJxc41CB9dZTR9RDVqxHbsB6u784SUjLjGuwiFEGRsb1zYJECVWwNNseJGuaRSiKEfP",
+      "wireSha256": "1cf1679df35a6618a9ac131c1d1126a2835a86a367fb4ede99ae9c9541753041",
+      "lostAcknowledgement": false,
+      "keylessWorker": 80843,
+      "exactFourSlotSuccessor": true,
+      "oneRetainedPaymentTicket": true
+    }
+  ],
+  "decisions": [
+    {
+      "label": "cap-rejects-funded40",
+      "allowed": false,
+      "signature": "5FbFbue5MaLj2ggu5kWCcYAdKvx13cUFXB1QPGGoYAzEQKGMsHbUWcfkqpZDWothpMzZgpfa8VDLtF7cWhuWsZgR"
+    },
+    {
+      "label": "purchase-a30",
+      "allowed": true,
+      "signature": "3kdLcMMXN1jqMWrjB2uyZLYTXDkCyGwbZJrvXeCsa5X55mCa8GshRZxWk7TcLxUrq4Efwxmxo53md5EfGc2QAYTB"
+    },
+    {
+      "label": "competing-b30",
+      "allowed": true,
+      "signature": "2rf1ZiYqEEBmpm3EFLCw6YrKGMUb6Dntw7BnXBTXKTUzGz3V7aB6DbqLAnfmq8aTLzWi8FqDUimsUmNpE1oLFWnX"
+    },
+    {
+      "label": "fresh-b30-allocation-denial",
+      "allowed": false,
+      "signature": "5hqyVyG7mmTwVi3JHTGQsXeN8yb9YpBXLQg4yFMmQBNwZCiqGZ6jsmnLTeEHCEuETzG1gAPx28kxrivTqFa57CAh"
+    },
+    {
+      "label": "fresh-compatible20",
+      "allowed": true,
+      "signature": "5eQDAzHA8PcRPBMMmMY8NAffrkqoW9CSUA8EdKJy7ihMWgAyVW5yNtfwc2FdNGrf3WMcByKes2hvQ57D2Pnyou4v"
+    }
+  ],
+  "signedArchiveChecks": {
+    "messages": 15,
+    "ed25519Signatures": 25,
+    "excludesProvisioningAndDeploymentReceipts": true
+  },
+  "tickets": [
+    {
+      "label": "cap-rejects-funded40",
+      "role": "query",
+      "signature": "5AtfcGqDAm7YSrfz4iCLEsJ7fmkzqpBoEGysZvwxczB9ow8QY21rQAob1CZ8WuNnTRidxTUVHa3qodKGNicvYDjC",
+      "wireSha256": "fed1ada8b2fa4ca6cd7836c131639a4fe993ca2277c914776195eb40b3febfdc",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    },
+    {
+      "label": "purchase-a30",
+      "role": "query",
+      "signature": "5TQJUBw6QVQub63uSK9WY4k2zxeecYgeJWLVpXYMtZNpb1Nn1WvcsFHsVqt9idpy84eYXnVmYTv9WSn5hZwBGJgJ",
+      "wireSha256": "234deffb02ec4bcc58b5bf8b4619a6707d0deb3f047a32f512ffc5ff34ea92bc",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    },
+    {
+      "label": "purchase-a30",
+      "role": "commit",
+      "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL",
+      "wireSha256": "327662aa1e129a03262d9b0c8d07c14d60682658ecd8816e7e50c814bf18da58",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    },
+    {
+      "label": "competing-b30",
+      "role": "query",
+      "signature": "3ctN1oQqKNJQZFh5FhRpDtsAYRoEbx4pQNx24oJbv9YYHUaogKPibaE4iWTv4XAHTrWEX82zx8HCmi2baMz8cQDL",
+      "wireSha256": "44dca8d46bccac5f3374bf70c6cc38bd7b3604aca225c60d2f00714c3ba278ae",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    },
+    {
+      "label": "fresh-b30-allocation-denial",
+      "role": "query",
+      "signature": "431WELXG8tPSfWeVQ8DBojyLqMD1itivaxYNT3qSb3yZwtRCX6tpXo5Fo91qEpRrGFzgFfdCuVst8nKLVVohYnMG",
+      "wireSha256": "14a71aef71c18eedd7029c10126d1a1ca1d253b87d594a58bf36028ca30e2a15",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    },
+    {
+      "label": "fresh-compatible20",
+      "role": "query",
+      "signature": "38BJixBMidFJdcqigBjYXoSs1VRJ79zMar5Ro11YeQKXmWgwUe8DxceWRe2nWKQR3SLA4pCQXt9HNhYW2ddQYmaF",
+      "wireSha256": "850efd5404fecd1f6fb86757726ae312aafa34358a6eb7e24b6c752e897bf60b",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    },
+    {
+      "label": "fresh-compatible20",
+      "role": "commit",
+      "signature": "5Wtb5DqTydMxXvwWTmG7CqJxc41CB9dZTR9RDVqxHbsB6u784SUjLjGuwiFEGRsb1zYJECVWwNNseJGuaRSiKEfP",
+      "wireSha256": "1cf1679df35a6618a9ac131c1d1126a2835a86a367fb4ede99ae9c9541753041",
+      "exactLandedMessage": true,
+      "broadcasts": 1
+    }
+  ],
+  "injectedFaults": [
+    {
+      "mode": "lost-ack",
+      "events": [
+        {
+          "fault": "actual-send-response-lost",
+          "processId": 78662,
+          "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL",
+          "wireSha256": "327662aa1e129a03262d9b0c8d07c14d60682658ecd8816e7e50c814bf18da58"
+        },
+        {
+          "fault": "receipt-unavailable",
+          "processId": 78662
+        }
+      ]
+    },
+    {
+      "mode": "unavailable-receipt",
+      "events": [
+        {
+          "fault": "receipt-unavailable",
+          "processId": 78683
+        }
+      ]
+    }
+  ],
+  "applicationProcessInvocations": 24,
+  "finalState": {
+    "version": "2",
+    "admissionCounter": "6",
+    "plaintextSuccessor": "remaining0/cap30 is a synthetic observer inference; live ciphertext not decrypted"
+  },
+  "loadedPrograms": [
+    {
+      "program": "EatMfuqnLntFc1n5MMCfmWKxn8MWbzuw7njoDQX4kzxD",
+      "elfSha256": "904b1dd5520930fa5c23db3238cc79d9d2a7f4db735fe897d5096d36d41990e1",
+      "loadedElfSha256": "904b1dd5520930fa5c23db3238cc79d9d2a7f4db735fe897d5096d36d41990e1",
+      "matched": true
+    },
+    {
+      "program": "G6N4jc4rkeqqtyKoQGt938XrhaKFf8Rx3EpEnGmQrT69",
+      "elfSha256": "bd1534890dbf6c168154821414c201fb02d67fa6389c8d22d6a8a56b3c52765a",
+      "loadedElfSha256": "bd1534890dbf6c168154821414c201fb02d67fa6389c8d22d6a8a56b3c52765a",
+      "matched": true
+    },
+    {
+      "program": "AhrH6Uac6JSpqv8vGdrNBF4dV5TvvoGLyAojRAxvtCgU",
+      "elfSha256": "a0ca0c369348d7c466206e12b52dd514da172e6b49dcd80bf7f2b4380adc537d",
+      "loadedElfSha256": "a0ca0c369348d7c466206e12b52dd514da172e6b49dcd80bf7f2b4380adc537d",
+      "matched": true
+    },
+    {
+      "program": "H8wben7KQit6eDG1bS9w3h6EmKK23Kotdnzagwn68KAT",
+      "elfSha256": "b3c33cad151137881e7481b876f4dfffaefd9a77ccff5c03ce485f3ec2c70005",
+      "loadedElfSha256": "b3c33cad151137881e7481b876f4dfffaefd9a77ccff5c03ce485f3ec2c70005",
+      "matched": true
+    },
+    {
+      "program": "6Wv8iNN6Jn7NBkASs4wnjDJNquUgrw7aPH5zjbXkMfSk",
+      "elfSha256": "735364673792a07d5ea01b1e81987b53ecbe54a4f6ad9c8675e8dbf90457861e",
+      "loadedElfSha256": "735364673792a07d5ea01b1e81987b53ecbe54a4f6ad9c8675e8dbf90457861e",
+      "matched": true
+    },
+    {
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "elfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loadedElfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "matched": true
+    },
+    {
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "elfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loadedElfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "matched": true
+    },
+    {
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "elfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loadedElfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "matched": true
+    },
+    {
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "elfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loadedElfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "matched": true
+    },
+    {
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "elfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loadedElfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "matched": true
+    }
+  ],
+  "circuits": [
+    {
+      "name": "runtime_policy_init",
+      "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+      "uploadedSha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+      "interfaceSha256": "3cb696cb618b27271a307ee8eec600e924d6709860f4eb11fbbaa0378a33c3dc"
+    },
+    {
+      "name": "runtime_policy_evaluate",
+      "sha256": "8d28981a5a649142399204615446af6b5f3307a385c54b018dd37293f2428eee",
+      "uploadedSha256": "8d28981a5a649142399204615446af6b5f3307a385c54b018dd37293f2428eee",
+      "interfaceSha256": "d739826c7e7364faf083c71ed27dd863558fa6b15276ac54fe8c5c15bf41869a"
+    }
+  ],
+  "selectedValidatorCosts": {
+    "adversarial-landed-failure": {
+      "transactions": 3,
+      "landedCU": 136191,
+      "feeLamports": 30000
+    },
+    "native-settlement": {
+      "transactions": 2,
+      "landedCU": 165674,
+      "feeLamports": 20000
+    },
+    "arcium-queue": {
+      "transactions": 5,
+      "landedCU": 899404,
+      "feeLamports": 50000
+    },
+    "arcium-signed-callback": {
+      "transactions": 5,
+      "landedCU": 781276,
+      "feeLamports": 25000
+    }
+  },
+  "deploymentValidatorCosts": {
+    "mxe-initialization": {
+      "transactions": 2,
+      "landedCU": 152784,
+      "feeLamports": 10000
+    },
+    "policy-provisioning": {
+      "transactions": 2,
+      "landedCU": 37677,
+      "feeLamports": 10000
+    },
+    "arcium-definition": {
+      "transactions": 2,
+      "landedCU": 113019,
+      "feeLamports": 10000
+    },
+    "arcium-circuit-upload": {
+      "transactions": 3259,
+      "landedCU": 30019694,
+      "feeLamports": 16295000
+    },
+    "arcium-queue": {
+      "transactions": 1,
+      "landedCU": 120220,
+      "feeLamports": 5000
+    },
+    "arcium-signed-callback": {
+      "transactions": 1,
+      "landedCU": 137993,
+      "feeLamports": 5000
+    },
+    "program-deployment": {
+      "transactions": 1019,
+      "landedCU": 2417280,
+      "feeLamports": 5145000
+    },
+    "native-asset-provisioning": {
+      "transactions": 19,
+      "landedCU": 76962,
+      "feeLamports": 170000
+    }
+  },
+  "costScope": "Selected operation costs exclude native proof/operation provisioning and ALT setup; deployment categories separate. Local synthetic fees/CU, not production pricing, rent or runtime resource cost.",
+  "approvalStagingToObservedCallbackMs": [
+    20726,
+    21050,
+    20296,
+    20460,
+    20356
+  ],
+  "timingScope": "Includes query staging, ALT finalization, RPC and callback observation; not isolated MPC latency or a comparison benchmark.",
+  "localFeatureDeviation": {
+    "disabledDeploymentRestriction": "B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g",
+    "sbfArch": "v0"
+  },
+  "priorAttempt": {
+    "path": ".local/license-app-qualification-v21",
+    "status": "partial retained: first license30 paid/recovered; stale expected803 assertion saw source-prestate701 in simulation, no landed701 claim"
+  },
+  "comparison": "Pinned upstream source/API review only; no independently implemented baseline or measured customer advantage.",
+  "limitations": [
+    "Internal author with recorded SDK source assistance; not external adoption",
+    "Same host/cached prerequisites/two local nodes; not independent operators or blank-machine bootstrap",
+    "Explicit local SBPFv0 deployment feature override; no public-network or production claim",
+    "RPC faults injected by a qualification-only preload; actual payments still execute on the validator",
+    "Confirmed RPC receipts/snapshots, not historical consensus proofs; BLS verified by loaded runtime, not a new offline verifier"
+  ]
+}

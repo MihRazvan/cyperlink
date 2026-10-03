@@ -2,14 +2,42 @@
 
 Updated 2026-10-03. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
-## In progress: separate paid-license application rehearsal
+## Completed: separate paid-license application rehearsal
 
-The [rehearsal plan](license-app-rehearsal.md) preserves the completed custom-policy
-milestone and tests documentation/SDK integration through a separate application.
-An internal docs-first author is implementing private per-purchase cap plus
-decreasing allowance and explicit license approval/recovery commands. Fresh local
-runtime evidence and an upstream comparison remain pending. This is not external
-developer validation. Existing ledgers, keys, fixtures and prior results remain intact.
+The [rehearsal](license-app-rehearsal.md) passes through a separate docs-first
+application using generated SDK bindings, without a core policy/native change.
+Its private cap/allowance rule produced five genuine local Arcium callbacks and
+two paid licenses: cap40 denied; competing30 purchases both authorized; A30 paid;
+B rejected stale803; freshB30 denied against remaining20; freshB20 paid. Initial
+values and arithmetic are synthetic test-observer disclosures.
+
+The [safe summary](../evidence/2026-10-03/license-app-v21b.json) records native
+post-transfer1199 rollback, issued-license replay1102 rejection, repeated-query
+ticket reuse, and same-byte payment recovery after actual acknowledgement loss
+and injected receipt unavailability across fresh processes. Ten loaded ELFs and
+two uploaded circuits match. Only final committed effect establishes payment.
+The [independent offline review](../evidence/2026-10-03/license-app-v21b-offline-review.json)
+checks15 messages/25 Ed25519 signatures, seven exact tickets, two keyless workers
+and36 unchanged rejection-account comparisons; it makes no independent BLS or
+historical consensus-proof claim.
+Six offline archive-corruption checks also reject altered or missing evidence;
+these are separate from the three actual landed rejection transactions.
+
+Integration exposed a pinned upstream cache-verification incompatibility and an
+application journal-reopening bug; both are fixed and documented. Fourteen policy
+IR vectors, three app safety tests and eighteen toolchain tests pass. The
+[upstream comparison](license-app-upstream-comparison.md) credits upstream polling
+and identical-byte retries; it is a source/API review, not an executed equivalent
+baseline or a measured advantage. Internal author assistance and missing ticket
+rediscovery remain explicit. No external developer/customer validation is claimed.
+
+Current fresh runtime: v21 RPC8985, compose `cyperlink-license-app-v21`.
+The completed instance is `.local/license-app-instance-v21b/`; initial v21's
+partly successful harness and paid state are retained. Previous ledgers remain
+intact. The explicit local SBPFv0 feature override and existing owner/admin trust
+profile remain unchanged. Next: remove documented integration friction, then
+independent builder reproduction and an equivalent direct-upstream comparison;
+GLAM and cross-MXE remain conditional extensions.
 
 ## Customer-authored private policies: real local path qualified
 
@@ -51,7 +79,7 @@ v20b reused untouched business states with nonces preserved. Failed archives and
 all historical ledgers remain intact. V19's separate real legacy budget40 control
 also paid/recovered successfully before its services stopped.
 
-Current local services: v20 RPC8983, two-node compose `cyperlink-custom-policies-v20`,
+Services recorded at the v20 milestone: RPC8983, two-node compose `cyperlink-custom-policies-v20`,
 and custom Approvals HTTP4317 (restarted server PID6705). The live custom UI paid
 merchant5 after explicit query/final approvals, lost its send acknowledgement, then
 recovered the identical payment after an actual server restart through a separate

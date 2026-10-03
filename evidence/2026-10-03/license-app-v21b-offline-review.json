@@ -1,0 +1,205 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "independent-offline-license-app-archive-review",
+  "input": {
+    "path": ".local/license-app-qualification-v21b/results.json",
+    "sha256": "e026ead2bc7e1a7054532f305e5e0c56fd2e786d80fbfc12973fda71b5334f85",
+    "bytes": 4093924
+  },
+  "counts": {
+    "messages": 15,
+    "ed25519Signatures": 25,
+    "callbacks": 5,
+    "paidLicenses": 2,
+    "rejections": 3,
+    "unchangedRejectionAccounts": 36,
+    "signedTickets": 7,
+    "keylessWorkers": 2,
+    "loadedElfReports": 10,
+    "circuitByteComparisons": 2
+  },
+  "callbacks": [
+    {
+      "label": "cap-rejects-funded40",
+      "signature": "5FbFbue5MaLj2ggu5kWCcYAdKvx13cUFXB1QPGGoYAzEQKGMsHbUWcfkqpZDWothpMzZgpfa8VDLtF7cWhuWsZgR",
+      "allowed": false,
+      "unchangedBusinessState": true,
+      "counterAdvancedExactlyOnce": true
+    },
+    {
+      "label": "purchase-a30",
+      "signature": "3kdLcMMXN1jqMWrjB2uyZLYTXDkCyGwbZJrvXeCsa5X55mCa8GshRZxWk7TcLxUrq4Efwxmxo53md5EfGc2QAYTB",
+      "allowed": true,
+      "unchangedBusinessState": true,
+      "counterAdvancedExactlyOnce": true
+    },
+    {
+      "label": "competing-b30",
+      "signature": "2rf1ZiYqEEBmpm3EFLCw6YrKGMUb6Dntw7BnXBTXKTUzGz3V7aB6DbqLAnfmq8aTLzWi8FqDUimsUmNpE1oLFWnX",
+      "allowed": true,
+      "unchangedBusinessState": true,
+      "counterAdvancedExactlyOnce": true
+    },
+    {
+      "label": "fresh-b30-allocation-denial",
+      "signature": "5hqyVyG7mmTwVi3JHTGQsXeN8yb9YpBXLQg4yFMmQBNwZCiqGZ6jsmnLTeEHCEuETzG1gAPx28kxrivTqFa57CAh",
+      "allowed": false,
+      "unchangedBusinessState": true,
+      "counterAdvancedExactlyOnce": true
+    },
+    {
+      "label": "fresh-compatible20",
+      "signature": "5eQDAzHA8PcRPBMMmMY8NAffrkqoW9CSUA8EdKJy7ihMWgAyVW5yNtfwc2FdNGrf3WMcByKes2hvQ57D2Pnyou4v",
+      "allowed": true,
+      "unchangedBusinessState": true,
+      "counterAdvancedExactlyOnce": true
+    }
+  ],
+  "paid": [
+    {
+      "label": "purchase-a30",
+      "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL",
+      "exactFourSlotSuccessor": true,
+      "exactLicenseFields": true,
+      "sourceAndDestinationChanged": true
+    },
+    {
+      "label": "fresh-compatible20",
+      "signature": "5Wtb5DqTydMxXvwWTmG7CqJxc41CB9dZTR9RDVqxHbsB6u784SUjLjGuwiFEGRsb1zYJECVWwNNseJGuaRSiKEfP",
+      "exactFourSlotSuccessor": true,
+      "exactLicenseFields": true,
+      "sourceAndDestinationChanged": true
+    }
+  ],
+  "rejections": [
+    {
+      "label": "license-post-native-failure",
+      "code": 1199,
+      "signature": "4vjzzEe6qmG6Tuxzhugz1W85td2u9nFmJXca3z7DyaTr6vRiyALbfQZh9JSTYspjTNWUNVwHPbV8k6DiCcAkpvy2",
+      "unchangedAccounts": 12
+    },
+    {
+      "label": "stale-predecessor-cannot-pay",
+      "code": 803,
+      "signature": "mJ6GpRHcmuaQnvmmoxrYHVtA7QDxQYRUGxqQc1mC77h3ENdmCJAJss1AXy7HHuDXJxr1UTYz4ne47TMEqxPYh2J",
+      "unchangedAccounts": 12
+    },
+    {
+      "label": "issued-license-cannot-pay-twice",
+      "code": 1102,
+      "signature": "49d2UzsabpGEXLPkwsUcTSaxHu2TC2FK17Ked1YXMKHk8YfX9vrD5kLNL6FWFkx8saS82yK5EoVeLfLGczrvDx8m",
+      "unchangedAccounts": 12
+    }
+  ],
+  "tickets": [
+    {
+      "label": "cap-rejects-funded40",
+      "role": "query",
+      "signature": "5AtfcGqDAm7YSrfz4iCLEsJ7fmkzqpBoEGysZvwxczB9ow8QY21rQAob1CZ8WuNnTRidxTUVHa3qodKGNicvYDjC",
+      "wireSha256": "fed1ada8b2fa4ca6cd7836c131639a4fe993ca2277c914776195eb40b3febfdc"
+    },
+    {
+      "label": "purchase-a30",
+      "role": "query",
+      "signature": "5TQJUBw6QVQub63uSK9WY4k2zxeecYgeJWLVpXYMtZNpb1Nn1WvcsFHsVqt9idpy84eYXnVmYTv9WSn5hZwBGJgJ",
+      "wireSha256": "234deffb02ec4bcc58b5bf8b4619a6707d0deb3f047a32f512ffc5ff34ea92bc"
+    },
+    {
+      "label": "purchase-a30",
+      "role": "commit",
+      "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL",
+      "wireSha256": "327662aa1e129a03262d9b0c8d07c14d60682658ecd8816e7e50c814bf18da58"
+    },
+    {
+      "label": "competing-b30",
+      "role": "query",
+      "signature": "3ctN1oQqKNJQZFh5FhRpDtsAYRoEbx4pQNx24oJbv9YYHUaogKPibaE4iWTv4XAHTrWEX82zx8HCmi2baMz8cQDL",
+      "wireSha256": "44dca8d46bccac5f3374bf70c6cc38bd7b3604aca225c60d2f00714c3ba278ae"
+    },
+    {
+      "label": "fresh-b30-allocation-denial",
+      "role": "query",
+      "signature": "431WELXG8tPSfWeVQ8DBojyLqMD1itivaxYNT3qSb3yZwtRCX6tpXo5Fo91qEpRrGFzgFfdCuVst8nKLVVohYnMG",
+      "wireSha256": "14a71aef71c18eedd7029c10126d1a1ca1d253b87d594a58bf36028ca30e2a15"
+    },
+    {
+      "label": "fresh-compatible20",
+      "role": "query",
+      "signature": "38BJixBMidFJdcqigBjYXoSs1VRJ79zMar5Ro11YeQKXmWgwUe8DxceWRe2nWKQR3SLA4pCQXt9HNhYW2ddQYmaF",
+      "wireSha256": "850efd5404fecd1f6fb86757726ae312aafa34358a6eb7e24b6c752e897bf60b"
+    },
+    {
+      "label": "fresh-compatible20",
+      "role": "commit",
+      "signature": "5Wtb5DqTydMxXvwWTmG7CqJxc41CB9dZTR9RDVqxHbsB6u784SUjLjGuwiFEGRsb1zYJECVWwNNseJGuaRSiKEfP",
+      "wireSha256": "1cf1679df35a6618a9ac131c1d1126a2835a86a367fb4ede99ae9c9541753041"
+    }
+  ],
+  "recoveries": [
+    {
+      "label": "purchase-a30",
+      "processId": 78685,
+      "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL"
+    },
+    {
+      "label": "fresh-compatible20",
+      "processId": 80843,
+      "signature": "5Wtb5DqTydMxXvwWTmG7CqJxc41CB9dZTR9RDVqxHbsB6u784SUjLjGuwiFEGRsb1zYJECVWwNNseJGuaRSiKEfP"
+    }
+  ],
+  "faultEvents": {
+    "lost-ack": [
+      {
+        "fault": "actual-send-response-lost",
+        "processId": 78662,
+        "signature": "31GxYL1rd3NJwnFFB2qTxXkxokdJVaRYKZSmFTkFwiy9DZeFty8UkarP9hwuLRd8cc4NzHuax6McN58nW553FpAL",
+        "wireSha256": "327662aa1e129a03262d9b0c8d07c14d60682658ecd8816e7e50c814bf18da58"
+      },
+      {
+        "fault": "receipt-unavailable",
+        "processId": 78662
+      }
+    ],
+    "unavailable-receipt": [
+      {
+        "fault": "receipt-unavailable",
+        "processId": 78683
+      }
+    ]
+  },
+  "circuitChecks": [
+    {
+      "circuit": "runtime_policy_init",
+      "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+      "bytes": 1023894
+    },
+    {
+      "circuit": "runtime_policy_evaluate",
+      "sha256": "8d28981a5a649142399204615446af6b5f3307a385c54b018dd37293f2428eee",
+      "bytes": 1613253
+    }
+  ],
+  "repeatedQuery": {
+    "signature": "5TQJUBw6QVQub63uSK9WY4k2zxeecYgeJWLVpXYMtZNpb1Nn1WvcsFHsVqt9idpy84eYXnVmYTv9WSn5hZwBGJgJ",
+    "unchangedAccounts": 12
+  },
+  "finalQuota": {
+    "version": "2",
+    "counter": "6"
+  },
+  "reviewedSourceHashes": {
+    "examples/license-app/app.mjs": "db9394a8b089ffa1ce525ca3bd1bedac00e0b619fc23945a95b4a85879afc04a",
+    "examples/license-app/qualify.mjs": "750dc506eb7faefaef0e7992607f21a4c834cf7a3d253de81f48fa2e90432f18",
+    "examples/license-app/rpc-fault.mjs": "485599e4e519ad6e1c26eac9093215d54bc1aba80aaadc21eeb659ebd5cf11e2",
+    "examples/license-app/verify.mjs": "e46d1b16b585ad716f78e411079e531745e3f9f2387e3e971965aa75bdd16e47"
+  },
+  "limitations": [
+    "No signer files opened, network calls, new execution or runtime mutation.",
+    "Reuses existing offline snapshot/ticket/circuit primitives; Ed25519 checked with Node crypto.",
+    "No independent BLS verification or historical consensus state proofs; archived RPC account/meta/ALT observations remain trusted.",
+    "Loaded ELF reports rehashed against local builds; raw loaded ProgramData not independently archived here.",
+    "Fault/process IDs are archived local runner evidence, not OS attestations.",
+    "Only two explicit receipt-unavailability fault cases, not arbitrary recovery or retransmission qualification."
+  ]
+}

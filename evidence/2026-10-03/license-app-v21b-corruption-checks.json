@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "passed": true,
+  "tests": 6,
+  "originalArchiveUnchanged": true,
+  "originalSha256": "e026ead2bc7e1a7054532f305e5e0c56fd2e786d80fbfc12973fda71b5334f85",
+  "outcomes": [
+    {
+      "case": "signed-message-corruption",
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: Invalid archived Ed25519 signature"
+    },
+    {
+      "case": "fourth-successor-slot-corruption",
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+    },
+    {
+      "case": "missing-circuit-evidence",
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: Expected exactly two distinct circuit artifacts"
+    },
+    {
+      "case": "missing-actual-fault-event",
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:"
+    },
+    {
+      "case": "duplicate-loaded-program",
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: Loaded program identity set differs"
+    },
+    {
+      "case": "repeated-query-account-change",
+      "rejected": true,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:"
+    }
+  ],
+  "limitations": [
+    "Offline corruption rejection tests only; no new execution or independent BLS/state proof."
+  ],
+  "verifierSha256": "e46d1b16b585ad716f78e411079e531745e3f9f2387e3e971965aa75bdd16e47"
+}

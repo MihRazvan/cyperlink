@@ -6,6 +6,11 @@ both private `purchase_cap` and private `remaining`. Settlement decreases remain
 and preserves the cap. Denial preserves both fields. Public source contains no
 private initialization values. This is not independent customer validation.
 
+The [fresh local rehearsal](../../docs/license-app-rehearsal.md) now passes real
+Arcium decisions, two paid licenses, stale/rollback/replay failures and exact
+cross-process recovery. It also records the SDK source assistance and application
+fix required during integration. Runtime commands and evidence are in that guide.
+
 From the repository root:
 
 ```sh
@@ -32,7 +37,7 @@ its explicitly approved administrator and selected provisioned source owner:
 ```sh
 INSTANCE=.local/license-instance/instance.json
 ADMIN=.local/localnet-license/app/local-test-wallet.json
-OWNER=.local/license-instance/assets/license/source-owner-signer.json
+OWNER=.local/license-instance/asset-b/source-owner-signer.json
 OPERATION=.local/license-purchase-one
 ```
 
