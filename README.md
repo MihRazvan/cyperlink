@@ -2,20 +2,40 @@
 
 Make private money programmable on Solana.
 
-CyperLink joins an exact native confidential payment, authenticated private shared-state policy and its application effect in one atomic settlement. Reusable account decryption keys stay with the client. Authorization alone is never reported as payment.
+Developers write private spending rules and state in their own application package.
+CyperLink compiles and deploys that policy, then provides generated SDK bindings for
+human-approved confidential payments. Native payment, private state consumption and
+the exact paid application effect settle atomically. Account-wide decryption keys
+stay with the client.
 
-The initial implementation supports synthetic local Token-2022 assets, one private allowance/MXE, explicit owner and administrator query signatures, and two internal consumers: a merchant SKU and an expiring product license. Fees, including fee extensions configured at 0 bps, require a separate adapter.
+The working product is the bounded local owner/admin profile with merchant purchases
+and expiring licenses. Bounded application/agent permissions are a separate escrow
+experiment, not part of this supported payment path.
 
-Start with the [current status and decisions](docs/STATUS.md), [supported profile](docs/initial-profile.md), and [validation matrix](docs/validation.md). For local execution, follow the [fresh bootstrap guide](docs/local-bootstrap.md), then the [interactive Approvals client](examples/approvals/README.md) or [scripted two-consumer demo](examples/two-consumers/README.md). The current path uses repository sources and pinned upstream artifacts; historical research stays read-only. New ledgers, keys and evidence stay under ignored `.local/` directories.
+## Start here
 
-[Interactive qualification and screenshots](docs/approvals-qualification.md) cover compatible payments, stale rejection, fresh denial and restart recovery. [Permissions feasibility](docs/permissions-feasibility.md) is a separate scoped escrow experiment; it is not enabled in the supported Approvals profile.
+- [Current status and next step](docs/STATUS.md)
+- [Architecture and supported profile](docs/architecture.md)
+- [Local setup](docs/local-bootstrap.md)
+- [Write a policy and integrate the SDK](docs/custom-policy-authoring.md)
+- [Evidence and limitations](docs/evidence.md)
+- [Outside-builder exercise](docs/builder-exercise.md)
 
-Developer APIs:
+## Code
 
-- [Customer-authored private policies](docs/custom-policy-authoring.md): write original private rules/state, compile packages and use generated local SDK bindings; two distinct policies now pass real local Arcium/native settlement and exact recovery.
-- [`@cyperlink/sdk`](packages/sdk): exact native/action builders and authenticated merchant/license lifecycle observations; [operation contract](docs/operation-contract.md).
-- [Local client](packages/local-client): signed native account provisioning, fresh proof submission and proof-buffer cleanup.
-- [Rust client proofs](crates/client-proofs): persistent client-owned keys and pinned upstream cryptographic proof generation.
-- [Shared native validation](crates/native-admission): the strict no-fee admission and settlement boundary.
+| Directory | Purpose |
+| --- | --- |
+| `packages/policy-cli` | Customer policy init, tests, compilation and local deployment |
+| `packages/policy-client` | Generated session API, operation binding and exact recovery |
+| `crates/policy-authoring` | Typed private-rule language and native commitment wrapper |
+| `crates/client-proofs` | Client-owned keys and pinned upstream native proofs |
+| `crates/native-admission` | Shared native proof/account/funding validation |
+| `programs/custom-policy` | Current policy admission, settlement and consumer programs |
+| `examples/license-session` | Explicit approval and recovery application |
+| `examples/approvals` | Interactive local demo |
+| `packages/sdk`, `packages/local-client`, `programs/native` | Shared infrastructure and retained legacy profile |
+| `experiments` | Separately qualified probes, including scoped Permissions |
 
-This is local developer infrastructure continuing validated research. Evidence distinguishes host tests, signed simulations, actual validator transactions and distributed computation. It establishes neither production security nor public-network/asset compatibility or external customer adoption.
+Use pinned dependencies. New ledgers, keys and raw evidence belong in ignored
+`.local/` directories. This repository does not claim production security,
+public-network deployment, fee-token compatibility or external customer validation.

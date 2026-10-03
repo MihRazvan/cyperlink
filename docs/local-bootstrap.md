@@ -1,6 +1,6 @@
 # Fresh local bootstrap
 
-This path uses repository sources, exact dependency locks and hash-pinned public artifacts. It does not read the original research checkout or copy its administrator/node identities. The historical [replay guide](local-replay.md) remains available for inspecting older evidence.
+This path uses repository sources, exact dependency locks and hash-pinned public artifacts. It does not read the original research checkout or copy its administrator/node identities. Historical replay is indexed under [evidence](evidence.md).
 
 Qualification currently covers Darwin ARM64 on the development host. Prerequisites are Python 3, Node 24.12.0/npm 11.6.2, Docker with Linux AMD64 support, host Rust/Cargo 1.95.0 and the auth workspace's pinned 1.89.0 toolchain. The SBF launcher selects platform-tools v1.57/arch v0. Existing Rust crate and SBF platform caches remain host dependencies; a blank-machine installation and independent compiler-byte qualification have **not** been demonstrated.
 
@@ -48,24 +48,22 @@ python3 run-validator.py
 docker compose -f artifacts/compose.json up -d --pull never
 ```
 
-From the repository root:
+Back at the repository root, follow [customer policy authoring and deployment](custom-policy-authoring.md)
+to deploy a fresh policy and integrate generated `connectSession` bindings.
+For the retained legacy fixed-allowance demo, use the separate
+[two-consumer runner](../examples/two-consumers/README.md). Do not mix its fixed
+program identities or account layouts into a new custom-policy instance.
 
-```sh
-node examples/two-consumers/run.mjs \
-  --scenario conflict --out .local/demo-01 \
-  --prefund-pdas true \
-  --module-root .local/toolchain/js \
-  --proof-cli crates/client-proofs/target/debug/cyperlink-client-proofs \
-  --payer .local/localnet-demo-01/app/local-test-wallet.json \
-  --idl .local/localnet-demo-01/app/target/idl/cyperlink_auth.json \
-  --circuits .local/localnet-demo-01/app/build \
-  --preparation .local/localnet-demo-01/preparation.json \
-  --rpc http://127.0.0.1:8899
-```
+For **custom policy deployment**, prepare with
+`--allow-pinned-sbf-v0-deployment` in addition to your chosen run ID/ports. This
+explicitly disables SIMD-0500 feature `B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g`
+at fresh local genesis so pinned SBF v0 deployments are accepted. It is not default
+Agave feature parity or public-network deployability. Do not alter an existing ledger.
 
-The output directory must not already exist. For `compatible`, prepare another fresh run and use its paths; do not reset the prior ledger. `--rpc-port` and `--metrics-port` each reserve that port and its successor. Preparation selects an unused Docker subnet and adjusts exactly three checked public genesis peer fields. It refuses reused output, symlinked inputs and runtime share state. The actual loaded bytes of all ten programs are checked before provisioning.
-
-Both scenarios use genuine native proofs, client-owned account keys, fresh MXE keys, signed distributed callbacks and owner/admin-authorized operations. Conflict demonstrates paid merchant entitlement, stale license rejection, honest fresh denial, exact binding attacks, replay and rollback after a native transfer. Compatible demonstrates a merchant payment followed by fresh computation and a paid license against the same allowance. Requested amounts and inferred remainder are labeled test-observer disclosures. See the [operation contract](operation-contract.md).
+Preparation requires fresh output, selects an unused Docker subnet and refuses reused
+runtime share state. Both profiles use fresh runtime identities and actual native proof
+verification; new account data/permits are never injected as a substitute. Setup and
+scenario qualification are different stages; [evidence](evidence.md) records what ran.
 
 ## Evidence and shutdown
 
