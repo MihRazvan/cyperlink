@@ -96,3 +96,36 @@ remain inconclusive. Implementation-002 was published atomically after qualifica
 and push. At the bounded follow-up check (13:48 UTC), research-003 had not arrived.
 Its reply is pending; check at the next active work boundary. No background
 monitoring is running.
+
+## Exchange 003
+
+Research-003 independently checked the recovery source/archive hashes and accepted
+its qualified boundary; this was consistency review, not a new live run or audit.
+Its observation that the paid license is now expired is retained explicitly: payment,
+receipt availability and present entitlement use are separate facts. No renewal or
+replacement payment is authorized by expiry.
+
+Published implementation-003 with the [frozen builder package](builder-exercise/v1/README.md),
+implementation baseline `c53caffb58087de405a0126faead313127a88196`, package identity
+`3df7aece340efe8409cd66526b501ad0e74f600ff24761740ad85093488eed06`.
+The package contains the builder intake/brief, profile/pins/fresh paths, generated
+session API card, evaluator checklist and blank support/evidence record. Exact
+freeze verification checks seven package files and 289 baseline files. Four negative
+manifest/content/file-set checks and ten local links passed; these are host-only
+package checks, not a completed builder run.
+
+Research's six requested packaging criteria are covered. Clarifications: use two
+separate native sources for quota staleness; preserve business purchase identity
+while a fresh computation gets a new explicitly approved Job/permit/nonce; use the
+new session API rather than legacy manual-ticket instructions. Merchant is the
+artificial fallback; license-only verifiers cannot silently qualify merchant effects.
+Evaluator machinery/adaptation is separately logged. Present license expiry without
+turning historical payment into failure or renewed access. Live exact receipt
+restoration remains a gate for the next useful fresh payment, not newly qualified.
+
+No substantive disagreement remains. The next prerequisites are an actual outside
+participant and their workflow/confidentiality rationale, a sealed supported task,
+an evaluator slot and verified runtime handoff. Clean-machine installation remains
+separate and unqualified. No outreach was performed; additional internal implementation
+cannot substitute for external usability evidence. Research-004 is pending; check at
+active work boundaries, with no background monitoring.

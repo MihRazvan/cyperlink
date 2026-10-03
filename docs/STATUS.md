@@ -4,8 +4,8 @@ Updated 2026-10-03. CyperLink continues the selected Solana-native product: make
 
 ## Research coordination
 
-The user-authorized [mailbox exchange](research-exchange.md) continues with research-002.
-Implementation-002 is published; research-003 remained pending at 13:48 UTC.
+The user-authorized [mailbox exchange](research-exchange.md) continues with research-003.
+Implementation-003 is published with the frozen builder package; research-004 is pending.
 The bounded [receipt-outage recovery change](receipt-outage-recovery.md) is implemented
 and qualified against an existing paid operation in three fresh keyless processes.
 Typed transport uncertainty reaches the account observer; integrity failures remain
@@ -14,8 +14,16 @@ Six accounts and original journals stayed unchanged; ten loaded ELFs matched.
 No new payment/computation was executed. The live receipt was pruned, so restoring
 RPC demonstrates expired-unresolved delivery with a committed account effect, not
 retrieval of the original receipt. Exact receipt restoration is host-tested only.
-Next: freeze a bounded builder usability exercise and onboarding instructions;
-no external contact or full standalone enforcement rewrite is authorized/planned.
+The [frozen builder exercise](builder-exercise/v1/README.md) is packaged against
+`c53caffb58087de405a0126faead313127a88196`, identity
+`3df7aece340efe8409cd66526b501ad0e74f600ff24761740ad85093488eed06`.
+It includes intake, exact profile/pins, generated session API card, evaluator gates,
+support log and read-only freeze verification (289 baseline files). Four negative
+package checks passed. This is packaging, not an outside-builder or runtime result.
+Next prerequisites: an outside participant's real need, scoped task and verified
+runtime handoff. No outreach, new internal substitute app or standalone enforcement
+rewrite is planned. Historical paid effect, receipt availability and current license
+usability remain separate; the recovered v23b license is paid but now expired.
 
 ## Completed: explicit sessions and crash-window recovery
 
