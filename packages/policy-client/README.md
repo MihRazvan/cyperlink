@@ -29,6 +29,23 @@ separate `recover-operation.mjs` accepts the same arguments as the legacy
 keyless worker, but validates this profile's full state and generated deployment.
 It never takes a signing key or native witness.
 
+`payerKeyfile` is the policy administrator used for query co-signing. Applications
+must obtain explicit consent for that role as well as the source owner; do not
+turn a deployment descriptor's keyfile path into automatic query authority.
+`prepare` also signs native preparation using the provisioned source owner's
+local keyfile, so preparation is an owner-authorized action.
+
+For a process restart, distinguish reopening an operation from reopening its
+transaction journal. `client.load` validates a saved plan; it does not attach a
+new connection/session to an old ticket's journal. `client.submit`/`client.recover`
+require their sender to use the ticket's original journal. The documented keyless
+worker opens `ticket.journalDirectory` and is the supported path for independent
+process recovery or explicit retransmission. A fresh signing session may safely
+prepare a different explicitly approved operation, but must not restage an old
+operation to recover its delivery. See the [separate license application](../../examples/license-app/README.md)
+for saved-ticket submission across invocations and the staging-to-ticket-save
+interruption limit.
+
 The supported transport is pinned CSplRescueCipher over ScalarField253. Four
 cipher slots are always present; unused slots are circuit-checked zero. State is
 353 bytes, permit712, Job1200, PreparedAction1200; the native/action template
