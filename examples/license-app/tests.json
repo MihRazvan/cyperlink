@@ -1,0 +1,186 @@
+[
+  {
+    "name": "within-cap",
+    "amount": 20,
+    "state": [
+      100,
+      30
+    ],
+    "allow": true,
+    "next": [
+      80,
+      30
+    ]
+  },
+  {
+    "name": "cap-denial-with-allowance",
+    "amount": 31,
+    "state": [
+      100,
+      30
+    ],
+    "allow": false,
+    "next": [
+      100,
+      30
+    ]
+  },
+  {
+    "name": "exact-cap",
+    "amount": 30,
+    "state": [
+      100,
+      30
+    ],
+    "allow": true,
+    "next": [
+      70,
+      30
+    ]
+  },
+  {
+    "name": "exact-exhaustion",
+    "amount": 20,
+    "state": [
+      20,
+      30
+    ],
+    "allow": true,
+    "next": [
+      0,
+      30
+    ]
+  },
+  {
+    "name": "exhausted",
+    "amount": 1,
+    "state": [
+      0,
+      30
+    ],
+    "allow": false,
+    "next": [
+      0,
+      30
+    ]
+  },
+  {
+    "name": "allowance-denial-within-cap",
+    "amount": 21,
+    "state": [
+      20,
+      30
+    ],
+    "allow": false,
+    "next": [
+      20,
+      30
+    ]
+  },
+  {
+    "name": "zero-payment",
+    "amount": 0,
+    "state": [
+      100,
+      30
+    ],
+    "allow": false,
+    "next": [
+      100,
+      30
+    ]
+  },
+  {
+    "name": "zero-cap",
+    "amount": 1,
+    "state": [
+      100,
+      0
+    ],
+    "allow": false,
+    "next": [
+      100,
+      0
+    ]
+  },
+  {
+    "name": "unit-boundary",
+    "amount": 1,
+    "state": [
+      1,
+      1
+    ],
+    "allow": true,
+    "next": [
+      0,
+      1
+    ]
+  },
+  {
+    "name": "u64-state-boundary",
+    "amount": 1,
+    "state": [
+      "18446744073709551615",
+      "18446744073709551615"
+    ],
+    "allow": true,
+    "next": [
+      "18446744073709551614",
+      "18446744073709551615"
+    ]
+  },
+  {
+    "name": "native-amount-largest",
+    "amount": "281474976710655",
+    "state": [
+      "281474976710655",
+      "281474976710655"
+    ],
+    "allow": true,
+    "next": [
+      0,
+      "281474976710655"
+    ]
+  },
+  {
+    "name": "native-amount-overflow",
+    "amount": "281474976710656",
+    "state": [
+      "281474976710656",
+      "281474976710656"
+    ],
+    "allow": false,
+    "next": [
+      "281474976710656",
+      "281474976710656"
+    ]
+  },
+  {
+    "name": "amount-native-mismatch",
+    "amount": 20,
+    "native_amount": 21,
+    "state": [
+      100,
+      30
+    ],
+    "allow": false,
+    "next": [
+      100,
+      30
+    ]
+  },
+  {
+    "name": "commitment-tampering",
+    "amount": 20,
+    "corrupt_commitment_byte": 31,
+    "state": [
+      100,
+      30
+    ],
+    "allow": false,
+    "next": [
+      100,
+      30
+    ]
+  }
+]
