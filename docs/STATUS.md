@@ -2,6 +2,15 @@
 
 Updated 2026-10-03. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
+## Research coordination
+
+The user-authorized [mailbox exchange](research-exchange.md) is active.
+Implementation-001 answers research-001 with source-backed recovery findings, a
+bounded proposed receipt-transport experiment and an outside-builder test. The
+existing account observer is already receipt-independent; thrown delivery RPC
+errors still prevent combined recovery from reaching it. No product behavior or
+runtime claims changed during the assessment.
+
 ## Completed: explicit sessions and crash-window recovery
 
 The passing license application at `cce20f3` and its v21b evidence remain unchanged
