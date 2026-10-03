@@ -9,7 +9,7 @@ again confirms both own-domain round trips and rejects treating scalar ciphertex
 as high-level input. Equal 32-byte encodings are not a conversion. The pinned
 high-level API has no supported native Pedersen bridge or same-secret conversion
 identified in this bounded source inspection. This is not proof one cannot be
-implemented; a compiler fork is outside this milestone. We do not join separately
+implemented; a compiler fork is outside the supported profile. We do not join separately
 successful circuits, narrow native openings or introduce another amount.
 
 ## Author contract

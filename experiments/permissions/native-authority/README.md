@@ -18,4 +18,4 @@ CARGO_TARGET_DIR="$PWD/.local/permissions-authority-build" cargo run \
 
 The output is create-only. ELF SHA256 is checked before execution. The lockfile was seeded from the recorded research `compatibility/deployed-elf/Cargo.lock`; the only newly resolved packages are this local crate and the existing local proof client. No registry version or checksum changed. Mollusk0.13.4 and SDK7.0.1 are exact dependencies; its underlying native builtin is the recorded SVM4 stack, distinct from the real validator's Agave4.3.0 stack.
 
-See [the design and limitations](../../../docs/permissions-feasibility.md). This is negative evidence for direct native delegation, not a successful Permissions offering.
+See [the design and limitations](https://github.com/MihRazvan/cyperlink/blob/builder-exercise-v1/docs/permissions-feasibility.md). This is negative evidence for direct native delegation, not a successful Permissions offering.

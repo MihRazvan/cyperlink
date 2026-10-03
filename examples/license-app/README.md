@@ -6,7 +6,7 @@ both private `purchase_cap` and private `remaining`. Settlement decreases remain
 and preserves the cap. Denial preserves both fields. Public source contains no
 private initialization values. This is not independent customer validation.
 
-The [fresh local rehearsal](../../docs/license-app-rehearsal.md) now passes real
+The [qualified reference run](../../docs/evidence.md) passed real
 Arcium decisions, two paid licenses, stale/rollback/replay failures and exact
 cross-process recovery. It also records the SDK source assistance and application
 fix required during integration. Runtime commands and evidence are in that guide.
@@ -29,7 +29,7 @@ Deploy with the documented `policy deploy --local` command, an existing prepared
 environment, and a private initializer containing exactly `remaining` and
 `purchase_cap` decimal strings. Keep that file, the instance and all runtime data
 beneath repository `.local/`. Deployment and runtime qualification are separate
-from this application's host tests. See [API friction](FRICTION.md).
+from this application's host tests. See [API friction](https://github.com/MihRazvan/cyperlink/blob/builder-exercise-v1/examples/license-app/FRICTION.md).
 
 Each CLI invocation is a separate process. Set paths to your fresh local instance,
 its explicitly approved administrator and selected provisioned source owner:
@@ -102,4 +102,5 @@ retains delivery and operation status independently; an expired unresolved
 transaction does not become a presumed failure. Recovery never refreshes the
 blockhash, nonce, private inputs or signature. If staging was interrupted before
 the returned ticket was saved, the retained approval intent blocks restaging;
-inspect the preserved SDK journal as described in FRICTION.md.
+consult the historical friction report linked above. New integrations should use
+[the session API](../license-session/README.md), which owns ticket discovery.

@@ -13,7 +13,7 @@ To inspect or run that exact package without changing this checkout, from repo r
 
 ```sh
 mkdir -p .local
- git worktree add --detach .local/builder-exercise-v1 builder-exercise-v1
+git worktree add --detach .local/builder-exercise-v1 builder-exercise-v1
 cd .local/builder-exercise-v1
 python3 docs/builder-exercise/v1/verify.py
 ```

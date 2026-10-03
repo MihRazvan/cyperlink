@@ -1,5 +1,10 @@
 # Custom-policy local client
 
+For new applications, start with the generated `connectSession` workflow in the
+[current authoring guide](../../docs/custom-policy-authoring.md). The lower-level
+`connect` API below remains available for existing integrations.
+
+
 This is the explicit `local-custom-policy-v1` client. Legacy SDK decoding and
 historical plans remain unchanged. Generated bindings supply a deployment
 containing its release, schema, key domain and generated program identities.

@@ -52,4 +52,4 @@ node examples/license-session/qualify.mjs .local/INSTANCE/instance.json .local/N
 boundaries. It never injects proofs, permits, callback signatures or verified
 contexts. The harness discloses synthetic allowance50/cap30 and purchases10/20 as
 test-observer values. Host tests and real runtime results are reported separately
-in the repository milestone document.
+in the [evidence index](../../docs/evidence.md).

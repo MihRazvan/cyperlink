@@ -134,4 +134,4 @@ stack and any human productivity/maintenance advantage remain **inconclusive**.
 The full direct adversarial matrix has not newly exercised substituted owner,
 destination/product/expiry, mismatched native commitment or a forged callback;
 those remain shared-enforcement/review evidence rather than direct-run claims.
-See [FRICTION.md](FRICTION.md) and the repository comparison report.
+See [FRICTION.md](https://github.com/MihRazvan/cyperlink/blob/builder-exercise-v1/examples/license-direct/FRICTION.md) and the [comparison summary](../../docs/evidence.md).
