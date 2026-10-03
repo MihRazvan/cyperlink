@@ -1,6 +1,15 @@
 # Implementation status
 
-Updated 2026-10-02. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
+Updated 2026-10-03. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
+
+## In progress: separate paid-license application rehearsal
+
+The [rehearsal plan](license-app-rehearsal.md) preserves the completed custom-policy
+milestone and tests documentation/SDK integration through a separate application.
+An internal docs-first author is implementing private per-purchase cap plus
+decreasing allowance and explicit license approval/recovery commands. Fresh local
+runtime evidence and an upstream comparison remain pending. This is not external
+developer validation. Existing ledgers, keys, fixtures and prior results remain intact.
 
 ## Customer-authored private policies: real local path qualified
 
