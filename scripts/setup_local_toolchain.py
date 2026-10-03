@@ -7,6 +7,7 @@ import os
 from pathlib import Path, PurePosixPath
 import platform
 import shutil
+import stat
 import subprocess
 import sys
 import tarfile
@@ -18,7 +19,18 @@ from verify_loaded_program import NoRedirect, account_bytes, compare_program, pr
 ROOT = Path(__file__).resolve().parents[1]
 LOCAL = ROOT / ".local/toolchain"
 NATIVE = LOCAL / "native"
-SBF_CACHE_LINK = "solana-release/bin/platform-tools-sdk/sbf/dependencies/platform-tools"
+SBF_DEPENDENCIES = "solana-release/bin/platform-tools-sdk/sbf/dependencies"
+SBF_CACHE_LINK = f"{SBF_DEPENDENCIES}/platform-tools"
+SBF_CACHE_LINKS = {
+    SBF_CACHE_LINK: "v1.57/platform-tools",
+    f"{SBF_DEPENDENCIES}/criterion": "v2.3.2/criterion",
+}
+# The pinned Darwin install.sh creates these empty completion markers. Its
+# default v1.52 marker does not qualify a compiler or permit a v1.52 cache link.
+SBF_CACHE_MARKERS = {
+    f"{SBF_DEPENDENCIES}/criterion-v2.3.2.md",
+    f"{SBF_DEPENDENCIES}/platform-tools-v1.52.md",
+}
 
 
 def sha(path):
@@ -38,10 +50,18 @@ def inventory(directory, sbf_runtime_cache=False):
     result = {}
     for p in sorted(directory.rglob("*")):
         name = p.relative_to(directory).as_posix()
-        if sbf_runtime_cache and name == SBF_CACHE_LINK:
-            # cargo-build-sbf creates this link on invocation; it is not in the release.
-            require(p.is_symlink() and p.resolve().name == "platform-tools" and p.resolve().parent.name == "v1.57",
+        if sbf_runtime_cache and name in SBF_CACHE_LINKS:
+            # These exact links are generated after installation, not archived
+            # release files. Do not accept same-suffix paths or redirected caches.
+            expected = Path.home() / ".cache/solana" / SBF_CACHE_LINKS[name]
+            require(p.is_symlink() and os.readlink(p) == str(expected)
+                    and expected.resolve() == expected and p.is_dir(),
                     "Unexpected SBF runtime cache link")
+            continue
+        if sbf_runtime_cache and name in SBF_CACHE_MARKERS:
+            metadata = p.lstat()
+            require(stat.S_ISREG(metadata.st_mode) and metadata.st_size == 0,
+                    "Unexpected SBF runtime cache marker")
             continue
         if p.is_symlink():
             require(directory.resolve() in p.resolve().parents, "Installed symlink escapes directory")
@@ -258,6 +278,10 @@ def main():
               "public_transactions": False, "private_keys_accessed": False, "verified": True}
     sbf_cache = NATIVE / "agave-3.1.14" / SBF_CACHE_LINK
     report["prerequisites"]["sbf_runtime_cache_link"] = str(sbf_cache.resolve()) if sbf_cache.is_symlink() else None
+    report["prerequisites"]["sbf_runtime_cache_links"] = {
+        name: str((NATIVE / "agave-3.1.14" / name).resolve())
+        for name in SBF_CACHE_LINKS if (NATIVE / "agave-3.1.14" / name).is_symlink()
+    }
     report["prerequisites"]["sbf_runtime_cache_qualified_by_this_script"] = False
     if not args.verify_only:
         report_path = NATIVE / "installation.json"

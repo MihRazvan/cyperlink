@@ -25,12 +25,25 @@ version. Builds must explicitly request the qualified platform-tools v1.57 and
 architecture v0. Host Rust 1.95.0 and the auth workspace’s pinned Rust 1.89.0 are separate prerequisites. This installer
 does not install or change global Rust or SBF toolchains.
 
-The launcher itself creates one runtime cache symlink at
-`solana-release/bin/platform-tools-sdk/sbf/dependencies/platform-tools` when used.
-That exact generated link is reported separately and excluded from the release
-inventory only when it points at a `v1.57/platform-tools` directory. The installer
-does not traverse or qualify that external cache; compilation must qualify the
-actual SBF toolchain separately. All archived files remain hash checked.
+The launcher and its pinned `sbf/scripts/install.sh` create optional runtime
+files under `solana-release/bin/platform-tools-sdk/sbf/dependencies/`. Only the
+following generated files are excluded from the release inventory:
+
+- `platform-tools`: a symlink to exactly `~/.cache/solana/v1.57/platform-tools`.
+- `criterion`: a symlink to exactly `~/.cache/solana/v2.3.2/criterion`, the Darwin
+  Criterion version selected by that archived upstream script.
+- `criterion-v2.3.2.md` and `platform-tools-v1.52.md`: empty regular completion
+  markers created by that script. The default v1.52 marker does not authorize
+  a v1.52 compiler link; builds still require v1.57.
+
+Cache links must target existing directories with no symlink redirection in the
+target path; same-suffix paths elsewhere are rejected. The links are reported
+separately. The installer does not traverse or qualify these external caches;
+compilation must qualify the actual SBF toolchain separately. These exceptions
+apply only to post-install verification, and all archived files remain checked.
+`python3 -m unittest discover -s tests -p test_setup_local_toolchain.py -v` covers
+the exact exclusions, redirected/missing/wrong targets, nonempty or linked markers,
+unknown generated files, and changed archived bytes.
 
 The default setup can download the pinned native assets. Docker images are only
 inspected locally unless `--pull-images` is supplied; that option permits pulling

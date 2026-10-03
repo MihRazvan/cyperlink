@@ -8,6 +8,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import setup_local_toolchain as setup
@@ -18,7 +19,7 @@ class ToolchainIntegrity(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
 
     def archive(self, members):
         path = self.root / "test.tar"
@@ -90,21 +91,110 @@ class ToolchainIntegrity(unittest.TestCase):
         self.assertRaises(ValueError, setup.install_asset, {"name": "absent", "format": "file", "path": "bin/absent"}, self.root, self.root / "cache", True)
         self.assertFalse((self.root / "bin").exists())
 
-    def test_only_exact_sbf_generated_cache_link_is_excluded(self):
+    def sbf_cache_fixture(self):
         archive = self.root / "archive"
         archive.mkdir()
-        cache = self.root / "v1.57/platform-tools"
-        cache.mkdir(parents=True)
-        link = archive / setup.SBF_CACHE_LINK
-        link.parent.mkdir(parents=True)
-        link.symlink_to(cache)
+        home = self.root / "home"
+        self.enterContext(patch.object(setup.Path, "home", return_value=home))
+        for name, relative in setup.SBF_CACHE_LINKS.items():
+            cache = home / ".cache/solana" / relative
+            cache.mkdir(parents=True)
+            link = archive / name
+            link.parent.mkdir(parents=True, exist_ok=True)
+            link.symlink_to(cache)
+        return archive, home
+
+    def test_only_exact_sbf_generated_cache_links_are_excluded(self):
+        archive, _ = self.sbf_cache_fixture()
         self.assertEqual(setup.inventory(archive, sbf_runtime_cache=True), {})
         with self.assertRaisesRegex(ValueError, "symlink escapes"):
             setup.inventory(archive)
-        link.unlink()
-        link.symlink_to(self.root / "v1.52/platform-tools")
-        with self.assertRaisesRegex(ValueError, "Unexpected SBF"):
-            setup.inventory(archive, sbf_runtime_cache=True)
+        for name, relative in setup.SBF_CACHE_LINKS.items():
+            link = archive / name
+            original = link.readlink()
+            for target in (self.root / relative, original.parent.parent / "wrong" / original.name):
+                target.mkdir(parents=True, exist_ok=True)
+                link.unlink()
+                link.symlink_to(target)
+                with self.subTest(name=name, target=target), self.assertRaisesRegex(ValueError, "Unexpected SBF"):
+                    setup.inventory(archive, sbf_runtime_cache=True)
+            link.unlink()
+            link.symlink_to(original)
+
+    def test_missing_redirected_and_non_symlink_cache_targets_rejected(self):
+        archive, _ = self.sbf_cache_fixture()
+        for name in setup.SBF_CACHE_LINKS:
+            link = archive / name
+            target = link.readlink()
+            target.rmdir()
+            with self.subTest(name=name, kind="missing"), self.assertRaisesRegex(ValueError, "Unexpected SBF"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            elsewhere = self.root / target.name
+            elsewhere.mkdir()
+            target.symlink_to(elsewhere)
+            with self.subTest(name=name, kind="redirected"), self.assertRaisesRegex(ValueError, "Unexpected SBF"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            target.unlink()
+            target.mkdir()
+            link.unlink()
+            link.mkdir()
+            with self.subTest(name=name, kind="directory"), self.assertRaisesRegex(ValueError, "Unexpected SBF"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            link.rmdir()
+            link.symlink_to(target)
+
+    def test_only_empty_regular_generated_markers_are_excluded(self):
+        archive, _ = self.sbf_cache_fixture()
+        for name in setup.SBF_CACHE_MARKERS:
+            marker = archive / name
+            marker.touch()
+            self.assertEqual(setup.inventory(archive, sbf_runtime_cache=True), {})
+            marker.write_bytes(b"unexpected")
+            with self.subTest(name=name, kind="nonempty"), self.assertRaisesRegex(ValueError, "cache marker"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            marker.unlink()
+            marker.symlink_to(archive / setup.SBF_CACHE_LINK)
+            with self.subTest(name=name, kind="link"), self.assertRaisesRegex(ValueError, "cache marker"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            marker.unlink()
+            marker.mkdir()
+            with self.subTest(name=name, kind="directory"), self.assertRaisesRegex(ValueError, "cache marker"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            marker.rmdir()
+
+    def test_cache_exception_does_not_allow_other_external_links(self):
+        archive, home = self.sbf_cache_fixture()
+        for name in ("criterion", f"{setup.SBF_DEPENDENCIES}/extra"):
+            link = archive / name
+            link.symlink_to(home / ".cache/solana/v2.3.2/criterion")
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "symlink escapes"):
+                setup.inventory(archive, sbf_runtime_cache=True)
+            link.unlink()
+
+    def test_install_receipt_survives_generated_cache_but_rejects_release_changes(self):
+        _, home = self.sbf_cache_fixture()
+        native, cache = self.root / "native", self.root / "cache"
+        native.mkdir(); cache.mkdir()
+        tar = self.archive([("bin/tool", tarfile.REGTYPE, b"tool")])
+        digest = setup.sha(tar)
+        tar.rename(cache / digest)
+        asset = {"name": "sbf-launcher", "format": "tar", "directory": "sbf", "sha256": digest}
+        original = setup.install_asset(asset, native, cache)
+        installed = native / "sbf"
+        (installed / setup.SBF_DEPENDENCIES).mkdir(parents=True)
+        for name, relative in setup.SBF_CACHE_LINKS.items():
+            (installed / name).symlink_to(home / ".cache/solana" / relative)
+        for name in setup.SBF_CACHE_MARKERS:
+            (installed / name).touch()
+        self.assertEqual(setup.install_asset(asset, native, cache, True), original)
+        unexpected = installed / setup.SBF_DEPENDENCIES / "platform-tools-v1.57.md"
+        unexpected.touch()
+        with self.assertRaisesRegex(ValueError, "Installed asset changed"):
+            setup.install_asset(asset, native, cache, True)
+        unexpected.unlink()
+        (installed / "bin/tool").write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "Installed asset changed"):
+            setup.install_asset(asset, native, cache, True)
 
 
 class PublicArtifactIntegrity(unittest.TestCase):
