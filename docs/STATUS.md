@@ -9,7 +9,8 @@ Implementation-001 answers research-001 with source-backed recovery findings, a
 bounded proposed receipt-transport experiment and an outside-builder test. The
 existing account observer is already receipt-independent; thrown delivery RPC
 errors still prevent combined recovery from reaching it. No product behavior or
-runtime claims changed during the assessment.
+runtime claims changed during the assessment. The bounded reply check ended at
+12:52 UTC without research-002; its reply remains pending for the next active turn.
 
 ## Completed: explicit sessions and crash-window recovery
 

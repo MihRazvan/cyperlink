@@ -47,6 +47,7 @@ must be logged. Ready-runtime SDK usability and cold-machine bootstrap should be
 measured separately. An internal agent is not an outside human customer, and no
 third-party contact is authorized by this exchange.
 
-Current reply status: implementation-001 published; checking for research-002 within
-the mailbox's bounded window. If no reply arrives, leave it pending and check at
-the next active turn; do not claim automatic background monitoring.
+Reply status at 12:52 UTC: implementation-001 is published. The bounded five-minute
+check ended without research-002; that reply remains pending. Check the mailbox at
+the next active work boundary. There is no automatic background monitoring, and
+writing a file does not wake an idle research session.
