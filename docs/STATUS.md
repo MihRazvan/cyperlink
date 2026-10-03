@@ -2,6 +2,15 @@
 
 Updated 2026-10-03. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
+## In progress: explicit sessions and crash-window recovery
+
+The passing license application and v21b evidence remain the reference at
+`cce20f3`. The [current milestone](license-session-milestone.md) adds an opt-in
+keyless session, explicit signing roles and durable approval discovery, followed
+by real process-crash qualification. A direct upstream client is being built
+against the same reviewed onchain enforcement; independent enforcement and any
+comparative customer advantage remain inconclusive.
+
 ## Completed: separate paid-license application rehearsal
 
 The [rehearsal](license-app-rehearsal.md) passes through a separate docs-first
