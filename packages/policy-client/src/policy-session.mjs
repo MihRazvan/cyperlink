@@ -1,3 +1,4 @@
+import { fetchRpc, isRpcUnavailable } from '../../sdk/src/rpc-availability.mjs';
 import { resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { createPrivateRun, loadWeb3, loadSigner, ensure, loopbackEndpoint } from '../../local-client/src/runtime.mjs';
@@ -18,7 +19,7 @@ export class PolicySession {
     endpoint = loopbackEndpoint(endpoint);
     const web3 = await loadWeb3(moduleRoot);
     const connection = new web3.Connection(endpoint, { commitment: 'confirmed', disableRetryOnRateLimit: true,
-      fetch: (url, options) => { ensure(loopbackEndpoint(url) === endpoint, 'Unexpected session RPC endpoint'); return fetch(url, { ...options, redirect: 'error' }); } });
+      fetch: (url, options) => { ensure(loopbackEndpoint(url) === endpoint, 'Unexpected session RPC endpoint'); return fetchRpc(globalThis.fetch, url, { ...options, redirect: 'error' }); } });
     ensure((await connection.getVersion())['solana-core'] === '4.3.0', 'Expected pinned local Agave 4.3.0');
     ensure(await connection.getGenesisHash() === deployment.genesisHash, 'Deployment belongs to another ledger');
     const store = await openApprovalStore({ directory, genesisHash: deployment.genesisHash, endpoint, deploymentHash: descriptorDigest(deployment) });
@@ -26,7 +27,7 @@ export class PolicySession {
   }
   constructor(options) {
     Object.assign(this, options);
-    this.reader = new OperationReader(new LocalRpcTransport(this.endpoint, { commitment: 'confirmed' }));
+    this.reader = new OperationReader(new LocalRpcTransport(this.endpoint, { commitment: 'confirmed', fetch: (url, options) => fetchRpc(globalThis.fetch, url, options) }));
   }
   async assertPlan(plan) {
     validateOperationPlan(plan);
@@ -87,15 +88,23 @@ export class PolicySession {
       try { await sender.recordSimulation(ticket, simulation); }
       catch (error) { if (error.code !== 'EEXIST') throw error; } // concurrent exact-ticket resumption: read the winning record
     }
-    if (submit) delivery = await sender.send(ticket);
-    this.reader.minimumSlot = Math.max(this.reader.minimumSlot ?? 0, plan.contextSlot, delivery.receipt?.slot ?? 0);
+    if (submit && !delivery.availability.length) delivery = await sender.send(ticket);
+    this.reader.minimumSlot = Math.max(this.reader.minimumSlot ?? 0, plan.contextSlot, delivery.observationSlot);
     // Expose public delivery metadata; keep signed wire, witnesses and private keys
     // in the local journal. RPC receipt/effect are separate facts.
     const result = { status: delivery.status, signature: ticket.signature, wireSha256: ticket.wireSha256, role,
-      attempts: delivery.attempts, canBroadcast: delivery.canBroadcast,
+      attempts: delivery.attempts, canBroadcast: delivery.canBroadcast, observationSlot: this.reader.minimumSlot, availability: delivery.availability,
       ...(delivery.receipt ? { receipt: { slot: delivery.receipt.slot, error: delivery.receipt.meta.err,
         landedCU: delivery.receipt.meta.computeUnitsConsumed, feeLamports: delivery.receipt.meta.fee } } : {}) };
-    return { ticket, delivery: result, observation: await this.observe(plan) };
+    let observation;
+    try { observation = await this.observe(plan); }
+    catch (error) {
+      if (!isRpcUnavailable(error, 'getMultipleAccounts')) throw error;
+      observation = { status: 'unresolved', reason: 'Account RPC unavailable', minContextSlot: this.reader.minimumSlot,
+        availability: { method: error.method, category: error.category, status: error.status, code: error.code } };
+    }
+    if (observation.status !== 'unresolved') await sender.recordContext(ticket, observation.slot);
+    return { ticket, delivery: result, observation };
   }
   recover(plan, role) { return this.reconcile(plan, role, false); }
   submit(plan, role) { return this.reconcile(plan, role, true); }

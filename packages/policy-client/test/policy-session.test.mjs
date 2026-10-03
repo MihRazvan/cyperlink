@@ -1,3 +1,4 @@
+import { RpcUnavailableError } from '../../sdk/src/rpc-availability.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
@@ -166,4 +167,72 @@ test('simulation rejection prevents broadcast and remains explicit on subsequent
   assert.equal((await session.submit(f.plan, 'commit')).delivery.status, 'simulation-rejected');
   assert.equal((await (await f.fresh()).recover(f.plan, 'commit')).delivery.status, 'simulation-rejected');
   assert.equal(f.calls.simulation, 1); assert.equal(f.calls.send, 0);
+});
+
+const unavailable = method => new RpcUnavailableError({ method, category: 'http', status: 503 });
+
+test('receipt/status outages reach account observation, never simulate or send even on explicit submit', async t => {
+  const f = await setup(t), reserved = await f.store.begin(f.plan, 'commit'), signed = await f.publish(reserved.journalDirectory);
+  f.connection.getTransaction = async () => { throw unavailable('getTransaction'); };
+  for (const status of [null, { slot: 2, err: null }]) {
+    f.connection.getSignatureStatuses = async () => ({ context: { slot: 8 }, value: [status] });
+    const session = await f.fresh();
+    session.reader.observe = async () => { assert.equal(session.reader.minimumSlot, 8); return { status: 'committed', slot: 8 }; };
+    const result = await session.submit(f.plan, 'commit');
+    assert.equal(result.delivery.status, status ? 'observed-without-receipt' : 'delivery-unavailable');
+    assert.equal(result.delivery.canBroadcast, false); assert.equal(result.delivery.receipt, undefined);
+    assert.equal(result.observation.status, 'committed'); assert.equal(result.ticket.signature, signed.ticket.signature);
+  }
+  f.connection.getSignatureStatuses = async () => { throw unavailable('getSignatureStatuses'); };
+  const session = await f.fresh();
+  session.reader.observe = async () => { assert.equal(session.reader.minimumSlot, 8); throw unavailable('getMultipleAccounts'); };
+  const result = await session.recover(f.plan, 'commit');
+  assert.equal(result.observation.status, 'unresolved'); assert.equal(result.observation.minContextSlot, 8);
+  assert.equal(result.delivery.availability.length, 2);
+  assert.equal(f.calls.simulation, 0); assert.equal(f.calls.send, 0);
+});
+
+test('status-only and later account context survive reopening; older evidence fails closed', async t => {
+  const f = await setup(t), reserved = await f.store.begin(f.plan, 'commit'), signed = await f.publish(reserved.journalDirectory);
+  f.connection.getSignatureStatuses = async () => ({ context: { slot: 7 }, value: [{ slot: 2, err: null }] });
+  const session = await f.fresh();
+  session.reader.observe = async () => { assert.equal(session.reader.minimumSlot, 7); return { status: 'authorized', slot: 9 }; };
+  const first = await session.recover(f.plan, 'commit');
+  assert.equal(first.delivery.status, 'observed-without-receipt'); assert.equal(first.observation.status, 'authorized');
+  assert.equal((await signed.journal.read(signed.ticket)).observationSlot, 9);
+  await assert.rejects((await f.fresh()).recover(f.plan, 'commit'), /older than retained operation/);
+  f.connection.getSignatureStatuses = async () => ({ context: { slot: 9 }, value: [null] });
+  const restarted = await f.fresh();
+  restarted.reader.observe = async () => ({ status: 'committed', slot: 8 });
+  await assert.rejects(restarted.recover(f.plan, 'commit'), /context regressed/);
+});
+
+test('availability does not swallow malformed RPC, wrong-method errors or conflicting account evidence', async t => {
+  const f = await setup(t), reserved = await f.store.begin(f.plan, 'commit'); await f.publish(reserved.journalDirectory);
+  const session = await f.fresh(); let observations = 0;
+  session.reader.observe = async () => { observations++; throw Error('Partial/conflicting effects'); };
+  for (const error of [new SyntaxError('Malformed receipt JSON'), Error('Invalid receipt'), unavailable('getGenesisHash')]) {
+    f.connection.getTransaction = async () => { throw error; };
+    await assert.rejects(session.recover(f.plan, 'commit'), error);
+  }
+  f.connection.getTransaction = async () => undefined;
+  await assert.rejects(session.recover(f.plan, 'commit'), /Malformed receipt/);
+  f.connection.getTransaction = async () => { throw unavailable('getTransaction'); };
+  for (const value of [undefined, {}, { context: { slot: 2 }, value: [] }, { context: { slot: 2 }, value: [{}] }]) {
+    f.connection.getSignatureStatuses = async () => value;
+    await assert.rejects(session.recover(f.plan, 'commit'));
+  }
+  assert.equal(observations, 0);
+  f.connection.getSignatureStatuses = async () => ({ context: { slot: 2 }, value: [null] });
+  await assert.rejects(session.recover(f.plan, 'commit'), /Partial\/conflicting effects/);
+  assert.equal(observations, 1); assert.equal(f.calls.send, 0);
+});
+
+test('one-shot receipt outage ends explicit submit without a second delivery attempt', async t => {
+  const f = await setup(t), reserved = await f.store.begin(f.plan, 'commit'); await f.publish(reserved.journalDirectory);
+  let receipts = 0;
+  f.connection.getTransaction = async () => { if (++receipts === 1) throw unavailable('getTransaction'); return null; };
+  const result = await (await f.fresh()).submit(f.plan, 'commit');
+  assert.equal(result.delivery.status, 'delivery-unavailable'); assert.equal(receipts, 1);
+  assert.equal(f.calls.simulation, 0); assert.equal(f.calls.send, 0);
 });

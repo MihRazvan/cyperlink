@@ -103,7 +103,7 @@ test('expired unknown and observed-without-receipt never rebuild or resend', asy
   assert.equal((await f.sender.send(f.ticket, { pollAttempts: 0 })).status, 'expired-unresolved');
   f.state.valid = true; f.state.height = 101;
   assert.equal((await f.sender.recover(f.ticket)).status, 'expired-unresolved');
-  f.state.status = { err: null, confirmationStatus: 'confirmed' };
+  f.state.status = { slot: 20, err: null, confirmationStatus: 'confirmed' };
   assert.equal((await f.sender.send(f.ticket, { pollAttempts: 1, pollIntervalMs: 0 })).status, 'observed-without-receipt');
   assert.equal(f.state.sends.length, 0); assert.equal(f.state.latestCalls, 0);
 });
@@ -211,4 +211,26 @@ test('missing response remains unknown after restart; corrupted response cannot 
   assert.equal(unknown.attempts, 1); assert.equal(unknown.broadcasts[0].response, null);
   response.signature = 'different'; await writeFile(responsePath, JSON.stringify(response), { mode: 0o600 });
   await assert.rejects(reopened.recover(f.ticket), /response binding mismatch/);
+});
+
+test('legacy retained receipts preserve their floor without new cursor files', async t => {
+  const f = await fixture(t); f.land(); await f.sender.recover(f.ticket);
+  const { readdir, unlink } = await import('node:fs/promises');
+  for (const name of await readdir(f.sender.directory)) if (name.includes('.context-')) await unlink(resolve(f.sender.directory, name));
+  assert.equal((await f.sender.read(f.ticket)).observationSlot, 20);
+  f.state.receipt = null;
+  f.connection.getSignatureStatuses = async () => ({ context: { slot: 19 }, value: [null] });
+  await assert.rejects(f.sender.recover(f.ticket), /older than retained operation/);
+});
+
+test('restored receipt reconciles the original signature after typed transport uncertainty', async t => {
+  const { RpcUnavailableError } = await import('../../sdk/src/rpc-availability.mjs');
+  const f = await fixture(t), readReceipt = f.connection.getTransaction;
+  f.connection.getTransaction = async () => { throw new RpcUnavailableError({ method: 'getTransaction', category: 'http', status: 503 }); };
+  const uncertain = await f.sender.recover(f.ticket);
+  assert.equal(uncertain.status, 'delivery-unavailable'); assert.equal(uncertain.canBroadcast, false);
+  f.land(); f.connection.getTransaction = readReceipt;
+  const restored = await f.sender.recover(f.ticket);
+  assert.equal(restored.status, 'landed'); assert.equal(restored.signature, uncertain.signature);
+  assert.equal(restored.record.wireSha256, uncertain.record.wireSha256); assert.equal(f.state.sends.length, 0);
 });

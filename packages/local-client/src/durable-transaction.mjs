@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { isRpcUnavailable } from '../../sdk/src/rpc-availability.mjs';
 import { constants } from 'node:fs';
 import { open, mkdir, realpath, readdir, link, unlink } from 'node:fs/promises';
 import { resolve, dirname, sep } from 'node:path';
@@ -61,6 +62,21 @@ function loadedAddresses(tx, tables) {
     }
   }
   return { writable, readonly };
+}
+
+// RPC receipt instruction bytes serialize as Buffer JSON; deserialized signed
+// messages use Uint8Array JSON. Normalize only these two explicit byte encodings.
+function jsonMessage(message) {
+  const value = JSON.parse(JSON.stringify(message));
+  for (const ix of value.compiledInstructions) {
+    const data = ix.data?.type === 'Buffer' ? ix.data.data : ix.data;
+    ensure(data && typeof data === 'object', 'Invalid retained receipt instruction bytes');
+    const bytes = Object.values(data);
+    assert.deepEqual(Object.keys(data), bytes.map((_, i) => String(i)), 'Noncanonical retained receipt bytes');
+    ensure(bytes.every(byte => Number.isInteger(byte) && byte >= 0 && byte <= 255), 'Invalid retained receipt byte');
+    ix.data = bytes;
+  }
+  return value;
 }
 
 /** Local, append-only signed-wire journal. A receipt establishes transaction outcome, not application payment. */
@@ -138,7 +154,34 @@ export class DurableTransactionSender {
     try { simulation = await readRecord(resolve(this.directory, `${ticket.signature}.simulation.json`)); }
     catch (error) { if (error.code !== 'ENOENT') throw error; }
     if (simulation) ensure(simulation.signature === ticket.signature && simulation.wireSha256 === record.wireSha256, 'Simulation binding mismatch');
-    return { record, wire, ...verified, attempts: files.length, broadcasts, simulation: simulation?.simulation };
+    let observationSlot = record.minContextSlot;
+    // Pre-cursor journals already contain qualified receipt evidence. Keep that
+    // floor on first upgrade/restart, without presenting a cached receipt as live.
+    for (const name of (await readdir(this.directory)).filter(name => name.startsWith(`${ticket.signature}.receipt-`) && name.endsWith('.json'))) {
+      const retained = await readRecord(resolve(this.directory, name)), receipt = retained.receipt;
+      ensure(name === `${ticket.signature}.receipt-${sha(JSON.stringify(retained))}.json`
+        && retained.signature === ticket.signature && retained.wireSha256 === record.wireSha256 && retained.commitment === commitment, 'Invalid retained receipt binding');
+      ensure(Number.isSafeInteger(receipt?.slot) && receipt.slot >= record.minContextSlot && receipt.meta && Object.hasOwn(receipt.meta, 'err'), 'Invalid retained receipt context');
+      assert.deepEqual(jsonMessage(receipt.transaction.message), jsonMessage(verified.tx.message), 'Retained receipt message differs');
+      assert.deepEqual(receipt.transaction.signatures, verified.signatures, 'Retained receipt signatures differ');
+      assert.deepEqual({ writable: receipt.meta.loadedAddresses?.writable ?? [], readonly: receipt.meta.loadedAddresses?.readonly ?? [] }, record.loadedAddresses, 'Retained receipt lookup resolution differs');
+      observationSlot = Math.max(observationSlot, receipt.slot);
+    }
+    for (const name of (await readdir(this.directory)).filter(name => name.startsWith(`${ticket.signature}.context-`) && name.endsWith('.json'))) {
+      const cursor = await readRecord(resolve(this.directory, name));
+      ensure(cursor.signature === ticket.signature && cursor.wireSha256 === record.wireSha256 && cursor.genesisHash === record.genesisHash
+        && Number.isSafeInteger(cursor.slot) && cursor.slot >= record.minContextSlot && name === `${ticket.signature}.context-${cursor.slot}.json`, 'Invalid retained observation context');
+      observationSlot = Math.max(observationSlot, cursor.slot);
+    }
+    return { record, wire, ...verified, attempts: files.length, broadcasts, observationSlot, simulation: simulation?.simulation };
+  }
+  async recordContext(ticket, slot) {
+    const saved = await this.read(ticket);
+    ensure(Number.isSafeInteger(slot) && slot >= saved.observationSlot, 'Observation context regressed');
+    if (slot === saved.observationSlot) return;
+    try { await publish(resolve(this.directory, `${ticket.signature}.context-${slot}.json`), {
+      signature: ticket.signature, wireSha256: saved.record.wireSha256, genesisHash: saved.record.genesisHash, slot,
+    }); } catch (error) { if (error.code !== 'EEXIST') throw error; }
   }
   async recordSimulation(ticket, simulation) {
     const { record } = await this.read(ticket);
@@ -148,10 +191,13 @@ export class DurableTransactionSender {
   async recover(ticket) {
     await this.assertGenesis(); const saved = await this.read(ticket);
     const { record, signatures, message, attempts, broadcasts, simulation } = saved;
-    const result = { ticket, signature: record.signature, attempts, canBroadcast: false, record, simulation, broadcasts,
+    const result = { observationSlot: saved.observationSlot, availability: [], ticket, signature: record.signature, attempts, canBroadcast: false, record, simulation, broadcasts,
       retryPolicy: { maxBroadcasts: this.manifest.maxBroadcasts, rpcMaxRetries: this.rpcMaxRetries },
       lastSendError: broadcasts.findLast(item => item.response?.outcome === 'error')?.response.error.message };
-    const receipt = await this.connection.getTransaction(record.signature, { commitment, maxSupportedTransactionVersion: 0 });
+    let receipt;
+    try { receipt = await this.connection.getTransaction(record.signature, { commitment, maxSupportedTransactionVersion: 0 }); }
+    catch (error) { if (!isRpcUnavailable(error, 'getTransaction')) throw error; result.availability.push({ method: error.method, category: error.category, status: error.status, code: error.code }); }
+    ensure(receipt === null || receipt && typeof receipt === 'object' || result.availability.length, 'Malformed receipt response');
     if (receipt) {
       ensure(Number.isSafeInteger(receipt.slot) && receipt.slot >= record.minContextSlot && receipt.meta && Object.hasOwn(receipt.meta, 'err'), 'Invalid landed receipt context');
       assert.deepEqual(Buffer.from(receipt.transaction.message.serialize()), message, 'Landed message differs from signed bytes');
@@ -160,11 +206,24 @@ export class DurableTransactionSender {
       const retained = { signature: record.signature, wireSha256: record.wireSha256, commitment, receipt };
       const receiptPath = resolve(this.directory, `${record.signature}.receipt-${sha(JSON.stringify(retained))}.json`);
       try { await publish(receiptPath, retained); } catch (error) { if (error.code !== 'EEXIST') throw error; }
+      result.observationSlot = Math.max(result.observationSlot, receipt.slot);
+      await this.recordContext(ticket, result.observationSlot);
       return { ...result, status: receipt.meta.err === null ? 'landed' : 'failed', receipt };
     }
-    const statuses = await this.connection.getSignatureStatuses([record.signature], { searchTransactionHistory: true });
-    ensure(Number.isSafeInteger(statuses.context.slot) && statuses.context.slot >= record.minContextSlot, 'Signature status context is older than retained operation context');
-    if (statuses.value[0]) return { ...result, status: 'observed-without-receipt', observedStatus: statuses.value[0] };
+    let statuses;
+    try { statuses = await this.connection.getSignatureStatuses([record.signature], { searchTransactionHistory: true }); }
+    catch (error) { if (!isRpcUnavailable(error, 'getSignatureStatuses')) throw error; result.availability.push({ method: error.method, category: error.category, status: error.status, code: error.code }); }
+    ensure(statuses !== undefined || result.availability.some(error => error.method === 'getSignatureStatuses'), 'Malformed signature status response');
+    if (statuses !== undefined) {
+      ensure(Number.isSafeInteger(statuses?.context?.slot) && statuses.context.slot >= saved.observationSlot, 'Signature status context is older than retained operation context');
+      ensure(Array.isArray(statuses.value) && statuses.value.length === 1, 'Malformed signature status response');
+      const status = statuses.value[0];
+      ensure(status === null || status && Number.isSafeInteger(status.slot) && status.slot >= record.minContextSlot && status.slot <= statuses.context.slot && Object.hasOwn(status, 'err'), 'Malformed signature status');
+      result.observationSlot = statuses.context.slot;
+      await this.recordContext(ticket, result.observationSlot);
+      if (status) return { ...result, status: 'observed-without-receipt', observedStatus: status };
+    }
+    if (result.availability.length) return { ...result, status: 'delivery-unavailable' };
     const [valid, height] = await Promise.all([this.connection.isBlockhashValid(record.blockhash.blockhash, { commitment, minContextSlot: record.minContextSlot }), this.connection.getBlockHeight(commitment)]);
     ensure(typeof valid.value === 'boolean' && Number.isSafeInteger(height) && height >= 0, 'Invalid blockhash observation');
     if (!valid.value || height > record.blockhash.lastValidBlockHeight) return { ...result, status: 'expired-unresolved' };
@@ -179,7 +238,7 @@ export class DurableTransactionSender {
     ensure(Number.isSafeInteger(pollAttempts) && pollAttempts >= 0 && pollAttempts <= 1000 && Number.isSafeInteger(pollIntervalMs) && pollIntervalMs >= 0 && pollIntervalMs <= 1000 && Number.isSafeInteger(retryEvery) && retryEvery >= 1, 'Invalid bounded polling options');
     let observed = await this.recover(ticket);
     for (let poll = 0; poll <= pollAttempts; poll++) {
-      if (['landed', 'failed', 'expired-unresolved', 'simulation-required', 'simulation-rejected'].includes(observed.status)) return observed;
+      if (observed.availability.length || ['delivery-unavailable', 'landed', 'failed', 'expired-unresolved', 'simulation-required', 'simulation-rejected'].includes(observed.status)) return observed;
       if (observed.canBroadcast && poll % retryEvery === 0) {
         await this.assertGenesis(); const saved = await this.read(ticket);
         ensure(saved.attempts < this.manifest.maxBroadcasts, 'Broadcast limit reached');

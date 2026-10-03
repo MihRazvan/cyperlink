@@ -124,7 +124,7 @@ export interface TransactionReceipt {
   simulatedCU?: number; landedCU: number; feeLamports: number; error: unknown; transaction: unknown;
 }
 export interface Delivery {
-  status: 'prepared' | 'pending' | 'landed' | 'failed' | 'observed-without-receipt' | 'expired-unresolved' | 'simulation-required' | 'simulation-rejected';
+  status: 'delivery-unavailable' | 'prepared' | 'pending' | 'landed' | 'failed' | 'observed-without-receipt' | 'expired-unresolved' | 'simulation-required' | 'simulation-rejected';
   signature: string; attempts: number; canBroadcast: boolean; result?: TransactionReceipt;
 }
 export class PolicyOperationClient {
@@ -150,9 +150,12 @@ export interface PolicySessionOptions {
 }
 export interface SessionDelivery extends Delivery {
   wireSha256: string; role: 'query' | 'commit';
+  observationSlot: number; availability: RpcAvailability[];
   receipt?: { slot: number; error: unknown; landedCU: number; feeLamports: number };
 }
-export interface SessionRecovery { ticket: SignedTicket; delivery: SessionDelivery; observation: Observation }
+export interface RpcAvailability { method: string; category: 'network' | 'http'; status?: number; code?: string }
+export interface UnresolvedObservation { status: 'unresolved'; reason: string; minContextSlot: number; availability: RpcAvailability }
+export interface SessionRecovery { ticket: SignedTicket; delivery: SessionDelivery; observation: Observation | UnresolvedObservation }
 /** Local keyless observation/recovery; explicit owner/admin keys only at prepare/stage. */
 export class PolicySession {
   static connect(options: PolicySessionOptions): Promise<PolicySession>;
