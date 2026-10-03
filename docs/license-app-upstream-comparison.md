@@ -1,5 +1,7 @@
 # License operation versus direct pinned upstream APIs
 
+Historical source/API review. The subsequent [controlled executable client comparison](license-client-comparison.md) records actual runs, shared enforcement, remaining parity gaps and implementation work. The [session milestone](license-session-milestone.md) addresses the signer/journal friction identified below.
+
 Source review dated 2026-10-03. A direct Arcium + Anchor + native Token-2022
 implementation is a credible alternative. Those dependencies already provide
 the cryptography, computation plumbing, callback authentication, transaction
