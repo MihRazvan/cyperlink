@@ -1,0 +1,281 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "independent-offline-direct-client-archive-review",
+  "input": {
+    "path": ".local/direct-license-qualification-v22c/results.json",
+    "sha256": "119859aeafe7c623513c36bb97f421c826be8353308173ed3ab3d2f3b5b0347b",
+    "bytes": 4508232
+  },
+  "counts": {
+    "messages": 15,
+    "ed25519Signatures": 25,
+    "callbacks": 5,
+    "paidLicenses": 2,
+    "rejections": 3,
+    "unchangedRejectionAccounts": 36,
+    "exactSignedWires": 7,
+    "keylessRecoveryInvocations": 3,
+    "loadedElfs": 10,
+    "circuits": 2,
+    "durableAttemptRecords": 7,
+    "processCrashWindows": 5,
+    "readonlyCrashAccounts": 60
+  },
+  "callbacks": [
+    {
+      "label": "cap40",
+      "signature": "36VxEYgnTuwtcsP97qaeFXViMTUjD2oyLg3kyu3NZE2eiUXENKb5TwS3JGefL3bDyV5jJJ6vj2gZnWjN94ihZsr4",
+      "allowed": false,
+      "immutableJobChecked": true,
+      "noPaymentAtCallback": true
+    },
+    {
+      "label": "a30",
+      "signature": "3pQDq2vw5Ky1m9A8YtL4JKzNYUTFsko645g4DaxXacCHWv3FUinufwPfPhTX1MyZUhYZtNgEbs4q4ihZTPhycD9P",
+      "allowed": true,
+      "immutableJobChecked": true,
+      "noPaymentAtCallback": true
+    },
+    {
+      "label": "competing30",
+      "signature": "567qRA2MgT2Z6cHCEJQguGt4gYTHMxFVMFvHzaajTGMFiNy1jbQo8UhNzQn75aXqrEJtz7BAdupofeyrw5RizTyx",
+      "allowed": true,
+      "immutableJobChecked": true,
+      "noPaymentAtCallback": true
+    },
+    {
+      "label": "fresh-b30",
+      "signature": "3e6t3f1K56h5HZMmZW4ify5kLxmpPrABEh5JUa2qoMMN4FukXxM2GZPjhTn448Eb2igX4t74y14n7W5a3UPCnexZ",
+      "allowed": false,
+      "immutableJobChecked": true,
+      "noPaymentAtCallback": true
+    },
+    {
+      "label": "fresh-b20",
+      "signature": "3CBBH3r8Wt7nNnc2PDHDqDMouudXqg8LqztsANK9ipmyczmmrWKmN3b7eDmkKdjzfhCQjBpqbVygyMaTAAuEXoye",
+      "allowed": true,
+      "immutableJobChecked": true,
+      "noPaymentAtCallback": true
+    }
+  ],
+  "paid": [
+    {
+      "label": "a30",
+      "signature": "66poMz5FA7XucgJvfXGw5dD1Ee26HKKsWai7V74GTMhnwxdxwCA3JgmSzjX4HQaGNKpr9MgFZ4h5VTK79MhUf8LT",
+      "exactNativeAndFourSlotSuccessor": true,
+      "exactLicenseEffect": true
+    },
+    {
+      "label": "fresh-b20",
+      "signature": "8mvYUc9e4KcmP1u8PmVWjssv6kEzsWozagfnKGeAR9RUQvcFdRoybUWtN7aUbYymV1zxXQRcoAjusdHZyqwgnZ3",
+      "exactNativeAndFourSlotSuccessor": true,
+      "exactLicenseEffect": true
+    }
+  ],
+  "rejected": [
+    {
+      "label": "post-native-rollback",
+      "code": 1199,
+      "signature": "5Bi5NEMmTLz8SmCCvHzwGkRSac7hpacANNJtoBWRj9rDNrR5YCFyb6caDf5QK1Df7CdDyhdAEWDVxbVWRu4vn1NE",
+      "unchangedAccounts": 12
+    },
+    {
+      "label": "stale803",
+      "code": 803,
+      "signature": "kVdSvn13q1bTq2vT61cbThcQD1NN357TVwENen1GX6YMcwzefQwyM6MHg1LaZssynd2L61WC3sQDj8bBSUnyJNx",
+      "unchangedAccounts": 12
+    },
+    {
+      "label": "replay1102",
+      "code": 1102,
+      "signature": "4MJ91VPzqZ1AZR6ZoSvJzpZGPc4qLKHBSLN7REMtu4k8tmDbxxoWeCtEJTz9Qb1cxJzt59p2qeSMT2X8aGumdVNz",
+      "unchangedAccounts": 12
+    }
+  ],
+  "tickets": [
+    {
+      "label": "cap40",
+      "role": "query",
+      "signature": "5jaDFKiB1PSusiTN8vAnFaviVYGsKj1svEcWdUEcpZxPNyX4x1WR5VW1QRoaj67tnQeAFkyPnV5BYdWjRtvgpEaC",
+      "wireSha256": "500ba9ccef11584fe9298d49d1eff6de2eb9b0bcb91b2a6a88c840e242cd66bc",
+      "instructionSha256": "ecda0b42335ef7e3e9e58bc2232307b460d41f81662f0a2a031fd25ff3c23e02",
+      "immutablePreparedActionChecked": true
+    },
+    {
+      "label": "a30",
+      "role": "query",
+      "signature": "4JtooMtzTsqw8owXnnvd3tvSwR9dMUWbzJVmGzUzQVnBUdoZvnch89pcna2G9st5Z99WZwoUc5gWcd9YwJ1zAjSw",
+      "wireSha256": "596722809226f91e2f855a8c10958cede76ea13a6fa4b79bea52206722999fbb",
+      "instructionSha256": "3c11cf7fb311d01ab2e8f7a9d474526de2a9d75295983552c98481e8fca0decd",
+      "immutablePreparedActionChecked": true
+    },
+    {
+      "label": "a30",
+      "role": "commit",
+      "signature": "66poMz5FA7XucgJvfXGw5dD1Ee26HKKsWai7V74GTMhnwxdxwCA3JgmSzjX4HQaGNKpr9MgFZ4h5VTK79MhUf8LT",
+      "wireSha256": "7261fc93a4584206a5a7aceb9ab03c25280918681be67d40200e6cae1ee90548",
+      "instructionSha256": "31239d9044a7656668bf2bc55016e822b8bfa9448ee7df1c3430504b0a61cab2",
+      "immutablePreparedActionChecked": false
+    },
+    {
+      "label": "competing30",
+      "role": "query",
+      "signature": "4zxWLkXqbPzehqfohGvoHumX3XH8XRuwzbiffsCWuKeGDzzwyqzrSRyJd3gJkWGVHdYBpHCujduzKPbW5mnkfiRM",
+      "wireSha256": "84f3c30ac2d6a4dd1b8879dea103263ec486cb1badb0222e8445b46082a08e3d",
+      "instructionSha256": "810d8ebf26f1e0d5b81b45dc979cd6155a17128f859fade540ab7b7b03469986",
+      "immutablePreparedActionChecked": true
+    },
+    {
+      "label": "fresh-b30",
+      "role": "query",
+      "signature": "2a36dSz4Esy7shk6xrpnfYthn3roqfpN7fThA2GBNnd21JaMWJQvcvDPyWnTqZNQuJLPZj7mZk49ibBrFCBGeRJR",
+      "wireSha256": "9aad5b03c132f49d41a044a7f4d0ad541c8204941582ca1bfdac769e525b5464",
+      "instructionSha256": "2babc1b6f2177d6cacaacb656315179013c0800062f5b08fa35f2607465e9301",
+      "immutablePreparedActionChecked": true
+    },
+    {
+      "label": "fresh-b20",
+      "role": "query",
+      "signature": "2tBtBU3uRSKmCGEYsXveGKUAWPYiyJ7HQn7VumLzQ3TT8Jh9KAdBg8u713VPtQBRfciuJPS1so8N5kDm8xqW6Saw",
+      "wireSha256": "f98e44893d7cd2b0d1985e3b98002ceea05dd98c07daad5c4e6b15ad113e6248",
+      "instructionSha256": "8356c64c97600e559e3c0f277f1c49c6c87fd25a340a5d32163f4f1591165f71",
+      "immutablePreparedActionChecked": true
+    },
+    {
+      "label": "fresh-b20",
+      "role": "commit",
+      "signature": "8mvYUc9e4KcmP1u8PmVWjssv6kEzsWozagfnKGeAR9RUQvcFdRoybUWtN7aUbYymV1zxXQRcoAjusdHZyqwgnZ3",
+      "wireSha256": "1492e4b43600b152f0af6a51b0f00df3a151fe5bbb035cb96feefc08b7cc6db1",
+      "instructionSha256": "a276ee83ce14f9bc2b63fcbb711d5ebbe6caa6b44a589bd733498c0aa33f7a1f",
+      "immutablePreparedActionChecked": false
+    }
+  ],
+  "recovery": [
+    {
+      "label": "a30",
+      "signature": "66poMz5FA7XucgJvfXGw5dD1Ee26HKKsWai7V74GTMhnwxdxwCA3JgmSzjX4HQaGNKpr9MgFZ4h5VTK79MhUf8LT",
+      "keylessArguments": true
+    },
+    {
+      "label": "fresh-b20",
+      "signature": "8mvYUc9e4KcmP1u8PmVWjssv6kEzsWozagfnKGeAR9RUQvcFdRoybUWtN7aUbYymV1zxXQRcoAjusdHZyqwgnZ3",
+      "keylessArguments": true
+    },
+    {
+      "label": "fresh-b20",
+      "signature": "8mvYUc9e4KcmP1u8PmVWjssv6kEzsWozagfnKGeAR9RUQvcFdRoybUWtN7aUbYymV1zxXQRcoAjusdHZyqwgnZ3",
+      "keylessArguments": true
+    }
+  ],
+  "circuits": [
+    {
+      "circuit": "runtime_policy_init",
+      "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+      "bytes": 1023894
+    },
+    {
+      "circuit": "runtime_policy_evaluate",
+      "sha256": "8d28981a5a649142399204615446af6b5f3307a385c54b018dd37293f2428eee",
+      "bytes": 1613253
+    }
+  ],
+  "crashChecks": [
+    {
+      "label": "a30",
+      "role": "query",
+      "phase": "after-wire",
+      "pid": 97973,
+      "readonlyUnchangedAccounts": 12,
+      "signature": "4JtooMtzTsqw8owXnnvd3tvSwR9dMUWbzJVmGzUzQVnBUdoZvnch89pcna2G9st5Z99WZwoUc5gWcd9YwJ1zAjSw",
+      "wireSha256": "596722809226f91e2f855a8c10958cede76ea13a6fa4b79bea52206722999fbb"
+    },
+    {
+      "label": "competing30",
+      "role": "query",
+      "phase": "after-simulation",
+      "pid": 99148,
+      "readonlyUnchangedAccounts": 12,
+      "signature": "4zxWLkXqbPzehqfohGvoHumX3XH8XRuwzbiffsCWuKeGDzzwyqzrSRyJd3gJkWGVHdYBpHCujduzKPbW5mnkfiRM",
+      "wireSha256": "84f3c30ac2d6a4dd1b8879dea103263ec486cb1badb0222e8445b46082a08e3d"
+    },
+    {
+      "label": "a30",
+      "role": "commit",
+      "phase": "after-simulation",
+      "pid": 147,
+      "readonlyUnchangedAccounts": 12,
+      "signature": "66poMz5FA7XucgJvfXGw5dD1Ee26HKKsWai7V74GTMhnwxdxwCA3JgmSzjX4HQaGNKpr9MgFZ4h5VTK79MhUf8LT",
+      "wireSha256": "7261fc93a4584206a5a7aceb9ab03c25280918681be67d40200e6cae1ee90548"
+    },
+    {
+      "label": "fresh-b20",
+      "role": "commit",
+      "phase": "after-wire",
+      "pid": 3500,
+      "readonlyUnchangedAccounts": 12,
+      "signature": "8mvYUc9e4KcmP1u8PmVWjssv6kEzsWozagfnKGeAR9RUQvcFdRoybUWtN7aUbYymV1zxXQRcoAjusdHZyqwgnZ3",
+      "wireSha256": "1492e4b43600b152f0af6a51b0f00df3a151fe5bbb035cb96feefc08b7cc6db1"
+    },
+    {
+      "label": "before-wire-unsubmitted",
+      "role": "query",
+      "phase": "before-wire",
+      "pid": 3765,
+      "readonlyUnchangedAccounts": 12
+    }
+  ],
+  "sharedBoundary": {
+    "releaseHashHex": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+    "sharedNativeProofCliSha256": "94a070b0925005702b1ef69e0d89f5a51dab73142d2205bfcc73986c88884db9",
+    "compilerAndPolicyPackageShared": true,
+    "enforcementShared": true,
+    "fullStandaloneUpstreamComparison": "inconclusive",
+    "baselineInstance": ".local/license-session-instance-v22/instance.json",
+    "identicalPolicyCircuitsAndProofBridge": true
+  },
+  "executedClientSources": [
+    {
+      "path": "examples/license-direct/abi.mjs",
+      "sha256": "b17b150180a6668e68ea4cebe25101a61be473581b26d1eedef0e7f9597bf4f1"
+    },
+    {
+      "path": "examples/license-direct/app.mjs",
+      "sha256": "9d20a56a9ab871c528f338c62aec667033b221e7afa9e20e55db86a7258e4724"
+    },
+    {
+      "path": "examples/license-direct/wire.mjs",
+      "sha256": "0241e81201fd72ca079d4c127eefd6922f74660e50427d6fe4436eecdc14d221"
+    },
+    {
+      "path": "examples/license-direct/crash-preload.mjs",
+      "sha256": "03437688f76e613b16a2c9e1db878a794ca832c1abf6e543cce6887c0740d641"
+    },
+    {
+      "path": "examples/license-direct/qualify.mjs",
+      "sha256": "13fc2ec386ea9205cf0601d16cb8f1c6a78c364b67f8c8fd8a82ec0c9acfc72f"
+    },
+    {
+      "path": "examples/license-direct/rpc-fault.mjs",
+      "sha256": "485599e4e519ad6e1c26eac9093215d54bc1aba80aaadc21eeb659ebd5cf11e2"
+    }
+  ],
+  "finalQuota": {
+    "version": "2",
+    "counter": "6"
+  },
+  "repeatedQuery": {
+    "signature": "4JtooMtzTsqw8owXnnvd3tvSwR9dMUWbzJVmGzUzQVnBUdoZvnch89pcna2G9st5Z99WZwoUc5gWcd9YwJ1zAjSw",
+    "unchangedAccounts": 12
+  },
+  "verifierSourceSha256": "8d6b74b0cb0b1af6ffafcf1baf3595348c8a90e697e64e4dca55b50cf0b2fe46",
+  "limitations": [
+    "Offline review only; no signer files, runtime changes, network requests or new execution.",
+    "SDK plan/instruction/reconciliation validators are independent qualification oracles, not dependencies of the direct application.",
+    "Archived RPC account/meta/ALT observations remain trusted; no independent BLS verification or historical consensus proof.",
+    "Actual response loss and process IDs are retained local harness evidence, not OS attestations.",
+    "Current ELF build bytes match archived loaded reports; raw ProgramData is not independently archived here.",
+    "Retained attempts and selected process-crash windows are checked; arbitrary disk loss, concurrent transport faults and full client failure-mode equivalence are not established.",
+    "Shares compiler, circuit, on-chain enforcement, native proof bridge and deployment/funding. Full standalone upstream equivalence remains inconclusive."
+  ]
+}

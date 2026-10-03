@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "offline-in-memory-direct-archive-corruption-checks",
+  "archiveUnmodified": true,
+  "rejected": [
+    "invalid callback signature",
+    "wrong callback result",
+    "wrong retained wire hash",
+    "changed rollback account",
+    "changed paid license",
+    "different runtime definition",
+    "missing historical crash artifact capture",
+    "broadcast during read-only crash recovery",
+    "simulation hidden at pre-simulation crash boundary"
+  ]
+}

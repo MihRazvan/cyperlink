@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "direct-client-shared-cyperlink-enforcement-real-local",
+  "rawArchive": ".local/direct-license-qualification-v22c/results.json",
+  "rawArchiveSha256": "119859aeafe7c623513c36bb97f421c826be8353308173ed3ab3d2f3b5b0347b",
+  "releaseHashHex": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+  "genesisHash": "7t79QMPLFiBZuNbf9pyu2o7qXHR1PNvVE9J89PRV5FyA",
+  "counts": {
+    "messages": 15,
+    "ed25519Signatures": 25,
+    "callbacks": 5,
+    "paidLicenses": 2,
+    "rejections": 3,
+    "unchangedRejectionAccounts": 36,
+    "exactSignedWires": 7,
+    "keylessRecoveryInvocations": 3,
+    "loadedElfs": 10,
+    "circuits": 2,
+    "durableAttemptRecords": 7,
+    "processCrashWindows": 5,
+    "readonlyCrashAccounts": 60
+  },
+  "finalState": {
+    "version": "2",
+    "counter": "6"
+  },
+  "appInvocations": 34,
+  "observerDisclosures": {
+    "remaining": 50,
+    "purchase_cap": 30,
+    "amounts": [
+      40,
+      30,
+      30,
+      30,
+      20
+    ]
+  },
+  "checks": [
+    {
+      "label": "cap40-decision",
+      "allowed": false,
+      "callbackDoesNotPay": true
+    },
+    {
+      "label": "a30-decision",
+      "allowed": true,
+      "callbackDoesNotPay": true
+    },
+    {
+      "label": "repeat-query-exact-wire-no-new-query"
+    },
+    {
+      "label": "competing30-decision",
+      "allowed": true,
+      "callbackDoesNotPay": true
+    },
+    {
+      "label": "post-native-rollback",
+      "expectedError": 1199,
+      "unchangedAccounts": 12,
+      "postNative": true
+    },
+    {
+      "label": "a30-paid-license",
+      "signature": "66poMz5FA7XucgJvfXGw5dD1Ee26HKKsWai7V74GTMhnwxdxwCA3JgmSzjX4HQaGNKpr9MgFZ4h5VTK79MhUf8LT",
+      "lostAck": true,
+      "exactRetainedWire": true,
+      "keylessNewProcess": true,
+      "quotaAndNativeAccountsChanged": true
+    },
+    {
+      "label": "stale803",
+      "expectedError": 803,
+      "unchangedAccounts": 12,
+      "postNative": false
+    },
+    {
+      "label": "replay1102",
+      "expectedError": 1102,
+      "unchangedAccounts": 12,
+      "postNative": false
+    },
+    {
+      "label": "fresh-b30-decision",
+      "allowed": false,
+      "callbackDoesNotPay": true
+    },
+    {
+      "label": "fresh-b20-decision",
+      "allowed": true,
+      "callbackDoesNotPay": true
+    },
+    {
+      "label": "fresh-b20-paid-license",
+      "signature": "8mvYUc9e4KcmP1u8PmVWjssv6kEzsWozagfnKGeAR9RUQvcFdRoybUWtN7aUbYymV1zxXQRcoAjusdHZyqwgnZ3",
+      "lostAck": false,
+      "exactRetainedWire": true,
+      "keylessNewProcess": true,
+      "quotaAndNativeAccountsChanged": true
+    }
+  ],
+  "crashBoundaries": [
+    {
+      "label": "a30-query-after-wire",
+      "role": "query",
+      "phase": "after-wire",
+      "signal": "SIGKILL"
+    },
+    {
+      "label": "competing30-query-after-simulation",
+      "role": "query",
+      "phase": "after-simulation",
+      "signal": "SIGKILL"
+    },
+    {
+      "label": "a30-commit-after-simulation",
+      "role": "commit",
+      "phase": "after-simulation",
+      "signal": "SIGKILL"
+    },
+    {
+      "label": "fresh-b20-commit-after-wire",
+      "role": "commit",
+      "phase": "after-wire",
+      "signal": "SIGKILL"
+    },
+    {
+      "label": "before-wire-unsubmitted-query-before-wire",
+      "role": "query",
+      "phase": "before-wire",
+      "signal": "SIGKILL"
+    }
+  ],
+  "sourceSnapshots": [
+    {
+      "path": "examples/license-direct/abi.mjs",
+      "sha256": "b17b150180a6668e68ea4cebe25101a61be473581b26d1eedef0e7f9597bf4f1"
+    },
+    {
+      "path": "examples/license-direct/app.mjs",
+      "sha256": "9d20a56a9ab871c528f338c62aec667033b221e7afa9e20e55db86a7258e4724"
+    },
+    {
+      "path": "examples/license-direct/wire.mjs",
+      "sha256": "0241e81201fd72ca079d4c127eefd6922f74660e50427d6fe4436eecdc14d221"
+    },
+    {
+      "path": "examples/license-direct/crash-preload.mjs",
+      "sha256": "03437688f76e613b16a2c9e1db878a794ca832c1abf6e543cce6887c0740d641"
+    },
+    {
+      "path": "examples/license-direct/qualify.mjs",
+      "sha256": "13fc2ec386ea9205cf0601d16cb8f1c6a78c364b67f8c8fd8a82ec0c9acfc72f"
+    },
+    {
+      "path": "examples/license-direct/rpc-fault.mjs",
+      "sha256": "485599e4e519ad6e1c26eac9093215d54bc1aba80aaadc21eeb659ebd5cf11e2"
+    }
+  ],
+  "selectedTransactionCosts": {
+    "adversarial-landed-failure": {
+      "transactions": 3,
+      "landedCU": 148191,
+      "feeLamports": 30000
+    },
+    "native-settlement": {
+      "transactions": 2,
+      "landedCU": 168674,
+      "feeLamports": 20000
+    },
+    "arcium-queue": {
+      "transactions": 5,
+      "landedCU": 921266,
+      "feeLamports": 50000
+    },
+    "arcium-signed-callback": {
+      "transactions": 5,
+      "landedCU": 770637,
+      "feeLamports": 25000
+    }
+  },
+  "costScope": "Only five queues, five callbacks, two settlements and three landed rejection receipts; excludes per-operation preparation/proof-context/ALT setup, rent, native funding, deployment and worker resources. Distinct deployments/accounts mean CU differences cannot be attributed to client efficiency.",
+  "priorAttempts": [
+    {
+      "archive": ".local/direct-license-qualification-v22/results.json",
+      "outcome": "Failed during native proof-context preparation before private query/payment: instruction validator did not account for global signer privilege promotion. Preserved."
+    },
+    {
+      "archive": ".local/direct-license-qualification-v22b/results.json",
+      "outcome": "Intermediate frozen direct client passed full five-decision/two-payment adverse matrix, without final crash/attempt guarantees. Independently reviewed. Final v22c uses a fresh instance after hardening."
+    }
+  ],
+  "limitations": [
+    "Offline review only; no signer files, runtime changes, network requests or new execution.",
+    "SDK plan/instruction/reconciliation validators are independent qualification oracles, not dependencies of the direct application.",
+    "Archived RPC account/meta/ALT observations remain trusted; no independent BLS verification or historical consensus proof.",
+    "Actual response loss and process IDs are retained local harness evidence, not OS attestations.",
+    "Current ELF build bytes match archived loaded reports; raw ProgramData is not independently archived here.",
+    "Retained attempts and selected process-crash windows are checked; arbitrary disk loss, concurrent transport faults and full client failure-mode equivalence are not established.",
+    "Shares compiler, circuit, on-chain enforcement, native proof bridge and deployment/funding. Full standalone upstream equivalence remains inconclusive.",
+    "Same operator/host with two local Arcium nodes and explicit SBPFv0 deployment feature override.",
+    "No external developer productivity, standalone replacement cost, production security or comparative customer advantage established."
+  ]
+}
