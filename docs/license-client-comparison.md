@@ -8,8 +8,8 @@ not compare independent implementations of the onchain enforcement stack.
 The preserved SDK reference is `examples/license-app` at `cce20f3`. The additive
 `examples/license-session` replaces its application-managed signer/session/ticket
 plumbing with generated `connectSession` APIs. The direct implementation is
-`examples/license-direct`: it calls pinned web3.js1.99.0, Anchor JS1.2.0 and
-Arcium0.15.0 itself, invokes the shared SDK7.0.1 proof CLI, and owns its native
+`examples/license-direct`: it calls pinned web3.js 1.99.0, Anchor JS 1.2.0 and
+Arcium 0.15.0 itself, invokes the shared SDK 7.0.1 proof CLI, and owns its native
 context provisioning, instruction encoding, account reconciliation and durable
 transaction recovery. It imports no CyperLink JavaScript operation client, sender,
 generated binding or recovery worker. Its author consulted CyperLink's source;
@@ -41,7 +41,7 @@ production-security, external adoption or independently operated MPC claim follo
 | Private query | Call stageQuery after preparation | Build immutable native/consumer template; encrypt native amount/opening with ScalarField253 CSpl; reconstruct inputs, PDAs, exact state/counter and Anchor instruction |
 | Atomic payment | Call stageCommit on authorized observation | Build exact consumer/native instruction/accounts; shared onchain code enforces atomicity |
 | Process recovery | Reopen stable keyless session; recover or explicitly submit role | Own wire persistence, signature validation, role/plan checks, ALT resolution, lifetime/receipt handling and retries |
-| Application result | Use operation observation; only committed effect means payment | Parse and cross-check Job, permit,353-byte state and81-byte license from one bank |
+| Application result | Use operation observation; only committed effect means payment | Parse and cross-check Job, permit, 353-byte state and 81-byte license from one bank |
 | Failure expertise | Understand explicit approval, allowed≠paid, stale recomputation, unresolved outcomes and retained storage | Same product semantics plus native proof-context ABI, cipher domain/opening bridge, Solana message/ALT/signature rules and durable file publication |
 
 These are concrete tasks visible in the implementations, not an assertion that
@@ -51,32 +51,123 @@ those failures, but an unaided external reproduction has not been run. The direc
 author received exact ABI/source guidance and review feedback. Both implementation
 and qualification assistance count as internal engineering work.
 
-Source-size measurements will separate application adapters, reusable SDK modules,
-shared native/enforcement code and qualification code. Physical lines and bytes
-measure retained code surface, not time, difficulty, audit cost or productivity.
-The direct source's denser formatting makes a raw line-count ratio misleading.
-Agent wall activity is not a measurement of human development time.
+[Measured source surface](../evidence/2026-10-03/license-client-source-surface.json)
+is reproducible with `scripts/measurements/license-client-surface.mjs`:
 
-## Qualification status
+| Retained source group | Files | Bytes | Physical lines |
+| --- | ---: | ---: | ---: |
+| Original SDK reference application | 1 | 10,026 | 128 |
+| New session application adapter | 1 | 2,897 | 41 |
+| Direct application/ABI/durable sender | 3 | 46,918 | 288 |
+| Common customer policy/manifest/host vectors | 3 | 3,910 | 241 |
+| Reusable SDK source directories | 28 | 189,352 | 2,297 |
+| Shared native proof bridge, including vendored adaptation | 7 | 55,964 | 1,483 |
+| Shared authoring/compiler/deployment source | 7 | 61,475 | 881 |
+| Shared onchain enforcement implementation | 12 | 94,276 | 2,643 |
 
-The SDK reference v21b has five authenticated decisions, two actual paid licenses,
-post-native1199 rollback, stale803, replay1102, exact query reuse and keyless recovery
-after actual send-acknowledgement loss and injected receipt outage. The additive
-session v22b also qualifies four real signed-record/simulation-to-ticket SIGKILL
-boundaries and one refusal to replace an interrupted attempt without a durable
-signed record. See [session evidence](license-session-milestone.md).
+The new adapter also imports the original file's parser/outcome helpers; its
+2,897 bytes are not its complete dependency footprint. Whole SDK directories
+include unexercised features. The listed source groups exclude external pinned
+packages, generated bindings, TypeScript declarations, bootstrap/toolchains and
+separate qualification/tests/docs; those are additional work. Inline tests can
+remain within implementation files. The artifact lists every counted file/hash.
+Physical lines and bytes measure retained source surface, not time, difficulty,
+audit cost or productivity. The direct source's denser formatting makes raw
+line-count ratios misleading. Agent wall activity is not human development time.
 
-The first frozen direct-client matrix v22b also executed five genuine decisions,
-two paid licenses, the three landed rejection causes and acknowledgement/receipt
-fault recovery. Its first v22 attempt stopped at preparation when a verifier
-incorrectly treated Solana's promoted signer flags as distinct instructions; the
-fix compares entire reconstructed signed messages. Those failed records remain.
-A review then identified client persistence/retry/validation differences; the
-baseline is being strengthened and requalified. That passing intermediate matrix
-is not evidence that the final direct recovery contract already has parity.
+## Qualified behavior and remaining comparison limits
 
-**Current conclusion: full equivalent-client comparison is inconclusive.** A real
-direct client can perform the operation using the shared enforcement, and the SDK
-packages client work it had to implement. That establishes feasibility, not a
-comparative customer advantage. Independent enforcement, full adverse-input parity,
-external builder effort and production maintenance remain unmeasured.
+The [final direct v22c matrix](../evidence/2026-10-03/license-direct-v22c.json) passes
+against a fresh instance. The [independent review](../evidence/2026-10-03/license-direct-v22c-offline-review.json)
+checks 15 messages / 25 Ed25519 signatures, five callbacks, two complete
+native/state/license payments, three landed rejections and 36 unchanged account
+comparisons, seven exact retained wires and durable attempt records, five SIGKILL
+windows with 60 unchanged read-only account comparisons, ten loaded ELF reports,
+two uploaded circuits and six frozen executed source snapshots. SDK semantic
+validators serve as an independent qualification oracle; the direct application
+does not import them. [Nine corruption checks](../evidence/2026-10-03/license-direct-v22c-corruptions.json)
+reject altered or missing evidence. Raw archives remain unchanged.
+
+| Case | Preserved SDK reference v21b | Additive SDK session v22b | Direct v22c |
+| --- | --- | --- | --- |
+| Cap40 denied; competing30 approvals; A30 paid; freshB30 denied; freshB20 paid | Actual five callbacks / two paid licenses | Separate crash-focused purchases10/20; two callbacks / paid licenses | Same five-decision / two-license scenario as reference |
+| Post-native1199 rollback; stale803; issued-license1102 replay | Three landed rejections,36 unchanged accounts | Not repeated in this crash-focused run | Three landed rejections,36 unchanged accounts |
+| Repeated query retains original transaction | Qualified | Host concurrent/single-attempt tests | Qualified,12 unchanged accounts |
+| Lost actual send acknowledgement and injected receipt outage | Separate-process recovery of original bytes | Not repeated in this crash-focused run | Same-byte recovery through fresh keyless processes |
+| Query and payment after durable wire / after simulation, before ticket save or return | Application intent blocks unsafe restaging; rediscovery missing | Four actual SIGKILL boundaries recovered without keys | Four corresponding actual SIGKILL boundaries recovered without keys; complete wire is the recovery handle |
+| Before durable signed-record publication | Not separately killed | Fifth kill; recovery and repeated approval refuse replacement | Fifth kill; recovery and repeated approval refuse replacement |
+| Invalid signature/plan, uncertain expiry, failed simulation, bounded retries | Existing host coverage | New store/session host checks, including ambiguity and concurrency | Nine host groups plus recorded malformed-plan probes; full adversarial-input/concurrency parity not established |
+
+A useful observed difference: the direct client independently reconciles the paid
+account effect even when the exact receipt RPC is unavailable, and can report
+`paymentCommitted: true` alongside `deliveryStatus: receipt-unavailable`. Its full
+bound account snapshots were independently checked. The reference SDK application
+exposes observation separately from ticket recovery, whose RPC failure can stop
+that command. Neither a successful computation nor receipt uncertainty alone is
+payment. This recovery-flow difference is preserved in the comparison.
+
+The final direct client includes immutable role intents, atomic private-file
+publication, strict retained instruction/signature validation, durable bounded
+attempts, explicit simulation-required/rejected states and identical-byte
+resumption. These required implementation and review; the first passing matrix
+alone did not establish them. An interrupted transport lock after some untested
+send-time crashes may still require manual inspection. Neither client qualifies
+arbitrary provisioning interruption, disk loss or every concurrent failure mode.
+
+The direct client's first attempt stopped during proof-context preparation when
+its instruction verifier mishandled Solana's globally promoted signer privileges.
+No private query/payment occurred. The frozen v22b revision then passed the original
+matrix. Review found persistence, retry-accounting, canonical-validation and
+misleading broadcastability gaps; final v22c was hardened and tested on a fresh
+instance. Failed and intermediate archives remain under `.local/`. The SDK session
+run separately caught a harness expiry1101 simulation rejection, preserved in its
+[qualification](license-session-milestone.md). Internal assistance and review are
+part of both paths' implementation work.
+
+Selected onchain receipts for the matched five-decision scenario:
+
+| Category | Transactions each | SDK reference CU | Direct CU | Lamports each |
+| --- | ---: | ---: | ---: | ---: |
+| Queries | 5 | 899,404 | 921,266 | 50,000 |
+| Authenticated callbacks | 5 | 781,276 | 770,637 | 25,000 |
+| Paid settlements | 2 | 165,674 | 168,674 | 20,000 |
+| Landed rejections | 3 | 136,191 | 148,191 | 30,000 |
+
+These omit proof/context preparation, ALT setup, rent, funding, deployment and
+worker resources. Different deployed identities/accounts and separate runs prevent
+attributing CU differences to client efficiency. They are receipt accounting,
+not a throughput, end-to-end latency or production-pricing benchmark.
+
+**Conclusion:** the direct client genuinely performs this operation, with the
+selected equivalent enforcement and recovery cases qualified. The SDK moves
+protocol-specific client work into reusable implementation and generated APIs.
+**Full standalone upstream replacement, arbitrary failure-mode equivalence,
+external builder effort, maintenance cost and comparative customer advantage
+remain inconclusive.** Source size and internal success do not establish those.
+
+## Reproduction and retained instances
+
+Build the unchanged reference policy, then deploy fresh synthetic instances using
+the existing pinned local setup and private initializer. Preserve consumed states
+and historical ledgers. Run from the repository root:
+
+```sh
+node --test examples/license-direct/app.test.mjs
+node examples/license-direct/qualify.mjs .local/INSTANCE/instance.json .local/NEW-DIRECT-RUN
+node examples/license-direct/verify.mjs \
+  --results .local/NEW-DIRECT-RUN/results.json --instance .local/INSTANCE/instance.json \
+  --output .local/NEW-DIRECT-RUN/independent-review.json \
+  --corruption-output .local/NEW-DIRECT-RUN/independent-corruptions.json
+node scripts/measurements/license-client-surface.mjs .local/NEW-SOURCE-MEASUREMENT.json
+```
+
+Final instance `.local/license-direct-instance-v22c/`, archive
+`.local/direct-license-qualification-v22c/`; intermediate instance
+`.local/license-direct-instance-v22/` and archives `v22`/`v22b` remain. They use
+v21's existing RPC8985 ledger and two-node runtime with distinct policy deployments.
+No reference application source or v21b archive bytes changed. Qualification is
+same-host local validator plus real distributed computation, not public-network or
+independent-operator evidence. Offline verification trusts retained RPC/runner
+observations; it is neither independent BLS verification nor a historical consensus
+proof. The [direct friction log](../examples/license-direct/FRICTION.md) records
+source assistance, fixes and remaining limitations.

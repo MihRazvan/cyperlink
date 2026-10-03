@@ -38,32 +38,32 @@ two SIGKILL points: signed-record persisted before simulation, and simulation
 persisted before ticket publication. New keyless processes found the original
 transaction, verified its exact instruction/signatures/ledger, performed read-only
 reconciliation, and then explicitly submitted identical bytes. No new key, query,
-nonce, blockhash or signature was substituted. Read-only recovery left48 tracked
+nonce, blockhash or signature was substituted. Read-only recovery left 48 tracked
 account observations unchanged and made no broadcasts. A fifth SIGKILL before
 signed-record publication caused both recovery and repeated approval to refuse
 restaging. The sender may already have signed in memory at that boundary.
 
 [Independent archive review](../evidence/2026-10-03/license-session-v22b-offline-review.json)
-verified6 signed messages/10 Ed25519 signatures,4 recovered tickets,2 callbacks,
-2 complete native/state/license transitions,10 loaded ELF reports and2 complete
+verified 6 signed messages / 10 Ed25519 signatures, 4 recovered tickets, 2 callbacks,
+2 complete native/state/license transitions, 10 loaded ELF reports and 2 complete
 uploaded circuits/interfaces. [Ten corruption checks](../evidence/2026-10-03/license-session-v22b-corruptions.json)
 rejected missing or altered evidence. These are offline checks of retained local
 RPC/runner observations, not historical consensus proofs, OS attestations or an
 independent BLS implementation.
 
-The first run exposed a harness expiry1500 error: the consumer permits a maximum
+The first run exposed a harness expiry of 1500 slots error: the consumer permits a maximum
 1000-slot horizon. Its query recovered and authorized, then payment simulation
-rejected1101 without settlement. The failed archive remains intact. The successful
-v22b run used a new operation/output directory, expiry900, and the same still-unspent
-business state at version0/counter2. It ended at version2/counter4. Initial
-allowance50/cap30, purchases10/20 and inferred remaining20 are test-observer
-synthetic disclosures. This is not a fresh initial-counter1 claim.
+rejected 1101 without settlement. The failed archive remains intact. The successful
+v22b run used a new operation/output directory, expiry of 900 slots, and the same still-unspent
+business state at version 0 / counter 2. It ended at version 2 / counter 4. Initial
+allowance 50 / cap 30, purchases 10 / 20 and inferred remaining 20 are test-observer
+synthetic disclosures. This is not a fresh initial-counter-1 claim.
 
-Validation:46 combined policy SDK/CLI host tests,46 local-client/reference-app
-regression tests,18 of those SDK tests specifically covering store/session failure
+Validation: 46 combined policy SDK/CLI host tests, 46 local-client/reference-app
+regression tests, 18 of those SDK tests specifically covering store/session failure
 handling, and strict TypeScript compilation of generated `connectSession` bindings.
 The original v21b archive was independently reverified after these changes, retaining
-its original SHA256 and all15 messages/25 signatures/5 callbacks/2 paid licenses.
+its original SHA256 and all 15 messages/25 signatures/5 callbacks/2 paid licenses.
 
 Reproduce against a fresh instance with the unchanged license policy:
 
@@ -77,8 +77,9 @@ node examples/license-session/verify.mjs \
 ```
 
 Raw completed instance: `.local/license-session-instance-v22/`. Archives:
-`.local/license-session-qualification-v22{,b}/`. They share v21's existing RPC8985
+`.local/license-session-qualification-v22{,b}/`. They share v21's existing RPC 8985
 ledger and two-node runtime, without resetting any reference evidence. Arbitrary
 provisioning interruption and independent-machine reproduction remain unqualified.
-The direct-client comparison is still in progress; no equivalent-completion or
-comparative advantage claim follows from the completed session work.
+The [direct-client comparison](license-client-comparison.md) now qualifies the
+selected matching settlement/recovery cases using shared enforcement. Full standalone
+equivalence and comparative customer advantage remain inconclusive.

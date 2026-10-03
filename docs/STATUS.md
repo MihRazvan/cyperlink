@@ -18,9 +18,33 @@ v22b began with unspent version0/counter2 and ended at version2/counter4. Same
 qualified local profile; no cryptography/program/circuit changes. See the milestone
 for commands, tests and the distinction between process observations and proofs.
 
-A direct pinned-upstream client is still being qualified against the same reviewed
-onchain enforcement. Full parity and independent enforcement remain inconclusive;
-no comparative customer advantage or measured developer productivity is claimed.
+## Completed: controlled direct-client comparison
+
+The [direct comparison](license-client-comparison.md) now includes actual execution
+using pinned web3/Anchor/Arcium with its own client preparation, ABI, durable sender
+and reconciliation. Final v22c passes the reference five-decision/two-license
+scenario, three landed atomic/stale/replay rejections, lost-acknowledgement recovery,
+four signed-wire/simulation SIGKILL recoveries and a fifth pre-publication refusal.
+Independent review checks 15 messages / 25 signatures, 5 callbacks, 2 paid licenses,
+7 exact wires/attempt records, 36 rejection and 60 read-only account comparisons,
+10 loaded ELFs, 2 uploaded circuits, 6 frozen source snapshots and 9 corruption cases.
+
+The [source accounting](../evidence/2026-10-03/license-client-source-surface.json)
+separates the application adapters, reusable SDK and shared proof/enforcement/
+authoring work. Both clients share reviewed CyperLink onchain programs, policy
+circuit, native proof bridge and deployment/provisioning. This is an executed
+client comparison; full standalone upstream replacement, arbitrary failure-mode
+parity, external developer productivity and comparative customer advantage remain
+inconclusive. Direct receipt-outage account reconciliation is credited explicitly.
+Failed and intermediate runs are retained; no source changed during final execution.
+
+Current completed instances on RPC8985: `.local/license-session-instance-v22/`
+and `.local/license-direct-instance-v22c/`. Raw final archives are
+`.local/license-session-qualification-v22b/` and `.local/direct-license-qualification-v22c/`.
+Nine direct host groups and strict retained-input probes supplement real execution;
+they do not substitute for it. Original reference files/archives remain unchanged.
+Next useful evidence: an unaided builder reproduction of the improved session API;
+standalone enforcement comparison requires separately scoped implementation.
 
 ## Completed: separate paid-license application rehearsal
 
@@ -55,9 +79,10 @@ Current fresh runtime: v21 RPC8985, compose `cyperlink-license-app-v21`.
 The completed instance is `.local/license-app-instance-v21b/`; initial v21's
 partly successful harness and paid state are retained. Previous ledgers remain
 intact. The explicit local SBPFv0 feature override and existing owner/admin trust
-profile remain unchanged. Next: remove documented integration friction, then
-independent builder reproduction and an equivalent direct-upstream comparison;
-GLAM and cross-MXE remain conditional extensions.
+profile remain unchanged. The follow-up session and controlled direct-client milestones
+above now address that integration friction and selected comparison cases.
+Independent builder reproduction remains next; GLAM and cross-MXE are conditional
+extensions.
 
 ## Customer-authored private policies: real local path qualified
 

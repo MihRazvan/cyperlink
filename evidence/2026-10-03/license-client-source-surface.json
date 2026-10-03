@@ -1,0 +1,473 @@
+{
+  "schema": 1,
+  "classification": "source-surface-accounting-not-productivity",
+  "generatedAt": "2026-10-03T12:16:02.146Z",
+  "groups": [
+    {
+      "label": "preserved-reference-application",
+      "note": "Original application includes CLI parsing/outcome projection and app-owned recovery worker/ticket plumbing.",
+      "totals": {
+        "files": 1,
+        "bytes": 10026,
+        "physicalLines": 128
+      },
+      "files": [
+        {
+          "path": "examples/license-app/app.mjs",
+          "bytes": 10026,
+          "physicalLines": 128,
+          "sha256": "db9394a8b089ffa1ce525ca3bd1bedac00e0b619fc23945a95b4a85879afc04a"
+        }
+      ]
+    },
+    {
+      "label": "session-application",
+      "note": "Uses generated bindings and imports parser/view from the preserved reference; that whole additional file is counted separately, not hidden.",
+      "totals": {
+        "files": 1,
+        "bytes": 2897,
+        "physicalLines": 41
+      },
+      "files": [
+        {
+          "path": "examples/license-session/app.mjs",
+          "bytes": 2897,
+          "physicalLines": 41,
+          "sha256": "ccb02c1fd5770a823652eb5e03836322fc8029cfb5eddf5594d2da083589dcf9"
+        }
+      ]
+    },
+    {
+      "label": "direct-client",
+      "note": "Direct operation-specific runtime implementation; denser formatting makes line-count ratios misleading.",
+      "totals": {
+        "files": 3,
+        "bytes": 46918,
+        "physicalLines": 288
+      },
+      "files": [
+        {
+          "path": "examples/license-direct/app.mjs",
+          "bytes": 18731,
+          "physicalLines": 89,
+          "sha256": "9d20a56a9ab871c528f338c62aec667033b221e7afa9e20e55db86a7258e4724"
+        },
+        {
+          "path": "examples/license-direct/abi.mjs",
+          "bytes": 13746,
+          "physicalLines": 97,
+          "sha256": "b17b150180a6668e68ea4cebe25101a61be473581b26d1eedef0e7f9597bf4f1"
+        },
+        {
+          "path": "examples/license-direct/wire.mjs",
+          "bytes": 14441,
+          "physicalLines": 102,
+          "sha256": "0241e81201fd72ca079d4c127eefd6922f74660e50427d6fe4436eecdc14d221"
+        }
+      ]
+    },
+    {
+      "label": "shared-customer-policy",
+      "note": "Same customer rules/manifest/host vectors on both sides; generated artifacts excluded.",
+      "totals": {
+        "files": 3,
+        "bytes": 3910,
+        "physicalLines": 241
+      },
+      "files": [
+        {
+          "path": "examples/license-app/policy.rs",
+          "bytes": 609,
+          "physicalLines": 15,
+          "sha256": "b9151b0bffb2b76f9c52f9e260cffe6d65c7f5c371e924620fe70fe98f2d432a"
+        },
+        {
+          "path": "examples/license-app/policy.json",
+          "bytes": 798,
+          "physicalLines": 40,
+          "sha256": "c0b592807a7ac18f4fa9e01bce5e3c418e10bac0b3470e18547ecd87acd2c8bc"
+        },
+        {
+          "path": "examples/license-app/tests.json",
+          "bytes": 2503,
+          "physicalLines": 186,
+          "sha256": "6c9cc67e970dc285dc5d70087af67afd95248c61ef0ae431f46a3c371e46d343"
+        }
+      ]
+    },
+    {
+      "label": "sdk-source-surface",
+      "note": "Entire source directories, including features not exercised in this operation. Shared SDK work is not zero; this is not an exact execution dependency closure.",
+      "totals": {
+        "files": 28,
+        "bytes": 189352,
+        "physicalLines": 2297
+      },
+      "files": [
+        {
+          "path": "packages/policy-client/src/approval-store.mjs",
+          "bytes": 10438,
+          "physicalLines": 158,
+          "sha256": "ea6ab6eeafbcaa07dbcbe724da6d75250f66d5c7c748c2a2de91e36173a1c560"
+        },
+        {
+          "path": "packages/policy-client/src/codec.mjs",
+          "bytes": 2889,
+          "physicalLines": 31,
+          "sha256": "a24ca6b1566c7ccc4ab7f1a60d1acf9988743700c83e65e5f45b3e0388fceaa2"
+        },
+        {
+          "path": "packages/policy-client/src/deployment.mjs",
+          "bytes": 2672,
+          "physicalLines": 25,
+          "sha256": "62f69d9dfa0ab2e432f50f45919a87a0d66bd9e25247b7217150499b72f759d7"
+        },
+        {
+          "path": "packages/policy-client/src/index.mjs",
+          "bytes": 369,
+          "physicalLines": 5,
+          "sha256": "8d0025d8a72f537cd9ca9f7cd444711b67119114cd4dc22e561ff686f51034af"
+        },
+        {
+          "path": "packages/policy-client/src/operation-client.mjs",
+          "bytes": 21970,
+          "physicalLines": 226,
+          "sha256": "b7abb87cf231789e7731439e9e6e599291b2a7ebb4fdf37fa4715eec69741ab6"
+        },
+        {
+          "path": "packages/policy-client/src/operation-plan.mjs",
+          "bytes": 5910,
+          "physicalLines": 73,
+          "sha256": "51859188682ceecf647257bb33bd0de95b1632d536ef518688fd646a2aed71ea"
+        },
+        {
+          "path": "packages/policy-client/src/operation-ticket.mjs",
+          "bytes": 10094,
+          "physicalLines": 104,
+          "sha256": "2be0ff0ede5bc2804aaebaad8e7d69f2d35398987f6ebd82466f6aaa7dd4148a"
+        },
+        {
+          "path": "packages/policy-client/src/policy-session.mjs",
+          "bytes": 6863,
+          "physicalLines": 102,
+          "sha256": "0c44a04f983f2ba69a5cd567aacd9d8b1d491b99182ba29a000645b315f644e4"
+        },
+        {
+          "path": "packages/policy-client/src/prepared-action.mjs",
+          "bytes": 3412,
+          "physicalLines": 45,
+          "sha256": "b12bf7bf88a9f08f000774b70e551b17bd81307f7c1bbe0cb2c576aace99fbc3"
+        },
+        {
+          "path": "packages/policy-client/src/sdk.mjs",
+          "bytes": 11428,
+          "physicalLines": 138,
+          "sha256": "b142a1789c819e59fc151a05e7f1f0385b807c0bdbb1b65ae333bc7a6f9db76b"
+        },
+        {
+          "path": "packages/local-client/src/durable-transaction.mjs",
+          "bytes": 18366,
+          "physicalLines": 209,
+          "sha256": "ad604101f8ed08e7b5d18de35690559d0fe8b9380a2faf46d9d2990c9633c8e7"
+        },
+        {
+          "path": "packages/local-client/src/hook-metadata.mjs",
+          "bytes": 1823,
+          "physicalLines": 27,
+          "sha256": "533d9738ec8c0691b39b8a9b1c6d45a7407b55fb99cbdaba6416783135599d59"
+        },
+        {
+          "path": "packages/local-client/src/index.mjs",
+          "bytes": 772,
+          "physicalLines": 10,
+          "sha256": "917dbc2e24c50bfdb59ec01f2a4dcdddeb39a334049a44835a037abfcbb26f5e"
+        },
+        {
+          "path": "packages/local-client/src/mint-profile.mjs",
+          "bytes": 2178,
+          "physicalLines": 21,
+          "sha256": "0bd343878e5840a1bb7853c5898bf85143a313393bd6820f8bb8549f7afc1d79"
+        },
+        {
+          "path": "packages/local-client/src/operation-client.mjs",
+          "bytes": 20030,
+          "physicalLines": 208,
+          "sha256": "d8e84d8754b36adcbfb0cfb31abcd7e8650d98fb53caa221216a265a11530f41"
+        },
+        {
+          "path": "packages/local-client/src/operation-plan.mjs",
+          "bytes": 5490,
+          "physicalLines": 71,
+          "sha256": "8aea3a5d49de8c4e051b785f73975267759efdffaea7d49410d36c962b74e87d"
+        },
+        {
+          "path": "packages/local-client/src/operation-ticket.mjs",
+          "bytes": 9075,
+          "physicalLines": 95,
+          "sha256": "0240298336d675ef366e4bc835a67fd23b1d0c5d37926bd19329c30f0cbfee3d"
+        },
+        {
+          "path": "packages/local-client/src/prepare-transfer.mjs",
+          "bytes": 3253,
+          "physicalLines": 36,
+          "sha256": "41b8174cef8f253828b4e32447a8057f4a3d025bc3496c9e0b93bd875ef35084"
+        },
+        {
+          "path": "packages/local-client/src/prepared-action.mjs",
+          "bytes": 3402,
+          "physicalLines": 45,
+          "sha256": "a1de46db59fffed100f84e2ad9b10036ad21a7f3449c37875a7c1c1a45c5e2e3"
+        },
+        {
+          "path": "packages/local-client/src/proofs.mjs",
+          "bytes": 4107,
+          "physicalLines": 53,
+          "sha256": "847a2008d3603335f1ed676c3d980962a876db3cd44ca39afe8c200b209e9333"
+        },
+        {
+          "path": "packages/local-client/src/provision.mjs",
+          "bytes": 5152,
+          "physicalLines": 60,
+          "sha256": "32640d5eab5a871c03d2f7900cf06df7b49449bdb8889e46ab7faa1e7ba0822d"
+        },
+        {
+          "path": "packages/local-client/src/runtime.mjs",
+          "bytes": 8862,
+          "physicalLines": 119,
+          "sha256": "7d0c754b603e4ca553886b6db2cb1d71dc9e6e7de77c1d6a5ee6088d9922fa2f"
+        },
+        {
+          "path": "packages/local-client/src/transaction-sender.mjs",
+          "bytes": 7723,
+          "physicalLines": 115,
+          "sha256": "33047e664584a2fe912b72cb40c914cee50df9666e8da28f19031905ea47e9d6"
+        },
+        {
+          "path": "packages/sdk/src/builders.mjs",
+          "bytes": 3375,
+          "physicalLines": 50,
+          "sha256": "1c352492317d3184a9a8dcb5dc40333b0444517f5687ed40a3c8c84396665579"
+        },
+        {
+          "path": "packages/sdk/src/codec.mjs",
+          "bytes": 5421,
+          "physicalLines": 90,
+          "sha256": "9ac9ebb40b02278f721ecb2245fbb01a56d184dbaf0706c456f878b2121ff167"
+        },
+        {
+          "path": "packages/sdk/src/index.mjs",
+          "bytes": 10838,
+          "physicalLines": 139,
+          "sha256": "2075f6e8476882f8215c1ec35e3d110ef154479c8fb57195f36b711bf821bebf"
+        },
+        {
+          "path": "packages/sdk/src/local.mjs",
+          "bytes": 253,
+          "physicalLines": 3,
+          "sha256": "3802915a939e7f663b77a486ae1a0fb080dd293160f4d278ca28d8b714158b4b"
+        },
+        {
+          "path": "packages/sdk/src/transport.mjs",
+          "bytes": 3187,
+          "physicalLines": 39,
+          "sha256": "fec822327a632cffb92528cd9e2308115ab4345d90cfb72f32663faf09c468cb"
+        }
+      ]
+    },
+    {
+      "label": "shared-native-proof-bridge",
+      "note": "Includes vendored upstream proof-generation adaptation; Cargo dependencies/toolchains are additional shared work, not measured here.",
+      "totals": {
+        "files": 7,
+        "bytes": 55964,
+        "physicalLines": 1483
+      },
+      "files": [
+        {
+          "path": "crates/client-proofs/src/lib.rs",
+          "bytes": 14887,
+          "physicalLines": 380,
+          "sha256": "60616552fa0202f07d8e385a7290839a47a4be8aca42a5116dcce9f8c00a0893"
+        },
+        {
+          "path": "crates/client-proofs/src/main.rs",
+          "bytes": 5251,
+          "physicalLines": 144,
+          "sha256": "aca27be8d971e0eb769a9c9d7d40d893e32e6ff88edbe52b44d6d2a4832766e1"
+        },
+        {
+          "path": "crates/client-proofs/tests/lifecycle.rs",
+          "bytes": 9093,
+          "physicalLines": 267,
+          "sha256": "d693ddde877c6a61a866b7c41afdb739a1747f7d2a5454246f7dbf6a414a7217"
+        },
+        {
+          "path": "crates/client-proofs/vendor/proof-generation/src/encryption.rs",
+          "bytes": 4414,
+          "physicalLines": 140,
+          "sha256": "adecf175a777df5a61258d176b7ffed9fa29bb52f1e30d9c780b7754d13b8cb5"
+        },
+        {
+          "path": "crates/client-proofs/vendor/proof-generation/src/errors.rs",
+          "bytes": 542,
+          "physicalLines": 15,
+          "sha256": "63d4f6a8ac0143f4a256e05d8ef3bb22fd60d01c31f3d80f89cbb570488ce2d8"
+        },
+        {
+          "path": "crates/client-proofs/vendor/proof-generation/src/lib.rs",
+          "bytes": 4013,
+          "physicalLines": 106,
+          "sha256": "3559bc17f59e329cf33e3b8bdbbe8f821f0f989d51fb54a1f0d3ca5083390ae2"
+        },
+        {
+          "path": "crates/client-proofs/vendor/proof-generation/src/transfer.rs",
+          "bytes": 17764,
+          "physicalLines": 431,
+          "sha256": "898ffd1e62c6c984b6bd56c9f34ebd22b802012b336a287af5d460148ce19f1e"
+        }
+      ]
+    },
+    {
+      "label": "shared-authoring-deployment",
+      "note": "Same policy compiler and deployment/provisioning layer reused by both clients; toolchain/bootstrap scripts and external compiler dependencies are additional excluded work.",
+      "totals": {
+        "files": 7,
+        "bytes": 61475,
+        "physicalLines": 881
+      },
+      "files": [
+        {
+          "path": "crates/policy-authoring/src/compile.rs",
+          "bytes": 8479,
+          "physicalLines": 251,
+          "sha256": "d85535bb1eea79084547601916fac4c514c648dd2b23ca1add9aaf5e5ad300e7"
+        },
+        {
+          "path": "crates/policy-authoring/src/lib.rs",
+          "bytes": 5343,
+          "physicalLines": 180,
+          "sha256": "4362f37128ce723377ce16051e977b7b329a3a72739570bd8f1961bb20683275"
+        },
+        {
+          "path": "crates/policy-authoring/src/testing.rs",
+          "bytes": 4422,
+          "physicalLines": 109,
+          "sha256": "0950f1ff24f1253c2a1340e90a3f60ce2c19cf3f913116a3f5dbf60582b22de5"
+        },
+        {
+          "path": "packages/policy-cli/src/circuit-evidence.mjs",
+          "bytes": 6093,
+          "physicalLines": 81,
+          "sha256": "2304497c7c4a3c9f5852fbb7279db4dab4bddbc31bda328f3c07a45733416091"
+        },
+        {
+          "path": "packages/policy-cli/src/deploy.mjs",
+          "bytes": 18323,
+          "physicalLines": 118,
+          "sha256": "ff3693175ab0bd7b52fbb7589e04b63e87141176abb722fc365057a072198f1e"
+        },
+        {
+          "path": "packages/policy-cli/src/package.mjs",
+          "bytes": 13495,
+          "physicalLines": 81,
+          "sha256": "f783ce7dcbb40f7757b7d851b5868d1b9c256d77ff62ed1a6fa406f23dbada80"
+        },
+        {
+          "path": "packages/policy-cli/src/provision.mjs",
+          "bytes": 5320,
+          "physicalLines": 61,
+          "sha256": "691f7566d430c49825f9c2b5363259c2a211b92aef7dfce9cbdb137fcc2adbf3"
+        }
+      ]
+    },
+    {
+      "label": "shared-onchain-implementation",
+      "note": "Shared reviewed enforcement. Direct client does not replace these programs/crates. Upstream dependencies and generated per-deployment constants excluded.",
+      "totals": {
+        "files": 12,
+        "bytes": 94276,
+        "physicalLines": 2643
+      },
+      "files": [
+        {
+          "path": "programs/custom-policy/auth/programs/cyperlink_auth/src/lib.rs",
+          "bytes": 33873,
+          "physicalLines": 964,
+          "sha256": "013e745c7ad5fdb6d1bf63b06f46733b2663f0a55286086e0cb0c9cfcfd379f0"
+        },
+        {
+          "path": "programs/custom-policy/native/guard/src/lib.rs",
+          "bytes": 5404,
+          "physicalLines": 160,
+          "sha256": "748a6b775fce3a110479bd31ef71878d23e70a142ad7c6da6587faab677d3538"
+        },
+        {
+          "path": "programs/custom-policy/native/interface/src/lib.rs",
+          "bytes": 1316,
+          "physicalLines": 41,
+          "sha256": "5a40c430468bbbc26f138cbbd8b32365834fec1ac434cbb81e659cb4285c6604"
+        },
+        {
+          "path": "programs/custom-policy/native/license/src/lib.rs",
+          "bytes": 5492,
+          "physicalLines": 156,
+          "sha256": "c2641c552a449adbfe66c5ba1a1e5c76e99781b65536c9a7bb2b0290cf452607"
+        },
+        {
+          "path": "programs/custom-policy/native/merchant/src/lib.rs",
+          "bytes": 4708,
+          "physicalLines": 141,
+          "sha256": "38a7c40956c522f8088e06a80bc527c4f0de9406ac065ffd3fba57d2d85f5664"
+        },
+        {
+          "path": "programs/custom-policy/native/policy/src/lib.rs",
+          "bytes": 12935,
+          "physicalLines": 374,
+          "sha256": "1c46d500ab3e87b6c7b8cfbb68b339b22a5fb74eadd44d2cb59d10aad133daa9"
+        },
+        {
+          "path": "programs/native/proof-buffer/src/lib.rs",
+          "bytes": 2010,
+          "physicalLines": 41,
+          "sha256": "136c3cbff4947815a3babff21bb2cd76475c2264f3540e447e3d9eb704bd2f4f"
+        },
+        {
+          "path": "crates/native-admission/src/arithmetic.rs",
+          "bytes": 8750,
+          "physicalLines": 224,
+          "sha256": "35a5c290e6aa6c579cb449ad5330b381784c1bbaa489fee4bdc008df97f85567"
+        },
+        {
+          "path": "crates/native-admission/src/lib.rs",
+          "bytes": 10715,
+          "physicalLines": 281,
+          "sha256": "741d62f15bd6d78bf94ddce2935809279066419397d7ab39c366717f1997138d"
+        },
+        {
+          "path": "crates/hook-routing/src/lib.rs",
+          "bytes": 2069,
+          "physicalLines": 65,
+          "sha256": "d2806399d284ecd5d6f115815b7d44eb727a36b1c7de46c974447b032ae0d0c6"
+        },
+        {
+          "path": "crates/pda-provisioning/src/lib.rs",
+          "bytes": 4370,
+          "physicalLines": 116,
+          "sha256": "05106018df2b34987b458444b6ad28c62386b0ef539f2c8aca0bc9615d92c541"
+        },
+        {
+          "path": "crates/custom-policy-layout/src/lib.rs",
+          "bytes": 2634,
+          "physicalLines": 80,
+          "sha256": "9dde678ee06c43c7aa53c663df0fb4e44725dde7652cc03d6fe74c1b34a1e978"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Source bytes and physical lines do not measure human time, expertise, security, maintenance cost or customer advantage.",
+    "Shared policy/compiler/deployment/funded-asset provisioning/native bridge/enforcement/runtime are not a standalone upstream comparison.",
+    "Both implementations used internal source assistance/review. Qualification/tests/docs are excluded from runtime groups and remain additional work.",
+    "Generated bindings, TypeScript declarations, toolchain/bootstrap scripts and external pinned package source are excluded; whole SDK directories include unexercised modules. No ratio is a measured saving."
+  ]
+}
