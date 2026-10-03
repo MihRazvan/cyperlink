@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "real-local-session-process-crash-qualification",
+  "referenceCommit": "cce20f35c21f048972ca065221f1693b63e00fbd",
+  "referenceArchiveSha256": "e026ead2bc7e1a7054532f305e5e0c56fd2e786d80fbfc12973fda71b5334f85",
+  "rawArchive": ".local/license-session-qualification-v22b/results.json",
+  "rawArchiveSha256": "e3e2436d065f36f2a66ece6a24359d9527df85d6104a13573094f8a4c3b37789",
+  "releaseHashHex": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+  "genesisHash": "7t79QMPLFiBZuNbf9pyu2o7qXHR1PNvVE9J89PRV5FyA",
+  "counts": {
+    "messages": 6,
+    "ed25519Signatures": 10,
+    "crashBoundaries": 4,
+    "callbacks": 2,
+    "paidLicenses": 2,
+    "readonlyUnchangedAccounts": 48,
+    "signedTickets": 4,
+    "loadedElfs": 10,
+    "circuits": 2
+  },
+  "actualProcessKills": 5,
+  "appInvocations": 20,
+  "initialState": {
+    "version": "0",
+    "counter": "2"
+  },
+  "finalState": {
+    "version": "2",
+    "counter": "4",
+    "inferredRemainingObserverDisclosure": 20
+  },
+  "observerDisclosures": {
+    "remaining": 50,
+    "purchase_cap": 30,
+    "purchases": [
+      10,
+      20
+    ]
+  },
+  "checks": [
+    "first: authenticated callback, native ciphertext changes, full successor state and paid license, exact recovery",
+    "second: authenticated callback, native ciphertext changes, full successor state and paid license, exact recovery",
+    "recover: attempt interrupted before signed-record persistence refuses automatic restaging",
+    "approve-query: attempt interrupted before signed-record persistence refuses automatic restaging"
+  ],
+  "interruptedBeforePublication": {
+    "recoveryError": "APPROVAL_INTERRUPTED_BEFORE_SIGNED_RECORD",
+    "approvalError": "APPROVAL_INTERRUPTED_BEFORE_SIGNED_RECORD",
+    "createsReplacement": false
+  },
+  "priorAttempt": {
+    "archive": ".local/license-session-qualification-v22/results.json",
+    "outcome": "Query crash recovered and authorized; payment simulation rejected1101 because harness expiry1500 exceeded1000-slot consumer horizon. No payment. Preserved source/records; v22b used same instance at business version0/counter2 with expiry900."
+  },
+  "limitations": [
+    "Offline review of retained local RPC and runner observations; no new execution, signer-file access or network calls.",
+    "Ed25519 signatures and exact instruction/operation binding are checked; no independent BLS verification or historical consensus proof.",
+    "SIGKILL, process IDs and historical directory captures are corroborating local runner evidence, not OS attestations.",
+    "Before-wire means before durable signed-record publication; the sender may already have signed in memory.",
+    "Loaded ELF reports are compared with current build bytes; raw loaded ProgramData is not independently retained by this verifier.",
+    "Covers four selected publication/simulation crash boundaries and one interrupted attempt, not arbitrary provisioning or disk-loss recovery.",
+    "Same host two local Arcium nodes, administrator-co-signed synthetic no-fee assets, explicit SBPFv0 feature override.",
+    "No independent external builder, public-network deployment, delegated authority, or production security claim.",
+    "No automatic recovery from arbitrary provisioning interruption, disk loss, missing signed record or ambiguous records."
+  ]
+}

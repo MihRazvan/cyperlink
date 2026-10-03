@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "independent-offline-session-crash-archive-review",
+  "input": {
+    "path": ".local/license-session-qualification-v22b/results.json",
+    "sha256": "e3e2436d065f36f2a66ece6a24359d9527df85d6104a13573094f8a4c3b37789",
+    "bytes": 3928318
+  },
+  "counts": {
+    "messages": 6,
+    "ed25519Signatures": 10,
+    "crashBoundaries": 4,
+    "callbacks": 2,
+    "paidLicenses": 2,
+    "readonlyUnchangedAccounts": 48,
+    "signedTickets": 4,
+    "loadedElfs": 10,
+    "circuits": 2
+  },
+  "crashes": [
+    {
+      "label": "first",
+      "role": "query",
+      "point": "after-wire",
+      "pid": 56471,
+      "signature": "2vf4cN6sMoCxhYiyKvM1bc9yZXFic1y7Z2hqqQAhUCyN2G4SRyxRyquov4PcWViSszzXVQg8XvbVBnnuWdANn1sv",
+      "wireSha256": "b65879ba2a95caad58b5521ec98e570ea4979b5244a55a763ed58dbcc1b33f04",
+      "readonlyUnchangedAccounts": 12,
+      "originalJournal": ".local/license-session-qualification-v22b/first-approvals/5914a699f07207fe3cba86a3cc2f031fc46bb7de635149520af14f252466d929-query/signing/transaction-journal"
+    },
+    {
+      "label": "first",
+      "role": "commit",
+      "point": "after-simulation",
+      "pid": 57335,
+      "signature": "5X12xb22HEPpw5f6nG1xtPUVqM1SQBDrrcv2VBnpX7Mt4W9fGnVcL8R63pV8Cif62hPv9jb5ePod5VfZVYtpDyCx",
+      "wireSha256": "2544d8688e90e976d7e175486cb3af4df2c5f0da526412f168a65ac09d40512f",
+      "readonlyUnchangedAccounts": 12,
+      "originalJournal": ".local/license-session-qualification-v22b/first-approvals/5914a699f07207fe3cba86a3cc2f031fc46bb7de635149520af14f252466d929-commit/signing/transaction-journal"
+    },
+    {
+      "label": "second",
+      "role": "query",
+      "point": "after-simulation",
+      "pid": 57640,
+      "signature": "QZUNGMHhTmCRv7YTuLKXkaWYG9m2z81XSQt7T3oWvrajHdTFhd8WR55e3SERNLe63HSUEBPgH5b2QkuPVmPRkQi",
+      "wireSha256": "f62edca89b7594fde8acee87be295a70fda0f97966c191740fd651064ced8dc7",
+      "readonlyUnchangedAccounts": 12,
+      "originalJournal": ".local/license-session-qualification-v22b/second-approvals/dcf34cfd717e8e61026616a521f9dd4edd4a3063e49c2a3eed9b594791e24db1-query/signing/transaction-journal"
+    },
+    {
+      "label": "second",
+      "role": "commit",
+      "point": "after-wire",
+      "pid": 58507,
+      "signature": "5UTMAgauSxvMCfgWZXDN9ACB9XuKxYSA27ZfrMtspfNURJm2rofHkidZtpruk4hrCGDgRU6Z5Y2Mh4osYvfEAhtT",
+      "wireSha256": "774cd562e2448bf4349acc22cd8f99be9453ee2a815cc82a057708dacd142463",
+      "readonlyUnchangedAccounts": 12,
+      "originalJournal": ".local/license-session-qualification-v22b/second-approvals/dcf34cfd717e8e61026616a521f9dd4edd4a3063e49c2a3eed9b594791e24db1-commit/signing/transaction-journal"
+    }
+  ],
+  "callbacks": [
+    {
+      "label": "first",
+      "signature": "3PdouPBdfHKGSNZme3ZEtqw2WxwczEvzfWRENHQBhfw18phw2Cn89zZHx3akrdrtQgCE9v8oGFEXhN8rVP2pTgBb",
+      "allowed": true,
+      "exactCommitmentAndSuccessor": true
+    },
+    {
+      "label": "second",
+      "signature": "47EmWuJnjiB4kUeMUnoc9mMoM1Mcq9Hn2fs1PaB2drnQssSmDtD5Hn13gMxWcCx4Zdzp6oUxtNxyrTjXv61mUynz",
+      "allowed": true,
+      "exactCommitmentAndSuccessor": true
+    }
+  ],
+  "paid": [
+    {
+      "label": "first",
+      "signature": "5X12xb22HEPpw5f6nG1xtPUVqM1SQBDrrcv2VBnpX7Mt4W9fGnVcL8R63pV8Cif62hPv9jb5ePod5VfZVYtpDyCx",
+      "nativeAccountsChanged": true,
+      "exactPaidLicense": true
+    },
+    {
+      "label": "second",
+      "signature": "5UTMAgauSxvMCfgWZXDN9ACB9XuKxYSA27ZfrMtspfNURJm2rofHkidZtpruk4hrCGDgRU6Z5Y2Mh4osYvfEAhtT",
+      "nativeAccountsChanged": true,
+      "exactPaidLicense": true
+    }
+  ],
+  "circuitChecks": [
+    {
+      "circuit": "runtime_policy_init",
+      "sha256": "4da98203fb472d992acd9c262278b34f625fcbbeee706fb369c20b3eecfa5016",
+      "bytes": 1023894
+    },
+    {
+      "circuit": "runtime_policy_evaluate",
+      "sha256": "8d28981a5a649142399204615446af6b5f3307a385c54b018dd37293f2428eee",
+      "bytes": 1613253
+    }
+  ],
+  "initialQuota": {
+    "version": "0",
+    "counter": "2"
+  },
+  "finalQuota": {
+    "version": "2",
+    "counter": "4"
+  },
+  "sourceHashes": {
+    "examples/license-session/app.mjs": "ccb02c1fd5770a823652eb5e03836322fc8029cfb5eddf5594d2da083589dcf9",
+    "examples/license-session/crash.mjs": "21ce32e6d58320e5056ad6edaf464d7102068bc932d1fb863f9088ac2c192e3f",
+    "examples/license-session/qualify.mjs": "67c4e4f61ed11ab7b9dd4eb7f2f3462ccb887e6dedfb7b2e3289db3a80626584",
+    "examples/license-session/verify.mjs": "d395deb4046740a20dcc1c52924dbd1d66a46c50e9466d44ea59d26ecac15e97",
+    "packages/policy-client/src/policy-session.mjs": "0c44a04f983f2ba69a5cd567aacd9d8b1d491b99182ba29a000645b315f644e4",
+    "packages/policy-client/src/approval-store.mjs": "ea6ab6eeafbcaa07dbcbe724da6d75250f66d5c7c748c2a2de91e36173a1c560"
+  },
+  "limitations": [
+    "Offline review of retained local RPC and runner observations; no new execution, signer-file access or network calls.",
+    "Ed25519 signatures and exact instruction/operation binding are checked; no independent BLS verification or historical consensus proof.",
+    "SIGKILL, process IDs and historical directory captures are corroborating local runner evidence, not OS attestations.",
+    "Before-wire means before durable signed-record publication; the sender may already have signed in memory.",
+    "Loaded ELF reports are compared with current build bytes; raw loaded ProgramData is not independently retained by this verifier.",
+    "Covers four selected publication/simulation crash boundaries and one interrupted attempt, not arbitrary provisioning or disk-loss recovery."
+  ]
+}

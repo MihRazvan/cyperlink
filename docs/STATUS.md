@@ -2,14 +2,25 @@
 
 Updated 2026-10-03. CyperLink continues the selected Solana-native product: make private money programmable. Original research, fixtures and ledgers are preserved read-only. Implementation and new experiments live here.
 
-## In progress: explicit sessions and crash-window recovery
+## Completed: explicit sessions and crash-window recovery
 
-The passing license application and v21b evidence remain the reference at
-`cce20f3`. The [current milestone](license-session-milestone.md) adds an opt-in
-keyless session, explicit signing roles and durable approval discovery, followed
-by real process-crash qualification. A direct upstream client is being built
-against the same reviewed onchain enforcement; independent enforcement and any
-comparative customer advantage remain inconclusive.
+The passing license application at `cce20f3` and its v21b evidence remain unchanged
+and were reverified. The additive [session milestone](license-session-milestone.md)
+now qualifies explicit signer roles, keyless reopening and SDK-owned durable ticket
+discovery. Four actual SIGKILL boundaries across query/payment recovered identical
+transactions through new processes; two local Arcium callbacks produced two real
+paid licenses. A fifth interruption before signed-record publication refuses
+restaging. Independent review checks6 messages/10 signatures,48 unchanged read-only
+account comparisons,10 loaded programs,2 uploaded circuits and10 corruption cases.
+
+The first harness expiry1101 simulation rejection remains archived; successful
+v22b began with unspent version0/counter2 and ended at version2/counter4. Same
+qualified local profile; no cryptography/program/circuit changes. See the milestone
+for commands, tests and the distinction between process observations and proofs.
+
+A direct pinned-upstream client is still being qualified against the same reviewed
+onchain enforcement. Full parity and independent enforcement remain inconclusive;
+no comparative customer advantage or measured developer productivity is claimed.
 
 ## Completed: separate paid-license application rehearsal
 

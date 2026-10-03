@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "passed": true,
+  "classification": "offline-in-memory-archive-corruption-checks",
+  "archiveUnmodified": true,
+  "rejected": [
+    "missing historical ticket-absence evidence",
+    "ticket falsely present at crash boundary",
+    "hidden broadcast during read-only recovery",
+    "changed retained-wire file hash",
+    "different recovered signature",
+    "changed read-only account bytes",
+    "missing SIGKILL evidence",
+    "callback signature corruption",
+    "false paid callback result",
+    "replaced runtime ELF identity"
+  ]
+}
