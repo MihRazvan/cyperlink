@@ -82,7 +82,7 @@ export class PolicyOperationClient {
     await this.assertChain(plan); this.reader.minimumSlot = Math.max(this.reader.minimumSlot ?? 0, plan.contextSlot);
     return this.reader.observe(plan.descriptor);
   }
-  async prepare({ label, directory, provisionedDirectory, amount, consumer }) {
+  async prepare({ label, directory, provisionedDirectory, amount, consumer, ownerKeyfile }) {
     const P = this.profile; await this.assertDeploymentState();
     ensure(/^[a-z0-9-]+$/.test(label), 'Invalid operation label');
     ensure(consumer?.kind === 'merchant' || consumer?.kind === 'license', 'Unsupported consumer');
@@ -90,11 +90,11 @@ export class PolicyOperationClient {
     else { hexBytes(consumer.productHex32, 32, 'product'); decimal(consumer.expirySlot); }
     const genesisHash = await this.session.connection.getGenesisHash();
     const preparedRun = await prepareNativeTransfer({ directory, provisionedDirectory, amount, endpoint: this.session.endpoint,
-      moduleRoot: this.moduleRoot, proofCli: this.proofCli, payerKeyfile: this.payerKeyfile });
+      moduleRoot: this.moduleRoot, proofCli: this.proofCli, payerKeyfile: this.payerKeyfile, ownerKeyfile });
     await verifyTransferProofs(preparedRun.session, preparedRun.prepared, preparedRun.contextSigners,
       { bufferProgram: P.proofBuffer });
     const { prepared } = preparedRun, { web3, connection, payer } = this.session, { PublicKey, Keypair, TransactionInstruction, SystemProgram } = web3;
-    const owner = await loadSigner(resolve(provisionedDirectory, 'source-owner-signer.json'), web3);
+    const owner = await loadSigner(ownerKeyfile ?? resolve(provisionedDirectory, 'source-owner-signer.json'), web3);
     ensure(owner.publicKey.toBase58() === prepared.owner, 'Native source owner mismatch');
     const kind = consumer.kind, consumerProgram = new PublicKey(P[kind]);
     const product = kind === 'merchant' ? le(consumer.sku) : hexBytes(consumer.productHex32, 32, 'product');

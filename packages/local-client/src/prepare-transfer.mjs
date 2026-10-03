@@ -6,7 +6,7 @@ import { createPrivateRun, ensure, loadSigner, loadWeb3, LocalSession, saveSigne
 const execute = promisify(execFile);
 
 /** Read current native source state and generate a NEW operation's native proofs. */
-export async function prepareNativeTransfer({ directory, provisionedDirectory, amount, endpoint = 'http://127.0.0.1:8899', moduleRoot, proofCli, payerKeyfile }) {
+export async function prepareNativeTransfer({ directory, provisionedDirectory, amount, endpoint = 'http://127.0.0.1:8899', moduleRoot, proofCli, payerKeyfile, ownerKeyfile }) {
   loopbackEndpoint(endpoint);
   ensure(Number.isSafeInteger(amount) && amount > 0 && amount < 2 ** 48, 'Amount must be a positive exact integer below 2^48');
   const web3 = await loadWeb3(moduleRoot), provisioned = JSON.parse(await readFile(resolve(provisionedDirectory, 'provisioned.json'), 'utf8'));
@@ -14,7 +14,7 @@ export async function prepareNativeTransfer({ directory, provisionedDirectory, a
   ensure(loopbackEndpoint(provisioned.rpc) === loopbackEndpoint(endpoint), 'Provisioning record belongs to a different endpoint');
   const payer = await loadSigner(payerKeyfile, web3), output = await createPrivateRun(directory);
   const session = new LocalSession({ web3, endpoint, payer, directory: output }); await session.assertLocalVersions();
-  const owner = await loadSigner(resolve(provisionedDirectory, 'source-owner-signer.json'), web3);
+  const owner = await loadSigner(ownerKeyfile ?? resolve(provisionedDirectory, 'source-owner-signer.json'), web3);
   ensure(owner.publicKey.toBase58() === provisioned.source_owner, 'Persisted source owner differs from provisioning record');
   const snapshot = await session.snapshot(new web3.PublicKey(provisioned.accounts.source.address), 'current-source-account.bin');
   ensure(snapshot.owner === TOKEN_PROGRAM, 'Current source has wrong native owner');

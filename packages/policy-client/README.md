@@ -64,3 +64,38 @@ authorities remain trusted. This client does not claim to audit arbitrary rules.
 including real Ed25519 signing and mocked account/ALT reads. These are not live
 native proof verification or distributed execution. Runtime qualification is
 recorded separately by the deployment/evidence tools.
+
+### Opt-in explicit approval sessions
+
+New applications can use generated `connectSession`, while existing `connect`
+continues to work unchanged:
+
+```js
+const session = await connectSession({ deployment, moduleRoot, endpoint,
+  directory: '.local/my-approval-session', idl, proofCli }); // no keys
+const signers = { ownerKeyfile, administratorKeyfile };
+const plan = await session.prepare({ label, directory, provisionedDirectory,
+  amount, consumer }, signers);
+await session.stageQuery(plan, signers); // durable intent, wire and ticket
+await session.submit(plan, 'query');
+const observation = await session.observe(plan);
+// Following an explicit payment approval and an authorized observation:
+await session.stageCommit(plan, signers);
+await session.submit(plan, 'commit');
+```
+
+Reopen with the same session directory, deployment and endpoint in a new process,
+without keys. `load(operationDirectory)`, `observe(plan)` and
+`recover(plan, 'query'|'commit')` never sign or broadcast. `discoverApproval`
+recovers the original ticket even if the process died before ticket publication;
+the caller does not need the original journal path. `submit(plan, role)` expressly
+resends those exact signed bytes. It can finish a missing simulation using the
+original signatures/blockhash, but cannot renew an expired authorization.
+
+There is one create-only signing attempt per descriptor/role. Concurrent callers
+or crashes before signed-record persistence can report
+`APPROVAL_INTERRUPTED_BEFORE_SIGNED_RECORD`; this is not permission to stage a
+replacement. Multiple candidates report `APPROVAL_AMBIGUOUS`. Read-only discovery
+may publish recovered local metadata, but performs no onchain writes. This API is
+still the pinned local owner/admin profile, not delegated execution or a production
+wallet/session-key feature. See the additive [license sample](../../examples/license-session/README.md).

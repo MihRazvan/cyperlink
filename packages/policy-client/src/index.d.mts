@@ -142,3 +142,26 @@ export function readOperationPlan(filename: string): Promise<OperationPlan>;
 export function validateOperationPlan(plan: OperationPlan): OperationPlan;
 export function descriptorDigest(descriptor: Operation): string;
 export function queryStateDigest(data: Uint8Array): Uint8Array;
+
+export interface ApprovalSigners { ownerKeyfile: string; administratorKeyfile: string }
+export interface PolicySessionOptions {
+  deployment: PolicyDeployment; moduleRoot: string; endpoint: string;
+  directory: string; idl: string; proofCli: string;
+}
+export interface SessionDelivery extends Delivery {
+  wireSha256: string; role: 'query' | 'commit';
+  receipt?: { slot: number; error: unknown; landedCU: number; feeLamports: number };
+}
+export interface SessionRecovery { ticket: SignedTicket; delivery: SessionDelivery; observation: Observation }
+/** Local keyless observation/recovery; explicit owner/admin keys only at prepare/stage. */
+export class PolicySession {
+  static connect(options: PolicySessionOptions): Promise<PolicySession>;
+  prepare(options: Parameters<PolicyOperationClient['prepare']>[0], signers: ApprovalSigners): Promise<OperationPlan>;
+  load(directory: string): Promise<OperationPlan>;
+  observe(plan: OperationPlan): Promise<Observation>;
+  stageQuery(plan: OperationPlan, signers: ApprovalSigners): Promise<SignedTicket>;
+  stageCommit(plan: OperationPlan, signers: ApprovalSigners): Promise<SignedTicket>;
+  discoverApproval(plan: OperationPlan, role: 'query' | 'commit'): Promise<SignedTicket>;
+  recover(plan: OperationPlan, role: 'query' | 'commit'): Promise<SessionRecovery>;
+  submit(plan: OperationPlan, role: 'query' | 'commit'): Promise<SessionRecovery>;
+}
