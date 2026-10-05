@@ -4,7 +4,7 @@ The bounded implementation uses typed Rust expressions over pinned
 `arcis-compiler =0.15.0` ScalarField internals. High-level Arcis has a different
 BaseField/RescueCipher domain (255-bit declarations), while the authenticated
 native bridge uses ScalarField/CSplRescueCipher (253-bit declarations). Running
-`node experiments/custom-policy-compiler/cipher-domains.mjs .local/toolchain/js`
+`node tests/cipher-domains.mjs .local/toolchain/js`
 again confirms both own-domain round trips and rejects treating scalar ciphertext
 as high-level input. Equal 32-byte encodings are not a conversion. The pinned
 high-level API has no supported native Pedersen bridge or same-secret conversion
@@ -61,7 +61,17 @@ integer values encoded as unsigned numbers or decimal strings. State arrays
 match the declared field order; optional four-slot arrays test padding. Optional
 `native_amount` and `corrupt_commitment_byte` exercise binding failures. These
 synthetic tests never send transactions. Actual compiler/host qualification and
-reproduction are in [the gate results](../experiments/custom-policy-compiler/README.md).
+results are retained in [the gate evidence](../evidence/2026-10-02/compiler-gate.json).
+Reproduce the maintained host/compiler checks without deploying:
+
+```sh
+CARGO_TARGET_DIR=.local/circuit-build-target cargo test --locked --offline \
+  --manifest-path crates/policy-authoring/Cargo.toml
+```
+
+Explicit artifact tests `compile_artifacts` and `compile_artifact_variants` additionally
+require `CYPERLINK_POLICY_BUILD_OUT` set to a fresh ignored output and `-- --ignored`.
+Compiler weights are modeled ACUs, separate from Solana CU and runtime latency.
 
 ## Fixed wire interface
 
