@@ -9,6 +9,9 @@ The [end-to-end product assessment](PRODUCT-ANALYSIS.md) reviews the current cod
 evidence and gaps before developer/team onboarding. Its first recommended milestone
 is an operable local project, including safe retained-runtime restart and recovery
 of interrupted setup, followed by portable application integration.
+The [product research](PRODUCT-RESEARCH.md) adds current upstream/competitive evidence,
+custody and operating requirements, and proposed acceptance gates. It does not broaden
+the implemented profile or establish public-network qualification.
 
 ## Working today
 
