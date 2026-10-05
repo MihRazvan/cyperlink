@@ -60,13 +60,24 @@ export class ConsoleService {
       assertInput(!ids.has(op.id) && canonicalHash(expected) === op.requestHash, 'Workspace operation identity changed.'); ids.add(op.id);
       if (op.busy) { op.busy = false; op.phase = 'interrupted'; op.error = { code: 'PROCESS_INTERRUPTED', message: 'The previous process stopped. Recover the retained operation; no action has been repeated.' }; }
     }
+    for (const [index, op] of state.operations.entries()) {
+      if (op.supersededBy === undefined) {
+        assertInput(op.historicalObservation === undefined, 'Historical observation requires explicit supersession.');
+        continue;
+      }
+      const successorIndex = state.operations.findIndex(value => value.id === op.supersededBy);
+      assertInput(successorIndex > index && businessKey(state.operations[successorIndex]) === businessKey(op) &&
+        !op.paymentCommitted && op.observation === null && terminalUnpaid.has(op.historicalObservation?.status),
+      'Invalid retained purchase supersession.');
+      op.phase = 'superseded';
+    }
     const service = new this({ directory, path, adapter, state }); await service.save(); return service;
   }
   constructor(options) { Object.assign(this, options); this.busy = false; this.saving = Promise.resolve(); }
   save() { this.state.updatedAt = now(); const value = structuredClone(this.state); this.saving = this.saving.then(() => saveState(this.path, value)); return this.saving; }
   canSign(op) { return this.adapter.project.administratorConfigured && this.adapter.project.sources.some(s => s.id === op.sourceId && s.canSign); }
   actions(op) {
-    if (this.busy || op.busy) return [];
+    if (this.busy || op.busy || op.supersededBy) return [];
     const actions = ['refresh'];
     if (!op.planHash) return actions;
     if (op.approvals.query) actions.push('recover-query');
@@ -84,9 +95,11 @@ export class ConsoleService {
     return { project: projectView(this.adapter.project), busy: this.busy, updatedAt: this.state.updatedAt,
       operations: this.state.operations.map(op => ({ id: op.id, title: op.title, amount: op.amount, sourceId: op.sourceId,
         consumer: op.consumer, createdAt: op.createdAt, phase: op.phase, busy: op.busy, planHash: op.planHash,
-        paymentCommitted: op.paymentCommitted, observation: op.observation, deliveries: op.deliveries, error: op.error, actions: this.actions(op) })) };
+        paymentCommitted: op.paymentCommitted, observation: op.observation, supersededBy: op.supersededBy,
+        historicalObservation: op.historicalObservation, deliveries: op.deliveries, error: op.error, actions: this.actions(op) })) };
   }
   apply(op, result) {
+    assertInput(!op.supersededBy, 'A superseded request retains historical evidence only.');
     if (result.planHash) { assertInput(!op.planHash || op.planHash === result.planHash, 'Retained operation plan changed.'); op.planHash = result.planHash; }
     if (result.observation) { op.observation = result.observation; if (op.observation.status === 'committed') op.paymentCommitted = true; }
     op.phase = op.observation?.status ?? 'prepared';
@@ -115,9 +128,17 @@ export class ConsoleService {
     if (this.busy || this.refreshing) throw new ConsoleError('WORKSPACE_BUSY', 'Wait for the current project action to finish.');
     assertInput(this.canSign(request), 'Configure the selected owner and administrator locally before preparing.');
     assertInput(this.state.operations.length < 500, 'Workspace operation limit reached; preserve it and use a new workspace.');
-    const conflict = this.state.operations.find(op => businessKey(op) === businessKey(request) && (op.paymentCommitted || !terminalUnpaid.has(op.observation?.status)));
+    const predecessors = this.state.operations.filter(op => businessKey(op) === businessKey(request));
+    const conflict = predecessors.find(op => op.paymentCommitted || !op.supersededBy && !terminalUnpaid.has(op.observation?.status));
     if (conflict) throw new ConsoleError('PURCHASE_EXISTS', 'This purchase already has a retained operation. Recover it before creating another.');
     const op = { ...request, requestHash, createdAt: now(), phase: 'preparing', busy: false, approvals: {}, deliveries: {}, observation: null, error: null, paymentCommitted: false };
+    for (const previous of predecessors) {
+      if (previous.supersededBy) continue;
+      previous.supersededBy = op.id;
+      previous.historicalObservation = structuredClone(previous.observation);
+      previous.observation = null;
+      previous.phase = 'superseded';
+    }
     this.state.operations.push(op);
     return this.launch(op, 'preparing', async () => this.apply(op, await this.adapter.prepare(op)));
   }
@@ -148,7 +169,7 @@ export class ConsoleService {
     this.refreshing = (async () => {
       await this.adapter.refreshProject?.();
       for (const op of this.state.operations) {
-        if (!op.planHash) continue;
+        if (!op.planHash || op.supersededBy) continue;
         try { this.apply(op, { observation: await this.adapter.observe(op) }); }
         catch (error) { op.observation = null; op.error = safeError(error); }
       }

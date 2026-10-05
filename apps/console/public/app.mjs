@@ -60,12 +60,14 @@ const actionCopy = {
 };
 const operations = () => Array.isArray(state?.operations) ? state.operations : [];
 const currentOperation = id => operations().find(op => op.id === id);
-const paid = op => op.observation?.status === 'committed' || op.paymentCommitted === true;
-const attention = op => !op.busy && (Boolean(op.error) || (op.actions || []).some(action => action !== 'refresh'));
+const superseded = op => Boolean(op.supersededBy) || op.phase === 'superseded';
+const paid = op => !superseded(op) && (op.observation?.status === 'committed' || op.paymentCommitted === true);
+const attention = op => !superseded(op) && !op.busy && (op.actions || []).some(action => action !== 'refresh');
 const locked = () => !connected || mutationPending || Boolean(state?.busy);
 const canPrepare = () => !locked() && state?.project?.signingEnabled === true && state.project.administratorConfigured === true && state.project.sources?.some(source => source.canSign);
 const sourceLabel = id => state?.project?.sources?.find(source => source.id === id)?.label || `Source ${String(id || '').toUpperCase()}`;
 function status(op) {
+  if (superseded(op)) return { label: 'Superseded', className: '' };
   if (paid(op)) return { label: op.observation?.status === 'committed' ? 'Paid' : 'Paid · previously confirmed', className: 'paid' };
   if (op.busy) return { label: 'Working', className: 'attention' };
   const observed = op.observation?.status;
@@ -189,14 +191,14 @@ function render() {
   if ($('#detail-dialog').open && selectedId) renderDetails();
   if ($('#confirm-dialog').open && confirmation) {
     const op = currentOperation(confirmation.id);
-    $('#confirm-submit').disabled = locked() || !op || op.busy || !op.actions?.includes(confirmation.action) || op.planHash !== confirmation.planHash;
+    $('#confirm-submit').disabled = locked() || !op || superseded(op) || op.busy || !op.actions?.includes(confirmation.action) || op.planHash !== confirmation.planHash;
   }
   if ($('#create-dialog').open) $('#create-submit').disabled = !canPrepare();
   if (focusKey?.operationId && focusKey.listId) {
     const replacement = $$('.operation-row', document.getElementById(focusKey.listId)).find(node => node.dataset.operationId === focusKey.operationId);
     replacement?.focus({ preventScroll: true });
   } else if (focusKey?.action) {
-    const replacement = $$('.detail-actions button').find(node => node.dataset.action === focusKey.action);
+    const replacement = $$('#detail-body button[data-action]').find(node => node.dataset.action === focusKey.action);
     if (replacement && !replacement.disabled) replacement.focus({ preventScroll: true });
   }
 }
@@ -394,27 +396,40 @@ function renderDetails() {
     card.append(element('span', '', label), element('strong', '', value), element('p', '', explanation));
     return card;
   };
-  const currentCommitted = op.observation?.status === 'committed';
-  const paymentLabel = paid(op) ? currentCommitted ? 'Paid · committed effect' : 'Paid · previously confirmed' : op.observation?.status === 'authorized' ? 'Authorized · unpaid' : `Not confirmed paid · ${result.label}`;
+  const historical = superseded(op);
+  const currentCommitted = !historical && op.observation?.status === 'committed';
+  const paymentLabel = historical ? 'Superseded · historical intent' : paid(op) ? currentCommitted ? 'Paid · committed effect' : 'Paid · previously confirmed' : op.observation?.status === 'authorized' ? 'Authorized · unpaid' : `Not confirmed paid · ${result.label}`;
   const license = op.consumer?.kind === 'license';
   const active = currentCommitted ? op.observation?.licenseActive : undefined;
-  statuses.append(statusCard('Payment / effect', paymentLabel, currentCommitted ? 'Established by the bound account effect.' : paid(op) ? 'Retained committed effect. A current committed observation is unavailable.' : 'Query authorization and signatures alone do not establish payment.'), statusCard('Receipt delivery', deliverySummary(op), 'Receipt availability is independent of the payment effect.'), statusCard('Use at observed slot', license ? active === true ? 'License active at observation' : active === false ? 'License not active at observation' : 'License unresolved' : paid(op) ? currentCommitted ? 'Merchant effect issued' : 'Merchant effect previously confirmed' : 'Not confirmed issued', license ? 'Refresh to observe again. A paid license may expire without changing its payment status.' : 'The merchant effect is bound to this exact purchase.'));
+  statuses.append(statusCard('Payment / effect', paymentLabel, historical ? 'This terminal unpaid intent was superseded by a separately prepared intent. Its historical observation is retained.' : currentCommitted ? 'Established by the bound account effect.' : paid(op) ? 'Retained committed effect. A current committed observation is unavailable.' : 'Query authorization and signatures alone do not establish payment.'), statusCard(historical ? 'Historical receipt delivery' : 'Receipt delivery', deliverySummary(op), historical ? 'Original delivery records are retained. No further submission is available for this intent.' : 'Receipt availability is independent of the payment effect.'), statusCard(historical ? 'Current entitlement' : 'Use at observed slot', historical ? 'Not assessed by this record' : license ? active === true ? 'License active at observation' : active === false ? 'License not active at observation' : 'License unresolved' : paid(op) ? currentCommitted ? 'Merchant effect issued' : 'Merchant effect previously confirmed' : 'Not confirmed issued', historical ? 'Inspect the successor intent for its own payment and application effect.' : license ? 'Refresh to observe again. A paid license may expire without changing its payment status.' : 'The merchant effect is bound to this exact purchase.'));
   const facts = element('dl', 'facts');
-  facts.append(...summaryRows(op), fact('Intent ID', op.id, true), fact('Plan hash', op.planHash || 'Available after preparation', true), fact('Current observation', op.observation ? pretty(op.observation.status) : 'Unavailable'), fact('Observed slot', op.observation?.slot === undefined ? 'Not reported' : number(op.observation.slot)));
+  facts.append(...summaryRows(op), fact('Intent ID', op.id, true), fact('Plan hash', op.planHash || 'Available after preparation', true), fact(historical ? 'Historical observation' : 'Current observation', op.observation ? pretty(op.observation.status) : 'Unavailable'), fact(historical ? 'Historical observed slot' : 'Observed slot', op.observation?.slot === undefined ? 'Not reported' : number(op.observation.slot)));
+  if (op.supersededBy) facts.append(fact('Successor intent ID', op.supersededBy, true));
   body.replaceChildren(statuses, facts);
-  if (op.error) body.append(element('p', 'form-error', `${op.error.code ? `${op.error.code}: ` : ''}${op.error.message || 'The operation needs review.'}`));
+  if (historical) {
+    const note = element('div', 'inline-note', 'A separately authorized fresh intent superseded this unpaid operation. This record is preserved and is no longer observed or submitted. A successor’s payment is never attributed to this intent.');
+    if (op.supersededBy && currentOperation(op.supersededBy)) {
+      const successor = element('button', 'text-button successor-link', 'View successor intent →');
+      successor.type = 'button';
+      successor.dataset.action = 'view-successor';
+      successor.addEventListener('click', () => { selectedId = op.supersededBy; renderDetails(); $('#detail-dialog [data-close]').focus(); });
+      note.append(successor);
+    }
+    body.append(note);
+  }
+  if (op.error) body.append(element('p', 'form-error', `${historical ? 'Historical error: ' : ''}${op.error.code ? `${op.error.code}: ` : ''}${op.error.message || 'The operation needs review.'}`));
   const deliveries = Object.entries(op.deliveries || {}).filter(([, delivery]) => delivery);
   if (deliveries.length) body.append(element('h3', 'detail-subhead', 'Original delivery records'));
   for (const [role, delivery] of deliveries) {
     const record = element('div', 'delivery-block');
-    record.append(element('h4', '', role === 'commit' ? 'Payment delivery' : 'Query delivery'), element('p', '', `Status: ${pretty(delivery.status)} · ${delivery.canBroadcast === true ? 'Retained bytes may be eligible for explicit submission' : 'Broadcast unavailable'}`));
+    record.append(element('h4', '', role === 'commit' ? 'Payment delivery' : 'Query delivery'), element('p', '', `Status: ${pretty(delivery.status)} · ${!historical && delivery.canBroadcast === true ? 'Retained bytes may be eligible for explicit submission' : 'Broadcast unavailable'}`));
     if (delivery.signature) record.append(element('p', 'delivery-signature', `Signature: ${delivery.signature}`));
     body.append(record);
   }
   if (paid(op) && license && active === false) body.append(element('div', 'inline-note', 'The payment remains paid. This license is not currently active; recovery does not renew its expiry.'));
-  if (op.busy) body.append(element('p', 'busy-indicator', 'Local operation in progress. Observing for updates…'));
+  if (op.busy && !historical) body.append(element('p', 'busy-indicator', 'Local operation in progress. Observing for updates…'));
   const actions = element('div', 'detail-actions');
-  for (const action of op.actions || []) {
+  for (const action of historical ? [] : op.actions || []) {
     if (!actionLabels[action]) continue;
     const button = element('button', `button ${action.startsWith('approve') ? 'primary' : 'secondary'}`, actionLabels[action]);
     button.type = 'button';
@@ -423,12 +438,12 @@ function renderDetails() {
     button.addEventListener('click', () => runAction(op.id, action));
     actions.append(button);
   }
-  if (!(op.actions || []).length && !op.busy) actions.append(element('span', 'small-muted', 'No further actions are currently available for this intent.'));
+  if (historical || (!(op.actions || []).length && !op.busy)) actions.append(element('span', 'small-muted', historical ? 'This superseded intent is preserved as a historical record.' : 'No further actions are currently available for this intent.'));
   body.append(actions);
 }
 async function runAction(id, action) {
   const op = currentOperation(id);
-  if (locked() || !op || op.busy || !op.actions?.includes(action)) return;
+  if (locked() || !op || superseded(op) || op.busy || !op.actions?.includes(action)) return;
   if (actionCopy[action]) {
     confirmation = { id, action, planHash: op.planHash };
     const [title, copy, note] = actionCopy[action];
@@ -451,7 +466,7 @@ $('#confirm-submit').addEventListener('click', async () => {
   if (!confirmation) return;
   const { id, action, planHash } = confirmation;
   const op = currentOperation(id);
-  if (locked() || !op || op.busy || !op.actions?.includes(action) || op.planHash !== planHash) {
+  if (locked() || !op || superseded(op) || op.busy || !op.actions?.includes(action) || op.planHash !== planHash) {
     text('#confirm-error', 'The intent or its available actions changed. Close this review and inspect the latest state.');
     $('#confirm-error').hidden = false;
     return;
