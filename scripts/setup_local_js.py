@@ -147,8 +147,9 @@ for (const name of JSON.parse(process.argv[2])) {
     if args.test:
         environment = os.environ.copy()
         environment['CYPERLINK_JS_MODULE_ROOT'] = str(TARGET)
-        tests = sorted([*REPO.glob('packages/sdk/test/*.test.mjs'), *REPO.glob('packages/local-client/test/*.test.mjs'),
-                        *REPO.glob('examples/two-consumers/*.test.mjs')])
+        tests = sorted([*REPO.glob('packages/*/test/*.test.mjs'),
+                        *REPO.glob('apps/*/*.test.mjs'), *REPO.glob('apps/*/test/*.test.mjs'),
+                        *REPO.glob('examples/*/*.test.mjs'), *REPO.glob('examples/policies/qualification/*.test.mjs')])
         subprocess.run(['node', '--test', *(str(path) for path in tests)], cwd=REPO, env=environment, check=True)
         report['host_tests_passed'] = True
     print(json.dumps(report, indent=2))

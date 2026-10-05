@@ -12,7 +12,7 @@ import shutil
 import subprocess
 import sys
 
-from prepare_local_replay import PROGRAMS, available_port, choose_subnet
+from localnet_support import PROGRAMS, available_port, choose_subnet
 from rebuild_circuits import check_artifacts
 from setup_local_js import load_config, check_installed
 
