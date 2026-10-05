@@ -5,6 +5,11 @@ The implemented offering is human-approved confidential spending with original
 customer-authored private policies. Application/agent permissions remain a separately
 qualified native escrow experiment, not an extension silently enabled in the SDK.
 
+The [end-to-end product assessment](PRODUCT-ANALYSIS.md) reviews the current code,
+evidence and gaps before developer/team onboarding. Its first recommended milestone
+is an operable local project, including safe retained-runtime restart and recovery
+of interrupted setup, followed by portable application integration.
+
 ## Working today
 
 - [CyperLink Console](../apps/console/README.md) connects an existing completed local
@@ -41,8 +46,11 @@ cryptography/runtime enforcement path.
 
 ## Next product work
 
-The user reprioritized building the product around Console. Next add guided project
-onboarding and policy author/test/build/deploy workflows. Today the Console requires
+The user reprioritized building the product around Console. The assessment recommends
+making the local project/runtime lifecycle operable first, including safe restart of
+retained environments, then guided policy author/test/build/deploy and interrupted-setup
+recovery. The generated validator launcher currently refuses an existing ledger;
+qualified Console restart does not establish whole-stack restart. Today Console requires
 an existing completed local deployment; those setup steps remain in the CLI. Keep
 ready-runtime usability distinct from clean-machine installation. Wallet integration
 and broader deployment profiles require separately scoped work.
