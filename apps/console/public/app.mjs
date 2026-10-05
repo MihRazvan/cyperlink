@@ -205,7 +205,7 @@ function render() {
 async function parseResponse(response) {
   let body;
   try { body = await response.json(); } catch { throw new Error(`The console returned an unreadable response (${response.status}).`); }
-  if (!response.ok) throw new Error(body.error?.message || body.message || `Request failed (${response.status}).`);
+  if (!response.ok) throw new Error((typeof body.error === 'string' ? body.error : body.error?.message) || body.message || `Request failed (${response.status}).`);
   return body;
 }
 function acceptState(next) {
@@ -397,13 +397,14 @@ function renderDetails() {
     return card;
   };
   const historical = superseded(op);
+  const displayedObservation = historical ? op.historicalObservation : op.observation;
   const currentCommitted = !historical && op.observation?.status === 'committed';
   const paymentLabel = historical ? 'Superseded · historical intent' : paid(op) ? currentCommitted ? 'Paid · committed effect' : 'Paid · previously confirmed' : op.observation?.status === 'authorized' ? 'Authorized · unpaid' : `Not confirmed paid · ${result.label}`;
   const license = op.consumer?.kind === 'license';
   const active = currentCommitted ? op.observation?.licenseActive : undefined;
   statuses.append(statusCard('Payment / effect', paymentLabel, historical ? 'This terminal unpaid intent was superseded by a separately prepared intent. Its historical observation is retained.' : currentCommitted ? 'Established by the bound account effect.' : paid(op) ? 'Retained committed effect. A current committed observation is unavailable.' : 'Query authorization and signatures alone do not establish payment.'), statusCard(historical ? 'Historical receipt delivery' : 'Receipt delivery', deliverySummary(op), historical ? 'Original delivery records are retained. No further submission is available for this intent.' : 'Receipt availability is independent of the payment effect.'), statusCard(historical ? 'Current entitlement' : 'Use at observed slot', historical ? 'Not assessed by this record' : license ? active === true ? 'License active at observation' : active === false ? 'License not active at observation' : 'License unresolved' : paid(op) ? currentCommitted ? 'Merchant effect issued' : 'Merchant effect previously confirmed' : 'Not confirmed issued', historical ? 'Inspect the successor intent for its own payment and application effect.' : license ? 'Refresh to observe again. A paid license may expire without changing its payment status.' : 'The merchant effect is bound to this exact purchase.'));
   const facts = element('dl', 'facts');
-  facts.append(...summaryRows(op), fact('Intent ID', op.id, true), fact('Plan hash', op.planHash || 'Available after preparation', true), fact(historical ? 'Historical observation' : 'Current observation', op.observation ? pretty(op.observation.status) : 'Unavailable'), fact(historical ? 'Historical observed slot' : 'Observed slot', op.observation?.slot === undefined ? 'Not reported' : number(op.observation.slot)));
+  facts.append(...summaryRows(op), fact('Intent ID', op.id, true), fact('Plan hash', op.planHash || 'Available after preparation', true), fact(historical ? 'Historical observation' : 'Current observation', displayedObservation ? pretty(displayedObservation.status) : 'Unavailable'), fact(historical ? 'Historical observed slot' : 'Observed slot', displayedObservation?.slot === undefined ? 'Not reported' : number(displayedObservation.slot)));
   if (op.supersededBy) facts.append(fact('Successor intent ID', op.supersededBy, true));
   body.replaceChildren(statuses, facts);
   if (historical) {

@@ -78,7 +78,7 @@ export async function main(args = process.argv.slice(2)) {
     if (!flags.has(args[i]) || Object.hasOwn(opts, args[i]) || !args[i + 1]) throw Error('Use console --instance INSTANCE --directory NEW_OR_RETAINED_WORKSPACE [--administrator KEYFILE --owner-a KEYFILE --owner-b KEYFILE --port 4321]');
     opts[args[i]] = args[i + 1];
   }
-  if (!opts['--instance'] || !opts['--directory']) throw Error('Console requires --instance and --directory. Omit signing options for read-only access.');
+  if (!opts['--instance'] || !opts['--directory']) throw Error('Console requires --instance and --directory. Omit signing options for keyless observation and recovery.');
   const port = opts['--port'] === undefined ? 4321 : Number(opts['--port']);
   if (!Number.isInteger(port) || port < 1024 || port > 65535) throw Error('Choose an unprivileged local port (1024–65535).');
   const ownerKeyfiles = {};
@@ -87,7 +87,7 @@ export async function main(args = process.argv.slice(2)) {
   const result = await startConsole({ instancePath: resolve(opts['--instance']), directory: resolve(opts['--directory']),
     administratorKeyfile: opts['--administrator'] && resolve(opts['--administrator']), ownerKeyfiles, port, registerSignals: true });
   console.log(`CyperLink Console: ${result.url}`);
-  console.log(result.service.adapter.project.signingEnabled ? 'Local signing configured. Preparation, private queries and payments each require explicit approval.' : 'Read-only session. No signing keys configured.');
+  console.log(result.service.adapter.project.signingEnabled ? 'Local signing configured. Preparation, private queries and payments each require explicit approval.' : 'Keyless session. Observe and recover; explicit submission can use only retained signed bytes.');
   return result;
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(error => { console.error(error.message); process.exitCode = 1; });
