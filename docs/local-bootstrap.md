@@ -50,9 +50,10 @@ docker compose -f artifacts/compose.json up -d --pull never
 
 Back at the repository root, follow [customer policy authoring and deployment](custom-policy-authoring.md)
 to deploy a fresh policy and integrate generated `connectSession` bindings.
-For the retained legacy fixed-allowance demo, use the separate
-[two-consumer runner](../examples/two-consumers/README.md). Do not mix its fixed
-program identities or account layouts into a new custom-policy instance.
+The bootstrap still builds and loads the pinned fixed-allowance programs and circuits
+used by upstream runtime preparation. These are setup dependencies; the current product
+deploys isolated customer-policy programs afterward. Do not mix bootstrap identities or
+account layouts into a custom-policy instance. Old demo runners are archived in Git.
 
 For **custom policy deployment**, prepare with
 `--allow-pinned-sbf-v0-deployment` in addition to your chosen run ID/ports. This

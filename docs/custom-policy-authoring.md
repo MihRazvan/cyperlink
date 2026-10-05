@@ -172,8 +172,5 @@ Use [Console](../apps/console/README.md) for the local browser workflow. Superse
 terminal unpaid intents remain historical records linked to their separately prepared
 successors; the old intent is never credited with the successor's payment or entitlement.
 The [explicit session example](../examples/license-session/README.md) demonstrates
-application integration. The [interactive Approvals demo](../examples/approvals/README.md)
-can accept a custom instance, but its views are not a production authentication boundary.
-Use [evidence](evidence.md) for relevant qualification commands and the
-[builder exercise](builder-exercise.md) for the frozen, currently deferred external
-usability exercise. Current Console development does not change that frozen package.
+application integration. Use [evidence](evidence.md) for qualification commands and
+archived reference workflows, including the deferred frozen outside-builder exercise.

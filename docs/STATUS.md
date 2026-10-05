@@ -56,18 +56,32 @@ advances its new policy instance from quota version2/counter5 to version4/counte
 The final host regression passed 164 tests; offline review checked ten signed messages,
 16 signatures, four callbacks and both exact paid effects. See [evidence](evidence.md).
 
-The [outside-builder exercise](builder-exercise.md) is prepared and accepted by
-research, but deferred under this product priority. No participant, outreach or external
-test occurred. Console development is internal product work, not external customer
-validation. A future exercise still needs a real builder, a sealed task, an evaluator
-slot and a verified runtime handoff.
+The outside-builder exercise remains deferred and frozen at `builder-exercise-v1`;
+see [archived workflows](evidence.md#archived-workflows). No external test occurred.
 
-The accepted package is preserved at Git tag `builder-exercise-v1`, commit
-`18d8f7a`. Its exact tooling baseline is `c53caff`; use the tagged checkout for the
-frozen run, not the current Console checkout. Research-004 accepted the package;
-implementation-004 records cleanup and the historical checkout path in the authorized
-mailbox `/Users/razvan/Repos/colosseum/handoff/cyperlink/agent-mailbox/`.
-There is no background mailbox monitor or open-ended internal implementation loop.
+## Repository scope after cleanup
+
+The active tree contains Console, generated policy SDK/CLI, native proof/admission
+code, pinned bootstrap, customer-policy examples and the paid-license/session reference.
+Superseded Approvals/two-consumer demos, direct comparison client, Permissions executable
+probe and research replay/export tools are archived at `console-reference-v2` (`165ef57`).
+Evidence, original fixtures and raw local runs are preserved; relevant lock/deployment
+tests were moved alongside their maintained implementations. The cipher-domain check
+is now `tests/cipher-domains.mjs`.
+
+Dependency review found that `programs/native`, `programs/auth`, `circuits/budget` and
+the eight checked-in circuit artifacts still form the supported bootstrap. They are
+not dead code. All shared Rust crates and SDK/native codecs are still required.
+Bootstrap now owns its local network helpers independently of the removed research
+replay script. Removing the bootstrap's fixed programs would be a separate runtime
+redesign requiring new qualification, not repository housekeeping.
+
+Post-cleanup checks: 161 maintained JavaScript tests (including real compiler/package
+tests), 65 Python bootstrap tests, the cipher-domain check, and the existing Console
+archive review pass. A fresh keyless adapter connection rechecked ten loaded ELFs and
+the generated release against the running instance. Program/circuit and cryptographic
+source, dependency locks, original fixtures and evidence bytes are unchanged. No new
+payment or distributed-computation run is claimed for this structural cleanup.
 
 ## Continuation constraints
 

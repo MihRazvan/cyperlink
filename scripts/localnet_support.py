@@ -43,4 +43,3 @@ def choose_subnet(requested):
         if not any(candidate.overlaps(other) for other in occupied if other.version == 4):
             return candidate
     raise RuntimeError('Requested subnet overlaps an existing Docker network')
-

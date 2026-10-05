@@ -23,7 +23,6 @@ escrow experiment, not part of this payment path.
 - [Local setup](docs/local-bootstrap.md)
 - [Write a policy and integrate the SDK](docs/custom-policy-authoring.md)
 - [Evidence and limitations](docs/evidence.md)
-- [Preserved outside-builder exercise](docs/builder-exercise.md)
 
 With a completed local deployment and its runtime running, open an observation session:
 
@@ -50,9 +49,17 @@ onboarding and build/deploy controls are next product work. No browser wallet is
 | `crates/native-admission` | Shared native proof/account/funding validation |
 | `programs/custom-policy` | Current policy admission, settlement and consumer programs |
 | `examples/license-session` | Explicit approval and recovery application |
-| `examples/approvals` | Interactive local demo |
-| `packages/sdk`, `packages/local-client`, `programs/native` | Shared infrastructure and retained legacy profile |
-| `experiments` | Separately qualified probes, including scoped Permissions |
+| `examples/license-app`, `examples/policies` | Paid-license reference, distinct customer policies and live qualification |
+| `packages/sdk`, `packages/local-client` | Shared native provisioning, transaction journal and account observation |
+| `programs/native`, `programs/auth`, `circuits/budget` | Pinned bootstrap dependencies still required by local setup |
+
+Superseded demos, research replay and separate Permissions/direct-client experiments
+are preserved at Git tag `console-reference-v2`. Their evidence remains indexed in
+[evidence](docs/evidence.md); they are not additional supported product entrypoints.
+
+Run maintained JavaScript checks with `python3 scripts/setup_local_js.py --check --test`
+and bootstrap checks with `python3 -m unittest discover -s tests -v`. Both use the
+existing pinned environment; live qualification remains a separate explicit step.
 
 Use pinned dependencies. New ledgers, keys and raw evidence belong in ignored
 `.local/` directories. This repository does not claim production security,

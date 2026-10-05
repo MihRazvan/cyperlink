@@ -17,7 +17,7 @@ in ignored `.local/`. Public machine-readable reports remain under `evidence/`.
 | Receipt outages | [v23b summary](../evidence/2026-10-03/license-session-receipt-outage-v23b.json) | Three fresh keyless processes on an existing paid operation; six unchanged accounts and ten matching loaded ELFs. Zero new payment/computation. |
 | Direct upstream client | [v22c run](../evidence/2026-10-03/license-direct-v22c.json), [review](../evidence/2026-10-03/license-direct-v22c-offline-review.json), [corruptions](../evidence/2026-10-03/license-direct-v22c-corruptions.json) | Direct pinned web3/Anchor/Arcium client with shared CyperLink enforcement, native proof bridge and deployment. Selected matching cases passed; standalone equivalence remains inconclusive. |
 | Interactive Approvals | [compatible browser/recovery](../evidence/2026-10-02/approvals-compatible-v16-browser-recovery.json), [conflict review](../evidence/2026-10-02/approvals-conflict-v18-review.json) | Actual payments, stale approval/fresh denial and restart UI. Local owner/public views are not a production authentication boundary. |
-| Bounded Permissions probe | [escrow v3](../experiments/permissions/evidence/native-escrow-v3.json), [experiment](../experiments/permissions/README.md) | Dedicated native escrow source, explicit grant, fresh executor-only transfer, revoke/refund and negative cases. No Arcium policy; effect is an execution receipt, not a priced merchant entitlement. |
+| Bounded Permissions probe | [escrow v3](../evidence/2026-10-02/permissions-native-escrow-v3.json), [archived experiment](https://github.com/MihRazvan/cyperlink/tree/console-reference-v2/experiments/permissions) | Dedicated native escrow source, explicit grant, fresh executor-only transfer, revoke/refund and negative cases. No Arcium policy; effect is an execution receipt, not a priced merchant entitlement. |
 
 The custom-policy runs bind all four encrypted successor slots, source native state,
 consumer and release/schema/domain. The two-node runtime is real local distributed
@@ -89,16 +89,36 @@ node examples/license-session/receipt-outage.mjs --qualify \
 ```
 
 The license harness expects its documented reference policy/initial state; do not
-apply it blindly to arbitrary merchant/customer policies. The [direct client](../examples/license-direct/README.md)
-and [authoring guide](custom-policy-authoring.md) describe their respective commands.
+apply it blindly to arbitrary merchant/customer policies. The [authoring guide](custom-policy-authoring.md)
+describes current customer integration.
 Evaluator adaptations belong in separate recorded work.
 
-Original research checks remain available with
-`python3 scripts/verify_research.py --research-root /path/to/colosseum`.
-They verify pinned archived records, not current runtime execution. Historical replay
-notes are [retained at the frozen revision](https://github.com/MihRazvan/cyperlink/blob/builder-exercise-v1/docs/local-replay.md).
-The original research/fixtures are preserved read-only; current setup does not require
-that checkout as an execution input.
+## Archived workflows
+
+Git tag [console-reference-v2](https://github.com/MihRazvan/cyperlink/tree/console-reference-v2)
+preserves the complete passing Console revision before product cleanup, including
+Approvals, the fixed-allowance two-consumer demo, direct comparison client, Permissions
+probe, research replay/export/review scripts and their tests. Use that checkout for
+their exact reproduction commands; they are no longer maintained product entrypoints.
+All public evidence remains in this checkout. Moved compiler/Permissions/provenance
+JSON files retain their exact bytes; historical paths inside reports describe the
+original revision, not current locations. No raw `.local` run was deleted.
+
+To inspect a historical workflow independently:
+
+```sh
+git worktree add --detach .local/console-reference-v2 console-reference-v2
+```
+
+Choose a fresh path. This does not provision its runtime or authorize copying keys.
+The original research checkout remains read-only and is not required by current setup.
+
+The separately frozen outside-builder package remains at
+[builder-exercise-v1](https://github.com/MihRazvan/cyperlink/tree/builder-exercise-v1/docs/builder-exercise/v1),
+commit `18d8f7a`, tooling baseline `c53caff`. Package ID:
+`3df7aece340efe8409cd66526b501ad0e74f600ff24761740ad85093488eed06`.
+It is deferred; no outside-builder run or customer validation occurred. Do not mix
+current files into its frozen run or silently regenerate its manifest.
 
 ## Comparison and open claims
 

@@ -98,7 +98,7 @@ persist outside settlement. Source native prestate and quota version are checked
 again at commit. Counter-only admission drift also invalidates delayed signed queries.
 
 Legacy `local-native-ct-v0` has a different 161-byte quota and 520-byte permit. Its
-code/archives remain supported by their explicit decoders; do not reinterpret those
+bootstrap code and archive decoders remain necessary; do not reinterpret those
 accounts as custom-policy state or copy legacy fixed program identities into new apps.
 
 ## Authority and recovery

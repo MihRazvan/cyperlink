@@ -103,6 +103,11 @@ Console does not automatically repeat preparation or replace an interrupted appr
 It also does not automatically retry browser mutations after a timeout. Observe the
 inbox before deciding what to do next.
 
+A hard crash may leave `.server.lock`. Confirm the previous server and its authorized
+child work have stopped before explicitly removing only that workspace's lock file.
+Preserve `console.json`, plans and journals. Locks are never cleared automatically by
+PID age/existence; removing one is not permission to restart signing or preparation.
+
 ## Scope
 
 This is a trusted local developer tool with synthetic assets and explicit keyfile

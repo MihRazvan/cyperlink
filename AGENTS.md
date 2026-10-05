@@ -25,8 +25,9 @@ research root (`CYPERLINK_RESEARCH_ROOT`, usually `/Users/razvan/Repos/colosseum
 read-only except the user-authorized agent mailbox; consult it for specific unresolved
 questions, not as a mandatory onboarding detour. Follow that mailbox's exchange protocol.
 
-The accepted builder exercise and historical narrative docs are preserved at tag
-`builder-exercise-v1`; see `docs/builder-exercise.md`. Do not silently change its freeze.
+The accepted builder exercise is preserved at tag `builder-exercise-v1`. The passing
+Console and removed research/demo entrypoints are preserved at `console-reference-v2`;
+see `docs/evidence.md`. Do not silently change these reference tags.
 No third-party contact, real funds, public-network writes or production deployment
 is authorized. Continue reversible local work and push small reviewed slices as
 requested. Independent agents may handle bounded reviews or disjoint work when useful.

@@ -1,6 +1,6 @@
 # Repository-managed local JavaScript runtime
 
-This package replaces the original research `node_modules` dependency for the local client and two-consumer demo. Its four direct dependencies match the actually installed research versions:
+This package supplies the pinned JavaScript runtime for Console, policy tooling and the local client. Its four direct dependencies match the qualified research versions:
 
 | Package | Exact version |
 |---|---|
@@ -26,11 +26,13 @@ Node24.12.0 is the recorded research host version. npm11.6.2 is the exact instal
 Use the generated **package root**, not its `node_modules` child:
 
 ```sh
-node examples/two-consumers/run.mjs --module-root "$PWD/.local/toolchain/js" ...
 CYPERLINK_JS_MODULE_ROOT="$PWD/.local/toolchain/js" node --test packages/local-client/test/runtime.test.mjs
 ```
 
-The local provisioning commands take the same `--module-root`. `--check` performs installed verification without installing or replacing anything:
+The local provisioning commands take the same `--module-root`; deployment records it
+in the instance consumed by Console. `--check` performs installed verification without
+installing or replacing anything. `--test` runs the maintained SDK, policy CLI/client,
+local-client, Console and reference-example host suites:
 
 ```sh
 python3 scripts/setup_local_js.py --check --test
