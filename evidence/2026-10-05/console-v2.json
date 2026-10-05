@@ -1,0 +1,290 @@
+{
+  "schema": 1,
+  "passed": true,
+  "date": "2026-10-05",
+  "evidenceLevel": "real-local-validator-two-node-arcium-browser-and-keyless-http",
+  "sourceCommit": "2fc4740e4c2e0d628c2603274cbf49de83f03fdb",
+  "profile": "local-custom-policy-v1",
+  "releaseHash": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+  "genesisHash": "7t79QMPLFiBZuNbf9pyu2o7qXHR1PNvVE9J89PRV5FyA",
+  "localFeatureDeviation": {
+    "disabledDeploymentRestriction": "B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g",
+    "sbfArch": "v0"
+  },
+  "runtimeScope": "Retained local v21 ledger; fresh policy instance. Two real Arcium nodes on one host, not independent operators or public-network evidence.",
+  "archives": {
+    "browser": {
+      "path": ".local/console-browser-v2/journey.json",
+      "sha256": "3991a274d65ccb975a6bb71f3e5f310157d69b55f27455652b40cc88822fb261",
+      "bytes": 342096
+    },
+    "offlineReview": {
+      "path": ".local/console-browser-v2/offline-review.json",
+      "sha256": "b82901f913e0c1eaf0c2b65b77ced3d00ba9e7bb52770abb0ccbee9f7b37421a",
+      "bytes": 9826
+    },
+    "keylessRecovery": {
+      "path": ".local/console-recovery-v2b/recovery.json",
+      "sha256": "52090ab3951009db33e1144eca2e8f39ead3ca3f3b3c56ed1d341fa8feafb9ad",
+      "bytes": 83102
+    },
+    "visual": {
+      "path": ".local/console-visual-v2/final/result.json",
+      "sha256": "8de2c84152c2d6973ff651d4980b9936ab903249541986577f41b5ff1675b232",
+      "bytes": 1740
+    },
+    "deployment": {
+      "path": ".local/console-instance-v1/results.json",
+      "sha256": "69df31723e4419f2b660c01bac53a5e2e68b0256d22aceacb359541a676bd109",
+      "bytes": 12879356
+    },
+    "hostTests": {
+      "path": ".local/console-final-regression.log",
+      "sha256": "098ca1eb4972e1d7a6c76c109f775dd702f367847f38ea974e798db43e7ad110",
+      "bytes": 17115
+    }
+  },
+  "testObserverDisclosures": {
+    "syntheticReferencePolicy": true,
+    "initialRemaining": 40,
+    "purchaseCap": 40,
+    "amounts": [
+      50,
+      10,
+      10,
+      10
+    ],
+    "remainingInterpretation": "40 before this run and 20 after inferred from synthetic initial state and paid amounts; UI does not expose a decrypted policy balance"
+  },
+  "browser": {
+    "passed": true,
+    "counts": {
+      "plans": 4,
+      "messages": 10,
+      "ed25519Signatures": 16,
+      "callbacks": 4,
+      "queryReceipts": 4,
+      "paymentReceipts": 2,
+      "snapshots": 12,
+      "paidMerchants": 1,
+      "paidLicenses": 1,
+      "supersededUnpaidRequests": 1
+    },
+    "quota": {
+      "initialVersion": "2",
+      "finalVersion": "4",
+      "initialCounter": "5",
+      "finalCounter": "9"
+    },
+    "supersession": {
+      "oldOperation": "2ae9c204-0cea-4caa-a404-4a9e14674f18",
+      "newOperation": "a89006db-dce4-4266-b56e-8c9281fb8902",
+      "historicalStatus": "stale",
+      "oldOperationPaid": false,
+      "laterSharedEffectAttributedOnlyToFreshOperation": true
+    },
+    "paidEffects": [
+      {
+        "consumer": "merchant",
+        "signature": "5TPsjcz13AuUxeL6XJni4EhXMmNNt6J646SiHrFBSoUUPpL9uhhHUtNGGWu54dNcUjfnfeS1v2vdisurEpRBXSge",
+        "wireSha256": "878f4867694e634fef0397341f313e0fae2e9c25edff32e92a8911e8903aff2c"
+      },
+      {
+        "consumer": "license",
+        "signature": "3VzJMrYuExF7cQhdFHZ44oAiqBqPwaLC9grWpZVK63fSTxg2GASe5H7J8zj52h62tVRvsXz8sgVWg1weTiubWqps",
+        "wireSha256": "eae0231e2ac8c63f285b60e8c560bfb3fceefe08fec20ea55d36e7d308a97082"
+      }
+    ],
+    "browserErrors": []
+  },
+  "keylessRecovery": {
+    "passed": true,
+    "separateProcess": true,
+    "signerFlagsSupplied": false,
+    "stages": [
+      {
+        "label": "keyless-original-receipt",
+        "delivery": "landed",
+        "currentObservation": "committed",
+        "historicalPaid": true,
+        "canBroadcast": false
+      },
+      {
+        "label": "receipt-transport-unavailable",
+        "delivery": "observed-without-receipt",
+        "currentObservation": "committed",
+        "historicalPaid": true,
+        "canBroadcast": false
+      },
+      {
+        "label": "receipt-and-account-transport-unavailable",
+        "delivery": "observed-without-receipt",
+        "currentObservation": "unavailable",
+        "historicalPaid": true,
+        "canBroadcast": false
+      },
+      {
+        "label": "original-receipt-restored",
+        "delivery": "landed",
+        "currentObservation": "committed",
+        "historicalPaid": true,
+        "canBroadcast": false
+      }
+    ],
+    "originalSignature": "3VzJMrYuExF7cQhdFHZ44oAiqBqPwaLC9grWpZVK63fSTxg2GASe5H7J8zj52h62tVRvsXz8sgVWg1weTiubWqps",
+    "originalWireSha256": "eae0231e2ac8c63f285b60e8c560bfb3fceefe08fec20ea55d36e7d308a97082",
+    "unchangedAccounts": 6,
+    "unchangedImmutableFiles": 75,
+    "simulateOrSendRpcCalls": 0,
+    "faults": "Selective test-only HTTP503 on original receipt and getMultipleAccounts; real restored RPC receipt, no injected verified contexts"
+  },
+  "loadedPrograms": [
+    {
+      "program": "2iRgpxmW4UxAXvyMgHLC1iSkWcX7SH8ECT9C3G8tHJBh",
+      "matched": true,
+      "elfSha256": "4893cbedb7a9101e76794379233f0ac18db0c5b3adf906359d566ab63757a560",
+      "loadedElfSha256": "4893cbedb7a9101e76794379233f0ac18db0c5b3adf906359d566ab63757a560",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "3DFYhmVWsHnJHYpkALnr5WqNRU1yA8faoKPu4Bsoo9Ft",
+      "matched": true,
+      "elfSha256": "d6b25255be3f6ceb07a2be24343d93fc3b67a5e3814703d3c1769f5da5c9e210",
+      "loadedElfSha256": "d6b25255be3f6ceb07a2be24343d93fc3b67a5e3814703d3c1769f5da5c9e210",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "61Pc6HoSoFvNWB9RsspjME1WSQkgbfrkcvAFrziATE3D",
+      "matched": true,
+      "elfSha256": "d8c8c6770e0a1474da79b6396949ce5436bd8e778d007454710eb70e189e989c",
+      "loadedElfSha256": "d8c8c6770e0a1474da79b6396949ce5436bd8e778d007454710eb70e189e989c",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "matched": true,
+      "elfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "loadedElfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "7oXRtpH5TQPqcu2P7jAbyuuP1cDDKNKyAbMznWjry4pk",
+      "matched": true,
+      "elfSha256": "a2fe5e6d7e82884d7422ce90c931cafbbf876973b37dd7195af2c813770c5def",
+      "loadedElfSha256": "a2fe5e6d7e82884d7422ce90c931cafbbf876973b37dd7195af2c813770c5def",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "8N443wMVm1QA9kLQteYxEiWZNvpHm2N9Vwwnck3e7CVQ",
+      "matched": true,
+      "elfSha256": "0a8d8a071927c569d9a76c8d97081bea82f12f7377e450e60d35d669802bae43",
+      "loadedElfSha256": "0a8d8a071927c569d9a76c8d97081bea82f12f7377e450e60d35d669802bae43",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "matched": true,
+      "elfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "loadedElfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "rpcSlot": 354490
+    },
+    {
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "matched": true,
+      "elfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "loadedElfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "rpcSlot": 354489
+    },
+    {
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "matched": true,
+      "elfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "loadedElfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "rpcSlot": 354490
+    },
+    {
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "matched": true,
+      "elfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "loadedElfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "rpcSlot": 354490
+    }
+  ],
+  "costs": {
+    "categories": {
+      "query-admission": {
+        "transactions": 4,
+        "landedCU": 735602,
+        "feeLamports": 40000
+      },
+      "settlement": {
+        "transactions": 2,
+        "landedCU": 168456,
+        "feeLamports": 20000
+      },
+      "arcium-callback": {
+        "transactions": 4,
+        "landedCU": 623712,
+        "feeLamports": 20000
+      }
+    },
+    "scope": "Only four query-admission, four callback and two settlement receipts. Excludes native preparation, deployment, provisioning, rent, compilation and wall-clock MPC cost. Synthetic local lamports, not public-network pricing."
+  },
+  "hostTests": {
+    "passed": 164,
+    "failed": 0,
+    "scope": "SDK, policy client, local client, retained Approvals reference and Console"
+  },
+  "visual": {
+    "passed": true,
+    "mobileViewport": {
+      "width": 390,
+      "height": 844
+    },
+    "noHorizontalOverflow": {
+      "viewport": 390,
+      "document": 390,
+      "body": 390
+    },
+    "keylessNewPaymentDisabled": true,
+    "nonGetRequests": 0,
+    "browserErrors": [],
+    "historicalSuccessorLink": true,
+    "licenseActivityMatchesObservedExpiry": true
+  },
+  "qualificationTools": {
+    "node": "v24.12.0",
+    "playwright": "1.64.0-alpha-1790635538000 (already cached; external qualification tool, not product dependency)",
+    "browser": "local Google Chrome; product dependency pins unchanged"
+  },
+  "sourceHashes": {
+    "apps/console/adapter.mjs": "0e458f18b679bbf9bc294c1e32c9b327c834830af03d2e7955e091ddc9f3b7cf",
+    "apps/console/service.mjs": "0da1b27ed8436a5ef3a22f66d51945f46fb8b7a613b61e76b9e8b09d4473a02c",
+    "apps/console/server.mjs": "3b2c1d06d2615ddf5794bfee708a8cd1c7e0c78eda4c83df99a02c5889f868e1",
+    "apps/console/public/app.mjs": "057b9f50b648efd30683a68121b5e36b88056b3956a7e6f9d6b935f3a06cfeb8",
+    "apps/console/public/index.html": "030d49b0eb34ddfb2a1444245861dcb036a8f32f3dba6a5d33f6dbd2e19a1279",
+    "apps/console/public/style.css": "c6b64365ec0938f3fda9f4e94f42e703a16b445e8b177428dc5894b777846ac6",
+    "apps/console/qualify.mjs": "856fa686d674f765ddf4bdfccf8ca8393e5f88c7bdb9622fb58b24a8863bcf5e",
+    "apps/console/qualify-recovery.mjs": "513a31977f5db37edaaa54f18b51d47f2dd0415e6f4f9872846b22392569fa17",
+    "apps/console/test/recovery-process.mjs": "c96640243dad5f29c56df6f728c23ee16eb79801c1c0b927d6d360b8cc30c16f",
+    "apps/console/verify.mjs": "6a14d105461d9c373456beb771c8b56396e48ad24fc3dd5777f918e9c7fc3a3a",
+    "packages/local-client/src/private-store.mjs": "a7e1c81205bec355bb4d3c6af7488dabca8aa41ac9c10674d1e19de9d9ac9ab1",
+    "packages/policy-client/src/local-deployment.mjs": "e1a8dbaeae00269371d0aca4ad7dd75164f7504339be6af84fefe5ab68f25012"
+  },
+  "limitations": [
+    "Trusted local developer tool with explicit owner/admin keyfiles; no browser wallet, hosted authentication or multi-user boundary.",
+    "Requires a completed local deployment; guided provisioning/build/deploy UI and arbitrary provisioning recovery remain unfinished.",
+    "Controlled browser, keyless restart and HTTP503 cases; does not rerun the separately qualified staging/SIGKILL or native rollback suites.",
+    "Receipt/account archives are confirmed local RPC evidence, not historical consensus proofs; BLS enforced by loaded runtime, not independently reverified offline.",
+    "Native balances and policy state remain encrypted; aggregate amounts are explicitly disclosed synthetic test values.",
+    "No production security, clean-machine installation, external customer advantage, delegated permissions or public-network qualification claim."
+  ],
+  "preservedDiagnostics": [
+    ".local/console-workspace-v1/",
+    ".local/console-browser-v1/",
+    ".local/console-browser-v1b/",
+    ".local/console-browser-v1c/",
+    ".local/console-recovery-v2/",
+    ".local/console-visual-v2/"
+  ]
+}

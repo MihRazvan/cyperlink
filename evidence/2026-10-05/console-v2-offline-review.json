@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "offline-console-browser-journey-archive-review",
+  "input": {
+    "path": ".local/console-browser-v2/journey.json",
+    "sha256": "3991a274d65ccb975a6bb71f3e5f310157d69b55f27455652b40cc88822fb261",
+    "bytes": 342096
+  },
+  "genesisHash": "7t79QMPLFiBZuNbf9pyu2o7qXHR1PNvVE9J89PRV5FyA",
+  "deploymentHash": "ee6488a291260c08ba4cf00824fb724dadcbdc1572bab8640d4bc8d8fc7cdbd8",
+  "counts": {
+    "plans": 4,
+    "messages": 10,
+    "ed25519Signatures": 16,
+    "callbacks": 4,
+    "queryReceipts": 4,
+    "paymentReceipts": 2,
+    "snapshots": 12,
+    "paidMerchants": 1,
+    "paidLicenses": 1,
+    "supersededUnpaidRequests": 1
+  },
+  "callbacks": [
+    {
+      "label": "Funded policy denial",
+      "signature": "4mwytcx4jodX9FRGmFzUYcd72enohWijVw4Ua6Xib5z15fAij9orhNewKrfgWnepKJvHp9ixtxrYZoZZPKZgDGhB",
+      "job": "ArfUYpCgYw7DyiaPW27F2e7XpjkbGNSmqxDEHNCsiPE9",
+      "computation": "3c9c3kn8KcefSn53xkiuCUP1pJb5DXgQQCp39gbBvok9",
+      "allowed": false,
+      "exactNativeCommitment": true,
+      "fullJobAndPermitBinding": true,
+      "allFourCiphertextsChecked": true,
+      "counterAdvancedExactlyOnce": true,
+      "nativeAndBusinessAccountsUnchanged": true
+    },
+    {
+      "label": "Design asset purchase",
+      "signature": "FjC4zif8iq6PgSd8n4NprpByj49yw3AottyQ3fuVVKyM7hBgQgHEERPG43nqQchMQE9dd1uT3oxNicWKuuDuo6A",
+      "job": "EhmNgmaG653WPTThZCsy7UczdGUqrpSvdjQLi7v9ER5t",
+      "computation": "EjuthjyyKYxrbuam3cKKwCGoP6TibzTikLtEarvFsth6",
+      "allowed": true,
+      "exactNativeCommitment": true,
+      "fullJobAndPermitBinding": true,
+      "allFourCiphertextsChecked": true,
+      "counterAdvancedExactlyOnce": true,
+      "nativeAndBusinessAccountsUnchanged": true
+    },
+    {
+      "label": "Competing license",
+      "signature": "5nsFALaPhU6UGjUxTDGS8bKsAitcwoJQrmBgHhxNuGboYM8ML4yV79fH15mXByJN74ygsgjmozWNTQMAfvoiuPvx",
+      "job": "3Cnh6tt8sPsVBczMzkmg99xzE54qWaSbMjNm9jQePt3n",
+      "computation": "BhsvxrLkKf9TNEagMb6C8aedMfK1qfNio5Tj1dSv6mzi",
+      "allowed": true,
+      "exactNativeCommitment": true,
+      "fullJobAndPermitBinding": true,
+      "allFourCiphertextsChecked": true,
+      "counterAdvancedExactlyOnce": true,
+      "nativeAndBusinessAccountsUnchanged": true
+    },
+    {
+      "label": "Fresh license approval",
+      "signature": "34cNMwdZJHqE146irBnwwHLzLfCfqEjpkNuKToxGo2JXsYjxkE3Gbt6vVVZQg2GUePUJYXqqiW95bvvzckLKb4qm",
+      "job": "3Ni25zNSQzouFkrfZSzArgMJSxFcSLWre2Rd6Genrq5H",
+      "computation": "FVjtqkC6LYxfgsYc6rpDL2D8acbz88Utjtv9WcJp44Ra",
+      "allowed": true,
+      "exactNativeCommitment": true,
+      "fullJobAndPermitBinding": true,
+      "allFourCiphertextsChecked": true,
+      "counterAdvancedExactlyOnce": true,
+      "nativeAndBusinessAccountsUnchanged": true
+    }
+  ],
+  "signedOperations": [
+    {
+      "label": "Funded policy denial",
+      "role": "query",
+      "signature": "3P9ANgcApH1QLBcdCzDToTAreWQgcTXdPTqdQGiMZ2fPLjdiq4WbpqZ7WGWNP3BBKDvqiyE4iPNUoWqwd2Fewaxi",
+      "wireSha256": "cef96fad36f92cacdfdd845976d65e2b91727269d6067e95d8498dda5461f54b",
+      "instructionSha256": "4c168ced306a5a1070b88c28c9d379095eb204e5b09f19bd752b7dc4c068dc62",
+      "signers": [
+        "BGRt7CbD31V8osozqzTkGhjB2VBQ3VRbNoas9kbEaZUx",
+        "BwVtXFoQPwUx5YNw95EyQ9HBqY7LLZcweo9irGa9KnXj"
+      ]
+    },
+    {
+      "label": "Design asset purchase",
+      "role": "query",
+      "signature": "5WtHSuyZptBwsp8N9zWQYmY66bMeFk5dGaFR3f4ZWGeNCEPM9ateqyLdShSY9C6bxB8uNFgcaDLbCgwXnh71sqw4",
+      "wireSha256": "6611713ee8ada361f43255eb7c9aee8a705fbe7b8996260a63c798438e9c3bfd",
+      "instructionSha256": "823cc9d41b5041e604f09b73473f21085bdc7700eb0d957e7056f8056f179d1f",
+      "signers": [
+        "BGRt7CbD31V8osozqzTkGhjB2VBQ3VRbNoas9kbEaZUx",
+        "BwVtXFoQPwUx5YNw95EyQ9HBqY7LLZcweo9irGa9KnXj"
+      ]
+    },
+    {
+      "label": "Competing license",
+      "role": "query",
+      "signature": "5zCvDarSQZNATf8mDMYMnWkwcD7FxwCiMxizxTJZFMGcGyAebBkJXQhzugCJdXJGMK5qDFieEmtN9YGjgw5VEUzJ",
+      "wireSha256": "c4a08c1635f0ea2051ee57dd6b70010922e14b8e32b56cf87167bc121b3311ae",
+      "instructionSha256": "6ba79921619a9ea2d3c94440f5091ca67314dae93735bc946d88b4964a44ee26",
+      "signers": [
+        "6RwRFnntkGepoEbjqyPiSjHaamJLvKb4ewthVt1VHxTG",
+        "BwVtXFoQPwUx5YNw95EyQ9HBqY7LLZcweo9irGa9KnXj"
+      ]
+    },
+    {
+      "label": "Fresh license approval",
+      "role": "query",
+      "signature": "66xc7kNmsuYyVVLz4AACFwYtAju3UHTzBuRYzKP2ff5pYbN72hQsd6fHgPRRqzwD9Zh7v166FNb7AfAekYzEGutg",
+      "wireSha256": "79c866dcaa2f78f2a24eca943aa52a01eafee6f5c9c43b845ffa74773ac6ebc6",
+      "instructionSha256": "061c12f6f16702cfff76fe10ffa8a80ceca5ba311d45d193a7ed4824964be795",
+      "signers": [
+        "6RwRFnntkGepoEbjqyPiSjHaamJLvKb4ewthVt1VHxTG",
+        "BwVtXFoQPwUx5YNw95EyQ9HBqY7LLZcweo9irGa9KnXj"
+      ]
+    },
+    {
+      "label": "Design asset purchase",
+      "role": "commit",
+      "signature": "5TPsjcz13AuUxeL6XJni4EhXMmNNt6J646SiHrFBSoUUPpL9uhhHUtNGGWu54dNcUjfnfeS1v2vdisurEpRBXSge",
+      "wireSha256": "878f4867694e634fef0397341f313e0fae2e9c25edff32e92a8911e8903aff2c",
+      "instructionSha256": "569ff6378051b171c8bee7205e015f43c3f5fd5db2361a072beadad584359c2d",
+      "signers": [
+        "BGRt7CbD31V8osozqzTkGhjB2VBQ3VRbNoas9kbEaZUx",
+        "BwVtXFoQPwUx5YNw95EyQ9HBqY7LLZcweo9irGa9KnXj"
+      ]
+    },
+    {
+      "label": "Fresh license approval",
+      "role": "commit",
+      "signature": "3VzJMrYuExF7cQhdFHZ44oAiqBqPwaLC9grWpZVK63fSTxg2GASe5H7J8zj52h62tVRvsXz8sgVWg1weTiubWqps",
+      "wireSha256": "eae0231e2ac8c63f285b60e8c560bfb3fceefe08fec20ea55d36e7d308a97082",
+      "instructionSha256": "4e0aad57a54854e20e13e7c58098b2e76abaa2c84d04e7aac0084896ae20950a",
+      "signers": [
+        "6RwRFnntkGepoEbjqyPiSjHaamJLvKb4ewthVt1VHxTG",
+        "BwVtXFoQPwUx5YNw95EyQ9HBqY7LLZcweo9irGa9KnXj"
+      ]
+    }
+  ],
+  "payments": [
+    {
+      "label": "Design asset purchase",
+      "consumerKind": "merchant",
+      "signature": "5TPsjcz13AuUxeL6XJni4EhXMmNNt6J646SiHrFBSoUUPpL9uhhHUtNGGWu54dNcUjfnfeS1v2vdisurEpRBXSge",
+      "exactBuyerAndConsumerTerms": true,
+      "nativeSourceAndDestinationChanged": true,
+      "completeQuotaSuccessorAndConsumedPermit": true,
+      "beforeVersion": "2",
+      "afterVersion": "3"
+    },
+    {
+      "label": "Fresh license approval",
+      "consumerKind": "license",
+      "signature": "3VzJMrYuExF7cQhdFHZ44oAiqBqPwaLC9grWpZVK63fSTxg2GASe5H7J8zj52h62tVRvsXz8sgVWg1weTiubWqps",
+      "exactBuyerAndConsumerTerms": true,
+      "nativeSourceAndDestinationChanged": true,
+      "completeQuotaSuccessorAndConsumedPermit": true,
+      "beforeVersion": "3",
+      "afterVersion": "4"
+    }
+  ],
+  "supersession": {
+    "oldOperation": "2ae9c204-0cea-4caa-a404-4a9e14674f18",
+    "newOperation": "a89006db-dce4-4266-b56e-8c9281fb8902",
+    "historicalStatus": "stale",
+    "oldOperationPaid": false,
+    "laterSharedEffectAttributedOnlyToFreshOperation": true
+  },
+  "recovery": {
+    "signature": "3VzJMrYuExF7cQhdFHZ44oAiqBqPwaLC9grWpZVK63fSTxg2GASe5H7J8zj52h62tVRvsXz8sgVWg1weTiubWqps",
+    "wireSha256": "eae0231e2ac8c63f285b60e8c560bfb3fceefe08fec20ea55d36e7d308a97082",
+    "retainedIdentityAcrossObservedRecovery": true
+  },
+  "quota": {
+    "initialVersion": "2",
+    "finalVersion": "4",
+    "initialCounter": "5",
+    "finalCounter": "9"
+  },
+  "sourceHashes": {
+    "apps/console/qualify.mjs": "856fa686d674f765ddf4bdfccf8ca8393e5f88c7bdb9622fb58b24a8863bcf5e",
+    "apps/console/verify.mjs": "6a14d105461d9c373456beb771c8b56396e48ad24fc3dd5777f918e9c7fc3a3a",
+    "apps/console/adapter.mjs": "0e458f18b679bbf9bc294c1e32c9b327c834830af03d2e7955e091ddc9f3b7cf",
+    "apps/console/service.mjs": "0da1b27ed8436a5ef3a22f66d51945f46fb8b7a613b61e76b9e8b09d4473a02c",
+    "apps/console/server.mjs": "3b2c1d06d2615ddf5794bfee708a8cd1c7e0c78eda4c83df99a02c5889f868e1",
+    "apps/console/public/app.mjs": "057b9f50b648efd30683a68121b5e36b88056b3956a7e6f9d6b935f3a06cfeb8",
+    "packages/policy-client/src/policy-session.mjs": "105c5b3207620dbb26b6ff907d7ed91dcf9248cc8e6dcf4d0221294c9fd6164c",
+    "packages/policy-client/src/operation-plan.mjs": "51859188682ceecf647257bb33bd0de95b1632d536ef518688fd646a2aed71ea",
+    "packages/policy-client/src/operation-ticket.mjs": "2be0ff0ede5bc2804aaebaad8e7d69f2d35398987f6ebd82466f6aaa7dd4148a",
+    "packages/policy-client/src/sdk.mjs": "b142a1789c819e59fc151a05e7f1f0385b807c0bdbb1b65ae333bc7a6f9db76b",
+    "examples/policies/qualification/archive.mjs": "2393678a63cf7c313106d0525f86d82d5e199679c579f5382eab970a22f49956"
+  },
+  "limitations": [
+    "Offline verification of retained confirmed local RPC receipts/account snapshots and browser-runner observations; no network calls, keys, decryption or new execution.",
+    "Ed25519 signatures and exact query/commit instructions are checked. RPC account bytes, receipt metadata and ALT resolution remain trusted archive evidence, not historical consensus proofs.",
+    "Callback identity, runtime predecessor and resulting state are checked; no independent BLS verification or independent-operator claim.",
+    "Requested plaintext amounts and private policy outcomes are runner disclosures. This review binds the native amount commitment across plan and callback without decrypting live balances or policy state.",
+    "Supersession is explicit Console history corroborated by stale quota and unissued shared-effect snapshots; no final old-permit snapshot or proof of absence of unarchived transactions is invented.",
+    "Recovery preserves archived signature/wire identity; this journey does not inject network outages or process crashes.",
+    "This review does not independently rerun loaded-ELF or circuit-upload verification. Source hashes identify files at review time, not an attestation of browser execution bytes."
+  ]
+}
