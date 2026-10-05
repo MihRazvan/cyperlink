@@ -10,6 +10,7 @@ in ignored `.local/`. Public machine-readable reports remain under `evidence/`.
 
 | Capability | Evidence | Boundary |
 | --- | --- | --- |
+| CyperLink Console | [browser/recovery summary](../evidence/2026-10-05/console-v2.json), [offline review](../evidence/2026-10-05/console-v2-offline-review.json) | Real browser → generated SDK → four Arcium callbacks → paid merchant and license. Explicit stale supersession, separate-process keyless recovery across selective HTTP503 faults and actual original-receipt restoration. Local keyfiles, existing completed deployment, no browser-wallet or production claim. |
 | Original customer policies | [v20b run](../evidence/2026-10-02/custom-policies-v20b.json), [offline review](../evidence/2026-10-02/custom-policy-v20b-offline-review.json) | Budget/count and private reserve: real runtime keys/callbacks, native settlement, isolation, native binding, stale/replay/rollback and exact recovery. Internal authoring, not customer adoption. |
 | Paid-license reference | [v21b run](../evidence/2026-10-03/license-app-v21b.json), [review](../evidence/2026-10-03/license-app-v21b-offline-review.json), [corruptions](../evidence/2026-10-03/license-app-v21b-corruption-checks.json) | Five authentic decisions, two paid licenses, three landed rejection cases, exact recovery. Integration involved source assistance and an application journal fix. |
 | Explicit sessions/crash window | [v22b run](../evidence/2026-10-03/license-session-v22b.json), [review](../evidence/2026-10-03/license-session-v22b-offline-review.json), [corruptions](../evidence/2026-10-03/license-session-v22b-corruptions.json) | Query and payment each survive SIGKILL after signed-wire persistence and after simulation/before ticket save. A fifth crash before signed publication refuses restaging. Two actual paid licenses. |
@@ -30,15 +31,36 @@ Host fixtures, signed simulations, landed rejection transactions and live callba
 must stay separately identified. Ten matching ELFs in a run do not qualify later
 source changes without a new actual loaded-byte check.
 
-## Recovery limitation
+## Recovery evidence and limits
 
 In v23b, receipt HTTP503 still allowed a committed bound account observation. Combined
 receipt/status/account outage yielded unresolved. Restored RPC returned null because
 history was pruned: delivery remained expired-unresolved while the paid effect stayed
-committed. No cached receipt was injected as live. Exact receipt restoration remains
-host-tested only until a useful fresh payment captures it before pruning. The license
+committed. No cached receipt was injected as live. The later Console v2 run captured
+actual original-receipt restoration on a fresh useful payment before pruning; this
+does not change the historical v23b result. The license
 in that run is now expired (`licenseActive: false`); historical payment does not renew
 access or authorize another charge.
+
+Console v2 used a separate process with no signer flags. Receipt HTTP503 yielded
+`observed-without-receipt` with a committed effect; adding account HTTP503 left current
+observation unavailable while preserving the historical paid fact. Restored RPC returned
+the same landed signature and wire hash. All six tracked accounts and 75 immutable
+signed/attempt/simulation files were unchanged, with no simulate/send RPC calls.
+This is controlled local fault coverage, not arbitrary crash/provisioning recovery.
+
+The Console browser archive has four policy decisions and two paid effects on the
+retained local ledger. Its offline verifier checks exact owner/admin messages, native
+amount commitment in callback output, nonce advancement without query payment, full
+encrypted settlement successor and exact merchant/license terms. It does not separately
+verify BLS or historical consensus. Startup matched ten actual loaded ELF files; no
+program or circuit source changed for Console. The report separates query, callback
+and settlement costs and excludes native preparation/deployment costs.
+
+Failed Console harness runs remain under `.local/`: early hidden-element selectors,
+an exposed superseded-history issue subsequently fixed, an unrecognized generic fault
+that correctly propagated instead of being treated as HTTP503, and an incorrect visual
+test assumption that a still-active license had expired. None is counted as a pass.
 
 The first v23 harness failed because its read-only RPC allowlist omitted blockhash
 queries. Corrected v23b permits those reads and records pruning honestly. Other failed

@@ -72,6 +72,30 @@ and evidence. Failed/partial output is not a ready instance. Preserve it; arbitr
 deployment/provisioning crash recovery, in-place upgrades and state migration are
 unsupported. Another policy needs a fresh deployment/output/key domain and mint.
 
+## Open the local Console
+
+After deployment completes and while the local validator/Arcium runtime is running,
+connect the generated instance to a separate retained workspace:
+
+```sh
+node packages/policy-cli/cyperlink.mjs console \
+  --instance .local/my-instance/instance.json \
+  --directory .local/my-console
+```
+
+Open `http://127.0.0.1:4321`. This starts without signing keys. Follow the
+[Console guide](../apps/console/README.md) to configure the matching source-owner and
+administrator keyfiles explicitly. Native preparation, the private query and payment
+each require their own review/approval; Console does not infer approval from a payer
+key or automatically recompute a denied/stale intent.
+
+Console provides the project overview, payment inbox, policy/runtime identity and
+recovery interface over the generated session API below. Account decryption keys stay
+in the local proof client. It requires an existing completed custom-policy deployment;
+browser-wallet integration and author/test/build/deploy UI are not implemented. Preserve
+the same Console directory across restart and keyless recovery, outside the deployment
+archive. A new workspace is not a retry mechanism for an unresolved purchase.
+
 ## Integrate the generated session API
 
 Import **your** generated bindings. Paths below are relative to the application file;
@@ -144,8 +168,12 @@ including explicit submit. Malformed evidence, wrong ledger, signature/ALT misma
 regressing snapshots or partial paid effects remain hard failures. Genesis/ALT access
 still needs RPC; this is not general offline recovery.
 
+Use [Console](../apps/console/README.md) for the local browser workflow. Superseded
+terminal unpaid intents remain historical records linked to their separately prepared
+successors; the old intent is never credited with the successor's payment or entitlement.
 The [explicit session example](../examples/license-session/README.md) demonstrates
-application usage. The [interactive Approvals demo](../examples/approvals/README.md)
+application integration. The [interactive Approvals demo](../examples/approvals/README.md)
 can accept a custom instance, but its views are not a production authentication boundary.
 Use [evidence](evidence.md) for relevant qualification commands and the
-[builder exercise](builder-exercise.md) for a frozen external usability test.
+[builder exercise](builder-exercise.md) for the frozen, currently deferred external
+usability exercise. Current Console development does not change that frozen package.

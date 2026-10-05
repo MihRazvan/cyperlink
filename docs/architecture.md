@@ -2,8 +2,9 @@
 
 CyperLink connects native Solana confidential payments to customer-authored private
 rules and shared state. The current offering is human-approved spending through
-generated SDK sessions. Bounded permissions for applications/agents remain a separate
-escrow experiment; owner-signed retries are not delegated execution.
+generated SDK sessions and the local CyperLink Console. Bounded permissions for
+applications/agents remain a separate escrow experiment; owner-signed retries are not
+delegated execution.
 
 ## Operation
 
@@ -25,6 +26,40 @@ Fresh computation needs fresh owner/admin consent, a new Job/permit and a nonrec
 MXE-domain nonce. A valid query may disclose one allow/deny result even if later
 abandoned. Administrator co-signing is a deliberate disclosure boundary, not an
 unlimited preview endpoint. There is no automatic threshold search or silent renewal.
+
+## Local Console application
+
+[Console](../apps/console/README.md) is a browser workspace over the public generated
+`PolicySession` API. Its local adapter connects one completed custom-policy instance,
+validates release/binding/artifact identity and compares actual loaded program ELFs
+with the retained build. It does not build/deploy policies or accept a partial instance
+as ready. Those onboarding workflows remain CLI operations.
+
+The server binds to `127.0.0.1`, checks its exact host/origin, and serves a local session
+cookie. Signing uses explicitly selected local owner/admin keyfiles, not a browser
+wallet or an inferred deployment payer. Decryption keys remain in the local proof
+client; the browser receives sanitized project and operation projections, not keyfiles
+or their paths. This is a trusted local developer boundary, not production multi-user
+authentication. The entered amount and consumer intent are visible to the local UI.
+
+A private workspace retains request identity before preparation and approval intent
+before signing. It is bound to the release/deployment/ledger and has a single-process
+lock. Startup never resumes signing automatically. Browser polling observes accounts
+and may update local metadata; it cannot prepare, approve, discover a ticket or submit
+a transaction. Every signing or original-wire submission requires its own explicit
+action, with availability checked on the server against the retained plan.
+
+Console retains a confirmed payment fact separately from the latest observation, so
+an account outage cannot turn a known paid intent into a new charge. A separately
+approved fresh request may supersede a terminal unpaid request for the same source
+and merchant SKU/license product. The predecessor's observation becomes historical;
+it has no further actions or current entitlement claims. The successor has its own
+plan, approvals and observation. This is application bookkeeping, not a relaxation
+of SDK observation or a way to attribute a successor's effect to the old plan.
+
+Console currently retains at most 500 intents per workspace. Duplicate-purchase checks
+are local to that workspace; it is not a global purchase registry or a replacement for
+preserving original operation and approval records.
 
 ## Current deployment profile
 
