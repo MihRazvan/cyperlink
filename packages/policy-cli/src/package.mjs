@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash, randomUUID } from 'node:crypto';
-import { readFile, writeFile, mkdir, cp, rename, readdir, realpath } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, cp, rename, readdir, realpath, open } from 'node:fs/promises';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
@@ -51,31 +51,85 @@ async function stageCompiler(directory){
  lock += '\n[[package]]\nname = "cyperlink-customer-build"\nversion = "0.1.0"\ndependencies = [\n "cyperlink-policy-authoring",\n]\n';await writeFile(join(work,'Cargo.lock'),lock);
  return{directory,manifest,source,work};
 }
-export async function testPackage(directory){const staged=await stageCompiler(directory);const log=join(staged.work,'test.log');await command(join(process.env.HOME,'.cargo/bin/cargo'),['run','--locked','--offline','--manifest-path',join(staged.work,'Cargo.toml'),'--','test',join(staged.directory,'tests.json')],{env:{CARGO_TARGET_DIR:join(ROOT,'.local/policy-package-target')},log});return{passed:true,evidence:'host-IR-only-not-distributed',log};}
+// Publish complete files and directory entries before switching the release pointer.
+// Failed work and temporary files remain diagnostic artifacts; no on-chain action occurs.
+async function syncDirectory(directory){const fd=await open(directory,'r');try{await fd.sync();}finally{await fd.close();}}
+async function atomicWrite(path,bytes){
+ const temporary=path+'.pending-'+randomUUID();const fd=await open(temporary,'wx',0o600);
+ try{await fd.writeFile(bytes);await fd.sync();}finally{await fd.close();}
+ await rename(temporary,path);await syncDirectory(dirname(path));
+}
+async function runStagedTests(staged){
+ const vectors=await readFile(join(staged.directory,'tests.json'));
+ const snapshot=join(staged.work,'tests.json');await writeFile(snapshot,vectors,{flag:'wx',mode:0o600});
+ const log=join(staged.work,'test.log');
+ await command(join(process.env.HOME,'.cargo/bin/cargo'),['run','--locked','--offline','--manifest-path',join(staged.work,'Cargo.toml'),'--','test',snapshot],{env:{CARGO_TARGET_DIR:join(ROOT,'.local/policy-package-target')},log});
+ return{testsSha256:sha(vectors),logSha256:sha(await readFile(log)),log};
+}
+export async function testPackage(directory){const staged=await stageCompiler(directory);const result=await runStagedTests(staged);return{passed:true,evidence:'host-IR-only-not-distributed',...result};}
 export async function buildPackage(directory){
  const platformBefore=await platformSources();
  const staged=await stageCompiler(directory),circuits=join(staged.work,'circuits');await mkdir(circuits);
+ const tested=await runStagedTests(staged);
  const started=Date.now();await command(join(process.env.HOME,'.cargo/bin/cargo'),['run','--locked','--offline','--manifest-path',join(staged.work,'Cargo.toml'),'--','build',circuits],{env:{CARGO_TARGET_DIR:join(ROOT,'.local/policy-package-target')},log:join(staged.work,'build.log')});
  assert.deepEqual(await platformSources(),platformBefore,'Platform changed while compiling; preserve work and rebuild');
+ assert.equal(sha(await readFile(join(staged.directory,'policy.rs'))),sha(staged.source),'Source changed while building; preserve work and rebuild');
+ assert.deepEqual(validateManifest(await json(join(staged.directory,'policy.json'))),staged.manifest,'Manifest changed while building; rebuild');
+ assert.equal(sha(await readFile(join(staged.directory,'tests.json'))),tested.testsSha256,'Tests changed while building; rebuild');
  const artifacts={};for(const stem of['runtime_policy_init','runtime_policy_evaluate'])for(const suffix of['arcis','idarc','hash','weight']){const file=`${stem}.${suffix}`,bytes=await readFile(join(circuits,file));artifacts[file]={sha256:sha(bytes),bytes:bytes.length};}
  const body={schema:1,package:staged.manifest,sourceSha256:sha(staged.source),schemaHashHex:schemaDigest(staged.manifest.stateFields),platformSources:platformBefore,artifacts};
  const releaseHashHex=sha(canonical(body)),release={...body,releaseHashHex};
- const target=join(staged.directory,'.cyperlink/releases',releaseHashHex);await mkdir(dirname(target),{recursive:true});let reused=false;try{await rename(staged.work,target);}catch(error){if(!['EEXIST','ENOTEMPTY'].includes(error.code))throw error;assert.deepEqual(await json(join(target,'release.json')),release,'Existing release is corrupt');for(const[name,record]of Object.entries(artifacts))assert.equal(sha(await readFile(join(target,'circuits',name))),record.sha256);reused=true;}
- if(!reused)await freshJson(join(target,'release.json'),release);await writeFile(join(staged.directory,'.cyperlink/current.json'),JSON.stringify({releaseHashHex},null,2)+'\n');
+ const qualification={schema:1,releaseHashHex,sourceSha256:release.sourceSha256,testsSha256:tested.testsSha256,logSha256:tested.logSha256,evidence:'host-IR-only-not-distributed',passed:true};
+ const qualificationHashHex=sha(canonical(qualification));
+ // The release manifest must exist before this directory becomes visible under its hash.
+ await freshJson(join(staged.work,'release.json'),release);
+ const target=join(staged.directory,'.cyperlink/releases',releaseHashHex);await mkdir(dirname(target),{recursive:true});
+ try{await rename(staged.work,target);}catch(error){if(!['EEXIST','ENOTEMPTY'].includes(error.code))throw error;assert.deepEqual(await json(join(target,'release.json')),release,'Existing release is corrupt; preserve it for diagnosis');for(const[name,record]of Object.entries(artifacts))assert.equal(sha(await readFile(join(target,'circuits',name))),record.sha256);}
+ await syncDirectory(dirname(target));
+ const qualifications=join(staged.directory,'.cyperlink/qualifications');await mkdir(qualifications,{recursive:true});
+ const qualifiedDirectory=join(qualifications,qualificationHashHex),pending=join(qualifications,'.pending-'+randomUUID());await mkdir(pending,{mode:0o700});
+ await freshJson(join(pending,'qualification.json'),qualification);
+ // A reused release retains its first log; this qualification retains the exact new run.
+ const workExists=await realpath(staged.work).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+ await cp(join(workExists??target,'test.log'),join(pending,'test.log'));
+ await cp(join(workExists??target,'tests.json'),join(pending,'tests.json'));
+ try{await rename(pending,qualifiedDirectory);}catch(error){if(!['EEXIST','ENOTEMPTY'].includes(error.code))throw error;assert.deepEqual(await json(join(qualifiedDirectory,'qualification.json')),qualification);}
+ await syncDirectory(qualifications);
  await generateBindings(staged.directory,release);
- return{releaseHashHex,schemaHashHex:body.schemaHashHex,releaseDirectory:target,compilationMs:Date.now()-started,evidence:'compiled-artifacts-not-runtime'};
+ await atomicWrite(join(staged.directory,'.cyperlink/current.json'),JSON.stringify({releaseHashHex,qualificationHashHex},null,2)+'\n');
+ return{releaseHashHex,schemaHashHex:body.schemaHashHex,releaseDirectory:target,qualificationHashHex,compilationMs:Date.now()-started,evidence:'compiled-artifacts-not-runtime',tests:'host-IR-only-not-distributed'};
 }
-export async function readRelease(directory,{checkPlatform=true}={}){
+export async function repairPackage(directory){
+ const {release,releaseDirectory,qualification}=await readRelease(directory);
+ await generateBindings(resolve(directory),release);
+ return{releaseHashHex:release.releaseHashHex,releaseDirectory,repaired:'generated-bindings',tests:qualification?'host-IR-only-not-distributed':'unqualified-legacy-release',transactions:0};
+}
+export async function readRelease(directory,{checkPlatform=true,requireTests=false}={}){
  directory=resolve(directory);const current=await json(join(directory,'.cyperlink/current.json'));assert(/^[a-f0-9]{64}$/.test(current.releaseHashHex));
  const releaseDirectory=join(directory,'.cyperlink/releases',current.releaseHashHex),release=await json(join(releaseDirectory,'release.json'));const{releaseHashHex,...body}=release;
  assert.equal(releaseHashHex,current.releaseHashHex);assert.equal(sha(canonical(body)),releaseHashHex,'Release manifest was altered');validateManifest(release.package);assert.equal(schemaDigest(release.package.stateFields),release.schemaHashHex);
  assert.equal(sha(await readFile(join(directory,'policy.rs'))),release.sourceSha256,'Source changed; build a fresh release');assert.deepEqual(await json(join(directory,'policy.json')),release.package,'Package manifest changed; rebuild');
  if(checkPlatform)assert.deepEqual(await platformSources(),release.platformSources,'Platform source changed; rebuild before deployment');
  for(const [name,record]of Object.entries(release.artifacts)){assert(/^runtime_policy_(init|evaluate)\.(arcis|idarc|hash|weight)$/.test(name));const bytes=await readFile(join(releaseDirectory,'circuits',name));assert.equal(sha(bytes),record.sha256,'Artifact bytes changed');assert.equal(bytes.length,record.bytes);}
- assert.equal(Object.keys(release.artifacts).length,8);return{release,releaseDirectory};
+ assert.equal(Object.keys(release.artifacts).length,8);
+ let qualification;
+ if(current.qualificationHashHex){
+  assert(/^[a-f0-9]{64}$/.test(current.qualificationHashHex),'Malformed test qualification identity');
+  const qualifiedDirectory=join(directory,'.cyperlink/qualifications',current.qualificationHashHex);
+  qualification=await json(join(qualifiedDirectory,'qualification.json'));
+  assert.equal(sha(canonical(qualification)),current.qualificationHashHex,'Test qualification was altered');
+  assert.deepEqual(Object.keys(qualification).sort(),['schema','releaseHashHex','sourceSha256','testsSha256','logSha256','evidence','passed'].sort());
+  assert.equal(qualification.schema,1);assert.equal(qualification.passed,true);assert.equal(qualification.evidence,'host-IR-only-not-distributed');
+  assert.equal(qualification.releaseHashHex,releaseHashHex,'Tests belong to another release');assert.equal(qualification.sourceSha256,release.sourceSha256);
+  assert.equal(sha(await readFile(join(qualifiedDirectory,'test.log'))),qualification.logSha256,'Retained test log changed');
+  assert.equal(sha(await readFile(join(qualifiedDirectory,'tests.json'))),qualification.testsSha256,'Retained test vectors changed');
+  assert.equal(sha(await readFile(join(directory,'tests.json'))),qualification.testsSha256,'Tests changed; rebuild to qualify this release');
+ }
+ if(requireTests)assert(qualification,'Release has no bound host tests; run policy build before new deployment');
+ return{release,releaseDirectory,qualification};
 }
 async function generateBindings(directory,release){
  const dest=join(directory,'.cyperlink'),module=join(ROOT,'packages/policy-client/src/index.mjs');
- await writeFile(join(dest,'bindings.mjs'),`// Generated local bindings. Package identity excludes this machine-specific import path.\nimport { PolicyOperationClient, PolicySession } from ${JSON.stringify(module)};\nexport const releaseHashHex=${JSON.stringify(release.releaseHashHex)};\nexport const stateFields=${JSON.stringify(release.package.stateFields)};\nexport async function connect(options){if(options.deployment.releaseHashHex!==releaseHashHex)throw Error('Selected deployment belongs to a different policy release');return PolicyOperationClient.connect(options);}\nexport async function connectSession(options){if(options.deployment.releaseHashHex!==releaseHashHex)throw Error('Selected deployment belongs to a different policy release');return PolicySession.connect(options);}\n`);
- await writeFile(join(dest,'bindings.d.mts'),`// Generated policy-specific private initializer shape. Values stay client-side.\nexport interface PrivateInitialState {\n${release.package.stateFields.map(f=>`  ${f.name}: bigint;`).join('\n')}\n}\nexport declare const releaseHashHex: string;\nexport declare const stateFields: readonly {name:string,type:'u64'}[];\nexport declare function connect(options: Parameters<typeof import(${JSON.stringify(module)}).PolicyOperationClient.connect>[0]): ReturnType<typeof import(${JSON.stringify(module)}).PolicyOperationClient.connect>;\nexport declare function connectSession(options: Parameters<typeof import(${JSON.stringify(module)}).PolicySession.connect>[0]): ReturnType<typeof import(${JSON.stringify(module)}).PolicySession.connect>;\n`);
+ await atomicWrite(join(dest,'bindings.mjs'),`// Generated local bindings. Package identity excludes this machine-specific import path.\nimport { PolicyOperationClient, PolicySession } from ${JSON.stringify(module)};\nexport const releaseHashHex=${JSON.stringify(release.releaseHashHex)};\nexport const stateFields=${JSON.stringify(release.package.stateFields)};\nexport async function connect(options){if(options.deployment.releaseHashHex!==releaseHashHex)throw Error('Selected deployment belongs to a different policy release');return PolicyOperationClient.connect(options);}\nexport async function connectSession(options){if(options.deployment.releaseHashHex!==releaseHashHex)throw Error('Selected deployment belongs to a different policy release');return PolicySession.connect(options);}\n`);
+ await atomicWrite(join(dest,'bindings.d.mts'),`// Generated policy-specific private initializer shape. Values stay client-side.\nexport interface PrivateInitialState {\n${release.package.stateFields.map(f=>`  ${f.name}: bigint;`).join('\n')}\n}\nexport declare const releaseHashHex: string;\nexport declare const stateFields: readonly {name:string,type:'u64'}[];\nexport declare function connect(options: Parameters<typeof import(${JSON.stringify(module)}).PolicyOperationClient.connect>[0]): ReturnType<typeof import(${JSON.stringify(module)}).PolicyOperationClient.connect>;\nexport declare function connectSession(options: Parameters<typeof import(${JSON.stringify(module)}).PolicySession.connect>[0]): ReturnType<typeof import(${JSON.stringify(module)}).PolicySession.connect>;\n`);
 }

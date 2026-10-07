@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, writeFile, cp, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile, cp, rm, rename, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import {
   ROOT, PROFILE, CIPHER, canonical, sha, schemaDigest, defaultManifest,
   validateManifest, initPackage, testPackage, buildPackage, readRelease,
-  command,
+  command, repairPackage,
 } from '../src/package.mjs';
 
 test('manifest schema rejects unsupported private inputs, outputs, authority and malformed fields', () => {
@@ -62,10 +62,61 @@ test('real package compiler, generated bindings, copied-directory identity and t
     const original = await readRelease(app, { checkPlatform: false });
     assert.equal(original.release.releaseHashHex, built.releaseHashHex);
     assert.equal(Object.keys(original.release.artifacts).length, 8);
+    const qualified = await readRelease(app, { checkPlatform: false, requireTests: true });
+    assert.equal(qualified.qualification.passed, true);
+    assert.equal(qualified.qualification.releaseHashHex, built.releaseHashHex);
+    const currentPath = join(app, '.cyperlink/current.json');
+    const qualifiedCurrent = await readFile(currentPath);
+    const testsPath = join(app, 'tests.json'), tests = await readFile(testsPath);
+    await writeFile(testsPath, '[]');
+    await assert.rejects(readRelease(app, { checkPlatform: false, requireTests: true }), /Tests changed/);
+    await assert.rejects(buildPackage(app), /failed/);
+    assert.deepEqual(await readFile(currentPath), qualifiedCurrent, 'failed host tests must never publish a new current release');
+    await writeFile(testsPath, tests);
+    // Legacy release identity remains readable; only NEW deployments require tests.
+    await writeFile(currentPath, JSON.stringify({ releaseHashHex: built.releaseHashHex }));
+    assert.equal((await readRelease(app, { checkPlatform: false })).qualification, undefined);
+    await assert.rejects(readRelease(app, { checkPlatform: false, requireTests: true }), /no bound host tests/);
+    const environment = join(temporary, 'preparation.json');
+    await writeFile(environment, JSON.stringify({ profile: 'provisioned161', rpc: 'http://127.0.0.1:8899' }));
+    const { deployPackage } = await import('../src/deploy.mjs');
+    await assert.rejects(deployPackage(app, { local: true, '--environment': environment,
+      '--initial-state': join(temporary, 'not-read.json'), '--out': join(temporary, 'not-created') }), /no bound host tests/);
+    await assert.rejects(readFile(join(temporary, 'not-created/results.json')), { code: 'ENOENT' });
+
+    await writeFile(currentPath, qualifiedCurrent);
+
     assert.match(await readFile(join(app, '.cyperlink/bindings.d.mts'), 'utf8'), /remaining: bigint/);
     const bindings = await readFile(join(app, '.cyperlink/bindings.mjs'), 'utf8');
     assert(bindings.includes(built.releaseHashHex));
     assert.match(bindings, /different policy release/);
+    // Simulate interruption between binding publication and pointer publication:
+    // repair must reproduce the exact old binding bytes without a compiler/RPC.
+    await writeFile(join(app, '.cyperlink/bindings.mjs'), '// incomplete generation');
+    const repaired = await repairPackage(app);
+    assert.equal(repaired.transactions, 0);
+    assert.equal(await readFile(join(app, '.cyperlink/bindings.mjs'), 'utf8'), bindings);
+    assert.deepEqual(await readFile(currentPath), qualifiedCurrent);
+
+    // Fault the second binding publication after immutable release/qualification
+    // publication. Readers retain the previous current pointer; explicit repair
+    // recovers after the filesystem issue is removed, with no recompilation.
+    const declaration = join(app, '.cyperlink/bindings.d.mts');
+    await rename(declaration, declaration + '.saved');
+    await mkdir(declaration);
+    await assert.rejects(buildPackage(app), /EISDIR|ENOTDIR|EPERM/);
+    assert.deepEqual(await readFile(currentPath), qualifiedCurrent);
+    assert.equal((await readRelease(app, { checkPlatform: false, requireTests: true })).release.releaseHashHex, built.releaseHashHex);
+    await rm(declaration, { recursive: true });
+    await rename(declaration + '.saved', declaration);
+    await repairPackage(app);
+    assert.equal(await readFile(join(app, '.cyperlink/bindings.mjs'), 'utf8'), bindings);
+    const qualificationPath = join(app, '.cyperlink/qualifications', JSON.parse(qualifiedCurrent).qualificationHashHex, 'test.log');
+    const retainedLog = await readFile(qualificationPath);
+    await writeFile(qualificationPath, 'changed evidence');
+    await assert.rejects(readRelease(app, { checkPlatform: false, requireTests: true }), /Retained test log changed/);
+    await writeFile(qualificationPath, retainedLog);
+
     assert(!canonical(original.release).includes(temporary), 'machine source/output paths must not define release identity');
 
     const relocated = join(temporary, 'relocated');

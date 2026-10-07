@@ -28,7 +28,7 @@ async function recordFor(connection,signature,label,category){for(let i=0;i<80;i
 export async function deployPackage(directory,options){
  assert.equal(options.local,true,'Deployment requires explicit --local');assert(options['--environment']&&options['--initial-state']&&options['--out'],'Require --environment --initial-state --out');
  const preparation=await json(resolve(options['--environment'])),endpoint=loopbackEndpoint(preparation.rpc);assert.equal(preparation.profile,'provisioned161','Use the pinned fresh localnet environment');
- const {release,releaseDirectory}=await readRelease(directory);const tools=await pinnedTools();
+ const {release,releaseDirectory,qualification}=await readRelease(directory,{requireTests:true});const tools=await pinnedTools();
  const output=await createPrivateRun(options['--out']),moduleRoot=resolve(options['--module-root']??join(ROOT,'.local/toolchain/js'));
  const initialPath=resolve(options['--initial-state']),privateRoot=await realpath(join(ROOT,'.local'));
  const initialStat=await lstat(initialPath);assert(initialStat.isFile()&&!initialStat.isSymbolicLink(),'Private initialization must be a regular file');assert.equal(initialStat.mode&0o077,0,'Private initialization must have owner-only permissions');assert.equal(initialStat.uid,process.getuid(),'Private initialization must belong to the current user');assert((await realpath(initialPath)).startsWith(privateRoot+'/'),'Keep private initialization under ignored .local');
@@ -42,7 +42,7 @@ export async function deployPackage(directory,options){
  const disabledV0='B8JJXCy5amZyWG9r7EnUYLwzXSXTxG7GZ1qZ1qggo83g';
  const restriction=await connection.getAccountInfo(new PublicKey(disabledV0),'confirmed');assert(!restriction||restriction.data[0]===0,'This validator disables new pinned SBPF v0 deployments; prepare a fresh ledger with --allow-pinned-sbf-v0-deployment');
  const genesisHash=await connection.getGenesisHash(),programs={},signers={};
- const result={schema:1,passed:false,phase:'building-programs',evidenceLevel:'real-local-deployment-in-progress',genesisHash,localFeatureDeviation:{disabledDeploymentRestriction:disabledV0,sbfArch:'v0'},releaseHashHex:release.releaseHashHex,transactions:[],callbacks:[],loadedPrograms:[],limitations:['Same local cluster/operator trust; distinct MXE encryption keys','Private initialization values omitted; no production/public-network claim','Program upgrade authority remains trusted','Deployment recovery from arbitrary partial phase is unsupported; preserve artifacts']};
+ const result={schema:1,passed:false,phase:'building-programs',evidenceLevel:'real-local-deployment-in-progress',hostTestQualification:{...qualification,qualificationHashHex:sha(canonical(qualification))},genesisHash,localFeatureDeviation:{disabledDeploymentRestriction:disabledV0,sbfArch:'v0'},releaseHashHex:release.releaseHashHex,transactions:[],callbacks:[],loadedPrograms:[],limitations:['Same local cluster/operator trust; distinct MXE encryption keys','Private initialization values omitted; no production/public-network claim','Program upgrade authority remains trusted','Deployment recovery from arbitrary partial phase is unsupported; preserve artifacts']};
  const save=()=>writeFile(join(output,'results.json'),JSON.stringify(result,null,2),{mode:0o600});await save();
  const transport=new SignedInstructionSender(session,async receipt=>{result.transactions.push(receipt);await save();});
  try{
@@ -60,7 +60,7 @@ export async function deployPackage(directory,options){
   for(const [name,path]of[['native','native/Cargo.toml'],['auth','auth/programs/cyperlink_auth/Cargo.toml']])await command(tools.sbf,['--manifest-path',join(workspace,path),'--tools-version','v1.57','--arch','v0','--sbf-out-dir',deploy,'--offline','--','--locked'],{cwd:join(workspace,name),env,log:join(output,`build-${name}.log`)});
   await mkdir(join(workspace,'auth/target/idl'),{recursive:true});await mkdir(join(workspace,'auth/target/types'),{recursive:true});
   await command(tools.anchor,['idl','build','-p','cyperlink_auth','-o','target/idl/cyperlink_auth.json','-t','target/types/cyperlink_auth.ts'],{cwd:join(workspace,'auth'),env,log:join(output,'build-idl.log')});
-  assert.equal((await readRelease(directory)).release.releaseHashHex,release.releaseHashHex,'Release changed during program build');
+  assert.equal((await readRelease(directory,{requireTests:true})).release.releaseHashHex,release.releaseHashHex,'Release changed during program build');
   result.phase='deploying-programs';await save();
   const filenames={auth:'cyperlink_auth.so',policy:'ct_policy_spike.so',guard:'ct_guard_spike.so',merchant:'cyperlink_merchant.so',license:'cyperlink_license.so'};
   for(const [name,file]of Object.entries(filenames)){
