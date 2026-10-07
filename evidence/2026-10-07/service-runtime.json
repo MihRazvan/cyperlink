@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "date": "2026-10-07",
+  "passed": true,
+  "classification": "real-local-service-runtime-restart",
+  "scope": "Retained local runtime + versioned HTTP service + actual confidential paid license before and after restart",
+  "archive": ".local/service-runtime-qualification-v1",
+  "rawResultsSha256": "2d8145e8a7a5a4335e2c38204d072de7f4a34566aa45f871d6afe1d1121eea86",
+  "deploymentArchive": ".local/service-instance-v1",
+  "genesisHash": "GfpWwPonbXZUz6tjt3GBuCsNPbRFMgfo3E4Rts1nJ6yR",
+  "releaseHashHex": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+  "programs": {
+    "auth": "CTMBrbKNKqEKmtyonWZZCKfjy1pdBZm61YRsVMbUcTmE",
+    "policy": "6FnSFMk94RbfoFcVj73D2a2tqDXACUM9nZ7AyVtdomU",
+    "guard": "7e1JdunCKgp9vCMYgpWoYE7fpvdoBgWiD3xBeWsYrcEB",
+    "merchant": "GAda9Vv96RREPs6R5jpQ42Y1suyygDB3cMksJzFYZzTm",
+    "license": "A32mgpdYLd3Z1DTJh7BndN7zjmxM7bR6SdSCsFtgy12t",
+    "kernel": "7e1JdunCKgp9vCMYgpWoYE7fpvdoBgWiD3xBeWsYrcEB",
+    "proofBuffer": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv"
+  },
+  "observerDisclosures": {
+    "initialRemaining": 50,
+    "purchaseCap": 30,
+    "purchases": [
+      10,
+      20
+    ]
+  },
+  "runtime": {
+    "id": "3682717b-f17c-488b-8722-98dbe62473cf",
+    "genesisPreserved": true,
+    "retainedContainers": {
+      "arx-node-1": "87d30bd10e92163ae65687923a392823bed44f56d4320fe1446ecc6c45b7d617",
+      "arcium-trusted-dealer": "56f9a0ef961ded10cdc85d0c484f6983cdd45767d960d5e03044e37cb7fc177a",
+      "arx-node-0": "71534b3cfad120833bfb536a676f1aeea9402dce8b523e9450b76e5237cfe5a9"
+    },
+    "retainedDirectoryRecords": 7,
+    "retainedUniqueDirectories": 6,
+    "ledgerIdentityHashes": {
+      "validator-keypair.json": "e420684604e4cda11e06aa364d920f12c0e37f023b24b7455bbec95e4790f099",
+      "vote-account-keypair.json": "7193b505259a4d3eced04816e06e26e26643df94c418908381aea1ec4966c38e",
+      "stake-account-keypair.json": "318abde01eb6b705327fc093597434dc0555751144e1f85dc7eeb9922e8ee718",
+      "faucet-keypair.json": "9c2ba498c6e45e9f9511a2bb4e9a82b9e957a63ea71877282f786bf3df7be182"
+    },
+    "genesisFileSha256": "e8d119f1ad41b0f16c59e1d5aa2f120a85689c153d67eff60ad91653e74350f4"
+  },
+  "loadedDeploymentPrograms": [
+    {
+      "program": "CTMBrbKNKqEKmtyonWZZCKfjy1pdBZm61YRsVMbUcTmE",
+      "elfSha256": "8dd3f67a97ecd9000391dd8432b2a082d26ca89e0641c533b394f277d36a7d6b",
+      "matched": true
+    },
+    {
+      "program": "6FnSFMk94RbfoFcVj73D2a2tqDXACUM9nZ7AyVtdomU",
+      "elfSha256": "4477341fc8d0893532d60870a1e964bf05ab6ea24bbd003c854e0da3dbca9dab",
+      "matched": true
+    },
+    {
+      "program": "7e1JdunCKgp9vCMYgpWoYE7fpvdoBgWiD3xBeWsYrcEB",
+      "elfSha256": "e1da8eb546456ebee62fad383b667f4e98e74743db57ee0c8ccda12fcd975da0",
+      "matched": true
+    },
+    {
+      "program": "GAda9Vv96RREPs6R5jpQ42Y1suyygDB3cMksJzFYZzTm",
+      "elfSha256": "c57ee044a1355a2f1ef17961e926f98e1941973a87426c8bf02e38b8a6af80d4",
+      "matched": true
+    },
+    {
+      "program": "A32mgpdYLd3Z1DTJh7BndN7zjmxM7bR6SdSCsFtgy12t",
+      "elfSha256": "b0c97bb2497d392479c5ca2a83be5cc032310eb9b328b7122f02b140ebf22d25",
+      "matched": true
+    },
+    {
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "elfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "matched": true
+    },
+    {
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "elfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "matched": true
+    },
+    {
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "elfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "matched": true
+    },
+    {
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "elfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "matched": true
+    },
+    {
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "elfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "matched": true
+    }
+  ],
+  "hostTestQualification": {
+    "schema": 1,
+    "releaseHashHex": "d9c2b77c210b2ee583abafe40483f94446d8c7377f5b81585e5a16d25eaebe9f",
+    "sourceSha256": "b9151b0bffb2b76f9c52f9e260cffe6d65c7f5c371e924620fe70fe98f2d432a",
+    "testsSha256": "6c9cc67e970dc285dc5d70087af67afd95248c61ef0ae431f46a3c371e46d343",
+    "logSha256": "f59c464a73b217b4de807fef1be99349f286ee70b5dc44d4fd6ca7b9f5a6a395",
+    "evidence": "host-IR-only-not-distributed",
+    "passed": true,
+    "qualificationHashHex": "bdf15fe98b979fcb314745c5f60e4138cda973911f3f23c3b34400ebcaef5bfd"
+  },
+  "serviceProcesses": [
+    19808,
+    20012
+  ],
+  "checks": [
+    "Same genesis/runtime identity and exact original signed payment after whole-stack restart",
+    "Recovery changed no tracked application account, signed wire, simulation or broadcast record",
+    "Fresh post-restart native proofs, distributed callback and atomic payment/state/license effect",
+    "Shipped HTTP client and API preserve imported identity and paid facts across restart"
+  ],
+  "finalState": {
+    "version": "2",
+    "counter": "3",
+    "inferredRemainingObserverDisclosure": 20
+  },
+  "payments": [
+    {
+      "label": "before-restart",
+      "signature": "2Tz3H52Dtj6rjzXEmoHbKmdmtQV84s5jBfBWQoAYWjd6fhW2pL18t4aLUUgF29eyqv1k7mGmZT6hUHdrT7JzoyZC",
+      "slot": 838,
+      "landedCU": 87337,
+      "feeLamports": 10000
+    },
+    {
+      "label": "after-restart",
+      "signature": "4wAHyu6Yi3SGpjJDhWVrRWxrPTU6kgFkcCrpbLveAWoEa3HhMVxJ2SCcC47Wc4HcWDmF2v4RAoyLsKCtP7bNQ2nB",
+      "slot": 1076,
+      "landedCU": 85837,
+      "feeLamports": 10000
+    }
+  ],
+  "callbacks": [
+    {
+      "label": "before-restart",
+      "signature": "5F1AVds5ThQVGuPHEwZseiShzBQniUpZwmxfnn3uththJHCr8YbzrMbxNasLe2GQsGMjd35ndGofVi8tvVjqw4Zt",
+      "slot": 837,
+      "status": 1,
+      "landedCU": 166907,
+      "feeLamports": 5000
+    },
+    {
+      "label": "after-restart",
+      "signature": "5RW9D44BmH7B1EfZ2Y62jP7A261uQtcxtkz2xuZ9tpzJvZ7st3T3mZqfpfTyybaPkN91DCoRALa5mL1c5JVs5xpn",
+      "slot": 1075,
+      "status": 1,
+      "landedCU": 164186,
+      "feeLamports": 5000
+    }
+  ],
+  "httpRecovery": {
+    "id": "before-restart",
+    "projectId": "license",
+    "planHash": "fbf31fe6d047d8b275ee5bdb0b9409787da05e3201fdcad978303c15360ed982",
+    "consumerKind": "license",
+    "createdAt": "2026-10-07T09:28:54.390Z",
+    "updatedAt": "2026-10-07T09:32:38.226Z",
+    "minimumSlot": 1018,
+    "paymentCommitted": true,
+    "observation": {
+      "status": "committed",
+      "slot": 1018,
+      "commitment": "confirmed",
+      "job": "G2J7KEW1uLbes8uPYzqE2hSa2BqAnJqHwmtPWDxehaU4",
+      "permit": "9W2iC2PNXz7uNshM4T9kCzi2U7m8EJpxZhm8MA5MtF3J",
+      "effect": "BgXFuMRc2nAMRFdSZaejAd7HcyzXpofTFZ3UMZ5enN3E",
+      "consumerKind": "license",
+      "licenseExpirySlot": "1681",
+      "licenseActive": true,
+      "quotaVersion": "1",
+      "expectedQuotaVersion": "0"
+    },
+    "deliveries": {
+      "commit": {
+        "status": "landed",
+        "signature": "2Tz3H52Dtj6rjzXEmoHbKmdmtQV84s5jBfBWQoAYWjd6fhW2pL18t4aLUUgF29eyqv1k7mGmZT6hUHdrT7JzoyZC",
+        "wireSha256": "02a7679694364c5b214f82302e898fdf69bf3f97178be94b5addfa6f8d7ca9d6",
+        "role": "commit",
+        "attempts": 1,
+        "canBroadcast": false,
+        "observationSlot": 838,
+        "receipt": {
+          "slot": 838,
+          "landedCU": 87337,
+          "feeLamports": 10000
+        }
+      }
+    },
+    "lastError": null
+  },
+  "regression": {
+    "javascriptTests": 188,
+    "pythonTests": 90,
+    "cipherDomainHostCheck": true,
+    "javascriptRunScope": "185-test full regression plus 3 focused offline-verifier tests"
+  },
+  "failuresPreserved": [
+    "First prepared runtime: default gossip-port collision; fresh run uses explicit gossip/dynamic ports",
+    "Immediate resume: TIME_WAIT falsely treated as occupied; actual TCP regression and immediate restart now pass",
+    "Qualification continuation initially reused create-only observer directory; diagnostic preserved; new observer used, original operation retained"
+  ],
+  "limits": [
+    "Two nodes and trusted dealer on one host",
+    "Graceful whole-stack restart, not host power loss or independent recovery operators",
+    "Local synthetic no-fee assets; explicit owner and administrator approval",
+    "HTTP provides keyless registration/observation/recovery, not remote preparation or signing",
+    "No staged/unsettled operation crash during runtime shutdown was tested",
+    "No validator host reboot, power loss, independently operated nodes or public-network execution",
+    "Runtime ready flag alone does not establish fresh computation; separate callback/payment establishes it here",
+    "Journal immutability across restart was asserted live; initial runner did not retain before/after hash maps for independent offline comparison",
+    "Measured payment and callback fees exclude native preparation, compilation, circuit upload, deployment and worker costs",
+    "Existing Console reference remains unchanged; new API runtime uses a fresh isolated ledger",
+    "Policy SDK remains repository-local; HTTP client has no runtime dependencies",
+    "Service is single-writer bounded local registry, not managed multitenant platform"
+  ]
+}

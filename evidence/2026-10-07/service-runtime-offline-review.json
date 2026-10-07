@@ -1,0 +1,375 @@
+{
+  "schema": 1,
+  "passed": true,
+  "evidenceLevel": "independent-offline-local-service-runtime-archive-review",
+  "input": {
+    "path": ".local/service-runtime-qualification-v1/results.json",
+    "sha256": "2d8145e8a7a5a4335e2c38204d072de7f4a34566aa45f871d6afe1d1121eea86",
+    "bytes": 126256
+  },
+  "genesisHash": "GfpWwPonbXZUz6tjt3GBuCsNPbRFMgfo3E4Rts1nJ6yR",
+  "deploymentHash": "947ebaae31980ea900ff51335c71186d1914a803665e174a0fe4dca941740161",
+  "counts": {
+    "plans": 2,
+    "paymentReceipts": 2,
+    "callbacks": 2,
+    "ed25519Signatures": 6,
+    "accountSnapshots": 5,
+    "unchangedRestartAccounts": 7,
+    "loadedProgramReports": 30,
+    "distinctLoadedPrograms": 10,
+    "retainedAttemptErrors": 2
+  },
+  "payments": [
+    {
+      "label": "before-restart",
+      "signature": "2Tz3H52Dtj6rjzXEmoHbKmdmtQV84s5jBfBWQoAYWjd6fhW2pL18t4aLUUgF29eyqv1k7mGmZT6hUHdrT7JzoyZC",
+      "slot": 838,
+      "wireSha256": "02a7679694364c5b214f82302e898fdf69bf3f97178be94b5addfa6f8d7ca9d6",
+      "signers": [
+        "C6x52LeJ9MG89pjgS7YXXKvpKXA3cNWpyguymvbXBkCS",
+        "Gonh2wWmPonFQ4gRKYEJkSEd5bNbQwXM1PL5SxZDxBaM"
+      ],
+      "exactNativeConsumerInstruction": true,
+      "fullEncryptedSuccessorAndPermitTransition": true,
+      "paidLicense": true
+    },
+    {
+      "label": "after-restart",
+      "signature": "4wAHyu6Yi3SGpjJDhWVrRWxrPTU6kgFkcCrpbLveAWoEa3HhMVxJ2SCcC47Wc4HcWDmF2v4RAoyLsKCtP7bNQ2nB",
+      "slot": 1076,
+      "wireSha256": "36687de4fcdd900e2c4a2c57c54de68c46340c2475ea36cc8e01ee64fcc8fdd9",
+      "signers": [
+        "C6x52LeJ9MG89pjgS7YXXKvpKXA3cNWpyguymvbXBkCS",
+        "Gonh2wWmPonFQ4gRKYEJkSEd5bNbQwXM1PL5SxZDxBaM"
+      ],
+      "exactNativeConsumerInstruction": true,
+      "fullEncryptedSuccessorAndPermitTransition": true,
+      "paidLicense": true
+    }
+  ],
+  "callbacks": [
+    {
+      "label": "before-restart",
+      "signature": "5F1AVds5ThQVGuPHEwZseiShzBQniUpZwmxfnn3uththJHCr8YbzrMbxNasLe2GQsGMjd35ndGofVi8tvVjqw4Zt",
+      "slot": 837,
+      "exactNativeCommitment": true,
+      "runtimePredecessorAndAccounts": true,
+      "immutableJobBinding": true,
+      "allFourSuccessorCiphertexts": true
+    },
+    {
+      "label": "after-restart",
+      "signature": "5RW9D44BmH7B1EfZ2Y62jP7A261uQtcxtkz2xuZ9tpzJvZ7st3T3mZqfpfTyybaPkN91DCoRALa5mL1c5JVs5xpn",
+      "slot": 1075,
+      "exactNativeCommitment": true,
+      "runtimePredecessorAndAccounts": true,
+      "immutableJobBinding": true,
+      "allFourSuccessorCiphertexts": true
+    }
+  ],
+  "quota": {
+    "initialVersion": "0",
+    "finalVersion": "2",
+    "beforeFirstPaymentCounter": "2",
+    "finalCounter": "3"
+  },
+  "recovery": {
+    "signature": "2Tz3H52Dtj6rjzXEmoHbKmdmtQV84s5jBfBWQoAYWjd6fhW2pL18t4aLUUgF29eyqv1k7mGmZT6hUHdrT7JzoyZC",
+    "wireSha256": "02a7679694364c5b214f82302e898fdf69bf3f97178be94b5addfa6f8d7ca9d6",
+    "apiOriginalIdentityChecked": true,
+    "sevenTrackedAccountsUnchanged": true,
+    "sameGenesisAndRuntimeId": true,
+    "differentServiceProcessIds": true,
+    "journals": {
+      "archived": false,
+      "verified": false,
+      "files": 0
+    }
+  },
+  "loadedProgramProvenance": [
+    {
+      "program": "CTMBrbKNKqEKmtyonWZZCKfjy1pdBZm61YRsVMbUcTmE",
+      "elfSha256": "8dd3f67a97ecd9000391dd8432b2a082d26ca89e0641c533b394f277d36a7d6b",
+      "bytes": 689936,
+      "reports": 3,
+      "firstObservedSlot": 779,
+      "lastObservedSlot": 1017
+    },
+    {
+      "program": "ArcStnN9zZZVB5WjgPhLHjYpY7Gb29mzb96ySsb1kxgq",
+      "elfSha256": "eb00484d859e13005039e748da319f3af3ac0019041337d7c51b62c42f6f5828",
+      "bytes": 816976,
+      "reports": 3,
+      "firstObservedSlot": 780,
+      "lastObservedSlot": 1018
+    },
+    {
+      "program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "elfSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+      "bytes": 1382016,
+      "reports": 3,
+      "firstObservedSlot": 780,
+      "lastObservedSlot": 1018
+    },
+    {
+      "program": "GAda9Vv96RREPs6R5jpQ42Y1suyygDB3cMksJzFYZzTm",
+      "elfSha256": "c57ee044a1355a2f1ef17961e926f98e1941973a87426c8bf02e38b8a6af80d4",
+      "bytes": 72904,
+      "reports": 3,
+      "firstObservedSlot": 779,
+      "lastObservedSlot": 1017
+    },
+    {
+      "program": "6FnSFMk94RbfoFcVj73D2a2tqDXACUM9nZ7AyVtdomU",
+      "elfSha256": "4477341fc8d0893532d60870a1e964bf05ab6ea24bbd003c854e0da3dbca9dab",
+      "bytes": 107320,
+      "reports": 3,
+      "firstObservedSlot": 779,
+      "lastObservedSlot": 1017
+    },
+    {
+      "program": "A32mgpdYLd3Z1DTJh7BndN7zjmxM7bR6SdSCsFtgy12t",
+      "elfSha256": "b0c97bb2497d392479c5ca2a83be5cc032310eb9b328b7122f02b140ebf22d25",
+      "bytes": 73656,
+      "reports": 3,
+      "firstObservedSlot": 779,
+      "lastObservedSlot": 1017
+    },
+    {
+      "program": "7e1JdunCKgp9vCMYgpWoYE7fpvdoBgWiD3xBeWsYrcEB",
+      "elfSha256": "e1da8eb546456ebee62fad383b667f4e98e74743db57ee0c8ccda12fcd975da0",
+      "bytes": 74328,
+      "reports": 3,
+      "firstObservedSlot": 779,
+      "lastObservedSlot": 1017
+    },
+    {
+      "program": "L2TExMFKdjpN9kozasaurPirfHy9P8sbXoAN1qA3S95",
+      "elfSha256": "a89179ae024ac36aa5fc308251caa84cd0a3390ae66d8523514004a86d5148bb",
+      "bytes": 424248,
+      "reports": 3,
+      "firstObservedSlot": 780,
+      "lastObservedSlot": 1018
+    },
+    {
+      "program": "71nJjoSudYSAR4GApb2mtugtj8iuwf6yjKKQBpzKVehv",
+      "elfSha256": "0a2c25330e479cfa981d84dc7fd935accf7ca0dc867f173333114397faacfb8f",
+      "bytes": 16504,
+      "reports": 3,
+      "firstObservedSlot": 780,
+      "lastObservedSlot": 1017
+    },
+    {
+      "program": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ",
+      "elfSha256": "decd20fdc62a7197c7b128d4991f7cb3febeef1255ea3adbc24ac8438b06eeda",
+      "bytes": 1648440,
+      "reports": 3,
+      "firstObservedSlot": 780,
+      "lastObservedSlot": 1018
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".local/service-runtime-qualification-v1/results.json",
+      "sha256": "2d8145e8a7a5a4335e2c38204d072de7f4a34566aa45f871d6afe1d1121eea86",
+      "bytes": 126256
+    },
+    {
+      "path": ".local/service-instance-v1/instance.json",
+      "sha256": "6fe0450ddd658bf5bd209a5fc606fcba8d286b10036ea72f98f02b7376c3fbf9",
+      "bytes": 2309
+    },
+    {
+      "path": ".local/service-instance-v1/programs/auth/target/idl/cyperlink_auth.json",
+      "sha256": "aa34ecc9f0d3ba6da8dd689aabea8b264200f11ead13aa27853895b0fb555a41",
+      "bytes": 43248
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/before-restart/operation-plan.json",
+      "sha256": "03dd2dad2d49489d354af9b3a805839be5b53465cfee7043a139f71f48c15da9",
+      "bytes": 15655
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/after-restart/operation-plan.json",
+      "sha256": "e47faaad601bf2e8074c3485ee838a6bd79f2a0a390eee1b068c4c6b2ecff4db",
+      "bytes": 15653
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-0b5cfc06-2ce3-4105-ad03-a1702447a2e9.json",
+      "sha256": "a53a8366616ef430a1d10b0f9f2c2e20fd8dcde40347dfa4b7d29684ac88bd2a",
+      "bytes": 896
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-10322162-9c77-4374-8dde-1b57cc4301b6.json",
+      "sha256": "5d9bacb05240ef49b41fc9e9f204c585b12d411a26596387477e04ba0a3530b9",
+      "bytes": 894
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-10c4bae2-4172-46c1-8192-e42984738bf6.json",
+      "sha256": "cdc31778bf450cd3fe5b787077cc4bca2d7648fdb45bf6b67726711e84794dab",
+      "bytes": 890
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-19575965-07a5-4ec4-9913-090c3e841e60.json",
+      "sha256": "a814fb954f735d216a71e293d8dcc13e7b06d26ab9ab267cc7a463c072bff9b2",
+      "bytes": 899
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-23135181-32ce-4cc6-a21c-63161dfd4789.json",
+      "sha256": "651419d8d68709f6da9616c1df969719a803554814ab38bb015b101e0149d16c",
+      "bytes": 897
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-25c2e098-e387-4856-ba1e-36ee3a8ff6ce.json",
+      "sha256": "c38f56cf4bb45f746c5a9ac3331bf226e6352dd4c6d277ed96ee0451fc7ad88b",
+      "bytes": 898
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-2ca849cc-9957-46f6-b7dc-9dd86eb4fa76.json",
+      "sha256": "1427cc75af3bc9e8044c064e1bf1113ea864f31251399a1e7c6640e4501734ac",
+      "bytes": 895
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-3d3f7192-2558-4b68-a208-e4c2b57e84b2.json",
+      "sha256": "69da4684051c7d812c9057d642ff2ebadd00b5fcf2c6f93305b917714d874d49",
+      "bytes": 889
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-3d85418c-7777-4d92-8c16-3d9bd25a520e.json",
+      "sha256": "ddf1af84af24536981e0d34ef916e4668127b3ed4079ea3bb2528c096ffc2f61",
+      "bytes": 905
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-41da595a-8a33-422f-be6f-be0a5aa3c70e.json",
+      "sha256": "040f1d53d505e397b3d691211883f14ae34b465e7b4470c5e4a411b6516e915d",
+      "bytes": 899
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-561669ea-b7d6-4311-9c30-333d51cfd09a.json",
+      "sha256": "3233858a7154dd49c2051182d41bc993199720da2368a86cea2f30b9b6dafb75",
+      "bytes": 889
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-602d3ef3-6d39-4794-9fb4-01600b261085.json",
+      "sha256": "c91455b0b569822c91cb10b6eab69982e0eaf2d43930950f2e88e48c731c51ca",
+      "bytes": 900
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-60bda76e-f428-4530-9a7a-c0905d973cc7.json",
+      "sha256": "4d1486a908db4b89770c6ff0934f8d34e9867a4e83740734c9c756233ba1ae39",
+      "bytes": 895
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-68d321de-f6c2-4fae-83eb-6b653eca18c3.json",
+      "sha256": "8bad9c6e147520337c4f234c39a55eada2b510ef3f2da3d9248aac111c95a769",
+      "bytes": 889
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-6e2fbd6e-6fc9-4f16-8191-88f1541a7c89.json",
+      "sha256": "54327d149d4e806d7de0c764e7f26405b4fb66e00d4399b81ff340bebe8aec70",
+      "bytes": 890
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-753e8da5-c8cb-420b-9cc3-6671850d4c7c.json",
+      "sha256": "afc797efd68322b167cb0a3acfbca54003eb8cab972d28ee72638e25e50c00ff",
+      "bytes": 897
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-762fbe05-1aa1-42da-9b4d-fac5a91abcc8.json",
+      "sha256": "db77e0989087cfe6f67d1446d8741154f20bacf34370514c0e5b2af8798ae7f8",
+      "bytes": 900
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-7a5bf55d-cff6-4704-9276-023179814825.json",
+      "sha256": "361be93f319a5f1eafad82ec1a7bdebe32003b5325ebeb4ca2c2f813a0ccec21",
+      "bytes": 905
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-8758a376-c48a-4b9a-a791-7653d578af89.json",
+      "sha256": "1ed7914cca9388770f4a9e4d73b66dfb886db6beb6ac0048dcaf701097e59588",
+      "bytes": 899
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-a0e2aebf-6ee7-4189-9c43-d8b932d2c275.json",
+      "sha256": "849fda9eeda773cbd6837c79686e2afbcc84ee1bf84dc603c86ee7c1cd3d131b",
+      "bytes": 896
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-af42abc7-c6bb-4da7-b8af-c9046e58c07d.json",
+      "sha256": "633ae094e79a456510b2b4659a6dd64034cbec307fc7e8b5e9efd681651b08d0",
+      "bytes": 897
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-b2f35c65-933a-4463-b428-9abd24a6533f.json",
+      "sha256": "038e43c6a5134492326856b8ba49c11e559c8e78cf82f1044b3a74ece26e5d4a",
+      "bytes": 896
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-b6f096d3-cb0d-4cb1-9a80-fade00918ff7.json",
+      "sha256": "ebbafb9b67d1e2e1fba750a9830453246cde28be7c7b77410e8bdd3ba7773a24",
+      "bytes": 894
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-c2461064-dd0b-44d6-bbfa-9960d45c167b.json",
+      "sha256": "e760c85da5033c19527e0dab99a5b1812dc131a5f956978b66cc3b93cd8a8509",
+      "bytes": 896
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-c3d079fc-5cc9-4b9d-9e45-0d8a99a5696c.json",
+      "sha256": "74669e0f60cd74e66c55f2893d104b1b787a91dd93848248f963908a1b4d9348",
+      "bytes": 894
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-cef746f6-c578-437b-899e-b91ee75ee204.json",
+      "sha256": "4cc0a7318e6e752889329bbdc0e62885cac2ee1d37649b3da70e3ba467012a93",
+      "bytes": 895
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-d5d863ed-b6aa-4f1e-ac4c-11e8b9103237.json",
+      "sha256": "900627299bed458ff0299c80fcd63d7f0aca991a66d8f43210b202d63ffcde9a",
+      "bytes": 897
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-db59a6e3-3d9b-4c31-8157-7d046dac3dfa.json",
+      "sha256": "26ed8f7fd44fc6b636e680c84e669524eeb6940b917f51481b90b439ab34502a",
+      "bytes": 904
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-dd3d1d55-fe94-466b-bfc7-f992c75497ee.json",
+      "sha256": "8bf554bd68e8d469ff05d66cab6e8d0bbf7458191f3bb9d69c4e4d9112bca29f",
+      "bytes": 893
+    },
+    {
+      "path": ".local/service-runtime-qualification-v1/workspace/provenance/loaded-e947967d-9d00-4331-93b8-4eef2e2c9512.json",
+      "sha256": "831922b544d05f0a6f6ca341f2cd809a4d2dded928587aac12e13d6889a87dd1",
+      "bytes": 888
+    }
+  ],
+  "sourceHashes": {
+    "scripts/qualify_service.mjs": "699220fa070bead203d6edfca9731c069f3145b4cbdf79e53d1ba6f7a8f7c804",
+    "scripts/runtime_local.py": "04ecc171e0eee8eb641f4c5a644f294f8ac5d1f3daa1881e3de2a95ebd7707b6",
+    "packages/service/src/service.mjs": "19471d7d298791bc49272ac35d900d07b961cc15b36861acf43ae8d1804717a6",
+    "packages/service/src/backend.mjs": "00ad1292f1849429fa80b575f77b4943e1a01445c9b80fe2c2f8941a177ee474",
+    "packages/service/src/config.mjs": "a165451f76f1949179c385ee8257872ca6ee8767ee9ef923b93aa0db79e0331d",
+    "packages/service/src/http.mjs": "d781263b0096c060bcbb01f4498dd6174e89765d2e34466ba780c752f5a8adfd",
+    "packages/service-client/src/index.mjs": "16721d08317568621ce65b8611f5235363d271d3a335d20f05f949e0a57f0534",
+    "packages/policy-client/src/policy-session.mjs": "105c5b3207620dbb26b6ff907d7ed91dcf9248cc8e6dcf4d0221294c9fd6164c",
+    "packages/policy-client/src/operation-ticket.mjs": "2be0ff0ede5bc2804aaebaad8e7d69f2d35398987f6ebd82466f6aaa7dd4148a",
+    "packages/policy-client/src/sdk.mjs": "b142a1789c819e59fc151a05e7f1f0385b807c0bdbb1b65ae333bc7a6f9db76b",
+    "examples/policies/qualification/archive.mjs": "2393678a63cf7c313106d0525f86d82d5e199679c579f5382eab970a22f49956",
+    "scripts/verify_loaded_program.py": "b13ee39c999badc9227003cda614eb2a1b42f227ca7f1991f0f0aa4784f5d9ee",
+    "scripts/verify_service_archive.mjs": "f9af25fe76f7fb43dfcf29ea29985d0b8286e7290e18371e7082fa27cbe311b7"
+  },
+  "limitations": [
+    "Offline review only: no RPC, runtime changes, signer loading or account/state decryption.",
+    "Ed25519 signatures and exact payment instructions are checked. Archived RPC account bytes, receipt metadata and address lookup resolution remain trusted local evidence, not historical consensus proofs.",
+    "Callback commitment, four successor ciphertexts, immutable Job, runtime predecessor and exact callback accounts are checked; no independent BLS verification or independent-operator claim.",
+    "Loaded-program reports are compared with retained local ELF files. Loaded account bytes were not re-fetched or independently retained in this review; reports represent the runner original RPC comparisons.",
+    "No before/after signed-journal hash maps are retained in results: journal immutability across restart remains a runner assertion, not an independently repeated offline comparison.",
+    "2 prior attempt errors retained. This review does not infer uninterrupted execution or arbitrary crash, power-loss or disaster-recovery qualification.",
+    "Only successful license payments were exercised here. Merchant, denial, stale rejection, rollback and RPC outage guarantees belong to earlier separately scoped evidence.",
+    "Initial allowance/cap, purchase amounts and inferred remaining balance are declared synthetic test-observer disclosures; this review does not independently decrypt or establish those plaintext values.",
+    "Source hashes identify current review-time files, not attestation of bytes loaded by prior service processes."
+  ]
+}

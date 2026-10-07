@@ -1,6 +1,6 @@
 # Current status
 
-Updated 2026-10-05. Product: programmable privacy infrastructure for Solana.
+Updated 2026-10-07. Product: programmable privacy infrastructure for Solana.
 The implemented offering is human-approved confidential spending with original
 customer-authored private policies. Application/agent permissions remain a separately
 qualified native escrow experiment, not an extension silently enabled in the SDK.
@@ -15,6 +15,17 @@ the implemented profile or establish public-network qualification.
 
 ## Working today
 
+- Versioned local project API and dependency-free TypeScript-declared HTTP client:
+  durable registration/import, cached metadata, explicit fresh observation and keyless
+  original-ticket recovery. Configured aliases bind original plan/journal identity;
+  adding aliases preserves existing projects. No service signing or submission path.
+- Managed validator/Arcium lifecycle: start, inspect, graceful stop and retained resume.
+  A fresh policy deployment paid a license, survived whole-stack restart with exact
+  payment recovery, then produced another genuine callback and paid license. Same
+  genesis, three containers, retained runtime directories and validator identities.
+- Policy builds run tests against staged source and retain test-bound qualification;
+  new deployments require it. Atomic publication and `policy repair` cover interrupted
+  generated-binding publication, while existing deployment identities remain readable.
 - [CyperLink Console](../apps/console/README.md) connects an existing completed local
   policy deployment to a browser workspace with a payment inbox, separate native
   preparation/query/payment approvals, runtime identity and retained-operation recovery.
@@ -49,14 +60,28 @@ cryptography/runtime enforcement path.
 
 ## Next product work
 
-The user reprioritized building the product around Console. The assessment recommends
-making the local project/runtime lifecycle operable first, including safe restart of
-retained environments, then guided policy author/test/build/deploy and interrupted-setup
-recovery. The generated validator launcher currently refuses an existing ledger;
-qualified Console restart does not establish whole-stack restart. Today Console requires
-an existing completed local deployment; those setup steps remain in the CLI. Keep
-ready-runtime usability distinct from clean-machine installation. Wallet integration
-and broader deployment profiles require separately scoped work.
+The retained-runtime and local service milestone is implemented and qualified. Next,
+remove repository-specific storage/import assumptions from the policy SDK behind an
+explicit storage contract, then add real proof/signer provider interfaces and recoverable
+setup phases. Keep hosted project authentication/tenancy, asynchronous worker scheduling,
+and durable database storage separate from the current loopback JSON service. The HTTP
+client is dependency-free, but the underlying policy SDK is not yet portable.
+
+Current qualification: `.local/service-instance-v1/instance.json`, runtime
+`.local/localnet-service-runtime-v2`, archive `.local/service-runtime-qualification-v1`.
+Two actual paid licenses advance quota version0→2 with original receipt/wire recovery
+across full runtime shutdown. Service recovery ran in a separate process without signer
+options. The 185-test JavaScript regression, three additional offline-verifier tests, 90 Python
+tests and cipher-domain host check pass.
+An independent offline review is indexed in [evidence](evidence.md). The initial gossip
+collision, TIME_WAIT restart bug and qualification observer-directory error remain
+preserved; none is counted as a passing attempt. Runtime readiness alone still means
+process/RPC readiness; the post-restart callback/payment is separate execution evidence.
+
+The current profile stays synthetic local assets, administrator co-signing, no transfer
+fees, configured hook and CPI Guard disabled. Same-host nodes/trusted dealer remain.
+Graceful restart is qualified; power loss, pending-computation restart, arbitrary partial
+provisioning recovery and production/public-network operation are not.
 
 Current local reference: `.local/console-instance-v1/instance.json`, retained workspace
 `.local/console-workspace-v2`. The clean browser archive is `.local/console-browser-v2/`;

@@ -10,6 +10,7 @@ in ignored `.local/`. Public machine-readable reports remain under `evidence/`.
 
 | Capability | Evidence | Boundary |
 | --- | --- | --- |
+| Local project service and retained runtime | [run summary](../evidence/2026-10-07/service-runtime.json), [offline review](../evidence/2026-10-07/service-runtime-offline-review.json) | Actual shipped HTTP client/API, fresh customer-policy deployment, two callbacks and paid licenses separated by full validator/node/dealer stop/resume. Original payment recovered by a separate keyless service process; loaded ELF and retained runtime identity checks. Graceful local restart only; no pending-work, power-loss or hosted-service claim. |
 | CyperLink Console | [browser/recovery summary](../evidence/2026-10-05/console-v2.json), [offline review](../evidence/2026-10-05/console-v2-offline-review.json) | Real browser → generated SDK → four Arcium callbacks → paid merchant and license. Explicit stale supersession, separate-process keyless recovery across selective HTTP503 faults and actual original-receipt restoration. Local keyfiles, existing completed deployment, no browser-wallet or production claim. |
 | Original customer policies | [v20b run](../evidence/2026-10-02/custom-policies-v20b.json), [offline review](../evidence/2026-10-02/custom-policy-v20b-offline-review.json) | Budget/count and private reserve: real runtime keys/callbacks, native settlement, isolation, native binding, stale/replay/rollback and exact recovery. Internal authoring, not customer adoption. |
 | Paid-license reference | [v21b run](../evidence/2026-10-03/license-app-v21b.json), [review](../evidence/2026-10-03/license-app-v21b-offline-review.json), [corruptions](../evidence/2026-10-03/license-app-v21b-corruption-checks.json) | Five authentic decisions, two paid licenses, three landed rejection cases, exact recovery. Integration involved source assistance and an application journal fix. |
@@ -32,6 +33,21 @@ must stay separately identified. Ten matching ELFs in a run do not qualify later
 source changes without a new actual loaded-byte check.
 
 ## Recovery evidence and limits
+
+The October7 service/runtime run preserves the original Console reference and uses a
+fresh isolated ledger. It found two real integration problems: default gossip-port
+collision despite distinct RPC/faucet ports, and TCP TIME_WAIT causing immediate resume
+to fail its port check. Explicit gossip/dynamic ports and a reusable-address probe
+resolved them; actual immediate restart and host regressions passed. Failed preparation
+and resume records remain in `.local/`.
+
+The run paid a license before restart, then recovered the same signature/wire after
+reopening the service in another process. Seven tracked application accounts stayed
+unchanged; a fresh query and paid license afterward proved retained Arcium state was
+usable. Initial journal immutability checks ran live but their before/after hash maps
+were not archived; offline review distinguishes that assertion from independently
+checked account snapshots and signed receipts. The reproducible runner now retains
+those maps for future runs. Neither historical payment nor recovery extends expiry.
 
 In v23b, receipt HTTP503 still allowed a committed bound account observation. Combined
 receipt/status/account outage yielded unresolved. Restored RPC returned null because
@@ -142,3 +158,35 @@ The separate Permissions escrow demonstrates actual spending authority distinct 
 owner-key autosigning. It does not establish private-query authorization or delegated
 shared-policy execution. Host-controlled roles, malicious balance-cache recovery,
 key loss and richer consumer rollback remain limits of that experiment.
+
+## Reproduce service/runtime qualification
+
+Prepare a **new** managed environment using [bootstrap](local-bootstrap.md), build a
+fresh copy of `examples/license-app`, and deploy it with synthetic private initial state
+`remaining: "50"`, `purchase_cap: "30"`. These are disclosed test-observer values.
+The runner consumes allowance and requires quota version0; do not rerun it on a used
+instance as if it were fresh.
+
+```sh
+node scripts/qualify_service.mjs .local/NEW-INSTANCE/instance.json \
+  .local/localnet-NEW-RUN .local/NEW-QUALIFICATION
+```
+
+It uses generated sessions for explicit local test approvals, the shipped API client
+and separate service processes for observation/recovery, and managed stop/resume.
+It checks actual callbacks, signed payment receipts, full encrypted state/license
+transitions and exact recovery. `--resume-after-runtime-failure` is a narrowly checked
+qualification continuation after the first payment; it preserves the failed report and
+original operation. It is not arbitrary application/deployment recovery.
+
+Review a completed service/runtime archive without RPC or signing keys:
+
+```sh
+node scripts/verify_service_archive.mjs .local/NEW-INSTANCE/instance.json \
+  .local/NEW-QUALIFICATION .local/NEW-OFFLINE-REVIEW.json
+```
+
+The verifier checks signed payment/callback messages, exact native and consumer binding,
+full encrypted successor transitions, retained account snapshots, service recovery
+identity and loaded-program comparison reports. Its report separates archived RPC
+observations from independent cryptographic checks and lists missing evidence.
