@@ -102,14 +102,21 @@ def main():
     parser.add_argument('--circuits', type=Path, default=ROOT / 'programs/auth/build')
     parser.add_argument('--rpc-port', type=int, default=8899)
     parser.add_argument('--metrics-port', type=int, default=9091)
+    parser.add_argument('--faucet-port', type=int, default=9900)
+    parser.add_argument('--gossip-port', type=int, default=8000)
+    parser.add_argument('--dynamic-port-range', default='8000-10000',
+                        help='Pinned validator dynamic UDP/TCP range, MIN inclusive and MAX exclusive')
     parser.add_argument('--allow-pinned-sbf-v0-deployment', action='store_true',
                         help='Fresh local genesis only: deactivate SIMD-0500 to deploy pinned arch-v0 builds; default feature set unchanged')
     args = parser.parse_args()
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,48}', args.run_id):
         parser.error('run-id must contain 1–49 lowercase letters, numbers or hyphens')
-    ports = [args.rpc_port, args.rpc_port + 1, args.metrics_port, args.metrics_port + 1]
-    if len(set(ports)) != 4 or not all(1024 <= p <= 65535 for p in ports):
-        parser.error('Choose four distinct unprivileged ports')
+    ports = [args.rpc_port, args.rpc_port + 1, args.metrics_port, args.metrics_port + 1, args.faucet_port, args.gossip_port]
+    if len(set(ports)) != 6 or not all(1024 <= p <= 65535 for p in ports):
+        parser.error('Choose six distinct unprivileged ports')
+    match = re.fullmatch(r'(\d+)-(\d+)', args.dynamic_port_range)
+    if not match or not 1024 <= int(match[1]) < int(match[2]) <= 65535 or int(match[2]) - int(match[1]) < 13:
+        parser.error('dynamic-port-range must be an unprivileged MIN-MAX range with at least 13 ports')
     for port in ports:
         available_port(port)
     toolchain = args.toolchain.absolute()
@@ -201,7 +208,8 @@ def main():
         target = artifacts / (name + '.so')
         shutil.copyfile(programs[name], target)
         deployments.append({'address': address, 'elf': str(target), 'upgradeable': False})
-    command = [str(executables['validator']), '--ledger', str(app / 'ledger'), '--bind-address', '127.0.0.1', '--rpc-port', str(args.rpc_port), '--quiet']
+    command = [str(executables['validator']), '--ledger', str(app / 'ledger'), '--bind-address', '127.0.0.1', '--rpc-port', str(args.rpc_port), '--faucet-port', str(args.faucet_port), '--gossip-port', str(args.gossip_port),
+               '--dynamic-port-range', args.dynamic_port_range, '--quiet']
     command += feature_args
     for d in deployments:
         command += ['--upgradeable-program' if d['upgradeable'] else '--bpf-program', d['address'], d['elf']]
@@ -224,7 +232,8 @@ os.execv(args[0], args)
     report = {'scope': 'fresh generated local bootstrap; preparation only, no execution claim', 'profile': 'provisioned161',
               'bootstrap': 'fresh-upstream-generated', 'research_checkout_required': False, 'run_id': args.run_id,
               'app': str(app), 'rpc': f'http://127.0.0.1:{args.rpc_port}', 'compose_project': compose['name'],
-              'subnet': str(subnet), 'payer': generation['payer'], 'genesis_accounts': len(generation['genesis_accounts']),
+              'subnet': str(subnet), 'faucet_port': args.faucet_port, 'gossip_port': args.gossip_port,
+              'dynamic_port_range': args.dynamic_port_range, 'payer': generation['payer'], 'genesis_accounts': len(generation['genesis_accounts']),
               'generation_manifest_sha256': digest(app / 'generation.json'), 'public_ip_patches': patches,
               'module_root': str(modules), 'validator_sha256': digest(executables['validator']),
               'validator_feature_deviations': feature_deviations,

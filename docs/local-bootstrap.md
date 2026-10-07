@@ -33,20 +33,53 @@ python3 scripts/prepare_localnet.py --run-id demo-01 \
 
 Preparation generates a new administrator wallet, node BLS/X25519/signing identities and 60 upstream runtime genesis accounts using the pinned Arcium CLI. The CLI lacks a generation-only command, so a checked wrapper intercepts its service launch. The resulting raw upstream Compose is retained as disabled evidence; only the reviewed three-service, digest-pinned Compose is executable through this guide. Recovery identities are generated but recovery is not exercised. No CyperLink-owned genesis state, token assets, proof contexts or preauthorized permits are injected.
 
-Run one generated validator at a time on this host: the pinned validator also
-uses the default faucet port 9900, independent of `--rpc-port`. Stop the previous
-run's validator and Compose project before starting the next. A startup collision
-can leave a partial ledger; preserve it and prepare a new run ID.
-
-From the printed application directory, start these in separate terminals:
+Use the managed lifecycle from the repository root:
 
 ```sh
-python3 run-validator.py
+python3 scripts/runtime_local.py inspect --environment .local/localnet-demo-01
+python3 scripts/runtime_local.py start --environment .local/localnet-demo-01
+python3 scripts/runtime_local.py stop --environment .local/localnet-demo-01
+python3 scripts/runtime_local.py resume --environment .local/localnet-demo-01
 ```
 
+`start` enrolls a freshly prepared environment and records its immutable configuration,
+artifact and identity digests before launching anything. `resume` reconciles that same
+managed environment, retaining the ledger/genesis and exact Docker containers. Neither
+command resets a ledger, changes dependency pins or regenerates node/dealer identities.
+The old `run-validator.py` remains a fresh-only manual launcher; an environment started
+manually cannot be silently adopted into managed ownership.
+
+Every action emits JSON with schema `cyperlink-local-runtime-v1`. `inspect` is read-only.
+`ready: true` means the owned validator is serving its expected genesis/version, all ten
+bootstrap program ELFs match their retained builds, and all three runtime containers
+are running. This is process/RPC readiness; a fresh authenticated callback is needed to
+qualify distributed computation after restart. Custom-policy deployed program bytes
+are separately checked when connecting the policy application.
+
+The runtime journal, validator log and Compose ownership override remain under the
+selected ignored environment directory. Read-only configuration/identity files must
+retain their hashes. Writable share/log/input directories retain their identities and
+may evolve as the runtime operates. Missing or replaced containers, missing retained
+volumes, changed genesis/artifacts and unrelated processes fail closed. The controller
+never recreates missing retained runtime material. Preserve the environment and its
+operation journals; creating another environment is not recovery of an old payment.
+
+For a second isolated environment on the same host, select separate RPC, metrics,
+faucet, gossip and dynamic ports before preparation. For example:
+
 ```sh
-docker compose -f artifacts/compose.json up -d --pull never
+python3 scripts/prepare_localnet.py --run-id isolated-02 \
+  --rpc-port 8995 --metrics-port 9191 --faucet-port 9910 \
+  --gossip-port 10020 --dynamic-port-range 10021-10121 \
+  --allow-pinned-sbf-v0-deployment
 ```
+
+The dynamic range has an inclusive minimum and exclusive maximum. Choose an unused
+range; concurrent validators also use UDP sockets. The defaults preserve the earlier
+single-environment ports. A collision never authorizes stopping a different run.
+Failed partial starts remain available for inspection; `resume` may continue an enrolled
+start with unchanged inputs. Changed startup ports require a new preparation, not edits
+to an enrolled environment's command.
 
 Back at the repository root, follow [customer policy authoring and deployment](custom-policy-authoring.md)
 to deploy a fresh policy and integrate generated `connectSession` bindings.
@@ -70,12 +103,16 @@ scenario qualification are different stages; [evidence](evidence.md) records wha
 
 Keep ignored `.local/` outputs: preparation/generation manifests, loaded ELF reports, signed receipts, source snapshots, raw before/after tracked account snapshots and full results. Keys and worker shares remain local. Snapshots use a single confirmed bank read for each group; these are retained RPC observations, not independent historical state proofs or finality claims. Failed transaction fees still apply to the payer outside the tracked application accounts.
 
-Stop only the selected run's Compose project from its application directory:
+Stop the selected managed environment with `runtime_local.py stop`. It sends SIGTERM
+to the exact owned Docker container IDs and SIGINT to the PID/start-time/command-bound
+validator. It waits for graceful exit and returns `STOP_TIMEOUT` if the processes do
+not exit; it sends no forced kill. Containers, networks, ledger and bound runtime
+volumes remain in place for `resume`. A failed or interrupted stop can be retried.
+Do not use Compose `down` for a managed environment: deleting its retained containers
+makes resume fail closed. Never run global Docker cleanup or validator reset.
 
-```sh
-docker compose -f artifacts/compose.json down
-```
-
-Stop that validator with Ctrl-C in its own terminal. Preserve its ledger and evidence. No global Docker cleanup or validator reset is needed.
+Manually launched legacy environments retain their previous terminal/Compose lifecycle;
+they are not covered by managed restart. Do not stop the preserved reference while
+qualifying a new environment.
 
 The two nodes and trusted dealer run on one developer host. This demonstrates actual local distributed computation, not independent operators or production security. Provisioning/proof, circuit upload, queue, callback and settlement costs remain separate; worker resource costs are not measured.
